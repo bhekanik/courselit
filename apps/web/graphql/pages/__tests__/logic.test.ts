@@ -11,6 +11,7 @@ import constants from "@/config/constants";
 import { deleteMedia, sealMedia } from "@/services/medialit";
 import GQLContext from "@/models/GQLContext";
 import { responses } from "@/config/strings";
+import { getCachedDomain, getDomainFromHost } from "@/lib/domain-cache";
 
 jest.mock("@/services/medialit", () => ({
     deleteMedia: jest.fn().mockResolvedValue(true),
@@ -1414,5 +1415,97 @@ describe("Media cleanup", () => {
 
             expect(deleteMedia).toHaveBeenCalledWith(complexMediaId);
         });
+    });
+});
+
+describe("publish shared domain state visibility", () => {
+    let domain: any;
+    let ctx: GQLContext;
+    // A custom host keeps this lookup independent of the global DOMAIN setting.
+    let customHost: string;
+
+    function makeTypeface(typeface: string) {
+        return {
+            section: "default",
+            typeface,
+            fontWeights: [400],
+            fontSize: 0,
+            lineHeight: 0,
+            letterSpacing: 0,
+            case: "captilize",
+        };
+    }
+
+    beforeAll(async () => {
+        const unique = `${Date.now()}-${Math.floor(Math.random() * 100000)}`;
+        customHost = `publish-cache-host-${unique}.example.test`;
+
+        domain = await DomainModel.create({
+            name: `publish-cache-domain-${unique}`,
+            customDomain: customHost,
+            email: "owner@test.com",
+            sharedWidgets: {
+                header: { name: "header", settings: { links: [] } },
+            },
+            draftSharedWidgets: {
+                header: {
+                    name: "header",
+                    settings: {
+                        links: [{ label: "Courses", href: "/courses" }],
+                    },
+                },
+            },
+            typefaces: [makeTypeface("Roboto")],
+            draftTypefaces: [makeTypeface("Inter")],
+        });
+
+        ctx = {
+            subdomain: domain,
+            user: {
+                userId: "admin-user",
+                permissions: [permissions.manageSite],
+            },
+            address: "https://publish-cache.test",
+        } as unknown as GQLContext;
+    });
+
+    afterAll(async () => {
+        await PageModel.deleteMany({ domain: domain._id });
+        await DomainModel.deleteMany({ _id: domain._id });
+    });
+
+    it("serves the published header and typefaces to readers that resolve the domain by name or host", async () => {
+        const beforeByName = await getCachedDomain(domain.name);
+        const beforeByHost = await getDomainFromHost(customHost);
+
+        expect(beforeByHost?.name).toBe(domain.name);
+        expect(beforeByName?.sharedWidgets.header.settings?.links).toEqual([]);
+        expect(beforeByName?.typefaces[0].typeface).toBe("Roboto");
+        expect(beforeByHost?.sharedWidgets.header.settings?.links).toEqual([]);
+        expect(beforeByHost?.typefaces[0].typeface).toBe("Roboto");
+
+        const page = await PageModel.create({
+            domain: domain._id,
+            pageId: "publish-shared-state",
+            type: constants.site,
+            creatorId: "creator-1",
+            name: "Publish Shared State",
+            layout: [makeHeaderWidget(), makeFooterWidget()],
+            draftLayout: [makeHeaderWidget(), makeFooterWidget()],
+        });
+
+        await publish(page.pageId, ctx);
+
+        const afterByName = await getCachedDomain(domain.name);
+        const afterByHost = await getDomainFromHost(customHost);
+
+        expect(afterByName?.sharedWidgets.header.settings?.links).toEqual([
+            { label: "Courses", href: "/courses" },
+        ]);
+        expect(afterByName?.typefaces[0].typeface).toBe("Inter");
+        expect(afterByHost?.sharedWidgets.header.settings?.links).toEqual([
+            { label: "Courses", href: "/courses" },
+        ]);
+        expect(afterByHost?.typefaces[0].typeface).toBe("Inter");
     });
 });

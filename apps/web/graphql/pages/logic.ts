@@ -18,6 +18,7 @@ import { Domain } from "../../models/Domain";
 import { homePageTemplate } from "./page-templates";
 import { publishTheme } from "../themes/logic";
 import getDeletedMediaIds from "@/lib/get-deleted-media-ids";
+import { invalidateDomainCache } from "@/lib/domain-cache";
 import { deleteMedia, sealMedia } from "@/services/medialit";
 import CommunityModel from "@models/Community";
 import { replaceTempMediaWithSealedMediaInPageLayout } from "@/lib/replace-temp-media-with-sealed-media-in-page-layout";
@@ -311,6 +312,8 @@ export const publish = async (
             },
         },
     );
+    invalidateDomainCache(ctx.subdomain.name);
+
     for (const mediaId of mediaToDelete) {
         await deleteMedia(mediaId);
     }
