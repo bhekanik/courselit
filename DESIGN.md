@@ -28,22 +28,22 @@ colors:
     dark-rule: "#7D8B97"
 typography:
     display:
-        fontFamily: "Roboto Slab, ui-serif, Georgia, serif"
-        fontSize: "clamp(2rem, 1.35rem + 2.4vw, 3.25rem)"
+        fontFamily: "Alegreya, ui-serif, Georgia, serif"
+        fontSize: "3rem"
         fontWeight: 600
-        lineHeight: 1.14
-        letterSpacing: "-0.005em"
+        lineHeight: 1.25
+        letterSpacing: "normal"
     headline:
-        fontFamily: "Roboto Slab, ui-serif, Georgia, serif"
-        fontSize: "clamp(1.5rem, 1.2rem + 1.1vw, 2rem)"
+        fontFamily: "Alegreya, ui-serif, Georgia, serif"
+        fontSize: "2.25rem"
         fontWeight: 600
-        lineHeight: 1.22
+        lineHeight: 1.25
         letterSpacing: "normal"
     title:
-        fontFamily: "Roboto Slab, ui-serif, Georgia, serif"
-        fontSize: "1.125rem"
-        fontWeight: 500
-        lineHeight: 1.35
+        fontFamily: "Alegreya, ui-serif, Georgia, serif"
+        fontSize: "1.5rem"
+        fontWeight: 600
+        lineHeight: 1.375
     body:
         fontFamily: "Mulish, ui-sans-serif, system-ui, sans-serif"
         fontSize: "1rem"
@@ -155,20 +155,20 @@ Ratios use WCAG relative luminance. Normal text and control labels require at le
 
 ## Typography
 
-**Display Font:** Roboto Slab (with Georgia fallback)
+**Display Font:** Alegreya (with Georgia fallback)
 **Body Font:** Mulish (with system sans fallback)
 
-**Character:** The slab headings feel like a clear training manual rather than a campaign headline. Mulish keeps instructions open and legible at working sizes. There is no third type family and no monospace costume.
+**Character:** Alegreya gives headings the handled character of an inspection handbook. Upright type, medium weight and natural spacing keep it out of the magazine-cover lane. Mulish keeps instructions open and legible at working sizes. The sealed diagrams retain their reviewed Roboto Slab and Mulish annotation system as a contained teaching-artifact voice.
 
 ### Hierarchy
 
-- **Display** (600, fluid 2rem–3.25rem, 1.14): Hero heading only, capped at 17 characters per line where the layout permits.
-- **Headline** (600, fluid 1.5rem–2rem, 1.22): Section headings, balanced and capped near 24 characters per line.
-- **Title** (500, 1.125rem, 1.35): Artefact names, diagram titles and the two earned comparison panels.
+- **Display** (600, 3rem, 1.25): Hero heading only, allowed to wrap naturally in the split layout.
+- **Headline** (600, 2.25rem, 1.25): Major section headings with natural tracking.
+- **Title** (600, 1.5rem, 1.375): Lesson and panel headings. Nested headings step down to 1.25rem.
 - **Body** (400, 1rem, 1.65): Instructions and explanatory copy, capped at 68ch.
 - **Label** (600, 0.875rem, 1.4, sentence case): Inventory, navigation and captions. Never used as a repeated uppercase eyebrow.
 
-**The Working Size Rule.** Body copy never drops below 1rem and diagram labels never render below 12px. Display tracking never becomes tighter than -0.005em.
+**The Working Size Rule.** Body copy never drops below 1rem and diagram labels never render below 12px. Display headings use natural tracking.
 
 ## Elevation
 
@@ -210,7 +210,7 @@ The system is flat by default. Tonal separation and rules establish hierarchy. C
 
 ### Navigation
 
-The header is sticky, quiet and action-led. It keeps the brand, login/theme controls and one `Start the course — free` button. It does not add anchor links that can land beneath the sticky header.
+The header is sticky, quiet and action-led. It keeps the brand, login/theme controls and one `Start the free course` button. It does not add anchor links that can land beneath the sticky header.
 
 ### Split Hero
 

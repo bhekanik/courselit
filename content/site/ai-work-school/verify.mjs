@@ -55,41 +55,12 @@ const colourFields = [
   "shadow2xl",
 ];
 const shadowFields = new Set(colourFields.filter((field) => field.startsWith("shadow")));
-const typographyFields = [
-  "preheader",
-  "header1",
-  "header2",
-  "header3",
-  "header4",
-  "subheader1",
-  "subheader2",
-  "text1",
-  "text2",
-  "link",
-  "button",
-  "input",
-  "caption",
-];
-const allowedFonts = new Set([
-  "font-roboto-slab",
-  "font-mulish",
-  "font-source-sans-3",
-  "font-system-ui",
-]);
+const typographyFields = ["preheader", "header1", "header2", "header3", "header4", "subheader1", "subheader2", "text1", "text2", "link", "button", "input", "caption"];
+const allowedFonts = new Set(["font-alegreya", "font-mulish"]);
 const allowedBlockNames = new Set(["header", "footer", "hero", "rich-text", "media", "grid", "faq"]);
 const allowedPageWidths = new Set(["max-w-2xl", "max-w-3xl", "max-w-4xl", "max-w-5xl", "max-w-6xl"]);
 const allowedVerticalPadding = new Set(["py-4", "py-8", "py-12", "py-16", "py-20", "py-24", "py-32"]);
-const allowedTipTapNodes = new Set([
-  "doc",
-  "paragraph",
-  "text",
-  "heading",
-  "bulletList",
-  "orderedList",
-  "listItem",
-  "blockquote",
-  "hardBreak",
-]);
+const allowedTipTapNodes = new Set(["doc", "paragraph", "text", "heading", "bulletList", "orderedList", "listItem", "blockquote", "hardBreak"]);
 const allowedTipTapMarks = new Set(["bold", "italic", "underline", "strike", "link"]);
 
 assert.equal(manifest.schemaVersion, 1);
@@ -102,11 +73,11 @@ assert.deepEqual(manifest.managedMarker, {
 assert.deepEqual(manifest.domainScope, {
   selector: "current-domain",
   ownerUserIdSource: "domain-owner.userId",
-    themeId: "theme_ai_work_school_v1",
-    settingsPatch: {
-      title: "AI Work School",
-      subtitle: "Bring the task. Build the checks.",
-    },
+  themeId: "theme_ai_work_school_v1",
+  settingsPatch: {
+    title: "AI Work School",
+    subtitle: "Learn AI by using it on work you already do.",
+  },
 });
 assert.deepEqual(manifest.course, { ...course, access: "free" });
 assert.equal(courseManifest.course.courseId, course.courseId);
@@ -177,10 +148,7 @@ for (const mode of ["light", "dark"]) {
     ["sidebarPrimaryForeground", "sidebarPrimary", 4.5],
     ["sidebarAccentForeground", "sidebarAccent", 4.5],
   ]) {
-    assert.ok(
-      contrast(colours[foreground], colours[background]) >= minimum,
-      `${mode}.${foreground}/${background} must have at least ${minimum}:1 contrast`,
-    );
+    assert.ok(contrast(colours[foreground], colours[background]) >= minimum, `${mode}.${foreground}/${background} must have at least ${minimum}:1 contrast`);
   }
   assert.ok(contrast(colours.ring, colours.background) >= 3, `${mode} focus ring must have 3:1 contrast`);
   for (const token of ["border", "input"]) {
@@ -198,11 +166,103 @@ for (const [role, type] of Object.entries(theme.style.typography)) {
   assert.match(type.fontWeight, /^font-(?:normal|medium|semibold|bold)$/);
 }
 for (const role of ["header1", "header2", "header3", "header4"]) {
-  assert.equal(theme.style.typography[role].fontFamily, "font-roboto-slab");
+  assert.equal(theme.style.typography[role].fontFamily, "font-alegreya");
+  assert.notEqual(theme.style.typography[role].letterSpacing, "tracking-tight");
 }
-for (const role of ["text1", "text2", "link", "button", "input", "caption"]) {
+for (const role of ["preheader", "subheader1", "subheader2", "text1", "text2", "link", "button", "input", "caption"]) {
   assert.equal(theme.style.typography[role].fontFamily, "font-mulish");
 }
+assert.deepEqual(
+  theme.style.typography,
+  {
+    preheader: {
+      fontFamily: "font-mulish",
+      fontSize: "text-sm",
+      fontWeight: "font-semibold",
+      lineHeight: "leading-normal",
+      letterSpacing: "tracking-wide",
+    },
+    header1: {
+      fontFamily: "font-alegreya",
+      fontSize: "text-5xl",
+      fontWeight: "font-semibold",
+      lineHeight: "leading-tight",
+      letterSpacing: "tracking-normal",
+    },
+    header2: {
+      fontFamily: "font-alegreya",
+      fontSize: "text-4xl",
+      fontWeight: "font-semibold",
+      lineHeight: "leading-tight",
+      letterSpacing: "tracking-normal",
+    },
+    header3: {
+      fontFamily: "font-alegreya",
+      fontSize: "text-2xl",
+      fontWeight: "font-semibold",
+      lineHeight: "leading-snug",
+      letterSpacing: "tracking-normal",
+    },
+    header4: {
+      fontFamily: "font-alegreya",
+      fontSize: "text-xl",
+      fontWeight: "font-semibold",
+      lineHeight: "leading-snug",
+      letterSpacing: "tracking-normal",
+    },
+    subheader1: {
+      fontFamily: "font-mulish",
+      fontSize: "text-xl",
+      fontWeight: "font-medium",
+      lineHeight: "leading-relaxed",
+    },
+    subheader2: {
+      fontFamily: "font-mulish",
+      fontSize: "text-lg",
+      fontWeight: "font-medium",
+      lineHeight: "leading-relaxed",
+    },
+    text1: {
+      fontFamily: "font-mulish",
+      fontSize: "text-base",
+      fontWeight: "font-normal",
+      lineHeight: "leading-relaxed",
+    },
+    text2: {
+      fontFamily: "font-mulish",
+      fontSize: "text-sm",
+      fontWeight: "font-normal",
+      lineHeight: "leading-relaxed",
+    },
+    link: {
+      fontFamily: "font-mulish",
+      fontSize: "text-base",
+      fontWeight: "font-semibold",
+      lineHeight: "leading-normal",
+      textDecoration: "underline",
+    },
+    button: {
+      fontFamily: "font-mulish",
+      fontSize: "text-base",
+      fontWeight: "font-semibold",
+      lineHeight: "leading-normal",
+      textTransform: "normal-case",
+    },
+    input: {
+      fontFamily: "font-mulish",
+      fontSize: "text-base",
+      fontWeight: "font-normal",
+      lineHeight: "leading-normal",
+    },
+    caption: {
+      fontFamily: "font-mulish",
+      fontSize: "text-sm",
+      fontWeight: "font-normal",
+      lineHeight: "leading-normal",
+    },
+  },
+  "typography roles must keep the inspection-handbook scale",
+);
 
 assert.ok(allowedPageWidths.has(theme.style.structure.page.width));
 assert.ok(allowedVerticalPadding.has(theme.style.structure.section.padding.y));
@@ -219,13 +279,16 @@ assert.equal(theme.style.interactives.card.shadow, "shadow-none");
 const { sharedWidgets, page } = manifest;
 assert.deepEqual(manifest.draftSharedWidgetsSource, "sharedWidgets");
 assert.equal(sharedWidgets.length, 2);
-assert.deepEqual(sharedWidgets.map(({ widgetId }) => widgetId), ["widget_ai_work_school_header_v1", "widget_ai_work_school_footer_v1"]);
-assert.deepEqual(sharedWidgets.map(({ name }) => name), ["header", "footer"]);
-assert.ok(sharedWidgets.every(({ shared }) => shared === true));
-assert.ok(
-  new Set(["font-normal", "font-light", "font-bold"]).has(sharedWidgets[0].settings.linkFontWeight),
-  "header linkFontWeight must match the registered Settings union",
+assert.deepEqual(
+  sharedWidgets.map(({ widgetId }) => widgetId),
+  ["widget_ai_work_school_header_v1", "widget_ai_work_school_footer_v1"],
 );
+assert.deepEqual(
+  sharedWidgets.map(({ name }) => name),
+  ["header", "footer"],
+);
+assert.ok(sharedWidgets.every(({ shared }) => shared === true));
+assert.ok(new Set(["font-normal", "font-light", "font-bold"]).has(sharedWidgets[0].settings.linkFontWeight), "header linkFontWeight must match the registered Settings union");
 
 assert.equal(page.pageId, "homepage");
 assert.equal(page.type, "site");
@@ -254,19 +317,7 @@ for (const widget of allWidgets) {
 }
 
 const bodyNames = page.layout.slice(1, -1).map(({ name }) => name);
-assert.deepEqual(bodyNames, [
-  "hero",
-  "rich-text",
-  "rich-text",
-  "media",
-  "rich-text",
-  "media",
-  "rich-text",
-  "rich-text",
-  "grid",
-  "hero",
-  "faq",
-]);
+assert.deepEqual(bodyNames, ["hero", "rich-text", "rich-text", "media", "rich-text", "media", "rich-text", "rich-text", "grid", "hero", "faq"]);
 const managedWidget = page.layout.find(({ widgetId }) => widgetId === manifest.managedMarker.widgetId);
 assert.equal(managedWidget.name, "rich-text");
 assert.equal(managedWidget.shared, false);
@@ -291,8 +342,163 @@ for (const [widgetId, mediaKey] of [
   assert.equal(widget.settings.mediaRadius, 4);
 }
 
+const widgetsById = Object.fromEntries(page.layout.map((widget) => [widget.widgetId, widget]));
+const visibleCopy = {
+  identity: {
+    subtitle: manifest.domainScope.settingsPatch.subtitle,
+    pageTitle: page.title,
+    pageDescription: page.description,
+  },
+  navigation: {
+    header: sharedWidgets[0].settings.links.map(({ label }) => label),
+    footer: sharedWidgets[1].settings.sections
+      .flatMap(({ links }) => links)
+      .filter(({ href }) => href === course.href)
+      .map(({ label }) => label),
+  },
+  hero: {
+    title: hero.settings.title,
+    body: paragraphTexts(hero.settings.description),
+    button: hero.settings.buttonCaption,
+  },
+  factLine: paragraphTexts(widgetsById.widget_ai_work_school_managed_v1.settings.text),
+  toolChoice: richTextCopy(widgetsById.widget_ai_work_school_tool_choice_v2.settings.text),
+  capstone: richTextCopy(widgetsById.widget_ai_work_school_artefacts_v2.settings.text),
+  checkedWorkCaption: paragraphTexts(widgetsById.widget_ai_work_school_outputs_caption_v2.settings.text),
+  curriculum: richTextCopy(widgetsById.widget_ai_work_school_curriculum_v2.settings.text),
+  fit: {
+    title: widgetsById.widget_ai_work_school_fit_v2.settings.title,
+    body: paragraphTexts(widgetsById.widget_ai_work_school_fit_v2.settings.description),
+    items: widgetsById.widget_ai_work_school_fit_v2.settings.items.map(({ title, description }) => ({
+      title,
+      body: paragraphTexts(description),
+    })),
+  },
+  closing: {
+    title: widgetsById.widget_ai_work_school_closing_v2.settings.title,
+    body: paragraphTexts(widgetsById.widget_ai_work_school_closing_v2.settings.description),
+    button: widgetsById.widget_ai_work_school_closing_v2.settings.buttonCaption,
+  },
+  faq: {
+    title: widgetsById.widget_ai_work_school_faq_v2.settings.title,
+    body: paragraphTexts(widgetsById.widget_ai_work_school_faq_v2.settings.description),
+    items: widgetsById.widget_ai_work_school_faq_v2.settings.items.map(({ title, description }) => ({
+      title,
+      body: paragraphTexts(description),
+    })),
+  },
+};
+assert.deepEqual(visibleCopy, {
+  identity: {
+    subtitle: "Learn AI by using it on work you already do.",
+    pageTitle: "AI for actual work | AI Work School",
+    pageDescription: "Bring one recurring job and learn how to use AI without losing track of its sources, checks or decisions.",
+  },
+  navigation: {
+    header: ["Start the free course"],
+    footer: ["Start the free course"],
+  },
+  hero: {
+    title: "AI can finish the task and still get the work wrong.",
+    body: ["Bring one recurring, low-risk job you already do. You will run it with AI, test the result, and write down enough of the method to do it again without starting from scratch."],
+    button: "Start the free course",
+  },
+  factLine: ["Free course. No coding required."],
+  toolChoice: {
+    headings: ["Work out what the job needs first."],
+    paragraphs: ["A quick question, a job you repeat, and a task that needs company files are different problems. The course shows you when chat is enough, when to save a method as a skill, and when a connection needs tighter permissions and review."],
+    items: [
+      "For a one-off question, use chat and check the answer yourself.",
+      "If you repeat the same job, save its context, steps, examples and checks as a skill.",
+      "If the job needs files or systems, connect only the approved source and keep the permissions narrow.",
+      "If a mistake would matter, have someone else review the result before it is used.",
+    ],
+  },
+  capstone: {
+    headings: ["The five files you will finish with"],
+    paragraphs: ["The capstone brings the work into five files. Together they show what you asked AI to do, what it used, how you checked it, what you decided, and what happens next."],
+    items: [
+      "Working brief (working-brief.md). Who the work is for, what it must do, what it must not do, and when it is finished.",
+      "Source contract (source-contract.md). The sources AI may use, the things it must not guess, and where each claim came from.",
+      "Checks and evidence (checks-and-evidence.md). Checks that would catch a missing, unsupported or unsafe result, plus evidence that you ran them.",
+      "Decision record (decision-record.md). What you accepted, changed or rejected, and why.",
+      "Handover (handover.md). The result, the evidence behind it, the open questions, and the next action.",
+    ],
+  },
+  checkedWorkCaption: ["The final result stays with the sources, checks and decisions behind it."],
+  curriculum: {
+    headings: ["Use the same job throughout the course"],
+    paragraphs: ["Each lesson leaves you with a working record that the next lesson can use. By the capstone, those records support one fresh run of the whole job."],
+    items: [
+      "Start with real work. Pick a recurring, low-risk job and decide what a useful result would need to do.",
+      "Build context that survives the session. Write down the rules you keep having to explain, and say when they go stale.",
+      "Choose the mechanism before the prompt. Use policy for a known choice, a workflow for a known sequence, and an agent only where the job needs bounded judgement.",
+      "Choose the work surface. Decide whether the job belongs in chat or needs a longer delegated run that you can inspect.",
+      "Build checks that can prove you wrong. Write checks from the brief, including one that would catch a plausible wrong result.",
+      "Make consequential work inspectable. Stop when important context is missing. Keep enough evidence for someone to replay the decision.",
+      'Close delegated work properly. Do not take the tool\'s word for "done". Verify the result where it was meant to land and write down what happens if automation stops halfway.',
+      "Package repeated work. Turn the part that repeats into a skill. Add a connection only when the job needs current data or an external action.",
+      "Research and write with evidence. Work out what the evidence supports before drafting. Then edit the argument as carefully as the sentences.",
+      "Produce work and act safely. Check the document, spreadsheet or meeting brief itself. Do not send, post or change a record without explicit authority.",
+      "Keep the understanding and improve the setup. Keep the useful miss. Change one part of the setup, rerun the job, and hand over the result.",
+    ],
+  },
+  fit: {
+    title: "Choose a safe job to practise on",
+    body: ["A month-end variance note, contract review table, or weekly operations pack can work if you have approved source material and time to review the result."],
+    items: [
+      {
+        title: "A good job for this course",
+        body: ["It happens more than once, has a known audience and source material, and can be reviewed before anyone acts on it."],
+      },
+      {
+        title: "Pick another job if",
+        body: ["It is a live crisis, uses data your organisation has not approved, or ends in an irreversible or high-consequence decision."],
+      },
+    ],
+  },
+  closing: {
+    title: "Start with the next real job on your list.",
+    body: ["Choose something recurring and low-risk. The first step is to write down who needs the result and what a useful result must do."],
+    button: "Start the free course",
+  },
+  faq: {
+    title: "Before you start",
+    body: ["Choose the job and material you will use before you begin."],
+    items: [
+      {
+        title: "How much does the course cost?",
+        body: ["Nothing. The course is free."],
+      },
+      {
+        title: "Do I need to write code?",
+        body: ["No. The core course is for professional work rather than software development. Engineering material is an optional extension."],
+      },
+      {
+        title: "What kind of work should I bring?",
+        body: ["Bring something you do more than once, with known sources and someone who uses the result. Do not start with a live crisis or a decision you cannot undo."],
+      },
+      {
+        title: "What if my company has rules about AI?",
+        body: ["Follow them. Use only approved tools, sources and accounts. If the exercise conflicts with policy, use a safe stand-in instead."],
+      },
+      {
+        title: "What should I do with sensitive material?",
+        body: ["Do not paste in personal information, secrets or confidential material without permission. If you cannot use the real material, remove identifying details or make a safe sample."],
+      },
+      {
+        title: "Does this depend on one AI tool?",
+        body: ["No. You learn a way of working: define the job, control its sources and permissions, check the result, and keep a record of the decision. Use whichever approved tool you have."],
+      },
+    ],
+  },
+});
+
 const actions = [...collectValues(manifest, "href"), ...collectValues(manifest, "buttonAction")];
-assert.ok(actions.every((href) => href.startsWith("/") || href.startsWith("#")), "all links must stay on the site");
+assert.ok(
+  actions.every((href) => href.startsWith("/") || href.startsWith("#")),
+  "all links must stay on the site",
+);
 
 const serialised = JSON.stringify(manifest);
 assert.doesNotMatch(serialised, /\b(?:gradient|marquee|carousel|autoplay|parallax|chatbot|robot|purple|violet)\b/i);
@@ -303,39 +509,54 @@ const copy = collectText(manifest).join("\n");
 assert.doesNotMatch(copy, /\b(?:revolutionary|cutting-edge|game-changing|seamless|robust|leverage|unlock|supercharge|transform your|empower)\b/i);
 assert.doesNotMatch(copy, /\b\d+(?:\.\d+)?\s*%/);
 assert.doesNotMatch(copy, /\b(?:save|saved|saving)\s+\d+\s+(?:minutes?|hours?|days?)\b/i);
-assert.doesNotMatch(copy.replaceAll("Start the course — free", ""), /[\u2013\u2014]/, "only the required CTA may use an en/em dash");
+assert.doesNotMatch(copy, /[\u2013\u2014]/, "landing copy must not use en/em dashes");
 assert.doesNotMatch(copy, /[\u200b\u200c\u200d\ufeff]/, "copy must not contain invisible characters");
 assert.match(copy, /real job/i);
 assert.match(copy, /working brief/i);
 assert.match(copy, /source contract/i);
 assert.match(copy, /decision record/i);
 assert.match(copy, /handover/i);
-assert.match(copy, /Choose the shape of the job, not the brand of the tool\./);
-assert.match(copy, /One-off question: use a chat, then check the answer yourself\./);
-assert.match(copy, /Same job, repeated: pack the context, steps, examples and checks as a reusable skill\./);
-assert.match(copy, /Needs approved files or systems: connect the source behind a permission gate\./);
-assert.match(copy, /Higher consequence: another person checks it before it leaves\./);
-assert.match(copy, /From first brief to finished handover\./);
-assert.match(copy, /Bring one job\. Leave with a method\. Free\./);
+assert.match(copy, /AI can finish the task and still get the work wrong\./);
+assert.match(copy, /Work out what the job needs first\./);
+assert.match(copy, /For a one-off question, use chat and check the answer yourself\./);
+assert.match(copy, /If you repeat the same job, save its context, steps, examples and checks as a skill\./);
+assert.match(copy, /connect only the approved source and keep the permissions narrow\./);
+assert.match(copy, /have someone else review the result before it is used\./);
+assert.match(copy, /Use the same job throughout the course/);
+assert.match(copy, /Start with the next real job on your list\./);
 assert.doesNotMatch(copy, /\b(?:7|seven) sections?\b|\b(?:14|fourteen|22|twenty-two) lessons?\b/i);
 
 const headerCourseLinks = sharedWidgets[0].settings.links.filter(({ href }) => href === course.href);
-assert.deepEqual(headerCourseLinks.map(({ label }) => label), ["Start the course — free"]);
+assert.deepEqual(
+  headerCourseLinks.map(({ label }) => label),
+  ["Start the free course"],
+);
 const courseHeroes = page.layout.filter(({ name, settings }) => name === "hero" && settings.buttonAction === course.href);
 assert.equal(courseHeroes.length, 2);
-assert.ok(courseHeroes.every(({ settings }) => settings.buttonCaption === "Start the course — free"));
+assert.ok(courseHeroes.every(({ settings }) => settings.buttonCaption === "Start the free course"));
 const footerCourseLinks = sharedWidgets[1].settings.sections.flatMap(({ links }) => links).filter(({ href }) => href === course.href);
-assert.deepEqual(footerCourseLinks.map(({ label }) => label), ["Start the course — free"]);
+assert.deepEqual(
+  footerCourseLinks.map(({ label }) => label),
+  ["Start the free course"],
+);
 const footerHrefs = new Set(sharedWidgets[1].settings.sections.flatMap(({ links }) => links).map(({ href }) => href));
-assert.ok(manifest.requiredPages.every(({ href }) => footerHrefs.has(href)), "every required page must be linked from the footer");
+assert.ok(
+  manifest.requiredPages.every(({ href }) => footerHrefs.has(href)),
+  "every required page must be linked from the footer",
+);
 
-assert.match(collectText(managedWidget).join(" "), /Free · Bring one job you already do · No coding/);
+assert.equal(collectText(managedWidget).join(" "), "Free course. No coding required.");
 const artefacts = page.layout.find(({ widgetId }) => widgetId === "widget_ai_work_school_artefacts_v2");
 const artefactItems = findNodes(artefacts.settings.text, "bulletList").flatMap(({ content }) => content);
 assert.equal(artefactItems.length, 5);
-assert.match(collectText(artefacts).join(" "), /capstone consolidates your lesson records into five reviewable files/i);
+assert.match(collectText(artefacts).join(" "), /capstone brings the work into five files/i);
 assert.deepEqual(
-  artefactItems.map((item) => collectText(item).join(" ").match(/\(([^)]+\.md)\)/)?.[1]),
+  artefactItems.map(
+    (item) =>
+      collectText(item)
+        .join(" ")
+        .match(/\(([^)]+\.md)\)/)?.[1],
+  ),
   courseManifest.course.capstone.artifacts,
 );
 const curriculum = page.layout.find(({ widgetId }) => widgetId === "widget_ai_work_school_curriculum_v2");
@@ -348,22 +569,24 @@ assert.deepEqual(
 );
 const grids = page.layout.filter(({ name }) => name === "grid");
 assert.equal(grids.length, 1, "fit/not-fit must be the only grid");
-assert.deepEqual(grids[0].settings.items.map(({ title }) => title), ["This is for you if", "This is not for you if"]);
+assert.deepEqual(
+  grids[0].settings.items.map(({ title }) => title),
+  ["A good job for this course", "Pick another job if"],
+);
 assert.equal(grids[0].settings.items.length, 2);
 const faqs = page.layout.filter(({ name }) => name === "faq");
 assert.equal(faqs.length, 1);
 assert.ok(faqs[0].settings.items.length <= 6, "FAQ must have no more than six items");
 assert.equal(faqs[0].settings.items.length, 6);
-assert.deepEqual(faqs[0].settings.items.map(({ title }) => title), [
-  "How much does the course cost?",
-  "Do I need to write code?",
-  "What kind of work should I bring?",
-  "What if my company has rules about AI?",
-  "What should I do with sensitive material?",
-  "Does this depend on one AI tool?",
-]);
+assert.deepEqual(
+  faqs[0].settings.items.map(({ title }) => title),
+  ["How much does the course cost?", "Do I need to write code?", "What kind of work should I bring?", "What if my company has rules about AI?", "What should I do with sensitive material?", "Does this depend on one AI tool?"],
+);
 assert.equal(courseHeroes.at(-1).settings.verticalPadding, "py-12", "closing CTA must stay compact");
-assert.ok(page.layout.every(({ settings }) => !settings?.background), "landing sections must not introduce colour bands");
+assert.ok(
+  page.layout.every(({ settings }) => !settings?.background),
+  "landing sections must not introduce colour bands",
+);
 
 console.log("AI Work School site manifest checks passed");
 
@@ -451,9 +674,24 @@ function findNodes(value, type, results = []) {
   return results;
 }
 
+function paragraphTexts(value) {
+  return findNodes(value, "paragraph").map((node) => collectText(node).join(""));
+}
+
+function richTextCopy(value) {
+  return {
+    headings: findNodes(value, "heading").map((node) => collectText(node).join("")),
+    paragraphs: (value.content ?? []).filter(({ type }) => type === "paragraph").map((node) => collectText(node).join("")),
+    items: findNodes(value, "listItem").map((node) => collectText(node).join("")),
+  };
+}
+
 function contrast(foreground, background) {
   const luminance = (hex) => {
-    const channels = hex.slice(1).match(/.{2}/g).map((part) => Number.parseInt(part, 16) / 255);
+    const channels = hex
+      .slice(1)
+      .match(/.{2}/g)
+      .map((part) => Number.parseInt(part, 16) / 255);
     const linear = channels.map((channel) => (channel <= 0.04045 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4));
     return 0.2126 * linear[0] + 0.7152 * linear[1] + 0.0722 * linear[2];
   };

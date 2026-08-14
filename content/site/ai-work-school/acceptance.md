@@ -13,9 +13,9 @@ This directory is the source-controlled input for the AI Work School theme and h
 
 ## Homepage
 
-- The header and both course heroes use the exact CTA `Start the course — free` and the real route `/course/ai-for-actual-work/course_ai_for_actual_work_v1`.
+- The header and both course heroes use the exact CTA `Start the free course` and the real route `/course/ai-for-actual-work/course_ai_for_actual_work_v1`.
 - The split hero comes first. Its copy precedes its sealed `landing-hero` media in mobile reading order.
-- The inventory is count-free: `Free · Bring one job you already do · No coding`.
+- The short fact line is count-free: `Free course. No coding required.`
 - The tool-choice section includes the sealed vertical diagram and an equivalent ordered text list for people who cannot read the image.
 - The page names the capstone's five final files: working brief, source contract, checks and evidence, decision record and handover. The sealed checked-work image follows them.
 - Curriculum is one ordered sequence using the published course's section names and outcomes. It does not advertise section or lesson counts.
@@ -27,11 +27,11 @@ This directory is the source-controlled input for the AI Work School theme and h
 - The page uses only registered CourseLit `hero`, `rich-text`, `media`, `grid`, `faq`, `header` and `footer` blocks. No app code, new block or custom CSS is required.
 - All landing sections remain light. No block supplies a background colour band.
 - The palette follows `DESIGN.md`: navy structure, oxblood action, teal evidence and clay review. There are no gradients, purple AI styling, chatbot or robot imagery.
-- Roboto Slab headings and Mulish body copy use fonts already registered by CourseLit.
+- Alegreya headings and Mulish working copy use fonts already registered by CourseLit. The heading family uses natural spacing rather than tight tracking.
 - Sealed MediaLit objects are public WebP media on `media.bhekani.com`, have stable query-free URLs and meaningful alternative text.
 - Theme pairs meet WCAG 2.2 AA contrast in both modes. Focus rings and rules meet the 3:1 non-text contrast target.
 - The manifest adds no autoplay, parallax, marquee, custom animation or hover-only information. Reduced-motion users lose no content.
-- Copy uses British spelling and contains no fake catalogue, metrics, testimonials, fixed time-saving claims, tool rankings or unsupported promises.
+- Copy uses British spelling, no en or em dashes, and no fake catalogue, metrics, testimonials, fixed time-saving claims, tool rankings or unsupported promises.
 
 ## Verification
 

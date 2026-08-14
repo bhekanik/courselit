@@ -139,7 +139,7 @@
             "kind": "button",
             "refersTo": "button-primary",
             "description": "The one decisive course action.",
-            "html": "<button class=\"ds-btn-primary\">Start the course — free</button>",
+            "html": "<button class=\"ds-btn-primary\">Start the free course</button>",
             "css": ".ds-btn-primary { min-height: 44px; padding: 12px 24px; border: 0; border-radius: 6px; background: #7A1B2B; color: #FFFFFF; font: 700 16px/1 Mulish, system-ui, sans-serif; box-shadow: 0 1px 2px rgba(15,29,46,.16); transition: background 160ms cubic-bezier(.22,1,.36,1); } .ds-btn-primary:hover { background: #5F1421; } .ds-btn-primary:focus-visible { outline: 2px solid #23394F; outline-offset: 2px; } @media (prefers-reduced-motion: reduce) { .ds-btn-primary { transition: none; } }"
         },
         {
@@ -155,8 +155,8 @@
             "kind": "card",
             "refersTo": "work-panel",
             "description": "A semantic comparison or grouped work artefact, never default page scaffolding.",
-            "html": "<section class=\"ds-work-panel\"><h3>This is for you if…</h3><p>You have a recurring task and remain accountable for what leaves your hands.</p></section>",
-            "css": ".ds-work-panel { padding: 24px; border: 1px solid #687783; border-radius: 8px; background: #F7F8F8; color: #0F1D2E; box-shadow: none; font: 400 16px/1.65 Mulish, system-ui, sans-serif; } .ds-work-panel h3 { margin: 0 0 8px; font: 500 18px/1.35 'Roboto Slab', Georgia, serif; }"
+            "html": "<section class=\"ds-work-panel\"><h3>A good job for this course</h3><p>It happens more than once and can be reviewed before anyone acts on it.</p></section>",
+            "css": ".ds-work-panel { padding: 24px; border: 1px solid #687783; border-radius: 8px; background: #F7F8F8; color: #0F1D2E; box-shadow: none; font: 400 16px/1.65 Mulish, system-ui, sans-serif; } .ds-work-panel h3 { margin: 0 0 8px; font: 600 24px/1.375 Alegreya, Georgia, serif; }"
         },
         {
             "name": "Text Field",

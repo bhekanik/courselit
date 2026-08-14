@@ -12,7 +12,7 @@
         "themeId": "theme_ai_work_school_v1",
         "settingsPatch": {
             "title": "AI Work School",
-            "subtitle": "Bring the task. Build the checks."
+            "subtitle": "Learn AI by using it on work you already do."
         }
     },
     "course": {
@@ -124,46 +124,48 @@
                 "preheader": {
                     "fontFamily": "font-mulish",
                     "fontSize": "text-sm",
-                    "fontWeight": "font-bold",
+                    "fontWeight": "font-semibold",
                     "lineHeight": "leading-normal",
                     "letterSpacing": "tracking-wide"
                 },
                 "header1": {
-                    "fontFamily": "font-roboto-slab",
+                    "fontFamily": "font-alegreya",
                     "fontSize": "text-5xl",
-                    "fontWeight": "font-bold",
+                    "fontWeight": "font-semibold",
                     "lineHeight": "leading-tight",
-                    "letterSpacing": "tracking-tight"
+                    "letterSpacing": "tracking-normal"
                 },
                 "header2": {
-                    "fontFamily": "font-roboto-slab",
+                    "fontFamily": "font-alegreya",
                     "fontSize": "text-4xl",
-                    "fontWeight": "font-bold",
+                    "fontWeight": "font-semibold",
                     "lineHeight": "leading-tight",
-                    "letterSpacing": "tracking-tight"
+                    "letterSpacing": "tracking-normal"
                 },
                 "header3": {
-                    "fontFamily": "font-roboto-slab",
-                    "fontSize": "text-3xl",
-                    "fontWeight": "font-semibold",
-                    "lineHeight": "leading-snug"
-                },
-                "header4": {
-                    "fontFamily": "font-roboto-slab",
+                    "fontFamily": "font-alegreya",
                     "fontSize": "text-2xl",
                     "fontWeight": "font-semibold",
-                    "lineHeight": "leading-snug"
+                    "lineHeight": "leading-snug",
+                    "letterSpacing": "tracking-normal"
+                },
+                "header4": {
+                    "fontFamily": "font-alegreya",
+                    "fontSize": "text-xl",
+                    "fontWeight": "font-semibold",
+                    "lineHeight": "leading-snug",
+                    "letterSpacing": "tracking-normal"
                 },
                 "subheader1": {
                     "fontFamily": "font-mulish",
                     "fontSize": "text-xl",
-                    "fontWeight": "font-normal",
+                    "fontWeight": "font-medium",
                     "lineHeight": "leading-relaxed"
                 },
                 "subheader2": {
                     "fontFamily": "font-mulish",
                     "fontSize": "text-lg",
-                    "fontWeight": "font-normal",
+                    "fontWeight": "font-medium",
                     "lineHeight": "leading-relaxed"
                 },
                 "text1": {
@@ -188,7 +190,7 @@
                 "button": {
                     "fontFamily": "font-mulish",
                     "fontSize": "text-base",
-                    "fontWeight": "font-bold",
+                    "fontWeight": "font-semibold",
                     "lineHeight": "leading-normal",
                     "textTransform": "normal-case"
                 },
@@ -287,7 +289,7 @@
                 "links": [
                     {
                         "id": "link_ai_work_school_start_v1",
-                        "label": "Start the course — free",
+                        "label": "Start the free course",
                         "href": "/course/ai-for-actual-work/course_ai_for_actual_work_v1",
                         "isButton": true,
                         "isPrimary": true
@@ -317,7 +319,7 @@
                         "links": [
                             {
                                 "id": "footer_link_ai_work_school_start_v1",
-                                "label": "Start the course — free",
+                                "label": "Start the free course",
                                 "href": "/course/ai-for-actual-work/course_ai_for_actual_work_v1"
                             }
                         ]
@@ -362,7 +364,7 @@
         "entityIdSource": "domain.name",
         "creatorIdSource": "domain-owner.userId",
         "title": "AI for actual work | AI Work School",
-        "description": "A free course for working professionals who want to turn one recurring job into a workflow that colleagues can inspect.",
+        "description": "Bring one recurring job and learn how to use AI without losing track of its sources, checks or decisions.",
         "robotsAllowed": true,
         "draftTitleSource": "page.title",
         "draftDescriptionSource": "page.description",
@@ -384,7 +386,7 @@
                     "type": "site",
                     "verticalPadding": "py-20",
                     "maxWidth": "max-w-6xl",
-                    "title": "Do one real job with AI, and show your working.",
+                    "title": "AI can finish the task and still get the work wrong.",
                     "description": {
                         "type": "doc",
                         "content": [
@@ -393,13 +395,13 @@
                                 "content": [
                                     {
                                         "type": "text",
-                                        "text": "A free course for working professionals. Bring one recurring, low-risk job you already do. Leave with a workflow that you, and anyone who reviews it, can inspect."
+                                        "text": "Bring one recurring, low-risk job you already do. You will run it with AI, test the result, and write down enough of the method to do it again without starting from scratch."
                                     }
                                 ]
                             }
                         ]
                     },
-                    "buttonCaption": "Start the course — free",
+                    "buttonCaption": "Start the free course",
                     "buttonAction": "/course/ai-for-actual-work/course_ai_for_actual_work_v1",
                     "alignment": "right",
                     "contentAlignment": "left",
@@ -443,7 +445,7 @@
                                                 "type": "bold"
                                             }
                                         ],
-                                        "text": "Free · Bring one job you already do · No coding"
+                                        "text": "Free course. No coding required."
                                     }
                                 ]
                             }
@@ -473,7 +475,7 @@
                                 "content": [
                                     {
                                         "type": "text",
-                                        "text": "Choose the shape of the job, not the brand of the tool."
+                                        "text": "Work out what the job needs first."
                                     }
                                 ]
                             },
@@ -482,7 +484,7 @@
                                 "content": [
                                     {
                                         "type": "text",
-                                        "text": "Tools change. The job does not. Decide whether you need a one-off answer, a reusable skill, or a governed connection to approved sources. Then match the mechanism to the risk and repeatability of the work."
+                                        "text": "A quick question, a job you repeat, and a task that needs company files are different problems. The course shows you when chat is enough, when to save a method as a skill, and when a connection needs tighter permissions and review."
                                     }
                                 ]
                             },
@@ -497,7 +499,7 @@
                                                 "content": [
                                                     {
                                                         "type": "text",
-                                                        "text": "One-off question: use a chat, then check the answer yourself."
+                                                        "text": "For a one-off question, use chat and check the answer yourself."
                                                     }
                                                 ]
                                             }
@@ -511,7 +513,7 @@
                                                 "content": [
                                                     {
                                                         "type": "text",
-                                                        "text": "Same job, repeated: pack the context, steps, examples and checks as a reusable skill."
+                                                        "text": "If you repeat the same job, save its context, steps, examples and checks as a skill."
                                                     }
                                                 ]
                                             }
@@ -525,7 +527,7 @@
                                                 "content": [
                                                     {
                                                         "type": "text",
-                                                        "text": "Needs approved files or systems: connect the source behind a permission gate."
+                                                        "text": "If the job needs files or systems, connect only the approved source and keep the permissions narrow."
                                                     }
                                                 ]
                                             }
@@ -539,7 +541,7 @@
                                                 "content": [
                                                     {
                                                         "type": "text",
-                                                        "text": "Higher consequence: another person checks it before it leaves."
+                                                        "text": "If a mistake would matter, have someone else review the result before it is used."
                                                     }
                                                 ]
                                             }
@@ -597,7 +599,7 @@
                                 "content": [
                                     {
                                         "type": "text",
-                                        "text": "Five artefacts, one job."
+                                        "text": "The five files you will finish with"
                                     }
                                 ]
                             },
@@ -606,7 +608,7 @@
                                 "content": [
                                     {
                                         "type": "text",
-                                        "text": "The capstone consolidates your lesson records into five reviewable files you can keep, inspect and hand to someone else."
+                                        "text": "The capstone brings the work into five files. Together they show what you asked AI to do, what it used, how you checked it, what you decided, and what happens next."
                                     }
                                 ]
                             },
@@ -630,7 +632,7 @@
                                                     },
                                                     {
                                                         "type": "text",
-                                                        "text": "The audience, constraints, permission and finish condition for the job."
+                                                        "text": "Who the work is for, what it must do, what it must not do, and when it is finished."
                                                     }
                                                 ]
                                             }
@@ -653,7 +655,7 @@
                                                     },
                                                     {
                                                         "type": "text",
-                                                        "text": "What the work may use, what it must not infer and where each claim comes from."
+                                                        "text": "The sources AI may use, the things it must not guess, and where each claim came from."
                                                     }
                                                 ]
                                             }
@@ -676,7 +678,7 @@
                                                     },
                                                     {
                                                         "type": "text",
-                                                        "text": "Conditions that can expose a missing, unsupported or unsafe result."
+                                                        "text": "Checks that would catch a missing, unsupported or unsafe result, plus evidence that you ran them."
                                                     }
                                                 ]
                                             }
@@ -699,7 +701,7 @@
                                                     },
                                                     {
                                                         "type": "text",
-                                                        "text": "What you accepted, changed or rejected, with the reason."
+                                                        "text": "What you accepted, changed or rejected, and why."
                                                     }
                                                 ]
                                             }
@@ -722,7 +724,7 @@
                                                     },
                                                     {
                                                         "type": "text",
-                                                        "text": "The result, evidence, open questions and next action in one place."
+                                                        "text": "The result, the evidence behind it, the open questions, and the next action."
                                                     }
                                                 ]
                                             }
@@ -782,7 +784,7 @@
                                                 "type": "italic"
                                             }
                                         ],
-                                        "text": "Assemble, check, cite, decide. The same moves make the work reviewable."
+                                        "text": "The final result stays with the sources, checks and decisions behind it."
                                     }
                                 ]
                             }
@@ -812,7 +814,7 @@
                                 "content": [
                                     {
                                         "type": "text",
-                                        "text": "From first brief to finished handover."
+                                        "text": "Use the same job throughout the course"
                                     }
                                 ]
                             },
@@ -821,7 +823,7 @@
                                 "content": [
                                     {
                                         "type": "text",
-                                        "text": "Follow one real job from initial context and permission through checks, decisions and handover."
+                                        "text": "Each lesson leaves you with a working record that the next lesson can use. By the capstone, those records support one fresh run of the whole job."
                                     }
                                 ]
                             },
@@ -845,7 +847,7 @@
                                                     },
                                                     {
                                                         "type": "text",
-                                                        "text": "Choose a recurring, low-risk job and describe what a useful result must do."
+                                                        "text": "Pick a recurring, low-risk job and decide what a useful result would need to do."
                                                     }
                                                 ]
                                             }
@@ -868,7 +870,7 @@
                                                     },
                                                     {
                                                         "type": "text",
-                                                        "text": "Write reusable rules and say when they need an update."
+                                                        "text": "Write down the rules you keep having to explain, and say when they go stale."
                                                     }
                                                 ]
                                             }
@@ -891,7 +893,7 @@
                                                     },
                                                     {
                                                         "type": "text",
-                                                        "text": "Match policy, workflow or agent to the job, then inspect the process underneath it."
+                                                        "text": "Use policy for a known choice, a workflow for a known sequence, and an agent only where the job needs bounded judgement."
                                                     }
                                                 ]
                                             }
@@ -914,7 +916,7 @@
                                                     },
                                                     {
                                                         "type": "text",
-                                                        "text": "Separate quick conversations from work that needs delegation and review."
+                                                        "text": "Decide whether the job belongs in chat or needs a longer delegated run that you can inspect."
                                                     }
                                                 ]
                                             }
@@ -937,7 +939,7 @@
                                                     },
                                                     {
                                                         "type": "text",
-                                                        "text": "Derive acceptance conditions from the brief and fail cheaply before anything changes."
+                                                        "text": "Write checks from the brief, including one that would catch a plausible wrong result."
                                                     }
                                                 ]
                                             }
@@ -960,7 +962,7 @@
                                                     },
                                                     {
                                                         "type": "text",
-                                                        "text": "Stop on missing context and leave a replayable decision trace."
+                                                        "text": "Stop when important context is missing. Keep enough evidence for someone to replay the decision."
                                                     }
                                                 ]
                                             }
@@ -983,7 +985,7 @@
                                                     },
                                                     {
                                                         "type": "text",
-                                                        "text": "Verify that done is true and plan for automation failure."
+                                                        "text": "Do not take the tool's word for \"done\". Verify the result where it was meant to land and write down what happens if automation stops halfway."
                                                     }
                                                 ]
                                             }
@@ -1006,7 +1008,7 @@
                                                     },
                                                     {
                                                         "type": "text",
-                                                        "text": "Turn a repeated job into a reusable skill and govern its connections."
+                                                        "text": "Turn the part that repeats into a skill. Add a connection only when the job needs current data or an external action."
                                                     }
                                                 ]
                                             }
@@ -1029,7 +1031,7 @@
                                                     },
                                                     {
                                                         "type": "text",
-                                                        "text": "Research before drafting, then edit the argument and the prose."
+                                                        "text": "Work out what the evidence supports before drafting. Then edit the argument as carefully as the sentences."
                                                     }
                                                 ]
                                             }
@@ -1052,7 +1054,7 @@
                                                     },
                                                     {
                                                         "type": "text",
-                                                        "text": "Build checked artefacts and act only with explicit authority."
+                                                        "text": "Check the document, spreadsheet or meeting brief itself. Do not send, post or change a record without explicit authority."
                                                     }
                                                 ]
                                             }
@@ -1075,7 +1077,7 @@
                                                     },
                                                     {
                                                         "type": "text",
-                                                        "text": "Turn misses into better rules, checks and handovers."
+                                                        "text": "Keep the useful miss. Change one part of the setup, rerun the job, and hand over the result."
                                                     }
                                                 ]
                                             }
@@ -1096,7 +1098,7 @@
                     "type": "site",
                     "verticalPadding": "py-16",
                     "maxWidth": "max-w-6xl",
-                    "title": "Check the fit",
+                    "title": "Choose a safe job to practise on",
                     "description": {
                         "type": "doc",
                         "content": [
@@ -1105,7 +1107,7 @@
                                 "content": [
                                     {
                                         "type": "text",
-                                        "text": "The course works best when the job is real, bounded and safe to practise with."
+                                        "text": "A month-end variance note, contract review table, or weekly operations pack can work if you have approved source material and time to review the result."
                                     }
                                 ]
                             }
@@ -1116,7 +1118,7 @@
                     "columns": 2,
                     "items": [
                         {
-                            "title": "This is for you if",
+                            "title": "A good job for this course",
                             "description": {
                                 "type": "doc",
                                 "content": [
@@ -1125,7 +1127,7 @@
                                         "content": [
                                             {
                                                 "type": "text",
-                                                "text": "You have a recurring, low-risk job with a known audience and source material, and you are willing to inspect the result before anyone uses it."
+                                                "text": "It happens more than once, has a known audience and source material, and can be reviewed before anyone acts on it."
                                             }
                                         ]
                                     }
@@ -1133,7 +1135,7 @@
                             }
                         },
                         {
-                            "title": "This is not for you if",
+                            "title": "Pick another job if",
                             "description": {
                                 "type": "doc",
                                 "content": [
@@ -1142,7 +1144,7 @@
                                         "content": [
                                             {
                                                 "type": "text",
-                                                "text": "You want one magic prompt, cannot use an approved environment, or expect AI to make a final high-consequence decision without human review."
+                                                "text": "It is a live crisis, uses data your organisation has not approved, or ends in an irreversible or high-consequence decision."
                                             }
                                         ]
                                     }
@@ -1161,7 +1163,7 @@
                     "type": "site",
                     "verticalPadding": "py-12",
                     "maxWidth": "max-w-4xl",
-                    "title": "Bring one job. Leave with a method. Free.",
+                    "title": "Start with the next real job on your list.",
                     "description": {
                         "type": "doc",
                         "content": [
@@ -1170,13 +1172,13 @@
                                 "content": [
                                     {
                                         "type": "text",
-                                        "text": "Start with work you already understand. Finish with a workflow another person can inspect."
+                                        "text": "Choose something recurring and low-risk. The first step is to write down who needs the result and what a useful result must do."
                                     }
                                 ]
                             }
                         ]
                     },
-                    "buttonCaption": "Start the course — free",
+                    "buttonCaption": "Start the free course",
                     "buttonAction": "/course/ai-for-actual-work/course_ai_for_actual_work_v1",
                     "alignment": "left",
                     "contentAlignment": "left",
@@ -1201,7 +1203,7 @@
                                 "content": [
                                     {
                                         "type": "text",
-                                        "text": "Bring the work. The course supplies the method."
+                                        "text": "Choose the job and material you will use before you begin."
                                     }
                                 ]
                             }
@@ -1238,7 +1240,7 @@
                                         "content": [
                                             {
                                                 "type": "text",
-                                                "text": "No. The core course covers research, analysis, planning, writing and decisions. Engineering material is an optional extension."
+                                                "text": "No. The core course is for professional work rather than software development. Engineering material is an optional extension."
                                             }
                                         ]
                                     }
@@ -1255,7 +1257,7 @@
                                         "content": [
                                             {
                                                 "type": "text",
-                                                "text": "Choose a recurring, low-risk job with a known audience, source material and a result someone will use. Avoid practising on a one-off crisis or an irreversible decision."
+                                                "text": "Bring something you do more than once, with known sources and someone who uses the result. Do not start with a live crisis or a decision you cannot undo."
                                             }
                                         ]
                                     }
@@ -1289,7 +1291,7 @@
                                         "content": [
                                             {
                                                 "type": "text",
-                                                "text": "Do not paste in personal information, secrets or confidential material without permission. Remove identifying details or use representative sample data."
+                                                "text": "Do not paste in personal information, secrets or confidential material without permission. If you cannot use the real material, remove identifying details or make a safe sample."
                                             }
                                         ]
                                     }
@@ -1306,7 +1308,7 @@
                                         "content": [
                                             {
                                                 "type": "text",
-                                                "text": "No. The course is organised around context, permission, sources, checks, decisions and handover. Apply those practices in the tool your work permits."
+                                                "text": "No. You learn a way of working: define the job, control its sources and permissions, check the result, and keep a record of the decision. Use whichever approved tool you have."
                                             }
                                         ]
                                     }
