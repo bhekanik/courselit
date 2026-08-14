@@ -1,6 +1,7 @@
 # One committed migration, run once, from the builder-stage image of the same
-# commit. Runs under the host deploy lock. Never touches the app service, the
-# compose file, the override or the live env file.
+# commit. Runs under the host deploy lock. Dry-run leaves the app alone; apply
+# stops and restarts it around the migration. Neither mode writes the compose
+# file, the override or the live env file.
 # Args: <migration-image> <migration-file> <revision> <mode: dry-run|apply>
 
 image="$1"
