@@ -47,11 +47,12 @@ HOOK
 }
 
 @test "a failed activation leaves the app on the previous image" {
-    export FAKE_COMPOSE_UP_EXIT=1
+    export FAKE_COMPOSE_UP_REJECT_IMAGE="$REF"
 
     run "$PROD_DIR/deploy.sh" "$SHA"
     [ "$status" -ne 0 ]
     [[ "$output" == *"remote activation failed"* ]]
     [ "$(container_image_of app)" = "$PREV" ]
+    [ "$(container_state_of app)" = running ]
     [ "$(sed -n 's/^AIWS_APP_IMAGE=//p' "$REMOTE_DIR/aiws-active-image.env")" = "$PREV" ]
 }

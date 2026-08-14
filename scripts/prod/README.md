@@ -46,7 +46,8 @@ scripts/prod/rollback.sh codelit/courselit-app:latest@sha256:<digest>
 scripts/prod/rollback.sh aiws/courselit-app:<sha>
 
 # Run one committed migration from the exact SHA's builder image.
-scripts/prod/migrate.sh <full-40-char-commit-sha> <migration.js> --yes
+scripts/prod/migrate.sh <full-40-char-commit-sha> <migration.js> --dry-run
+scripts/prod/migrate.sh <full-40-char-commit-sha> <migration.js> --apply --yes
 
 # Destructive DB-restore half of a rollback rehearsal.
 scripts/prod/restore-db.sh \
@@ -183,25 +184,32 @@ machine:
 The directory itself is mode 700. `mongodump` runs inside the mongo container
 using its own `MONGO_INITDB_ROOT_USERNAME` / `MONGO_INITDB_ROOT_PASSWORD`.
 Those values are not sent over SSH or printed by the harness. A dump smaller
-than `AIWS_MIN_DUMP_BYTES` aborts the deploy before activation.
+than `AIWS_MIN_DUMP_BYTES` aborts the deploy before activation. The app is
+stopped before the dump and stays stopped into candidate activation, so the
+archive is an exact pre-deploy restore point. If the dump or candidate config
+validation fails, the harness restores the prior config, restarts the previous
+app image, and verifies it before returning the failure.
 
 A manual rollback writes `aiws-backups/rollback-<timestamp>/` with the same
 config files and a `rollback.meta`. It does **not** take a database dump —
 rollback has to be fast, and it does not touch the database.
 
-A migration writes `aiws-backups/migrate-<timestamp>/mongo.archive.gz` and
-`migration.meta` before it mutates Mongo. A database restore writes
-`aiws-backups/restore-<timestamp>/`, including a safety dump of the database it
-is about to replace, a post-restore verification dump, and `restore.meta`.
+`migrate.sh --apply` writes `aiws-backups/migrate-<timestamp>/mongo.archive.gz`
+before it mutates Mongo, `post-migration.archive.gz` after, and `migration.meta`.
+A dry run writes only `migration.meta`. A database restore writes
+`aiws-backups/restore-<timestamp>/`, including `pre-restore.archive.gz` (a safety
+dump of the database it is about to replace, itself restorable as backup ID
+`restore-<timestamp>`), a post-restore verification dump, and `restore.meta`.
 
 ## Rollback
 
 **Automatic.** If activation or the public smoke fails, the app is put back on
 the image recorded as `PREVIOUS_IMAGE` in this deploy's `deployment.meta`, and
-the same invariants are re-verified. It refuses in two cases:
+the same invariants are re-verified:
 
-- the app is already on the previous image — nothing to do, reported and exits 0;
-- the app is running something that is neither this deploy's candidate nor its
+- if the app is already on the previous image, it still reapplies, restarts and
+  verifies that predecessor because activation may have left it stopped;
+- if the app is running something that is neither this deploy's candidate nor its
   predecessor — a newer deployment landed while the smoke was running, and
   reverting would silently regress it. The harness stops and says so.
 
@@ -221,31 +229,74 @@ ssh notto-deploy "docker inspect --format '{{.Config.Image}}' courselit-app-1"
 
 ## Migration channel
 
-`migrate.sh` accepts one bare `.js` filename under `apps/web/.migrations`.
-It proves the file exists in the named commit, builds Dockerfile target
-`builder` from `git archive <sha>`, tags it exactly
-`courselit-migrate:<sha>`, verifies the loaded platform/revision, and streams
-it to the host without a registry. The host checks the revision again, takes a
-mongodump, then runs `node apps/web/.migrations/<file>` in a one-off container
-on the network shared by the live app and Mongo. The live `.env` is passed with
-Docker's `--env-file`; its values are never rendered. Compose files, the app
-container, runtime image and startup command are untouched. A successful
-migration must also pass the public smoke.
+`migrate.sh` accepts one bare `.js` filename under `apps/web/.migrations` and
+one explicit mode:
 
-The confirmation flag is deliberate: a migration mutates production. A failed
+```sh
+scripts/prod/migrate.sh <full-40-char-commit-sha> <migration.js> --dry-run
+scripts/prod/migrate.sh <full-40-char-commit-sha> <migration.js> --apply --yes
+```
+
+There is no default mode, and `--apply` without `--yes` is refused. The mode is
+passed to the migration script itself as its first argument (`--dry-run` or
+`--apply`). Each migration must honour `--dry-run` as a non-mutating operation;
+the P4 migration is responsible for that application-level contract.
+
+Both modes prove the file exists in the named commit, build Dockerfile target
+`builder` from `git archive <sha>`, tag it exactly `courselit-migrate:<sha>`,
+verify the loaded platform/revision, and stream it to the host without a
+registry. The host checks the revision again, then runs
+`node apps/web/.migrations/<file> <mode>` in a one-off container on the network
+shared by the live app and Mongo. The live `.env` is passed with Docker's
+`--env-file`; its values are never rendered. Compose files, the runtime image
+and the startup command are untouched.
+
+In `--dry-run` mode the harness never stops the app and never takes a dump. The
+migration receives `--dry-run` and must not mutate production data.
+
+`--apply` stops the app **before** the pre-migration mongodump, so the backup is
+a consistent restore point and the migration does not race live writes. The app
+stays stopped through the migration run and a post-migration read-back of Mongo.
+Only when both succeed does the harness restart the app on its existing image,
+re-check the app/MediaLit/network invariants, and run the public smoke. A
+failure at any earlier point leaves the app stopped on purpose, so nothing
+writes into half-migrated data.
+
+The migration process's own exit code is preserved end to end, so a migration
+that distinguishes its failure modes by exit code keeps that signal.
+
+The confirmation flag is deliberate: an apply mutates production. A failed
 migration is never auto-restored because `mongorestore --drop` can erase writes
-made after the dump. Stop, inspect `migration.meta`, and decide explicitly.
+made after the dump. Stop, inspect `migration.meta` (which records
+`MIGRATION_MODE`), and decide explicitly.
 
 ## Database restore and rollback rehearsal
 
-`restore-db.sh` is destructive. It accepts only an exact harness backup ID in
-`YYYYMMDDTHHMMSSZ` or `migrate-YYYYMMDDTHHMMSSZ` form and requires the full
-confirmation flag. Before stopping writes it checks the archive size and gzip
-integrity, proves `mongorestore` exists, and takes a safety dump of the database
-being replaced. It then stops the app, runs `mongorestore --drop`, dumps the
-restored database to prove Mongo can read it, restarts the same app image,
-checks app/MediaLit/network invariants, and runs the public smoke. If restore or
-verification fails, the app stays stopped so it cannot write into partial data.
+`restore-db.sh` is destructive. It requires the full confirmation flag and an
+exact harness backup ID in one of three forms:
+
+| Backup ID                  | Archive read                | Written by         |
+| -------------------------- | --------------------------- | ------------------ |
+| `YYYYMMDDTHHMMSSZ`         | `mongo.archive.gz`          | a deploy           |
+| `migrate-YYYYMMDDTHHMMSSZ` | `mongo.archive.gz`          | `migrate.sh --apply` |
+| `restore-YYYYMMDDTHHMMSSZ` | `pre-restore.archive.gz`    | an earlier restore |
+
+The `restore-` form is how you undo a restore: every restore keeps a safety dump
+of the state it replaced, and that dump is selectable as a restore source. The
+ID is still pattern-matched to an exact timestamp and rejected if it looks like a
+path, so nothing outside the backup directory is reachable.
+
+It checks the archive size and gzip integrity and proves `mongorestore` exists
+first, while the app is still up. It then stops the app, takes the safety dump,
+runs `mongorestore --drop`, dumps the restored database to prove Mongo can read
+it, restarts the same app image, checks app/MediaLit/network invariants, and runs
+the public smoke. The app is stopped before the safety dump, not after, so that
+dump is a consistent snapshot rather than one taken under a live writer.
+
+Every failure after the restore record is created writes `OUTCOME=failed` into
+`restore.meta`, including a failed safety dump, a failed `mongorestore`, a failed
+restart and a failed post-restart verification. If anything from the stop
+onwards fails, the app stays stopped so it cannot write into partial data.
 
 A P0 rollback rehearsal is both commands, in this order, using the backup made
 immediately before the candidate activation:
@@ -314,7 +365,8 @@ These are real, and deliberately not papered over:
 ```
 scripts/prod/
   deploy.sh            build + ship + activate + smoke + auto-rollback
-  migrate.sh           exact-SHA builder image + one committed migration
+  migrate.sh           exact-SHA builder image + one committed migration,
+                       --dry-run or --apply --yes
   restore-db.sh        confirmed destructive restore + verification + smoke
   smoke.sh             public checks, runnable on its own
   rollback.sh          manual rollback to an image already on the host
@@ -329,7 +381,7 @@ scripts/prod/
     preflight.sh       read-only host checks
     activate.sh        backup, layer, up -d --no-deps app, verify
     auto-rollback.sh   restore this deploy's predecessor
-    migrate.sh         backup + one-off migration on the compose network
+    migrate.sh         stop writers + backup + one-off migration + restart
     restore-db.sh      stop writers + restore + verify + restart
     rollback.sh        manual rollback
   tests/               Bats; fakes only for docker, ssh, curl, git, df, flock

@@ -140,7 +140,7 @@ wait_for_app() {
         fi
         [ "$waited" -lt "$HEALTH_TIMEOUT" ] ||
             r_die "app did not become healthy within ${HEALTH_TIMEOUT}s (state=$state health=$health)"
-        sleep "$HEALTH_INTERVAL"
+        sleep "$interval"
         waited=$((waited + interval))
     done
 }

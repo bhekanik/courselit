@@ -132,8 +132,18 @@ cmd_run() {
     esac
 }
 
+compose_image_from_env_files() {
+    local env_files="$1" image="" f
+    for f in $env_files; do
+        [ -f "$f" ] || continue
+        image="$(sed -n 's/^AIWS_APP_IMAGE=//p' "$f" | tail -1)"
+        [ -n "$image" ] && break
+    done
+    printf '%s' "$image"
+}
+
 cmd_compose() {
-    local action="" services="" env_files="" a
+    local action="" services="" env_files="" image="" a
     while [ $# -gt 0 ]; do
         a="$1"
         case "$a" in
@@ -141,28 +151,45 @@ cmd_compose() {
         -f | --file) shift 2 ;;
         config)
             shift
+            image="$(compose_image_from_env_files "$env_files")"
+            if [ -n "${FAKE_COMPOSE_CONFIG_REJECT_IMAGE:-}" ] &&
+                [ "$image" = "$FAKE_COMPOSE_CONFIG_REJECT_IMAGE" ]; then
+                return 1
+            fi
             return "${FAKE_COMPOSE_CONFIG_EXIT:-0}"
             ;;
         up)
             action=up
             shift
             ;;
+        stop)
+            action=stop
+            shift
+            ;;
         -d | --no-deps | --wait) shift ;;
         *)
-            [ "$action" = up ] && services="$services $1"
+            case "$action" in
+            up | stop) services="$services $1" ;;
+            esac
             shift
             ;;
         esac
     done
+    if [ "$action" = stop ]; then
+        [ "${FAKE_COMPOSE_STOP_EXIT:-0}" = "0" ] || return "$FAKE_COMPOSE_STOP_EXIT"
+        for svc in $services; do
+            stop_service "$svc"
+        done
+        return 0
+    fi
     [ "$action" = up ] || return 0
     [ "${FAKE_COMPOSE_UP_EXIT:-0}" = "0" ] || return "$FAKE_COMPOSE_UP_EXIT"
 
-    local image="" f
-    for f in $env_files; do
-        [ -f "$f" ] || continue
-        image="$(sed -n 's/^AIWS_APP_IMAGE=//p' "$f" | tail -1)"
-        [ -n "$image" ] && break
-    done
+    image="$(compose_image_from_env_files "$env_files")"
+    if [ -n "${FAKE_COMPOSE_UP_REJECT_IMAGE:-}" ] &&
+        [ "$image" = "$FAKE_COMPOSE_UP_REJECT_IMAGE" ]; then
+        return 1
+    fi
     # No override layered on: compose uses whatever the live file already pins,
     # so the service keeps the image it is running.
     if [ -n "$image" ]; then
@@ -173,6 +200,14 @@ cmd_compose() {
     for svc in $services ${FAKE_COMPOSE_UP_EXTRA_SERVICES:-}; do
         recreate_service "$svc" "$image"
     done
+}
+
+stop_service() {
+    local svc="$1" tmp="$STATE/containers.tmp"
+    awk -F'\t' -v svc="$svc" \
+        'BEGIN { OFS = "\t" } $5 == svc { $6 = "stopped" } { print }' \
+        "$CONTAINERS" >"$tmp"
+    mv "$tmp" "$CONTAINERS"
 }
 
 recreate_service() {

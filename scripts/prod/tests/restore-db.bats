@@ -61,6 +61,102 @@ setup() {
     refute_broad_compose_up
 }
 
+@test "restore stops app writes before its own pre-restore safety dump" {
+    run "$PROD_DIR/restore-db.sh" "$CONFIRM" "$BACKUP_ID"
+    [ "$status" -eq 0 ]
+    assert_call_before "stop app" "mongodump --username"
+}
+
+@test "restore can restore a previous run's safety dump by its restore- backup id" {
+    # A real mongodump --gzip writes a gzip stream, and the safety dump has to
+    # survive the same gzip -t guard as any other archive.
+    seed_exec mongo 'case "$*" in
+      *"command -v mongodump"*) exit 0 ;;
+      *"command -v mongorestore"*) exit 0 ;;
+      *mongorestore*) cat >/dev/null; exit 0 ;;
+      *mongodump*) head -c 8192 /dev/urandom | gzip ;;
+    esac'
+
+    run "$PROD_DIR/restore-db.sh" "$CONFIRM" "$BACKUP_ID"
+    [ "$status" -eq 0 ]
+    SAFETY="restore-$AIWS_DEPLOY_TS"
+    [ -f "$REMOTE_DIR/aiws-backups/$SAFETY/pre-restore.archive.gz" ]
+
+    # A second restore needs its own record directory, so move the clock on.
+    export AIWS_DEPLOY_TS=20260814T130000Z
+    : >"$FAKE_CALLS"
+    run "$PROD_DIR/restore-db.sh" "$CONFIRM" "$SAFETY"
+    [ "$status" -eq 0 ]
+    grep -q "^RESTORED_FROM=$SAFETY$" "$REMOTE_DIR/aiws-backups/restore-20260814T130000Z/restore.meta"
+    assert_call "mongorestore"
+}
+
+@test "restore refuses a restore- backup id whose safety dump is missing" {
+    mkdir -p "$REMOTE_DIR/aiws-backups/restore-20990101T000000Z"
+
+    run "$PROD_DIR/restore-db.sh" "$CONFIRM" restore-20990101T000000Z
+    [ "$status" -ne 0 ]
+    [[ "$output" == *"pre-restore.archive.gz"* ]]
+    refute_call "mongorestore"
+}
+
+@test "restore still refuses a traversal attempt dressed as a restore- id" {
+    run "$PROD_DIR/restore-db.sh" "$CONFIRM" restore-../../outside
+    [ "$status" -ne 0 ]
+    refute_call " ssh "
+}
+
+@test "restore records a failed outcome and leaves the app stopped when mongorestore fails" {
+    seed_exec mongo 'case "$*" in
+      *"command -v mongodump"*) exit 0 ;;
+      *"command -v mongorestore"*) exit 0 ;;
+      *mongorestore*) cat >/dev/null; exit 1 ;;
+      *mongodump*) head -c 4096 /dev/zero | tr "\\0" m ;;
+    esac'
+
+    run "$PROD_DIR/restore-db.sh" "$CONFIRM" "$BACKUP_ID"
+    [ "$status" -ne 0 ]
+    grep -q '^OUTCOME=failed$' "$REMOTE_DIR/aiws-backups/restore-$AIWS_DEPLOY_TS/restore.meta"
+    assert_call "stop app"
+    refute_call "up -d --no-deps app"
+}
+
+@test "restore records a failed outcome and leaves the app stopped when the safety dump fails" {
+    seed_exec mongo 'case "$*" in
+      *"command -v mongodump"*) exit 0 ;;
+      *"command -v mongorestore"*) exit 0 ;;
+      *mongodump*) exit 4 ;;
+    esac'
+
+    run "$PROD_DIR/restore-db.sh" "$CONFIRM" "$BACKUP_ID"
+    [ "$status" -ne 0 ]
+    [[ "$output" == *"safety dump"* ]]
+    grep -q '^OUTCOME=failed$' "$REMOTE_DIR/aiws-backups/restore-$AIWS_DEPLOY_TS/restore.meta"
+    assert_call "stop app"
+    refute_call "exec mongorestore"
+    refute_call "up -d --no-deps app"
+}
+
+@test "restore records a failed outcome when the app does not restart" {
+    export FAKE_COMPOSE_UP_EXIT=1
+
+    run "$PROD_DIR/restore-db.sh" "$CONFIRM" "$BACKUP_ID"
+    [ "$status" -ne 0 ]
+    grep -q '^OUTCOME=failed$' "$REMOTE_DIR/aiws-backups/restore-$AIWS_DEPLOY_TS/restore.meta"
+    [ "$(container_state_of app)" = stopped ]
+}
+
+@test "restore records a failed outcome when the restarted app fails verification" {
+    export FAKE_UP_NETWORKS=isolated_net
+
+    run "$PROD_DIR/restore-db.sh" "$CONFIRM" "$BACKUP_ID"
+    [ "$status" -ne 0 ]
+    [[ "$output" == *"network"* ]]
+    grep -q '^OUTCOME=failed$' "$REMOTE_DIR/aiws-backups/restore-$AIWS_DEPLOY_TS/restore.meta"
+    [ "$(grep -c 'stop app' "$FAKE_CALLS")" -eq 2 ]
+    [ "$(container_state_of app)" = stopped ]
+}
+
 @test "restore verifies the database is readable after the restore and smokes the site" {
     run "$PROD_DIR/restore-db.sh" "$CONFIRM" "$BACKUP_ID"
     [ "$status" -eq 0 ]
@@ -111,6 +207,15 @@ setup() {
     grep -q '^OUTCOME=succeeded$' "$R"
     [ "$(file_mode "$R")" = "600" ]
     refute_secret_leak "$output"
+}
+
+@test "restore health polling sleeps the guarded interval, never a zero-second spin" {
+    export AIWS_HEALTH_INTERVAL=0 AIWS_HEALTH_TIMEOUT=5 FAKE_APP_HEALTH_AFTER=2
+
+    run "$PROD_DIR/restore-db.sh" "$CONFIRM" "$BACKUP_ID"
+    [ "$status" -eq 0 ]
+    assert_call "sleep 1"
+    refute_call "sleep 0"
 }
 
 @test "restore rehearsal also proves image rollback to the pre-restore image" {

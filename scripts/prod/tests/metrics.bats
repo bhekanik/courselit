@@ -33,7 +33,7 @@ setup() {
 }
 
 @test "the migration build is measured under its own kind" {
-    run "$PROD_DIR/migrate.sh" "$SHA" "$MIGRATION" --yes
+    run "$PROD_DIR/migrate.sh" "$SHA" "$MIGRATION" --apply --yes
     [ "$status" -eq 0 ]
     grep -q 'kind=migration' "$AIWS_METRICS_FILE"
     grep -q "image=courselit-migrate:$SHA" "$AIWS_METRICS_FILE"

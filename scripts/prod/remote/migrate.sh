@@ -1,11 +1,12 @@
 # One committed migration, run once, from the builder-stage image of the same
 # commit. Runs under the host deploy lock. Never touches the app service, the
 # compose file, the override or the live env file.
-# Args: <migration-image> <migration-file> <revision>
+# Args: <migration-image> <migration-file> <revision> <mode: dry-run|apply>
 
 image="$1"
 migration="$2"
 revision="$3"
+mode="$4"
 path="$MIGRATIONS_DIR/$migration"
 
 docker image inspect "$image" >/dev/null 2>&1 ||
@@ -37,38 +38,91 @@ fi
 mkdir -p "$dir"
 chmod 700 "$dir"
 
-# Pre-mutation backup. Credentials are expanded only inside the mongo
-# container; the harness never prints them or sends them over SSH.
-docker exec "$mongo_id" sh -c 'exec mongodump --username "$MONGO_INITDB_ROOT_USERNAME" --password "$MONGO_INITDB_ROOT_PASSWORD" --authenticationDatabase admin --archive --gzip --quiet' \
-    >"$dir/mongo.archive.gz"
-chmod 600 "$dir/mongo.archive.gz"
-dump_bytes="$(wc -c <"$dir/mongo.archive.gz" | tr -d ' ')"
-[ "$dump_bytes" -ge "$MIN_DUMP_BYTES" ] ||
-    r_die "mongodump archive is $dump_bytes bytes, below the $MIN_DUMP_BYTES byte floor; refusing to migrate without a usable backup"
-r_ok "pre-migration mongodump $dump_bytes bytes at $dir"
-
 write_meta() {
     {
         printf 'DEPLOY_TS=%s\n' "$DEPLOY_TS"
         printf 'MIGRATION=%s\n' "$migration"
+        printf 'MIGRATION_MODE=%s\n' "$mode"
         printf 'MIGRATION_IMAGE=%s\n' "$image"
         printf 'MIGRATION_REVISION=%s\n' "$revision"
         printf 'MIGRATION_NETWORK=%s\n' "$network"
-        printf 'MONGODUMP_BYTES=%s\n' "$dump_bytes"
+        printf 'MONGODUMP_BYTES=%s\n' "${dump_bytes:-0}"
+        printf 'VERIFY_DUMP_BYTES=%s\n' "${verify_bytes:-0}"
         printf 'OUTCOME=%s\n' "$1"
     } >"$dir/migration.meta"
     chmod 600 "$dir/migration.meta"
 }
 
-# The live env file is passed as a file, so no value is ever rendered onto a
-# command line or into this script's output.
-r_log "running $path once from $image on $network"
-if docker run --rm --network "$network" --env-file "$ENV_FILE" \
-    --workdir /app --entrypoint "$MIGRATION_RUNNER" "$image" "$path"; then
-    write_meta succeeded
-    r_ok "migration $migration succeeded; record and backup at $dir"
-else
-    status=$?
-    write_meta failed
-    r_die "migration $migration exited $status; the database backup taken before it is at $dir (restore with scripts/prod/restore-db.sh)"
+if [ "$mode" = apply ]; then
+    medialit_id="$(require_service_id medialit)"
+    app_image="$(docker inspect --format '{{.Config.Image}}' "$app_id")"
+
+    # Stop writers first. A dump taken while the app is writing is not a restore
+    # point for the state the migration is about to change, and the migration
+    # itself would race the app for the same documents.
+    r_log "stopping the app before the pre-migration dump"
+    compose_app stop app || {
+        write_meta failed
+        r_die "could not stop the app service; refusing to migrate under a live writer"
+    }
+
+    # Pre-mutation backup. Credentials are expanded only inside the mongo
+    # container; the harness never prints them or sends them over SSH.
+    docker exec "$mongo_id" sh -c 'exec mongodump --username "$MONGO_INITDB_ROOT_USERNAME" --password "$MONGO_INITDB_ROOT_PASSWORD" --authenticationDatabase admin --archive --gzip --quiet' \
+        >"$dir/mongo.archive.gz" || {
+        write_meta failed
+        r_die "pre-migration mongodump failed; the app remains stopped -- record at $dir"
+    }
+    chmod 600 "$dir/mongo.archive.gz"
+    dump_bytes="$(wc -c <"$dir/mongo.archive.gz" | tr -d ' ')"
+    [ "$dump_bytes" -ge "$MIN_DUMP_BYTES" ] || {
+        write_meta failed
+        r_die "mongodump archive is $dump_bytes bytes, below the $MIN_DUMP_BYTES byte floor; refusing to migrate without a usable backup (the app remains stopped)"
+    }
+    r_ok "pre-migration mongodump $dump_bytes bytes at $dir"
 fi
+
+# The live env file is passed as a file, so no value is ever rendered onto a
+# command line or into this script's output. The mode reaches the migration
+# script itself, so it can honour --dry-run.
+r_log "running $path once in $mode mode from $image on $network"
+# `if ! cmd` would make $? the negation's 0, so the real code is captured here.
+status=0
+docker run --rm --network "$network" --env-file "$ENV_FILE" \
+    --workdir /app --entrypoint "$MIGRATION_RUNNER" "$image" "$path" "--$mode" || status=$?
+if [ "$status" -ne 0 ]; then
+    write_meta failed
+    # Not r_die: the operator needs the migration's own exit code, not 1.
+    printf 'error: migration %s exited %s in %s mode; record at %s\n' \
+        "$migration" "$status" "$mode" "$dir" >&2
+    [ "$mode" = apply ] &&
+        printf 'error: the app remains stopped; the pre-migration backup is at %s (restore with scripts/prod/restore-db.sh)\n' "$dir" >&2
+    exit "$status"
+fi
+
+if [ "$mode" = apply ]; then
+    # Prove mongo still serves data before letting writers back in: a dump at
+    # least as large as the floor means the migration left a readable database.
+    docker exec "$mongo_id" sh -c 'exec mongodump --username "$MONGO_INITDB_ROOT_USERNAME" --password "$MONGO_INITDB_ROOT_PASSWORD" --authenticationDatabase admin --archive --gzip --quiet' \
+        >"$dir/post-migration.archive.gz" || true
+    chmod 600 "$dir/post-migration.archive.gz"
+    verify_bytes="$(wc -c <"$dir/post-migration.archive.gz" | tr -d ' ')"
+    if [ "$verify_bytes" -lt "$MIN_DUMP_BYTES" ]; then
+        write_meta failed
+        r_die "post-migration verification read only $verify_bytes bytes back out of mongo; the app remains stopped -- record at $dir"
+    fi
+    r_ok "post-migration verification dump $verify_bytes bytes"
+
+    r_log "restarting the app on $app_image"
+    # Subshell: verify_app calls r_die, and its exit must land here so the record
+    # says failed rather than the whole run dying with no outcome written.
+    if ! (compose_app up -d --no-deps app &&
+        verify_app "$app_image" "" "$mongo_id" "$medialit_id"); then
+        compose_app stop app || true
+        write_meta failed
+        r_die "the app did not come back after migration $migration; record at $dir"
+    fi
+fi
+
+write_meta succeeded
+r_ok "migration $migration succeeded in $mode mode; record at $dir"

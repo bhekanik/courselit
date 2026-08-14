@@ -23,7 +23,9 @@ if [ "$running" = "$previous" ]; then
     write_image_env "$previous"
     compose_full config --quiet ||
         r_die "app is on $previous but the restored compose override does not validate"
-    r_ok "app and compose override restored to $previous"
+    compose_full up -d --no-deps app
+    verify_app "$previous" "" "$mongo_before" "$medialit_before"
+    r_ok "app and compose override restored and verified on $previous"
     exit 0
 fi
 

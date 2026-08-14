@@ -18,8 +18,12 @@ This is destructive: mongorestore --drop replaces the current database.
 
   $CONFIRM_FLAG
                       required, exactly as written
-  <backup-id>         the directory name under $AIWS_BACKUP_SUBDIR on the host,
-                      e.g. 20260814T120000Z or migrate-20260814T120000Z
+  <backup-id>         the directory name under $AIWS_BACKUP_SUBDIR on the host:
+                      20260814T120000Z          a pre-deploy backup
+                      migrate-20260814T120000Z  a pre-migration backup
+                      restore-20260814T120000Z  the safety dump an earlier
+                                                restore took of the state it
+                                                replaced
 
 List the backups the host holds:
   ssh $AIWS_SSH_HOST ls -1 $AIWS_REMOTE_DIR/$AIWS_BACKUP_SUBDIR
@@ -47,8 +51,8 @@ main() {
         die "an exact backup id is required; this command never picks one for you"
     }
     assert_safe_token "backup id" "$backup_id"
-    if ! [[ "$backup_id" =~ ^(migrate-)?[0-9]{8}T[0-9]{6}Z$ ]]; then
-        die "backup id must be an exact UTC timestamp, optionally prefixed with migrate-: '$backup_id'"
+    if ! [[ "$backup_id" =~ ^(migrate-|restore-)?[0-9]{8}T[0-9]{6}Z$ ]]; then
+        die "backup id must be an exact UTC timestamp, optionally prefixed with migrate- or restore-: '$backup_id'"
     fi
 
     log "restoring the production database on $AIWS_SSH_HOST from backup $backup_id"

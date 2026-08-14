@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Fake sleep: records the interval the harness actually asked for and returns at
+# once, so health-poll timing is asserted rather than waited out.
+set -u
+# shellcheck source=scripts/prod/tests/helpers/fakes/_helpers.bash
+. "${FAKE_HELPERS:?FAKE_HELPERS must be set}"
+fake_log sleep "$@"

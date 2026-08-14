@@ -219,3 +219,7 @@ container_id_of() {
 container_image_of() {
     awk -F'\t' -v s="$1" '$5 == s { print $3 }' "$FAKE_REMOTE_DOCKER_STATE/containers"
 }
+
+container_state_of() {
+    awk -F'\t' -v s="$1" '$5 == s { print $6 }' "$FAKE_REMOTE_DOCKER_STATE/containers"
+}
