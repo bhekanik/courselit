@@ -65,9 +65,20 @@ next_container_id() {
 
 # Renders the small set of --format templates the prod scripts actually use.
 render_format() {
-    local fmt="$1" key="$2" row rev
+    local fmt="$1" key="$2" row rev count i
     row="$(container_row "$key")" || die "No such object: $key"
     case "$fmt" in
+    *Config.Env*)
+        if [ "$(printf '%s' "$row" | cut -d"$(printf '\t')" -f5)" = app ] &&
+            [ -n "${FAKE_APP_DB_CONNECTION_STRING:-}" ]; then
+            count="${FAKE_APP_DB_CONNECTION_COUNT:-1}"
+            i=0
+            while [ "$i" -lt "$count" ]; do
+                printf 'DB_CONNECTION_STRING=%s\n' "$FAKE_APP_DB_CONNECTION_STRING"
+                i=$((i + 1))
+            done
+        fi
+        ;;
     *image.revision*)
         rev="$(image_revision "$(printf '%s' "$row" | cut -d"$(printf '\t')" -f3)")" || rev=""
         printf '%s\n' "$rev"
@@ -120,7 +131,14 @@ cmd_run() {
         a="$1"
         case "$a" in
         --rm | -i | -t) shift ;;
-        --network | --env-file | --env | -w | --workdir | --entrypoint | -e) shift 2 ;;
+        --env | -e)
+            if [ "$2" = DB_CONNECTION_STRING ]; then
+                [ -n "${DB_CONNECTION_STRING:-}" ] || die "DB_CONNECTION_STRING was not exported"
+                printf '%s' "$DB_CONNECTION_STRING" >"$STATE/last-run-db-connection-string"
+            fi
+            shift 2
+            ;;
+        --network | --env-file | -w | --workdir | --entrypoint) shift 2 ;;
         -*) die "unsupported run flag: $a" ;;
         *) image="$1"; shift; break ;;
         esac

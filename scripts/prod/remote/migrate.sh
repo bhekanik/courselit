@@ -25,6 +25,25 @@ loaded_revision="$(docker image inspect --format "$REVISION_LABEL" "$image")"
 r_ok "migration image revision is $revision"
 
 app_id="$(require_service_id app)"
+
+# Compose assembles this value for the app, so it may not exist in the raw env
+# file. Copy it from the existing container without putting the value on a
+# command line or in output; `docker run --env NAME` reads the exported value.
+db_connection_entries="$(
+    docker inspect --format '{{range .Config.Env}}{{println .}}{{end}}' "$app_id" |
+        sed -n '/^DB_CONNECTION_STRING=/p'
+)" || r_die "could not inspect the app container environment"
+db_connection_count="$(
+    printf '%s\n' "$db_connection_entries" |
+        awk '/^DB_CONNECTION_STRING=/ { count++ } END { print count + 0 }'
+)"
+[ "$db_connection_count" -eq 1 ] ||
+    r_die "app container must contain exactly one DB_CONNECTION_STRING entry; found $db_connection_count"
+DB_CONNECTION_STRING="${db_connection_entries#DB_CONNECTION_STRING=}"
+[ -n "$DB_CONNECTION_STRING" ] ||
+    r_die "app container DB_CONNECTION_STRING must not be empty"
+export DB_CONNECTION_STRING
+
 mongo_id="$(require_service_id mongo)"
 
 # The migration must reach mongo exactly the way the app does, so it runs on a
@@ -98,6 +117,7 @@ r_log "running $path once in $mode mode from $image on $network"
 status=0
 docker run --rm --network "$network" --env-file "$ENV_FILE" \
     --env "TARGET_DOMAIN=$TARGET_DOMAIN" \
+    --env DB_CONNECTION_STRING \
     --workdir /app --entrypoint "$MIGRATION_RUNNER" "$image" "$path" "--$mode" || status=$?
 if [ "$status" -ne 0 ]; then
     write_meta failed

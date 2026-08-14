@@ -70,10 +70,32 @@ setup() {
     assert_call "docker run --rm --network notto-demo_default"
     assert_call "--env-file .env"
     assert_call "--env TARGET_DOMAIN=main"
+    assert_call "--env DB_CONNECTION_STRING"
     assert_call "--entrypoint node"
     assert_call "apps/web/.migrations/$MIGRATION"
+    [ "$(cat "$FAKE_REMOTE_DOCKER_STATE/last-run-db-connection-string")" = "$FAKE_APP_DB_CONNECTION_STRING" ]
     refute_secret_leak "$output"
     refute_rendered_compose_config
+}
+
+@test "migrate rejects an app container without DB_CONNECTION_STRING before running the migration" {
+    export FAKE_APP_DB_CONNECTION_STRING=
+
+    run "$PROD_DIR/migrate.sh" "$SHA" "$MIGRATION" --dry-run
+    [ "$status" -ne 0 ]
+    [[ "$output" == *"exactly one DB_CONNECTION_STRING"* ]]
+    refute_call "remote docker run --rm --network"
+    refute_secret_leak "$output"
+}
+
+@test "migrate rejects multiple DB_CONNECTION_STRING entries before running the migration" {
+    export FAKE_APP_DB_CONNECTION_COUNT=2
+
+    run "$PROD_DIR/migrate.sh" "$SHA" "$MIGRATION" --dry-run
+    [ "$status" -ne 0 ]
+    [[ "$output" == *"exactly one DB_CONNECTION_STRING"* ]]
+    refute_call "remote docker run --rm --network"
+    refute_secret_leak "$output"
 }
 
 @test "migrate rejects an empty target before build or remote work" {

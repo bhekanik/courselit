@@ -43,6 +43,8 @@ prod_setup() {
     export AIWS_LOCK_TIMEOUT=5
     export AIWS_HEALTH_TIMEOUT=1
     export AIWS_HEALTH_INTERVAL=0
+    export FAKE_APP_DB_CONNECTION_STRING='mongodb://root:s3cr3t-db@mongo:27017/courselit?authSource=admin'
+    export FAKE_APP_DB_CONNECTION_COUNT=1
     unset AIWS_TARGET_DOMAIN
     unset AIWS_SMOKE_MEDIA_URL AIWS_SMOKE_OTP_URL AIWS_SMOKE_OTP_BODY
 
