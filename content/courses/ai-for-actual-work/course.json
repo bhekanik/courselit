@@ -8,7 +8,7 @@
     "access": "free",
     "privacy": "public",
     "published": true,
-    "description": "A free, practical course for working professionals who have tried an AI chat tool and still use it one question at a time. You bring one recurring, low-risk job from your own work and turn it into a repeatable AI-assisted workflow with written context, an explicit level of agency, checks that catch realistic errors, and a record another person can inspect. Worked illustrative cases cover a research brief, an operational handover, and a stakeholder update. Coding is not required at any point on the core path.",
+    "description": "A free, practical course for professionals moving from isolated chat questions to checked delegated work. You carry one recurring, low-risk task from a clear brief to a handover another person can inspect. The work itself decides which work surface fits, whether its repeatable method belongs in a skill, and whether external access through MCP is justified. You do the research and writing with evidence, then check documents, spreadsheets and meeting briefs before any external action. Clearly illustrative accounting, legal and operations cases show how the method changes with the stakes. Coding is optional and never required on the core path.",
     "audience": "Working professionals in operations, product, research, analysis, marketing, law, finance, or software. You need one recurring task you already do and access to an approved tool that can read text you give it. You do not need coding skills, admin rights, a budget for integrations, a team, or permission to automate anything that changes an external system.",
     "outcome": "You finish with one real recurring job running as an inspectable AI-assisted workflow, plus a set of artefacts that record what actually happened on a real run rather than what you intended to do. Where the evidence runs out, the workflow says so instead of guessing.",
     "sections": [
@@ -1258,10 +1258,571 @@
         }
       },
       {
+        "key": "choose-the-work-surface",
+        "groupId": "group_ai_for_actual_work_08",
+        "title": "Choose the work surface",
+        "rank": 7000,
+        "outcome": "Choose between a quick conversation and delegated multi-step work from the shape and risk of the job, then record what the current product surface can and cannot establish.",
+        "lessons": [
+          {
+            "key": "separate-chat-from-delegated-work",
+            "lessonId": "lesson_ai_for_actual_work_15",
+            "title": "Separate chat from delegated work",
+            "outcome": "Classify your recurring job as a quick conversation or a bounded delegation, and define the scope, inputs, authority, progress signals and finish condition before work starts.",
+            "type": "text",
+            "published": true,
+            "requiresEnrollment": true,
+            "exercise": "Take the recurring job from your baseline, split its requests into quick questions and delegated work, then write a work-surface decision that names the inputs, authority boundary, progress checkpoints, finish condition and recovery path for the next real run.",
+            "artifact": {
+              "filename": "work-surface-decision.md",
+              "description": "A decision record classifying the chosen job as chat, delegated work or a deliberate sequence of both, with its scope, inputs, allowed actions, progress signals, finish condition, review owner and recovery path."
+            },
+            "verification": [
+              "Each request is classified from the work it requires rather than from which product button is easiest to reach.",
+              "The delegated part has a written finish condition that another person could inspect without reading the conversation.",
+              "The authority boundary names an action the system must stop before taking, even if it appears to know what should happen.",
+              "At least one progress checkpoint can expose a wrong direction before the final artefact is produced.",
+              "The record says who adopts the result and remains responsible for checking it before use."
+            ],
+            "sourceNotes": [
+              "ai-work-school-public-research.md"
+            ],
+            "content": {
+              "type": "doc",
+              "content": [
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "Choose from the job, not the button" }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "A chat surface is useful when you need a quick explanation, a question answered, a small draft or help thinking through one decision. You stay in the conversation, inspect each response and decide the next move. The work is short enough that you can hold its state and notice when it has wandered." }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "A delegated work surface is for a bounded job with several steps, source material, an artefact to produce and a finish condition. The system may plan the route, ask questions, work across files and report progress. That does not make the job unowned. Delegation changes who performs steps. It does not transfer the responsibility for adopting the result." }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "The distinction is about the shape of the work, not about which product looks newer. A short question can sit inside a delegated job. A long conversation can still be chat if you are choosing every next step yourself. Write down who controls scope, sequence and action. That tells you which surface you are actually using." }] },
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "Six fields make a delegation bounded" }] },
+                { "type": "bulletList", "content": [
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Scope names the one job and what remains outside it. A request to prepare a review pack does not silently include sending it." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Inputs name the approved sources and the date or version that matters. Missing material becomes a question or a refusal, not an invitation to fill the gap." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Authority says what may be read, drafted and changed. It also says which external action needs a person to approve it." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Progress signals show the plan, sources found, open questions and draft state early enough for you to redirect the job." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Finish states the required artefact and the checks it must pass. A response that says complete is not a finish condition." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Recovery says what happens if the work stops, uses the wrong source or reaches an action it cannot safely take." }] }] }
+                ] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "If you cannot fill these fields, keep the work conversational while you find the missing policy or evidence. A delegated surface cannot repair an undefined job. It can only move through the ambiguity with more freedom, which is precisely when the boundary matters." }] },
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "Split a job without splitting ownership" }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Many useful workflows use both surfaces. You might use chat to challenge the purpose of a report, then delegate evidence gathering and a first draft, then return to chat to test an assumption. The decision is made step by step. There is no prize for making the whole job autonomous." }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "For each step, ask who chooses the next move and whether the step can change something outside the working draft. If you choose the next move, it is conversational. If the system chooses several moves inside a bounded contract, it is delegated. If it can send, publish, update or delete, you also need an explicit action gate." }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "The evidence of a good choice is not that the run felt impressive. It is that the surface matched the job, missing information became visible, review happened before adoption, and the result reached the finish condition without crossing the authority boundary." }] },
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "What you will make" }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Create work-surface-decision.md. Record the job, each major step, whether that step is chat or delegated work, the reason, the six boundary fields, and the person who accepts the final result. Keep product names out of the first pass so the job drives the decision." }] },
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "Try it on your work" }] },
+                { "type": "orderedList", "content": [
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Open your real-task baseline and list the decisions and artefacts the job contains." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Mark each step chat, delegated work or person-only. Give one sentence of evidence for the mark." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Complete the scope, inputs, authority, progress, finish and recovery fields for every delegated step." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Ask a colleague to find the point where the system could do more than you intended. Tighten that boundary before the run." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Run one low-risk instance and record where you had to redirect, approve or take the work back." }] }] }
+                ] },
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "Check your work" }] },
+                { "type": "bulletList", "content": [
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "A reader can tell why each step needs conversation, delegation or a person." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "No delegated step has an open-ended scope or an unnamed input source." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "At least one checkpoint would catch a plausible wrong direction before the finished artefact." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Every external action has a named approval point and a named approver." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "The run record names what the system did and what you remained responsible for." }] }] }
+                ] }
+              ]
+            }
+          },
+          {
+            "key": "map-current-work-surfaces",
+            "lessonId": "lesson_ai_for_actual_work_16",
+            "title": "Map current work surfaces",
+            "outcome": "Build a dated map of the work surfaces available to you, distinguish their documented roles, and test access on your actual account without turning capability into a performance claim.",
+            "type": "text",
+            "published": true,
+            "requiresEnrollment": true,
+            "exercise": "Inspect the products approved for your work, record which named surfaces your account actually exposes, map each surface to one step in your recurring job, and mark every capability that still needs a live test or administrator decision.",
+            "artifact": {
+              "filename": "dated-product-map.md",
+              "description": "A dated product map recording the documented role, actual account access, permitted data, permitted actions, live test result and review trigger for each work surface considered for the recurring job."
+            },
+            "verification": [
+              "The map is labelled As of 14 August 2026 and gives every product observation a review trigger.",
+              "ChatGPT Work and Codex are recorded as different surfaces with different documented centres of work.",
+              "Claude Cowork and Copilot Cowork are not treated as the same product despite the shared word Cowork.",
+              "Every capability is marked documented, observed on this account, unavailable, or not yet tested.",
+              "No entry turns a vendor capability statement into evidence of speed, accuracy, quality or suitability."
+            ],
+            "sourceNotes": [
+              "ai-work-school-public-research.md"
+            ],
+            "content": {
+              "type": "doc",
+              "content": [
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "A dated field map" }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "As of 14 August 2026, the main products in this lesson separate quick conversation from longer delegated work in different ways. The names, plans, interfaces and permissions can change. Treat this as a field map for one date, then inspect the account and organisation you actually use." }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "A product page can establish a documented capability. It cannot establish that the capability performs your job well. Current capability is not performance evidence. Your dated-product-map.md keeps documented, observed and approved as separate columns so those claims cannot collapse into one another." }] },
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "OpenAI surfaces" }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "ChatGPT Work is the current OpenAI surface for longer, multi-step professional work and finished deliverables such as research, documents, spreadsheets, presentations and reports. A user can inspect progress, answer questions, redirect the work and approve important actions. Availability and file behaviour still depend on the plan, platform, connected apps and workspace controls." }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Codex is the dedicated OpenAI surface for software development and technical work, including code, commands, tests and repositories. It can be useful to a technical practitioner working with files or data, but it is not the default non-technical work surface in this course. ChatGPT Work versus Codex is a job distinction, not a contest." }] },
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "Anthropic and Microsoft surfaces" }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Claude Cowork is Anthropic's multi-step knowledge-work surface. Its documentation covers research, files, documents, spreadsheets, presentations, projects, scheduled work and delegated tasks. Local files, browser control, remote work and live artefacts vary by platform and mode, so record what you can actually see rather than copying the full feature list." }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Microsoft 365 Copilot is the Microsoft work surface connected to applications such as Word, Excel, PowerPoint, Outlook and Teams and, where licensed and configured, organisational work data. Copilot Chat, Researcher, Analyst and file agents have distinct roles. Access depends on licence, tenant configuration and administrator settings." }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Copilot Cowork is Microsoft's delegated work experience inside Microsoft 365 Copilot. It can carry multi-step work across Microsoft 365, including documents, messages, meetings and files, with action approvals. It is not Claude Cowork. Microsoft uses Anthropic technology within a separate Microsoft product, identity and governance boundary." }] },
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "Use four evidence states" }] },
+                { "type": "bulletList", "content": [
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Documented means the vendor currently describes the capability. It does not mean your plan includes it." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Observed means you opened your account and verified the surface, control or result yourself on the date recorded." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Approved means your organisation permits the data and action involved. Product access is not organisational approval." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Suitable means the surface passed your job-specific check. It is the conclusion of a test, not a fact borrowed from documentation." }] }] }
+                ] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "If any state is missing, record it. Do not smooth not tested into supported, and do not smooth supported into safe. The gap tells you whether the next step is a harmless live test, a policy question, an administrator request or a decision to use invented input." }] },
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "What you will make" }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Create dated-product-map.md. Give each surface a row for documented role, plan or platform caveat, actual access, approved data class, permitted action, evidence from one low-risk test and the event or date that should trigger a review." }] },
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "Try it on your work" }] },
+                { "type": "orderedList", "content": [
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "List only products your organisation approves or that you can test with invented material." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Open each account and record the named surfaces you can reach. Mark anything absent rather than guessing why." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Choose one harmless step from your recurring job and run the same source pack and acceptance check on each suitable surface." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Record the actual questions, actions and output. Keep this evidence separate from the vendor's description." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Choose a surface for this job and write the dated reason. Add the condition that would make you review the choice." }] }] }
+                ] },
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "Check your work" }] },
+                { "type": "bulletList", "content": [
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Every current product fact carries the date and is traceable through the source map." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "The map distinguishes product documentation, account observation, organisational approval and job suitability." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "ChatGPT Work, Codex, Claude Cowork, Microsoft 365 Copilot and Copilot Cowork each have a separate row." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "No missing feature, licence or permission has been silently treated as present." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "The chosen surface passed a requirement-derived check on your job rather than a prose-quality preference." }] }] }
+                ] }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "key": "package-repeated-work",
+        "groupId": "group_ai_for_actual_work_09",
+        "title": "Package repeated work",
+        "rank": 8000,
+        "outcome": "Turn one tested workflow into a small reusable skill, then decide whether the job also needs a governed connection to external tools or data through MCP.",
+        "lessons": [
+          {
+            "key": "write-and-test-a-skill",
+            "lessonId": "lesson_ai_for_actual_work_17",
+            "title": "Write and test a skill",
+            "outcome": "Package the durable method from your recurring job into a concise skill brief with clear triggers, degrees of freedom, safety boundaries and blind tests.",
+            "type": "text",
+            "published": true,
+            "requiresEnrollment": true,
+            "exercise": "Choose one repeated part of your workflow that has succeeded at least twice, write its skill brief from real examples, then give its blind evaluation prompts to a fresh session or colleague without showing the expected answer and record every miss.",
+            "artifact": {
+              "filename": "skill-brief.md",
+              "description": "A reusable skill brief containing its trigger, non-trigger, inputs, ordered workflow, degree of freedom, resource map, safety boundaries, output contract and results from normal, ambiguous and out-of-scope blind tests."
+            },
+            "verification": [
+              "The skill brief starts from at least two real examples rather than from an imagined general-purpose capability.",
+              "Its trigger and non-trigger let a fresh reader decide when the skill should and should not be used.",
+              "Each fragile step has tighter instructions while judgement-heavy steps retain a stated degree of freedom.",
+              "The blind evaluation prompts do not reveal the expected answer or the failure the test is meant to expose.",
+              "A miss changed the instructions, resource map or boundary and the revised skill was tested again."
+            ],
+            "sourceNotes": [
+              "ai-work-school-skills-evidence.md"
+            ],
+            "content": {
+              "type": "doc",
+              "content": [
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "A skill is a reusable way of doing work" }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "A skill packages the part of a workflow that should survive a conversation. It tells an AI system when a method applies, which inputs matter, what sequence to follow, where judgement is allowed, what must never happen and what a finished result looks like. It is more than a saved prompt because it carries the checks and the boundaries as well as the request." }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Start from work you have already done. Two real examples reveal the decisions you make without noticing, the places where sources differ and the exceptions that a generic instruction misses. A skill invented before the workflow has run usually packages guesses. Run the job, record the repeated method, then package what survived." }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "The goal is not to preserve every sentence from the successful conversation. Keep what a capable system cannot safely rediscover each time: your policy, source hierarchy, required order, output contract, stopping rules and examples of the boundary. Leave facts in their source and point to them. Context has a cost, and a large skill can hide the rule that actually matters." }] },
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "Choose the degree of freedom" }] },
+                { "type": "bulletList", "content": [
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Low freedom fits fragile exact work. Give the precise source, order, required fields and failure response. A calculation or approved filing template should not be improvised." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Medium freedom fits a known method with variable material. State the stages and checks, then allow the system to choose how to organise the evidence inside them." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "High freedom fits exploratory work where several routes can be valid. Keep the evidence, privacy and authority boundaries explicit even when the route is open." }] }] }
+                ] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Do not choose one freedom level for the whole job. A research brief may allow broad exploration while requiring exact citation fields and a fixed refusal when evidence is missing. Tighten the step that fails dangerously, not every sentence around it." }] },
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "Keep the core small and route the rest" }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "The core instructions should let a reader understand the trigger, the workflow and the boundaries in one pass. Put long policy, examples and templates in named references. Use a script only for a narrow deterministic operation that is safer to run than to describe repeatedly. Use an asset only when the output needs a real template or approved visual material." }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Every resource needs a reason. If the core never points to it, remove it. If it changes independently, give it an owner and update trigger. A forgotten reference is worse than no reference because it looks authoritative while quietly teaching an old rule." }] },
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "Test the skill without leaking the answer" }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "A blind evaluation prompt gives the task and permitted inputs without telling the worker which rule you hope it will apply. If the prompt says remember to refuse when the approval is missing, you tested obedience to the hint, not whether the skill made the boundary usable." }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Use at least three classes. A normal case should complete. An ambiguous case should ask a useful question or state the assumption it needs. An out-of-scope case should stop or route elsewhere. Add one plausible wrong result from your earlier check-with-teeth.md and confirm the skill does not accept it merely because the prose looks finished." }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Record the first run before editing. A miss may show an unclear instruction, missing example, unreachable resource, wrong trigger or a task the skill should never have accepted. Repair the owning part, then rerun the same class with a fresh example. Do not keep adding warnings around a bad abstraction." }] },
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "What you will make" }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Create the skill brief in skill-brief.md with name, description, trigger, non-trigger, required inputs, ordered workflow, degrees of freedom, output contract, resource map, safety boundaries and three blind evaluation prompts. Add a small results table with expected behaviour, observed behaviour, miss and repair." }] },
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "Try it on your work" }] },
+                { "type": "orderedList", "content": [
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Pick one repeated stage with two completed examples and mark the decisions that recur." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Write the trigger and non-trigger before the procedure so the boundary shapes the skill." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Give each step low, medium or high freedom and explain why a mistake there is cheap or costly." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Route only necessary references, scripts and assets, with an owner for anything durable." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Run the normal, ambiguous and out-of-scope prompts blind. Repair one real miss and rerun." }] }] }
+                ] },
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "Check your work" }] },
+                { "type": "bulletList", "content": [
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "A fresh reader can distinguish when the skill fires from a nearby task it must refuse." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "The core contains no fact or procedure that belongs in a maintained source." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "The out-of-scope test stops cleanly without producing a helpful-looking substitute." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "The ambiguous test asks for the missing decision rather than selecting one silently." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "The results table records a miss and a verified repair rather than only successful examples." }] }] }
+                ] }
+              ]
+            }
+          },
+          {
+            "key": "separate-skills-from-mcp-connections",
+            "lessonId": "lesson_ai_for_actual_work_18",
+            "title": "Separate skills from MCP connections",
+            "outcome": "Decide whether your recurring job needs reusable instructions, a connection to external systems, both, or neither, with the smallest permission and action boundary that can do the work.",
+            "type": "text",
+            "published": true,
+            "requiresEnrollment": true,
+            "exercise": "Map every missing capability in the recurring job to instruction, current data or external action, choose skill, MCP, both or neither for each gap, then test the choice using invented or read-only material and record the permission and failure boundary.",
+            "artifact": {
+              "filename": "skill-mcp-decision.md",
+              "description": "A decision record separating workflow instruction from external access or action, naming the chosen skill and MCP roles, data and tool permissions, approval gates, fallback behaviour and evidence from a harmless test."
+            },
+            "verification": [
+              "Each gap is classified as missing instruction, missing access, missing action, missing authority or a task that should stay manual.",
+              "No skill is described as granting access that only a configured and authorised connection can provide.",
+              "Every MCP tool or resource requested is tied to one step and uses the narrowest useful permission.",
+              "The test uses read-only or invented material and proves the refusal path before any write action is considered.",
+              "The record states what happens when the connection is unavailable, returns stale data or requests unexpected authority."
+            ],
+            "sourceNotes": [
+              "ai-work-school-public-research.md",
+              "ai-work-school-skills-evidence.md"
+            ],
+            "content": {
+              "type": "doc",
+              "content": [
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "Instruction and connection solve different gaps" }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "A skill tells the AI how to carry out a repeated workflow. It packages the method, decisions, source hierarchy, output contract and safety boundary. It cannot make a file, database, calendar or business system available if the product has no authorised connection to it." }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "MCP connects an AI application to external systems through a standard protocol. Model Context Protocol is an open standard through which a server can expose tools for actions, resources for context and prompts for reusable interaction templates. The host application decides what it supports and how the user sees and approves those capabilities." }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "A skill is instruction. MCP is a connection contract. They can work together and neither replaces the other. A meeting-prep skill can say how to build a decision brief. An MCP connection can make approved calendar events and documents available. The skill still needs a rule for missing context, and the connection still needs permissions." }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "As of 14 August 2026, MCP is supported across several AI applications, but support, setup and approval vary by product and organisation. This lesson teaches the decision boundary, not a setup sequence. Check the current client and approved server before relying on any connection." }] },
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "Choose among four honest answers" }] },
+                { "type": "bulletList", "content": [
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Choose a skill when the material is already available but the method gets reinvented or explained repeatedly." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Choose MCP when the method is clear but the job needs current data or a specific external capability that the AI application cannot otherwise reach." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Choose both when a repeated method needs governed access. Keep the method in the skill and the access boundary in the connection and its permissions." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Choose neither when a checklist, lookup, formula or person-only decision can do the job more clearly, or when authority is absent." }] }] }
+                ] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Do not add a connection because it exists. Each tool or resource adds data exposure, possible action and another failure mode. Name the exact step it enables. If you cannot, leave it disconnected. Least permission starts by refusing capabilities the workflow does not need." }] },
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "Tools, resources and prompts" }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "A tool is a callable function, such as searching a system, creating a draft record or performing a calculation. A resource supplies contextual data, such as a file, record or schema. A prompt is a reusable interaction template exposed through the protocol. These are protocol primitives, not promises about correctness or authorisation." }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "A connection can expose more than the task should use. Record read, create, modify, send, delete and schedule separately. Prefer read-only access for evidence gathering. Put any external write behind a person who can see the target, payload and consequence. Treat names and descriptions from an untrusted server as untrusted input rather than instructions to expand scope." }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "The failure contract matters as much as the happy path. What happens if the server is unavailable, the resource is stale, the tool returns partial data or a requested action is outside authority? A safe workflow produces a bounded draft, asks a question or stops. It does not quietly swap in remembered information." }] },
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "Test access without testing damage" }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Begin with discovery and a read-only case. Confirm which tools and resources the client actually exposes, which account they belong to, and whether the returned source is current. Use invented material where a real record would be sensitive. Then remove the connection and confirm the workflow reaches its written fallback." }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Do not test a write by sending a real message, moving a live file or changing a record. Prepare the proposed action, inspect the exact target and payload, and stop before execution. The safe-action lesson later in the course adds the approval and post-action evidence needed for a real authorised change." }] },
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "What you will make" }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Create skill-mcp-decision.md. For each workflow gap, record its type, the skill or MCP role if any, exact tools or resources, data class, permissions, approval gate, fallback and evidence from one harmless test." }] },
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "Try it on your work" }] },
+                { "type": "orderedList", "content": [
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "List every place the workflow lacks a method, current fact, external action or authority." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Choose skill, MCP, both or neither for each gap and give the smallest reason that supports it." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "For every proposed connection, list tools and resources and cross out anything not needed for this job." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Run one read-only or invented case, then run it with the connection absent to test the fallback." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Record any action the workflow can prepare but must not execute without explicit approval." }] }] }
+                ] },
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "Check your work" }] },
+                { "type": "bulletList", "content": [
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Instruction gaps and access gaps are in separate rows and have different repairs." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Every connected tool or resource enables a named workflow step and nothing is connected just in case." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "The permission list distinguishes reading from creating, changing, sending, deleting and scheduling." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "The disconnected run follows the written fallback instead of inventing current data." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "No real external change was used merely to prove that a connection works." }] }] }
+                ] }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "key": "research-and-write-with-evidence",
+        "groupId": "group_ai_for_actual_work_10",
+        "title": "Research and write with evidence",
+        "rank": 9000,
+        "outcome": "Build an evidence-backed argument before drafting, then use AI as an editorial partner to repair structure and prose without inventing facts, voice or experience.",
+        "lessons": [
+          {
+            "key": "research-before-you-draft",
+            "lessonId": "lesson_ai_for_actual_work_19",
+            "title": "Research before you draft",
+            "outcome": "Define the decision, build a dated claim-status table, test the thesis and its strongest counterargument, and gather missing evidence before asking for prose.",
+            "type": "text",
+            "published": true,
+            "requiresEnrollment": true,
+            "exercise": "Take the next brief or recommendation inside your recurring job, write the intended decision and source hierarchy, classify every material claim, verify primary sources, map the argument, and delay drafting until the weakest link and strongest counterargument are visible.",
+            "artifact": {
+              "filename": "research-evidence-pack.md",
+              "description": "A research pack containing the decision, source hierarchy, dated claim-status table, source ledger, first idea map, thesis stress test, strongest counterargument, weakest link, missing evidence and honest insufficient-evidence route."
+            },
+            "verification": [
+              "Every material claim is marked observed, inferred, disproved or unknown and carries a current supporting source where one exists.",
+              "A citation is checked for support at the exact location rather than accepted because the source looks authoritative.",
+              "The strongest counterargument could change the recommendation and is not a softened version written to be dismissed.",
+              "The weakest link names the missing fact or reasoning step that would most affect the intended decision.",
+              "The pack has a not-enough-evidence route and no unknown claim has been turned into polished prose."
+            ],
+            "sourceNotes": [
+              "ai-work-school-public-research.md",
+              "ai-work-school-skills-evidence.md"
+            ],
+            "content": {
+              "type": "doc",
+              "content": [
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "Name the decision before the topic" }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Research gets vague when the request is a topic. Research the market, understand the policy or look into the incident gives the system no test for relevance. Name the person who will read the work, the decision they face, the date or period that matters and the form of answer they can act on." }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "The decision narrows the evidence. A background fact may be interesting and still irrelevant. A small contradiction may matter more than a large pile of agreement if it changes the recommendation. Write the decision at the top of the pack and make every source earn its place against it." }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Set a source hierarchy before searching. Current primary material comes first for product behaviour, policy, law, financial figures or official decisions. Internal records and prior cases are leads whose current status must be checked. Reviews and interviews show reported experience, not universal fact. Search results and generated summaries help you find a source and do not replace opening it." }] },
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "Build the claim-status table" }] },
+                { "type": "bulletList", "content": [
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Observed means the source directly establishes the claim you wrote, for the relevant scope and date." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Inferred means the conclusion follows from evidence plus a reasoning step. Keep the step visible and invite challenge." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Disproved means current evidence contradicts the claim. Keep it in the table so it cannot return later as an unexamined assumption." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Unknown means the evidence is absent, conflicting, stale or outside your authority to obtain. Unknown is a result, not a drafting inconvenience." }] }] }
+                ] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "For each row, record the claim, status, source, source date, date checked, exact supporting location and what would disprove it. Then do the fact-check at the source. A link proves where a statement came from. It does not prove that the source supports the wording, that the source is right, or that the claim is complete." }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Ask the AI to help inspect the table, not bless it. Useful requests include finding claims with no source, comparing the wording with the cited passage, naming scope changes, and proposing what evidence would overturn the inference. Open the source yourself for any claim that changes the decision." }] },
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "Map and stress-test the argument" }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Make an idea map before a draft. Put the intended takeaway at the top. Under it, place the few claims it needs. Under each claim, put the evidence and the reasoning step. Anything that does not support the takeaway becomes background, a separate question or material to cut." }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Now ask for the strongest counterargument, not a polite objection. It should use the same evidence standard and state the condition under which it wins. If your reply is that the reader would never think that, you have probably not written the strongest version. Give it enough force that it could change the recommendation." }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Name the weakest link next. It may be a stale source, a jump from correlation to cause, an untested assumption about the reader, or a policy interpretation that needs an authorised owner. Gather the missing material before polishing. If it cannot be obtained, narrow the claim or take the not enough evidence route." }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "This is an editorial partnership rather than a request for an answer. You provide the decision, source boundary and accountability. The AI helps expose omissions, contradictions and rival structures. You decide which claims survive and whether the evidence is strong enough to adopt them." }] },
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "What you will make" }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Create research-evidence-pack.md with the decision, reader, source hierarchy, claim-status table, source ledger, idea map, thesis, strongest counterargument, weakest link, missing-evidence list and the explicit route for not enough evidence." }] },
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "Try it on your work" }] },
+                { "type": "orderedList", "content": [
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Write the reader, decision and relevant date before opening a search tool." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "List the claims the decision would need and give each a status before drafting." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Open every consequential source, capture the exact support and mark scope or date limits." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Draw the idea map, then ask for the strongest counterargument and weakest link." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Gather the missing evidence or narrow the claim. Only then start the draft." }] }] }
+                ] },
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "Check your work" }] },
+                { "type": "bulletList", "content": [
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "The decision and reader exclude at least one interesting but irrelevant source." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Every observed claim has exact support and every inference exposes its reasoning step." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "The counterargument could win under a named condition and is not a token paragraph." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "At least one claim was narrowed, removed or left unknown after checking the evidence." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "No prose presents a citation as proof beyond the scope and date of the source." }] }] }
+                ] }
+              ]
+            }
+          },
+          {
+            "key": "edit-the-argument-and-repair-the-prose",
+            "lessonId": "lesson_ai_for_actual_work_20",
+            "title": "Edit the argument and repair the prose",
+            "outcome": "Revise the argument before line editing, preserve every supported claim and the accountable author's voice, and remove AI-writing patterns without inventing specificity.",
+            "type": "text",
+            "published": true,
+            "requiresEnrollment": true,
+            "exercise": "Take a draft built from the research pack, compare its first and revised idea maps, resolve the strongest counterargument and weakest link, then run a voice-calibrated AI-writing repair and record every suggestion rejected for fabrication, tone or claim drift.",
+            "artifact": {
+              "filename": "editorial-repair-record.md",
+              "description": "An editorial record containing the first and revised idea maps, claim-status changes, structural decisions, voice sample, pattern audit, fabrication check, rejected suggestions, final draft and cold-read notes."
+            },
+            "verification": [
+              "The revised idea map shows a material structural decision made before sentence-level changes began.",
+              "Every supported claim from the approved research pack remains supported after the rewrite or is explicitly removed.",
+              "The fabrication check rejects any invented quote, experience, number, motive, feeling or decorative specificity.",
+              "The prose is calibrated against a real sample from the accountable author rather than a generic instruction to sound human.",
+              "A cold read catches at least one unclear transition, repeated point or claim that still outruns its evidence."
+            ],
+            "sourceNotes": [
+              "ai-work-school-public-research.md",
+              "ai-work-school-skills-evidence.md"
+            ],
+            "content": {
+              "type": "doc",
+              "content": [
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "Edit in the order the risk appears" }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "A clean sentence cannot rescue a weak argument. Before asking for smoother prose, restate the intended takeaway, reopen the claim-status table and compare the draft with the idea map. Check whether the draft answers the decision, whether the evidence carries the thesis and whether the strongest counterargument received a real answer." }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Structural editing comes first because it can remove, combine or reorder whole sections. A line edit performed before that work creates attachment to sentences you should cut. It also makes unsupported reasoning look finished, which is the most dangerous form of polish in professional writing." }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Use AI as an editorial partner. Ask it to rebuild the idea map from the draft, identify the weakest link, name the paragraph where movement stops, and argue the strongest alternative structure. Do not ask whether the draft is good. Ask questions that produce evidence you can inspect." }] },
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "Rebuild the map after revision" }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Make the structural changes, then rebuild the map from the revised draft without looking at the first map. The new map should show the actual argument, not the argument you remember intending. Compare them. A missing claim may be a useful cut or a broken link. A new claim may be a clearer inference or an unsupported addition." }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Run the fact-check again after structural work. Moving a qualifier can widen a claim. Combining paragraphs can detach a source from the sentence it supported. Summarising can turn several bounded observations into a universal statement. Source validity did not change, but claim shape did." }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Now cut repetition and audit the opening. The opening should earn the reader's attention with the real decision or tension, not a generic statement that the topic matters. Keep necessary context, but move it to the point where the reader needs it. End each section with a consequence, decision or next action rather than a summary of itself." }] },
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "Repair AI writing without fabricating humanity" }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "AI-writing repair is not synonym replacement and it is not an attempt to fool a detector. Preserve the supported information while changing the shape that makes the draft feel generic: repeated setup-conclusion pairs, equal-length paragraphs, over-explained transitions, padded lists, abstract claims and the assistant's habit of announcing what it will say." }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Calibrate against a real sample from the person who will own the document. Notice sentence length, directness, preferred terms, tolerance for fragments, how claims are qualified and what the writer leaves implicit. Preserve deliberate roughness if it carries voice. Neutral prose may be the right voice for a legal note, policy or reference document." }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Do not make a vague sentence vivid by inventing a number, anecdote or emotion. Do not add a quote nobody said or a motive the evidence does not establish. A fabrication check should inspect every new specific detail and ask where it came from. If the answer is that it merely sounds plausible, remove it." }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Audit clusters rather than punctuation in isolation. One colon, one short sentence or one balanced phrase proves nothing. Repeated structure across the whole document is the signal. Read paragraphs in sequence and mark where the prose starts sounding interchangeable with any professional memo on any subject." }] },
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "Keep a rejection record" }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "An editorial partner should propose changes you reject. Record the significant ones. Rejection reasons reveal the writing contract: unsupported claim, invented detail, lost nuance, wrong audience, voice drift, unnecessary polish or a valid rough edge. The record is also evidence that you reviewed rather than adopted the rewrite whole." }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Finish with a cold read after a break or by a second person. Read for movement, support and voice separately. The document can pass one and fail another. Update the claim table for any late cut or qualification, then name the accountable author who adopts the final text." }] },
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "What you will make" }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Create editorial-repair-record.md with the first and revised maps, structural decisions, changed claim statuses, a short voice sample, pattern audit, fabrication check, rejected suggestions, cold-read notes and a pointer to the final draft." }] },
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "Try it on your work" }] },
+                { "type": "orderedList", "content": [
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Rebuild the first idea map from the draft and compare it with the intended takeaway." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Resolve the weakest link and strongest counterargument before touching sentence style." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Revise structure, rebuild the map and rerun the fact-check against the new claim shapes." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Run the voice and pattern audit, then apply only the repairs that preserve support and intent." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Complete the fabrication check, record rejected suggestions and perform a cold read." }] }] }
+                ] },
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "Check your work" }] },
+                { "type": "bulletList", "content": [
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "The revised map makes the decision path easier to inspect and no required claim disappeared silently." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "The final claim table matches the actual wording and qualifiers in the final draft." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Every new specific detail has a source and no human texture was invented for effect." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "The rejection record includes at least one plausible suggestion that would have weakened truth or voice." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "The cold read produced a concrete correction rather than a general feeling that the draft sounded fine." }] }] }
+                ] }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "key": "produce-work-and-act-safely",
+        "groupId": "group_ai_for_actual_work_11",
+        "title": "Produce work and act safely",
+        "rank": 10000,
+        "outcome": "Build and inspect professional documents, spreadsheets and meeting briefs, then keep every external action behind explicit authority and post-action evidence.",
+        "lessons": [
+          {
+            "key": "build-and-check-work-artifacts",
+            "lessonId": "lesson_ai_for_actual_work_21",
+            "title": "Build and check work artefacts",
+            "outcome": "Create the document, spreadsheet or meeting brief your recurring job needs and prove its source, content, calculation and rendered-output checks separately.",
+            "type": "text",
+            "published": true,
+            "requiresEnrollment": true,
+            "exercise": "Choose the professional artefact your recurring job actually delivers, build it from the approved evidence pack, inspect both its underlying content and rendered form, then run one deliberately broken source, calculation or decision case through the relevant check.",
+            "artifact": {
+              "filename": "work-artifact-qa.md",
+              "description": "A quality record naming the artefact, reader and decision, with source and content checks plus the relevant document render, spreadsheet reconciliation or meeting-preparation checks and evidence from one deliberate failure."
+            },
+            "verification": [
+              "The chosen format follows the reader's decision and information shape rather than the easiest generation tool.",
+              "Source and content checks are recorded separately from layout, calculation and rendered-output checks.",
+              "A document was inspected page by page, a spreadsheet reconciled and rendered, or a meeting brief checked against its event and sources.",
+              "One plausible broken input or calculation caused a named check to fail before the artefact was accepted.",
+              "The final quality record states what remains unverified and who must review it before professional use."
+            ],
+            "sourceNotes": [
+              "ai-work-school-skills-evidence.md"
+            ],
+            "content": {
+              "type": "doc",
+              "content": [
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "Choose the form from the work" }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "A professional artefact is not finished when the text exists. It has a reader, a decision or action, a source boundary, a form and a quality gate. Choose the form from what the reader needs to inspect. Use prose for an argument, steps for a procedure, a table for repeated comparable records and a spreadsheet when calculations and assumptions need to remain visible." }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Keep factual correctness, structural usefulness, calculation, visual quality, privacy and accessibility as separate checks. A polished document can carry a false claim. A correct spreadsheet can hide a broken formula. A complete meeting summary can still omit the decision the meeting exists to make." }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Begin from the work contract and research evidence pack. Name the reader and next action, then map each information unit to the form that makes it inspectable. Do not ask for a beautiful file before the source and content contract is settled. Visual polish is a later proof, not a substitute for the first ones." }] },
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "Document lane" }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "For a document, choose its mode: decision memo, proposal, procedure, report or brief. Lead with the decision, next action or result the reader came for. Use headings to expose the argument, tables only for repeated comparable facts, and callouts for a boundary the reader could otherwise miss." }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Render the document to pages and inspect every page. Check clipping, broken tables, orphan headings, unreadable footnotes, inconsistent spacing, source placement and whether the visual hierarchy matches the intellectual hierarchy. Text extraction cannot prove layout. A polished page cannot prove factual support. Record both gates." }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "When editing an existing file, preserve its structure and metadata unless the task says otherwise. Comments, tracked changes and hidden fields can carry private material that a page image does not reveal. Review them separately before sharing." }] },
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "Spreadsheet lane" }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "For a spreadsheet, separate inputs, assumptions, calculations and outputs. Keep source dates and units beside inputs. Use simple formulas for derived values instead of hard-coded totals or magic numbers. A reader should be able to trace an output to the exact cells and assumptions that produced it." }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Test zero, negative, missing and duplicated inputs where they make sense. Scan for formula errors, reconcile representative totals against the source and inspect whether copied formulas point at the intended rows. Then render every sheet and check widths, number formats, hidden columns, page breaks, chart labels and whether displayed precision matches meaning." }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "A nearby label does not prove that a formula uses the labelled assumption. Open the formula and trace it. A total that matches once can still be wrong through two cancelling errors, so reconcile components as well as the grand total." }] },
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "Meeting lane" }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "For a meeting brief, start with the event and inspect its linked material. Infer the likely decision carefully and label the inference. Separate confirmed context from missing context. Prioritise what somebody must read, decide or prepare rather than copying the calendar description into a longer summary." }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "A useful brief names the purpose, likely decisions, confirmed facts, missing inputs, questions, owners and pre-meeting actions. It does not invent an agenda from a thin invitation. If the purpose remains uncertain, the first useful action is a question to the organiser." }] },
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "Clearly illustrative accountant exercise" }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "This is invented teaching material, not accounting advice or a real organisation. An accountant prepares a month-end variance workpaper from approved current and prior-period reports. The workbook keeps raw inputs separate, records the reporting period and currency, reconciles source totals, calculates variances with formulas, flags unmatched accounts and leaves journal entries outside the permitted action boundary." }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "The acceptance check is not that the commentary sounds plausible. It requires source totals to reconcile, every material narrative to point to a row, missing accounts to remain visible and a qualified reviewer to approve the workpaper. Break the case by duplicating one source row. The reconciliation must fail before the narrative is accepted." }] },
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "What you will make" }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Create work-artifact-qa.md. Name the artefact, reader, decision and source pack. Record content and source checks, then the relevant document, spreadsheet or meeting checks. Attach evidence from the render or reconciliation and from one deliberate failure." }] },
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "Try it on your work" }] },
+                { "type": "orderedList", "content": [
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Choose the artefact form from the reader's next decision and write why that form fits." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Build from the approved sources and mark every assumption or missing input." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Run source and content checks before rendering or presenting the result." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Run the lane-specific check: page inspection, formula reconciliation or decision-brief review." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Introduce one plausible wrong input and capture the check that rejects it." }] }] }
+                ] },
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "Check your work" }] },
+                { "type": "bulletList", "content": [
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "The chosen form exposes the decision, calculations or preparation the reader needs." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Every consequential statement or input points to its approved source and date." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "The rendered or calculated output was inspected independently of the prose review." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "The deliberate error failed the expected check for the expected reason." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Privacy, accessibility and professional sign-off remain named gates rather than assumptions." }] }] }
+                ] }
+              ]
+            }
+          },
+          {
+            "key": "act-only-with-explicit-authority",
+            "lessonId": "lesson_ai_for_actual_work_22",
+            "title": "Act only with explicit authority",
+            "outcome": "Use inspect, propose, approve, act and verify for external changes, and leave an action ledger that proves the target, authority, result and recovery boundary.",
+            "type": "text",
+            "published": true,
+            "requiresEnrollment": true,
+            "exercise": "Choose one low-risk external action from the recurring job, inspect current state, prepare the exact change and evidence, stop for explicit approval, then either simulate it or perform it within authority and verify the resulting state without exposing secrets.",
+            "artifact": {
+              "filename": "action-ledger.md",
+              "description": "A ledger recording intended outcome, observed starting state, target, proposed action, data and permission boundary, required approver, approval evidence, execution result, post-action verification and recovery or escalation."
+            },
+            "verification": [
+              "The ledger records fresh observed state before the action rather than relying on a prior screenshot or remembered status.",
+              "The target, payload and externally visible consequence are shown to an authorised person before execution.",
+              "Instructions found inside files, pages or messages do not expand scope or authority without independent confirmation.",
+              "Post-action evidence comes from re-inspecting the external system and not from the tool's completion message.",
+              "The failure path keeps the action stopped or safely recoverable and names the person who decides what happens next."
+            ],
+            "sourceNotes": [
+              "ai-work-school-public-research.md",
+              "ai-work-school-skills-evidence.md"
+            ],
+            "content": {
+              "type": "doc",
+              "content": [
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "Drafting is not authority" }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "An AI system can prepare an email, form, calendar change, file move, record update or proposed entry without having authority to carry it out. Keep those states separate. A safe action begins with a named outcome and ends with evidence from the system that changed. The generated confirmation message is not that evidence." }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Risk depends on what the system can read and what it can do. Reading a redacted copy is different from reading a confidential live folder. Drafting a message is different from sending it. Viewing a record is different from editing or deleting it. List permissions as separate verbs so a broad word such as access cannot hide the difference." }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Treat visible instructions as untrusted. A document, web page, email or tool description can contain text telling the AI to ignore the task, reveal data or take an unrelated action. Content inside the work is evidence to inspect, not authority to change the workflow. Confirm any new instruction against the original job contract and an authorised person." }] },
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "Inspect, propose, approve, act, verify" }] },
+                { "type": "orderedList", "content": [
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Inspect current state. Confirm the account, target, current value, pending changes and whether somebody else has already acted." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Propose one bounded action. Show the exact target and payload, the source supporting it, what will become visible and how it could be undone." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Approve through the person and process that own the consequence. Silence, product access and prior approval for a similar action are not current approval." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Act once. If the interface changes, the target is unclear or the result is unexpected, stop and inspect again rather than clicking through." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Verify by reopening or re-querying the external system. Record the actual state, time and evidence, then close or recover the action." }] }] }
+                ] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "The action ledger records each stage before the next begins. This makes the approval boundary visible and prevents the familiar reconstruction where an action happens first and the reason is written afterwards. Secrets do not belong in the ledger. Record the credential source or approval mechanism, never the secret value." }] },
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "Clearly illustrative lawyer exercise" }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "This invented case is not legal advice and describes no real client. A lawyer prepares a contract-review matrix from a fixed document set and a current approved playbook. Every finding cites document, page and section. Quoted language, inference and missing evidence stay separate. Privileged material remains within the approved tool and access boundary." }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "The system may draft the matrix and questions. It may not send advice, file anything, contact a counterparty or change contract text. Counsel reviews the source citations and jurisdiction before adoption. Break the exercise by removing a later amendment. The workflow must mark the document set incomplete rather than presenting a final conclusion." }] },
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "Clearly illustrative operations exercise" }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "This invented case describes no real team. An operations lead prepares a weekly action log from approved dashboards, tickets and meeting decisions. Each proposed action has an owner, due date, evidence link and source-freshness note. Observed status remains separate from inference." }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "The system may prepare draft updates and assignments. It may not post to a channel, assign a ticket, schedule a meeting or change a record until the owner approves the exact target and wording. Break the exercise with a resolved ticket that remains in a stale dashboard. The freshness check must stop the outdated action." }] },
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "What you will make" }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Create action-ledger.md with the intended outcome, fresh state, target, payload, evidence, data class, read and write permissions, approver, approval evidence, result, post-action verification, recovery and any instruction you rejected as outside authority." }] },
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "Try it on your work" }] },
+                { "type": "orderedList", "content": [
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Choose a low-risk action you already have authority to prepare and name the outcome." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Inspect fresh state and record the target without copying secrets into the ledger." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Prepare the exact action and show its evidence, consequence and recovery to the approver." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Stop before execution. Simulate the remainder unless the approval and authority are explicit." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "If authorised, act once and re-inspect. Otherwise record the stopped state as the correct result." }] }] }
+                ] },
+                { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "Check your work" }] },
+                { "type": "bulletList", "content": [
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "The ledger proves the target and state were inspected immediately before the proposed action." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "The approver saw the exact payload and consequence rather than a vague request to proceed." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "The system could not turn content inside a source into new authority or scope." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Execution happened once or stopped cleanly, and either state is recorded honestly." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Post-action evidence comes from the external state and the recovery owner is named." }] }] }
+                ] }
+              ]
+            }
+          }
+        ]
+      },
+      {
         "key": "keep-the-understanding-and-improve-the-setup",
         "groupId": "group_ai_for_actual_work_07",
         "title": "Keep the understanding and improve the setup",
-        "rank": 7000,
+        "rank": 11000,
         "outcome": "Spend part of what you saved on understanding the work you delegated, then decide which misses are worth fixing in the setup and which are not, and run the whole thing on a fresh real task.",
         "lessons": [
           {
@@ -1365,7 +1926,7 @@
               "At least one miss is logged as a current ceiling and was done by hand instead of optimised around.",
               "The setup work had a limit set before it started, and the log says whether the limit held.",
               "The durable change carries an update trigger and an owner rather than being a one-off edit.",
-              "The capstone run used a fresh real task and produced all ten artefacts as evidence of what happened."
+              "The capstone run used a fresh real task, and its five final files contain evidence of what happened."
             ],
             "sourceNotes": [
               "A Miss Is a Bug Report Against Your Setup.md",
@@ -1413,22 +1974,17 @@
                   { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Rerun the job that produced the original miss and record whether the miss recurred." }] }] }
                 ] },
                 { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "Capstone: run your workflow" }] },
-                { "type": "paragraph", "content": [{ "type": "text", "text": "The course is finished when you have run the workflow on real work, not when you have collected the templates. A folder of filled-in artefacts with no completed run does not count." }] },
-                { "type": "paragraph", "content": [{ "type": "text", "text": "Choose a fresh instance of your recurring job, one you would have had to do this week anyway. Run it end to end using what you have built. Amend any artefact that turns out to be wrong about the job while you are running, because discovering that your own description was inaccurate is a result rather than a failure. Keep the permission position from the first lesson: if the answer there was redacted or invented input, run the capstone that way and say so on the submission." }] },
-                { "type": "paragraph", "content": [{ "type": "text", "text": "Submit ten artefacts:" }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "The course is finished after a completed workflow run on real work. The twenty-two lesson artefacts are setup and working records. The capstone submission is five files produced from a fresh run." }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Choose a fresh instance of your recurring job, one you would have had to do this week anyway. Run it end to end using what you have built. Amend any setup record that turns out to be wrong about the job while you are running, because discovering that your own description was inaccurate is a result rather than a failure. Keep the permission position from the first lesson: if the answer there was redacted or invented input, run the capstone that way and say so on the submission." }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "Submit exactly five final files. Produce or update each one during the fresh run. They consolidate or point to the lesson records, but their claims and evidence must describe this run:" }] },
                 { "type": "orderedList", "content": [
-                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "real-task-baseline.md" }] }] },
-                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "context-router.md with working-rules.md" }] }] },
-                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "mechanism-decision-record.md" }] }] },
-                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "substrate-audit.md" }] }] },
-                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "check-with-teeth.md, with the evidence that it catches a realistic wrong result" }] }] },
-                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "guardrail-plan.md with source-contract.md" }] }] },
-                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "decision-trace.md or review-map.md, where the task warrants one" }] }] },
-                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "closing-ledger.md" }] }] },
-                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "understanding-pass.md" }] }] },
-                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "miss-triage-log.md, with one durable update to the setup" }] }] }
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "working-brief.md records the actual task, recipient, scope, chosen work surface, inputs, permissions and finish condition." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "source-contract.md records the sources you used, their dates or versions, each claim's status, the gaps you found and the rule for refusing or labelling an assumption." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "checks-and-evidence.md records the checks you ran, the realistic failure they caught and the relevant document, spreadsheet, meeting or post-action evidence." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "decision-record.md records the decisions, assumptions, approvals, rejected options and action boundary from the run, with links to any setup records that explain them." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "handover.md records where the finished result lives, its delivery state, the recipient or owner, review evidence, open items and any recovery or escalation still required." }] }] }
                 ] },
-                { "type": "paragraph", "content": [{ "type": "text", "text": "The assessor checks seven things: that the task was real and bounded and you would have had to do it anyway; that each artefact describes what actually happened rather than what you planned; that evidence sits beside the claim it supports; that the check would fail on a plausible wrong result and you can point at the run where it did; that missing evidence led to refusal, a clarifying question or human review rather than a fluent guess; that you can explain the workflow and its failure path with the artefacts closed; and that the setup changed in response to a real miss, with an owner or update trigger on the change." }] },
+                { "type": "paragraph", "content": [{ "type": "text", "text": "The assessor checks eleven things: that the task was real and bounded and you would have had to do it anyway; that the five final files describe what actually happened rather than what you planned; that evidence sits beside the claim it supports; that the check would fail on a plausible wrong result and you can point at the run where it did; that missing evidence led to refusal, a clarifying question or human review rather than a fluent guess; that the work surface matched the job and the product observation was dated; that the skill or MCP decision kept instruction, access and authority separate; that the final document, spreadsheet or meeting brief passed its relevant content and rendered-output checks; that every external action had explicit authority and post-action evidence; that you can explain the workflow and its failure path with the files closed; and that the setup changed in response to a real miss, with an owner or update trigger on the change." }] },
                 { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "Check your work" }] },
                 { "type": "bulletList", "content": [
                   { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Every miss carries a classification and the signal behind it, not a judgement made after the fact." }] }] },
@@ -1436,7 +1992,7 @@
                   { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "The limit was written before the work started, and the log says honestly whether it held." }] }] },
                   { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "The durable change has an update trigger and a named owner." }] }] },
                   { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Superseded material is marked and kept rather than deleted." }] }] },
-                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "The capstone ran on a fresh real task, and every artefact describes that run." }] }] },
+                  { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "The capstone ran on a fresh real task, and all five final files contain evidence from that run." }] }] },
                   { "type": "listItem", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Anything the run proved wrong about your earlier artefacts has been amended, with the old version marked." }] }] }
                 ] },
                 { "type": "paragraph", "content": [{ "type": "text", "text": "If the capstone run went perfectly, look again at the artefact you were least willing to change. That is usually the one describing the job as you wish it worked." }] }
@@ -1476,26 +2032,25 @@
       "capstoneId": "capstone_ai_for_actual_work_v1",
       "embeddedInLessonKey": "turn-misses-into-system-improvements",
       "title": "Capstone: run your workflow",
-      "outcome": "You run the workflow you built on a fresh, real task and submit the artefacts that show what happened during that run, rather than a set of templates you filled in beforehand.",
-      "exercise": "Take a fresh instance of your recurring job, one you would have had to do anyway, and run it through the workflow you have built across the course. Collect the ten artefacts as they are produced during the run, amend any that turned out to be wrong about the job, and record the miss that caused your last change to the setup.",
+      "outcome": "You run the workflow you built on a fresh, real task and submit five final files that show what happened. The lesson records completed beforehand remain supporting material.",
+      "exercise": "Take a fresh instance of your recurring job, one you would have had to do anyway, and run it through the workflow you built across the course. Produce or update working-brief.md, source-contract.md, checks-and-evidence.md, decision-record.md and handover.md during the run. Use those five files to consolidate or reference the lesson records that shaped this workflow, and put the actual run evidence in the five final files. Amend any setup record that proves wrong about the job, and record the miss that caused your last change to the setup.",
       "artifacts": [
-        "real-task-baseline.md",
-        "context-router.md",
-        "mechanism-decision-record.md",
-        "substrate-audit.md",
-        "check-with-teeth.md",
-        "guardrail-plan.md",
-        "decision-trace.md",
-        "closing-ledger.md",
-        "understanding-pass.md",
-        "miss-triage-log.md"
+        "working-brief.md",
+        "source-contract.md",
+        "checks-and-evidence.md",
+        "decision-record.md",
+        "handover.md"
       ],
       "verification": [
         "The task was real and bounded, and you would have had to do it whether or not you were taking this course.",
-        "Each artefact describes what actually happened during the run, not what you planned to do.",
+        "All five final files describe what actually happened during the run, not what you planned to do.",
         "Evidence sits beside the claim it supports rather than in a separate appendix nobody opens.",
         "The check would fail on a plausible wrong result, and you can point to the run where it did.",
         "Missing evidence led to refusal, a clarifying question, or human review rather than a fluent guess.",
+        "The work surface matched the job, and every product observation that influenced the choice was dated.",
+        "The skill or MCP decision kept reusable instruction, external access, action authority, and fallback behaviour separate.",
+        "The final document, spreadsheet, or meeting brief passed its relevant source, content, calculation, and rendered-output checks.",
+        "Every external action had explicit authority before execution and fresh evidence from the resulting external state.",
         "You can explain the workflow and its failure path with the artefacts closed.",
         "The setup changed in response to a real miss, and that change has an owner or an update trigger."
       ]

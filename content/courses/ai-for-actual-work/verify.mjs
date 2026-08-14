@@ -11,58 +11,112 @@ const errors = [];
 const expectedSections = [
     {
         key: "start-with-real-work",
+        groupId: "group_ai_for_actual_work_01",
         title: "Start with real work",
-        lessonKeys: [
-            "stop-asking-isolated-questions",
-            "test-behaviour-not-brand-loyalty",
+        rank: 1000,
+        lessons: [
+            { key: "stop-asking-isolated-questions", lessonId: "lesson_ai_for_actual_work_01" },
+            { key: "test-behaviour-not-brand-loyalty", lessonId: "lesson_ai_for_actual_work_02" },
         ],
     },
     {
         key: "build-context-that-survives-the-session",
+        groupId: "group_ai_for_actual_work_02",
         title: "Build context that survives the session",
-        lessonKeys: [
-            "turn-answers-into-reusable-rules",
-            "route-context-and-give-it-an-update-trigger",
+        rank: 2000,
+        lessons: [
+            { key: "turn-answers-into-reusable-rules", lessonId: "lesson_ai_for_actual_work_03" },
+            { key: "route-context-and-give-it-an-update-trigger", lessonId: "lesson_ai_for_actual_work_04" },
         ],
     },
     {
         key: "choose-the-mechanism-before-the-prompt",
+        groupId: "group_ai_for_actual_work_03",
         title: "Choose the mechanism before the prompt",
-        lessonKeys: [
-            "use-policy-workflow-or-agent-on-purpose",
-            "audit-the-substrate-before-adding-ai",
+        rank: 3000,
+        lessons: [
+            { key: "use-policy-workflow-or-agent-on-purpose", lessonId: "lesson_ai_for_actual_work_05" },
+            { key: "audit-the-substrate-before-adding-ai", lessonId: "lesson_ai_for_actual_work_06" },
         ],
     },
     {
         key: "build-checks-that-can-prove-you-wrong",
+        groupId: "group_ai_for_actual_work_04",
         title: "Build checks that can prove you wrong",
-        lessonKeys: [
-            "derive-expectations-from-the-requirement",
-            "fail-cheaply-before-you-mutate",
+        rank: 4000,
+        lessons: [
+            { key: "derive-expectations-from-the-requirement", lessonId: "lesson_ai_for_actual_work_07" },
+            { key: "fail-cheaply-before-you-mutate", lessonId: "lesson_ai_for_actual_work_08" },
         ],
     },
     {
         key: "make-consequential-work-inspectable",
+        groupId: "group_ai_for_actual_work_05",
         title: "Make consequential work inspectable",
-        lessonKeys: [
-            "stop-the-system-from-guessing",
-            "leave-a-replayable-decision-trace",
+        rank: 5000,
+        lessons: [
+            { key: "stop-the-system-from-guessing", lessonId: "lesson_ai_for_actual_work_09" },
+            { key: "leave-a-replayable-decision-trace", lessonId: "lesson_ai_for_actual_work_10" },
         ],
     },
     {
         key: "close-delegated-work-properly",
+        groupId: "group_ai_for_actual_work_06",
         title: "Close delegated work properly",
-        lessonKeys: [
-            "treat-done-as-a-claim",
-            "design-for-automation-failure",
+        rank: 6000,
+        lessons: [
+            { key: "treat-done-as-a-claim", lessonId: "lesson_ai_for_actual_work_11" },
+            { key: "design-for-automation-failure", lessonId: "lesson_ai_for_actual_work_12" },
+        ],
+    },
+    {
+        key: "choose-the-work-surface",
+        groupId: "group_ai_for_actual_work_08",
+        title: "Choose the work surface",
+        rank: 7000,
+        lessons: [
+            { key: "separate-chat-from-delegated-work", lessonId: "lesson_ai_for_actual_work_15" },
+            { key: "map-current-work-surfaces", lessonId: "lesson_ai_for_actual_work_16" },
+        ],
+    },
+    {
+        key: "package-repeated-work",
+        groupId: "group_ai_for_actual_work_09",
+        title: "Package repeated work",
+        rank: 8000,
+        lessons: [
+            { key: "write-and-test-a-skill", lessonId: "lesson_ai_for_actual_work_17" },
+            { key: "separate-skills-from-mcp-connections", lessonId: "lesson_ai_for_actual_work_18" },
+        ],
+    },
+    {
+        key: "research-and-write-with-evidence",
+        groupId: "group_ai_for_actual_work_10",
+        title: "Research and write with evidence",
+        rank: 9000,
+        lessons: [
+            { key: "research-before-you-draft", lessonId: "lesson_ai_for_actual_work_19" },
+            { key: "edit-the-argument-and-repair-the-prose", lessonId: "lesson_ai_for_actual_work_20" },
+        ],
+    },
+    {
+        key: "produce-work-and-act-safely",
+        groupId: "group_ai_for_actual_work_11",
+        title: "Produce work and act safely",
+        rank: 10000,
+        lessons: [
+            { key: "build-and-check-work-artifacts", lessonId: "lesson_ai_for_actual_work_21" },
+            { key: "act-only-with-explicit-authority", lessonId: "lesson_ai_for_actual_work_22" },
         ],
     },
     {
         key: "keep-the-understanding-and-improve-the-setup",
+        groupId: "group_ai_for_actual_work_07",
         title: "Keep the understanding and improve the setup",
-        lessonKeys: [
-            "pay-back-some-of-the-speed",
-            "turn-misses-into-system-improvements",
+        rank: 11000,
+        lessons: [
+            { key: "pay-back-some-of-the-speed", lessonId: "lesson_ai_for_actual_work_13" },
+            { key: "turn-misses-into-system-improvements", lessonId: "lesson_ai_for_actual_work_14" },
         ],
     },
 ];
@@ -172,6 +226,26 @@ const expectedSources = new Map([
             "Rules for AI in cursor.md",
         ],
     ],
+    ["separate-chat-from-delegated-work", ["ai-work-school-public-research.md"]],
+    ["map-current-work-surfaces", ["ai-work-school-public-research.md"]],
+    ["write-and-test-a-skill", ["ai-work-school-skills-evidence.md"]],
+    [
+        "separate-skills-from-mcp-connections",
+        ["ai-work-school-public-research.md", "ai-work-school-skills-evidence.md"],
+    ],
+    [
+        "research-before-you-draft",
+        ["ai-work-school-public-research.md", "ai-work-school-skills-evidence.md"],
+    ],
+    [
+        "edit-the-argument-and-repair-the-prose",
+        ["ai-work-school-public-research.md", "ai-work-school-skills-evidence.md"],
+    ],
+    ["build-and-check-work-artifacts", ["ai-work-school-skills-evidence.md"]],
+    [
+        "act-only-with-explicit-authority",
+        ["ai-work-school-public-research.md", "ai-work-school-skills-evidence.md"],
+    ],
     [
         "pay-back-some-of-the-speed",
         [
@@ -193,6 +267,77 @@ const expectedSources = new Map([
         ],
     ],
 ]);
+
+const expectedLessonPhrases = new Map([
+    ["separate-chat-from-delegated-work", ["chat surface", "delegated work surface"]],
+    [
+        "map-current-work-surfaces",
+        [
+            "As of 14 August 2026",
+            "ChatGPT Work",
+            "Codex",
+            "Claude Cowork",
+            "Microsoft 365 Copilot",
+            "Copilot Cowork",
+        ],
+    ],
+    ["write-and-test-a-skill", ["skill brief", "blind evaluation prompt"]],
+    [
+        "separate-skills-from-mcp-connections",
+        ["Model Context Protocol", "A skill tells", "MCP connects"],
+    ],
+    ["research-before-you-draft", ["claim-status table", "strongest counterargument", "fact-check"]],
+    [
+        "edit-the-argument-and-repair-the-prose",
+        ["idea map", "line edit", "fabrication check", "AI-writing repair"],
+    ],
+    [
+        "build-and-check-work-artifacts",
+        ["document", "spreadsheet", "meeting", "illustrative accountant exercise"],
+    ],
+    [
+        "act-only-with-explicit-authority",
+        ["safe action", "action ledger", "illustrative lawyer exercise", "illustrative operations exercise"],
+    ],
+]);
+
+const requiredPrimarySources = [
+    "https://help.openai.com/en/articles/20001275-chatgpt-work-and-codex",
+    "https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork",
+    "https://learn.microsoft.com/en-us/microsoft-365/copilot/microsoft-365-copilot-overview",
+    "https://learn.microsoft.com/en-us/microsoft-365/copilot/cowork/",
+    "https://modelcontextprotocol.io/docs/getting-started/intro",
+];
+
+const requiredVisualRoles = [
+    "illustration-skill-lesson",
+    "illustration-mcp-lesson",
+    "illustration-checked-work",
+    "illustration-editing-argument",
+];
+
+const expectedCapstoneArtifacts = [
+    "working-brief.md",
+    "source-contract.md",
+    "checks-and-evidence.md",
+    "decision-record.md",
+    "handover.md",
+];
+
+const requiredDescriptionPhrases = [
+    "work surface",
+    "skill",
+    "MCP",
+    "research",
+    "writing",
+    "documents",
+    "spreadsheets",
+    "meeting briefs",
+    "external action",
+    "accounting",
+    "legal",
+    "operations",
+];
 
 const allowedNodeTypes = new Set([
     "doc",
@@ -300,21 +445,19 @@ function validateSources(lesson, label) {
     }
 }
 
-function validateLesson(lesson, sectionIndex, lessonIndex) {
-    const number = sectionIndex * 2 + lessonIndex + 1;
-    const expected = expectedSections[sectionIndex].lessonKeys[lessonIndex];
-    const label = `lesson ${number}`;
+function validateLesson(lesson, expected) {
+    const label = expected.lessonId;
 
-    check(lesson?.key === expected, `${label} key must be ${expected}`);
-    check(
-        lesson?.lessonId === `lesson_ai_for_actual_work_${String(number).padStart(2, "0")}`,
-        `${label} has the wrong stable lessonId`,
-    );
+    check(lesson?.key === expected.key, `${label} key must be ${expected.key}`);
+    check(lesson?.lessonId === expected.lessonId, `${expected.key} has the wrong stable lessonId`);
     check(typeof lesson?.title === "string" && lesson.title.length >= 8, `${label} needs a title`);
     check(typeof lesson?.outcome === "string" && lesson.outcome.length >= 40 && lesson.outcome.length <= 240, `${label} needs a concise outcome`);
     check(lesson?.type === "text", `${label} type must be text`);
     check(lesson?.published === true, `${label} intended state must be published`);
-    check(lesson?.requiresEnrollment === (number !== 1), `${label} has the wrong enrolment setting`);
+    check(
+        lesson?.requiresEnrollment === (expected.lessonId !== "lesson_ai_for_actual_work_01"),
+        `${label} has the wrong enrolment setting`,
+    );
     check(typeof lesson?.exercise === "string" && lesson.exercise.length >= 100, `${label} needs a real-work exercise`);
     check(typeof lesson?.artifact?.filename === "string" && lesson.artifact.filename.endsWith(".md"), `${label} needs a Markdown artefact filename`);
     check(typeof lesson?.artifact?.description === "string" && lesson.artifact.description.length >= 60, `${label} needs an artefact description`);
@@ -328,7 +471,10 @@ function validateLesson(lesson, sectionIndex, lessonIndex) {
     for (const heading of requiredLessonHeadings) {
         check(headings.has(heading), `${label} is missing the heading ${heading}`);
     }
-    if (number === 14) {
+    for (const phrase of expectedLessonPhrases.get(expected.key) ?? []) {
+        check(text.includes(phrase), `${label} must teach or demonstrate: ${phrase}`);
+    }
+    if (expected.lessonId === "lesson_ai_for_actual_work_14") {
         check(headings.has("Capstone: run your workflow"), `${label} must contain the capstone`);
     }
     validateSources(lesson, label);
@@ -391,7 +537,10 @@ function validateEditorialText(text) {
         [/\bjob security\b/i, "unsupported job-security claim"],
         [/\b\d+(?:\.\d+)?\s*%/, "percentage claim"],
         [/\b\d+\s+(?:minutes?|hours?)\s+(?:saved|faster)\b/i, "fixed time-saving claim"],
-        [/\b(?:ChatGPT|Claude|Gemini|OpenAI|Anthropic|Cursor)\b/i, "vendor-specific comparison"],
+        [
+            /\b(?:ChatGPT|Claude|Copilot|Codex)\b.{0,40}\b(?:outperforms?|superior|more accurate|faster|best)\b/i,
+            "unsupported product ranking or performance claim",
+        ],
         [/\b(?:Contentful|Notto|Life Coach OS)\b/i, "private or internal project detail"],
         [/(?:\/Users\/|iCloud|Obsidian)/i, "private source path"],
         [/https?:\/\//i, "learner-facing URL"],
@@ -420,7 +569,10 @@ if (manifest) {
     check(course?.access === "free", "course access must be free");
     check(course?.privacy === "public", "course privacy must be public");
     check(course?.published === true, "course intended state must be published");
-    check(Array.isArray(course?.sections) && course.sections.length === 7, "course must have seven sections");
+    check(Array.isArray(course?.sections) && course.sections.length === 11, "course must have eleven sections");
+    for (const phrase of requiredDescriptionPhrases) {
+        check(course?.description?.toLowerCase().includes(phrase.toLowerCase()), `course description must cover: ${phrase}`);
+    }
 
     const lessonKeys = [];
     const lessonIds = [];
@@ -432,16 +584,16 @@ if (manifest) {
         const expected = expectedSections[sectionIndex];
         const sectionNumber = sectionIndex + 1;
         check(section?.key === expected.key, `section ${sectionNumber} key must be ${expected.key}`);
-        check(section?.groupId === `group_ai_for_actual_work_${String(sectionNumber).padStart(2, "0")}`, `section ${sectionNumber} has the wrong stable groupId`);
+        check(section?.groupId === expected.groupId, `${expected.key} has the wrong stable groupId`);
         check(section?.title === expected.title, `section ${sectionNumber} title must be ${expected.title}`);
-        check(section?.rank === sectionNumber * 1000, `section ${sectionNumber} rank must be ${sectionNumber * 1000}`);
+        check(section?.rank === expected.rank, `${expected.key} rank must be ${expected.rank}`);
         check(typeof section?.outcome === "string" && section.outcome.length >= 40, `section ${sectionNumber} needs an outcome`);
         check(Array.isArray(section?.lessons) && section.lessons.length === 2, `section ${sectionNumber} must have two lessons`);
 
         section?.lessons?.forEach((lesson, lessonIndex) => {
             lessonKeys.push(lesson.key);
             lessonIds.push(lesson.lessonId);
-            allLearnerText.push(validateLesson(lesson, sectionIndex, lessonIndex));
+            allLearnerText.push(validateLesson(lesson, expected.lessons[lessonIndex]));
         });
 
         if (section?.technicalExtension) {
@@ -450,10 +602,31 @@ if (manifest) {
         }
     }
 
-    check(lessonKeys.length === 14, "course must have fourteen lessons");
-    check(new Set(lessonKeys).size === 14, "lesson keys must be unique");
-    check(new Set(lessonIds).size === 14, "lesson IDs must be unique");
+    check(lessonKeys.length === 22, "course must have twenty-two lessons");
+    check(new Set(lessonKeys).size === 22, "lesson keys must be unique");
+    check(new Set(lessonIds).size === 22, "lesson IDs must be unique");
     check(extensionCount >= 4, "course needs explicit technical extensions in at least four sections");
+
+    const finalSection = course?.sections?.[course.sections.length - 1];
+    const finalLesson = finalSection?.lessons?.[finalSection.lessons.length - 1];
+    check(finalSection?.groupId === "group_ai_for_actual_work_07", "the capstone section must remain last");
+    check(finalLesson?.lessonId === "lesson_ai_for_actual_work_14", "lesson 14 and its capstone must remain last");
+
+    const finalLessonNodes = Array.isArray(finalLesson?.content?.content) ? finalLesson.content.content : [];
+    const capstoneHeadingIndex = finalLessonNodes.findIndex(
+        (node) => node.type === "heading" && plainText(node).trim() === "Capstone: run your workflow",
+    );
+    const embeddedArtifactList =
+        capstoneHeadingIndex >= 0
+            ? finalLessonNodes.slice(capstoneHeadingIndex + 1).find((node) => node.type === "orderedList")
+            : undefined;
+    const embeddedCapstoneArtifacts = (embeddedArtifactList?.content ?? []).map(
+        (item) => plainText(item).trim().match(/^[a-z0-9-]+\.md\b/)?.[0],
+    );
+    check(
+        JSON.stringify(embeddedCapstoneArtifacts) === JSON.stringify(expectedCapstoneArtifacts),
+        "lesson 14 must present exactly the five locked run artefacts in course order",
+    );
 
     const capstone = course?.capstone;
     check(capstone?.key === "run-your-ai-assisted-workflow", "capstone key is wrong");
@@ -462,12 +635,11 @@ if (manifest) {
     check(typeof capstone?.title === "string" && capstone.title.length >= 8, "capstone needs a title");
     check(typeof capstone?.outcome === "string" && capstone.outcome.length >= 50, "capstone needs an outcome");
     check(typeof capstone?.exercise === "string" && capstone.exercise.length >= 120, "capstone needs a real-work exercise");
-    check(Array.isArray(capstone?.artifacts) && capstone.artifacts.length === 10, "capstone must collect ten artefacts");
     check(
-        capstone?.artifacts?.every((artifact) => /^[a-z0-9-]+\.md$/.test(artifact)),
-        "capstone artefacts must be bare Markdown filenames",
+        JSON.stringify(capstone?.artifacts) === JSON.stringify(expectedCapstoneArtifacts),
+        "capstone must collect exactly five locked run artefacts in course order",
     );
-    check(Array.isArray(capstone?.verification) && capstone.verification.length >= 7, "capstone needs at least seven checks");
+    check(Array.isArray(capstone?.verification) && capstone.verification.length >= 10, "capstone needs at least ten checks");
 
     const learnerText = [collectLearnerMetadata(course), ...allLearnerText].join("\n");
     validateEditorialText(learnerText);
@@ -485,6 +657,13 @@ if (manifest) {
     for (const lessonKey of lessonKeys) {
         check(sourceMap.includes(`\`${lessonKey}\``), `source-map.md is missing ${lessonKey}`);
     }
+    for (const url of requiredPrimarySources) {
+        check(sourceMap.includes(url), `source-map.md is missing primary source ${url}`);
+    }
+    for (const role of requiredVisualRoles) {
+        check(sourceMap.includes(`\`${role}\``), `source-map.md is missing visual role ${role}`);
+    }
+    check(!/illustration-[a-z-]+[^\n]*https?:\/\//i.test(sourceMap), "visual insertion notes cannot use unstable URLs");
     check(sourceMap.includes("Original course example"), "source-map.md must label original course examples");
     check(editorialNotes.includes("## Claim boundaries"), "editorial-notes.md needs claim boundaries");
     check(editorialNotes.includes("## Reviewer-skill record"), "editorial-notes.md needs the reviewer-skill record");
@@ -496,4 +675,4 @@ if (errors.length > 0) {
     process.exit(1);
 }
 
-console.log("Curriculum verification passed: 7 sections, 14 lessons, 1 capstone, stable IDs, traced sources, and clean learner copy.");
+console.log("Curriculum verification passed: 11 sections, 22 lessons, 1 capstone, stable IDs, traced sources, and clean learner copy.");
