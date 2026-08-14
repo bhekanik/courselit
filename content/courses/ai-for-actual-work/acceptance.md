@@ -29,6 +29,17 @@ Every lesson has:
 
 The first lesson is available as a preview. The remaining lessons require free enrolment.
 
+## Media contract
+
+- `course.featuredImage` is the complete sealed `course-featured-image` Media object from `content/site/ai-work-school/media.json`.
+- Lesson 17 contains `skill-lesson` followed by `skill-package-lesson` at the reviewed anchor after "Choose the degree of freedom".
+- Lesson 18 contains `mcp-lesson` followed by `mcp-connection-lesson` after the dated introductory paragraph.
+- Lesson 20 contains `editorial-partnership-lesson` between "Rebuild the map after revision" and "Repair AI writing without fabricating humanity".
+- Lesson 21 contains `checked-work-lesson` followed by `checked-workflow-lesson` before "Document lane".
+- Every lesson image uses the exact sealed HTTPS `file` URL, the reviewed alt text from `asset-contracts.json`, and a non-empty title. Its next node is a visible paragraph whose text matches the sealed media caption exactly.
+- The course contains exactly these seven lesson images. No image substitutes for lesson prose, an exercise, an artefact, or a check.
+- Stable course, group, lesson and capstone identifiers do not change when media is added. The capstone submission remains the same five files.
+
 ## Expansion contract
 
 - `separate-chat-from-delegated-work` distinguishes a quick conversational surface from delegated multi-step work using job scope, inputs, authority, progress and finish conditions.
@@ -69,7 +80,7 @@ The first lesson is available as a preview. The remaining lessons require free e
 - No em or en dashes, curly quotation marks, invisible Unicode marks, marketing copy, or generic AI-written conclusions.
 - Source mapping records what each note supports and names original course examples as original rather than source-derived.
 - `source-map.md` records primary official product and MCP URLs plus review dates. Learner-facing prose does not contain raw URLs.
-- Visual insertion notes use stable asset-role names only. Lesson prose remains complete without an image and no local or temporary image URL enters the manifest.
+- Course media uses only sealed HTTPS URLs from `media.json`. No local or temporary image URL enters the manifest, and lesson prose remains complete without an image.
 
 ## Verification
 
@@ -79,7 +90,7 @@ Run:
 node content/courses/ai-for-actual-work/verify.mjs
 ```
 
-The command validates observable manifest behaviour: explicit stable identifiers, counts, ordering, lesson completeness, TipTap shape, dated product coverage, source traceability, professional exercises, banned claims, privacy coverage, capstone integration, and the non-coding core boundary.
+The command validates observable manifest behaviour: explicit stable identifiers, counts, ordering, lesson completeness, TipTap shape, sealed media, accessible image attributes and captions, dated product coverage, source traceability, professional exercises, banned claims, privacy coverage, capstone integration, and the non-coding core boundary.
 
 ## Reviewer-skill applicability
 

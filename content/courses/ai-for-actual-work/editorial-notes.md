@@ -109,7 +109,7 @@ Before the assessment is used to pass or fail anybody, pilot it against delibera
 - A new banned claim is discovered: add it to the verifier's pattern list first, then fix the content, so the check fails before the repair.
 - Any new original illustrative case is added: label it as invented in the learner text and add it to `Original course examples`.
 - A product or MCP review date passes: update the primary-source entry, learner-facing date label and dated product map together.
-- A reviewed curriculum image receives its final CDN URL: insert it only at the exact asset-role position in `source-map.md`, add reviewed alt text and caption, then verify lesson rendering. Do not replace the role note with a local or temporary URL.
+- A sealed course media record changes: update the course manifest, the matching exact URL and accessibility record in `source-map.md`, and the verifier together. Keep each image at its reviewed anchor and never replace a sealed URL with a local or temporary one.
 
 ## Reviewer-skill record
 
@@ -122,6 +122,8 @@ What was applied, and how honestly.
 - Test-quality rubric: the verifier uses requirement-derived exact values rather than values copied from the manifest, covers missing and invalid input paths, and fails when required structure is deleted. Deleting a required heading, shortening a lesson below the character floor, replacing a capstone artefact with prose or reordering a source list all produce a failure. Verification strings have a length floor, not a semantic-strength check, so reviewer judgement still matters there.
 - TypeScript reviewer: no TypeScript file, type declaration, package manifest or build configuration entered the diff. The standalone verifier consumes untrusted JSON through runtime checks rather than a cast, so the negative scope and boundary check passes.
 - Simplify: applied to the owned diff only, to remove duplication and unclear metadata without changing the course contract. No identifier, count, heading requirement or source list was simplified away.
+- Course-media TDD: the media contract was added to the verifier first. It failed with 45 errors against the image-free course, including the absent featured image, missing lesson nodes, captions, reading-order anchors and sealed source-map records. The course and records were then changed until the same verifier passed.
+- Course-media test quality: exact URLs and captions come from the sealed media lock, exact alt text and targets come from the reviewed asset contract, and lesson IDs plus anchors come from the curriculum contract. Wrong URLs, alt text, titles, captions, order, targets, duplicates and unreviewed extra core images all fail. The prose-length check excludes image nodes and their following captions, so an image cannot make an incomplete lesson pass.
 - Remove-ai-marks: Layer A inspection was run over all five owned files after the final prose pass. It found no zero-width characters, bidi Unicode, suspicious format marks, space homoglyphs or confusables, so there was nothing to rewrite. Layer B was not run because the humanizer and editorial passes already reviewed the wording, and another statistical rewrite would discard deliberate phrasing and source boundaries.
 
 ## Handoff notes
@@ -160,6 +162,6 @@ What was applied, and how honestly.
 - Several sources are internal, draft or unpublished. Their patterns are used; their details are not, and any future edit must hold that line.
 - The five capstone files can still become paperwork. Each one must contain evidence from the fresh run, and that tie is the thing most likely to erode.
 - Tool-specific claims will date faster than the rest of the course. The review dates above are the only defence and they need somebody to own them.
-- The four image roles have semantic targets and captions but no final CDN URLs. The course is complete without them; adding them later still needs alt-text and production-render review.
+- The seven lesson images and course featured image have sealed MediaLit IDs, exact HTTPS URLs, reviewed alt text and visible captions. Production rendering still needs browser review after the follow-up migration applies them; the prose remains complete if an image cannot load.
 - The course can over-teach ambition if the miss filter is ever separated from the raise-your-aspirations framing. They are deliberately taught together.
 - The assessment rubric is unpiloted. Treat any pass or fail decision made with it as provisional until the weak-submission pilot has run.

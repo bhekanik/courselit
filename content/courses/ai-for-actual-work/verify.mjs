@@ -1,11 +1,15 @@
 import { existsSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { isDeepStrictEqual } from "node:util";
 
 const courseDirectory = dirname(fileURLToPath(import.meta.url));
 const manifestPath = join(courseDirectory, "course.json");
 const sourceMapPath = join(courseDirectory, "source-map.md");
 const editorialNotesPath = join(courseDirectory, "editorial-notes.md");
+const siteDirectory = join(courseDirectory, "../../site/ai-work-school");
+const mediaPath = join(siteDirectory, "media.json");
+const assetContractsPath = join(siteDirectory, "asset-contracts.json");
 const errors = [];
 
 const expectedSections = [
@@ -309,11 +313,31 @@ const requiredPrimarySources = [
     "https://modelcontextprotocol.io/docs/getting-started/intro",
 ];
 
-const requiredVisualRoles = [
-    "illustration-skill-lesson",
-    "illustration-mcp-lesson",
-    "illustration-checked-work",
-    "illustration-editing-argument",
+const expectedLessonMedia = [
+    {
+        lessonId: "lesson_ai_for_actual_work_17",
+        keys: ["skill-lesson", "skill-package-lesson"],
+        precedingText: "Tighten the step that fails dangerously, not every sentence around it.",
+        followingHeading: "Keep the core small and route the rest",
+    },
+    {
+        lessonId: "lesson_ai_for_actual_work_18",
+        keys: ["mcp-lesson", "mcp-connection-lesson"],
+        precedingText: "Check the current client and approved server before relying on any connection.",
+        followingHeading: "Choose among four honest answers",
+    },
+    {
+        lessonId: "lesson_ai_for_actual_work_20",
+        keys: ["editorial-partnership-lesson"],
+        precedingText: "End each section with a consequence, decision or next action rather than a summary of itself.",
+        followingHeading: "Repair AI writing without fabricating humanity",
+    },
+    {
+        lessonId: "lesson_ai_for_actual_work_21",
+        keys: ["checked-work-lesson", "checked-workflow-lesson"],
+        precedingText: "Visual polish is a later proof, not a substitute for the first ones.",
+        followingHeading: "Document lane",
+    },
 ];
 
 const expectedCapstoneArtifacts = [
@@ -349,6 +373,7 @@ const allowedNodeTypes = new Set([
     "listItem",
     "blockquote",
     "codeBlock",
+    "image",
 ]);
 const allowedMarkTypes = new Set(["bold", "italic", "code", "strike"]);
 const requiredLessonHeadings = new Set([
@@ -381,6 +406,18 @@ function parseManifest() {
     }
 }
 
+function parseRequiredJson(path, label) {
+    const source = readRequiredFile(path, label);
+    if (!source) return null;
+
+    try {
+        return JSON.parse(source);
+    } catch (error) {
+        errors.push(`${label} is invalid JSON: ${error.message}`);
+        return null;
+    }
+}
+
 function plainText(node) {
     if (!node || typeof node !== "object") return "";
     if (node.type === "text") return typeof node.text === "string" ? node.text : "";
@@ -396,7 +433,7 @@ function collectHeadings(node, headings = []) {
     return headings;
 }
 
-function validateTipTap(document, label, { allowCodeBlocks }) {
+function validateTipTap(document, label, { allowCodeBlocks, allowImages }) {
     check(document?.type === "doc", `${label} must be a TipTap doc`);
     check(Array.isArray(document?.content), `${label} must have a content array`);
 
@@ -410,12 +447,21 @@ function validateTipTap(document, label, { allowCodeBlocks }) {
         if (!allowCodeBlocks) {
             check(node.type !== "codeBlock", `${label} puts engineering/code content in the core lesson`);
         }
+        if (!allowImages) {
+            check(node.type !== "image", `${label} contains an image outside a reviewed core lesson target`);
+        }
         if (node.type === "heading") {
             check([2, 3].includes(node.attrs?.level), `${label} heading at ${path} must use level 2 or 3`);
         }
         if (node.type === "text") {
             check(typeof node.text === "string" && node.text.length > 0, `${label} has an empty text node at ${path}`);
             check(!Object.hasOwn(node, "content"), `${label} text node at ${path} cannot have children`);
+        }
+        if (node.type === "image") {
+            check(!Object.hasOwn(node, "content"), `${label} image at ${path} cannot have children`);
+            check(/^https:\/\//.test(node.attrs?.src), `${label} image at ${path} needs an HTTPS src`);
+            check(node.attrs?.alt?.trim().length >= 40, `${label} image at ${path} needs meaningful alt text`);
+            check(node.attrs?.title?.trim().length >= 40, `${label} image at ${path} needs a meaningful title`);
         }
         if (Array.isArray(node.marks)) {
             for (const mark of node.marks) {
@@ -430,6 +476,97 @@ function validateTipTap(document, label, { allowCodeBlocks }) {
     if (Array.isArray(document?.content)) {
         document.content.forEach((node, index) => visit(node, `content[${index}]`));
     }
+}
+
+function textWithoutVisuals(document) {
+    const nodes = Array.isArray(document?.content) ? document.content : [];
+    const captionIndexes = new Set();
+    nodes.forEach((node, index) => {
+        if (node?.type === "image") captionIndexes.add(index + 1);
+    });
+    return nodes
+        .filter((node, index) => node?.type !== "image" && !captionIndexes.has(index))
+        .map(plainText)
+        .join("\n");
+}
+
+function assetByTargetKey(assetContracts, key) {
+    return [...(assetContracts?.rasters ?? []), ...(assetContracts?.diagrams ?? [])].find((asset) =>
+        asset.promotionTargets?.some((target) => target.key === key),
+    );
+}
+
+function collectImages(node, images = []) {
+    if (!node || typeof node !== "object") return images;
+    if (node.type === "image") images.push(node);
+    if (Array.isArray(node.content)) {
+        for (const child of node.content) collectImages(child, images);
+    }
+    return images;
+}
+
+function validateLessonMedia(course, mediaLock, assetContracts) {
+    const mediaByKey = new Map((mediaLock?.entries ?? []).map((entry) => [entry.key, entry]));
+    const allLessons = (course?.sections ?? []).flatMap((section) => section.lessons ?? []);
+    const actualImageSources = [];
+
+    for (const expected of expectedLessonMedia) {
+        const lesson = allLessons.find(({ lessonId }) => lessonId === expected.lessonId);
+        const nodes = Array.isArray(lesson?.content?.content) ? lesson.content.content : [];
+        const precedingIndex = nodes.findIndex(
+            (node) => node.type === "paragraph" && plainText(node).trim().endsWith(expected.precedingText),
+        );
+        check(precedingIndex >= 0, `${expected.lessonId} is missing its reviewed media anchor`);
+
+        expected.keys.forEach((key, keyIndex) => {
+            const imageIndex = precedingIndex + 1 + keyIndex * 2;
+            const image = nodes[imageIndex];
+            const caption = nodes[imageIndex + 1];
+            const media = mediaByKey.get(key)?.media;
+            const asset = assetByTargetKey(assetContracts, key);
+            const promotionTarget = asset?.promotionTargets?.find((target) => target.key === key);
+            const expectedAttrs = {
+                src: media?.file,
+                alt: asset?.alt,
+                title: media?.caption,
+            };
+
+            check(asset, `${key} has no reviewed asset contract`);
+            check(media, `${key} has no sealed media entry`);
+            check(
+                promotionTarget?.owner === "course-lesson" &&
+                    promotionTarget?.resolvedTargetId === expected.lessonId,
+                `${key} must resolve to ${expected.lessonId} in the reviewed asset contract`,
+            );
+            check(image?.type === "image", `${expected.lessonId} must place ${key} at its reviewed anchor`);
+            check(
+                isDeepStrictEqual(image?.attrs, expectedAttrs),
+                `${expected.lessonId} ${key} image attributes must match the sealed media and accessibility contracts`,
+            );
+            check(caption?.type === "paragraph", `${expected.lessonId} ${key} needs a visible caption paragraph`);
+            check(
+                plainText(caption).trim() === media?.caption,
+                `${expected.lessonId} ${key} caption must match the sealed media contract`,
+            );
+        });
+
+        const followingNode = nodes[precedingIndex + 1 + expected.keys.length * 2];
+        check(
+            followingNode?.type === "heading" && plainText(followingNode).trim() === expected.followingHeading,
+            `${expected.lessonId} media must remain at the reviewed reading-order anchor`,
+        );
+    }
+
+    for (const lesson of allLessons) {
+        actualImageSources.push(...collectImages(lesson?.content).map((image) => image.attrs?.src));
+    }
+    const expectedImageSources = expectedLessonMedia.flatMap(({ keys }) =>
+        keys.map((key) => mediaByKey.get(key)?.media?.file),
+    );
+    check(
+        JSON.stringify(actualImageSources) === JSON.stringify(expectedImageSources),
+        "course lessons must contain exactly the seven reviewed images in reading order",
+    );
 }
 
 function validateSources(lesson, label) {
@@ -464,8 +601,8 @@ function validateLesson(lesson, expected) {
     check(Array.isArray(lesson?.verification) && lesson.verification.length >= 4, `${label} needs at least four verification checks`);
     check(lesson?.verification?.every((item) => typeof item === "string" && item.length >= 25), `${label} has a weak verification check`);
 
-    validateTipTap(lesson?.content, `${label} content`, { allowCodeBlocks: false });
-    const text = plainText(lesson?.content);
+    validateTipTap(lesson?.content, `${label} content`, { allowCodeBlocks: false, allowImages: true });
+    const text = textWithoutVisuals(lesson?.content);
     check(text.length >= 2500, `${label} content is too short (${text.length}/2500 characters)`);
     const headings = new Set(collectHeadings(lesson?.content));
     for (const heading of requiredLessonHeadings) {
@@ -494,7 +631,7 @@ function validateExtension(extension, sectionNumber) {
         check(typeof filename === "string" && filename.endsWith(".md"), `${label} has an invalid source filename`);
         check(!filename.includes("/") && !filename.includes("\\"), `${label} exposes a source path`);
     });
-    validateTipTap(extension.content, `${label} content`, { allowCodeBlocks: true });
+    validateTipTap(extension.content, `${label} content`, { allowCodeBlocks: true, allowImages: false });
     const text = plainText(extension.content);
     check(text.length >= 500, `${label} content is too short (${text.length}/500 characters)`);
     return text;
@@ -558,6 +695,8 @@ function validateEditorialText(text) {
 const manifest = parseManifest();
 const sourceMap = readRequiredFile(sourceMapPath, "source-map.md");
 const editorialNotes = readRequiredFile(editorialNotesPath, "editorial-notes.md");
+const mediaLock = parseRequiredJson(mediaPath, "media.json");
+const assetContracts = parseRequiredJson(assetContractsPath, "asset-contracts.json");
 
 if (manifest) {
     check(manifest.schemaVersion === 1, "schemaVersion must be 1");
@@ -569,6 +708,18 @@ if (manifest) {
     check(course?.access === "free", "course access must be free");
     check(course?.privacy === "public", "course privacy must be public");
     check(course?.published === true, "course intended state must be published");
+    const featuredImage = mediaLock?.entries?.find(({ key }) => key === "course-featured-image")?.media;
+    const featuredAsset = assetByTargetKey(assetContracts, "course-featured-image");
+    const featuredTarget = featuredAsset?.promotionTargets?.find(({ key }) => key === "course-featured-image");
+    check(featuredImage, "course-featured-image has no sealed media entry");
+    check(
+        featuredTarget?.owner === "course-manifest" && featuredTarget?.resolvedTargetId === course?.courseId,
+        "course-featured-image must resolve to the stable course ID in the reviewed asset contract",
+    );
+    check(
+        isDeepStrictEqual(course?.featuredImage, featuredImage),
+        "course featuredImage must match the sealed course-featured-image Media object",
+    );
     check(Array.isArray(course?.sections) && course.sections.length === 11, "course must have eleven sections");
     for (const phrase of requiredDescriptionPhrases) {
         check(course?.description?.toLowerCase().includes(phrase.toLowerCase()), `course description must cover: ${phrase}`);
@@ -606,6 +757,7 @@ if (manifest) {
     check(new Set(lessonKeys).size === 22, "lesson keys must be unique");
     check(new Set(lessonIds).size === 22, "lesson IDs must be unique");
     check(extensionCount >= 4, "course needs explicit technical extensions in at least four sections");
+    validateLessonMedia(course, mediaLock, assetContracts);
 
     const finalSection = course?.sections?.[course.sections.length - 1];
     const finalLesson = finalSection?.lessons?.[finalSection.lessons.length - 1];
@@ -660,10 +812,14 @@ if (manifest) {
     for (const url of requiredPrimarySources) {
         check(sourceMap.includes(url), `source-map.md is missing primary source ${url}`);
     }
-    for (const role of requiredVisualRoles) {
-        check(sourceMap.includes(`\`${role}\``), `source-map.md is missing visual role ${role}`);
+    for (const { keys } of expectedLessonMedia) {
+        for (const key of keys) {
+            const file = mediaLock?.entries?.find((entry) => entry.key === key)?.media?.file;
+            const sourceMapLine = sourceMap.split("\n").find((line) => line.includes(`\`${key}\``));
+            check(sourceMapLine, `source-map.md is missing sealed media target ${key}`);
+            check(file && sourceMapLine?.includes(file), `source-map.md maps the wrong sealed media URL for ${key}`);
+        }
     }
-    check(!/illustration-[a-z-]+[^\n]*https?:\/\//i.test(sourceMap), "visual insertion notes cannot use unstable URLs");
     check(sourceMap.includes("Original course example"), "source-map.md must label original course examples");
     check(editorialNotes.includes("## Claim boundaries"), "editorial-notes.md needs claim boundaries");
     check(editorialNotes.includes("## Reviewer-skill record"), "editorial-notes.md needs the reviewer-skill record");
@@ -675,4 +831,4 @@ if (errors.length > 0) {
     process.exit(1);
 }
 
-console.log("Curriculum verification passed: 11 sections, 22 lessons, 1 capstone, stable IDs, traced sources, and clean learner copy.");
+console.log("Curriculum verification passed: 11 sections, 22 lessons, 7 lesson images, 1 capstone, stable IDs, traced sources, and clean learner copy.");
