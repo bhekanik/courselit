@@ -1,6 +1,6 @@
 {
     "schemaVersion": 1,
-    "status": "source-only-awaiting-upload-and-curriculum-targets",
+    "status": "uploaded-and-targeted",
     "sourceRasterCount": 5,
     "diagramSourceCount": 4,
     "promotionTargetCount": 11,
@@ -34,19 +34,19 @@
                     "key": "landing-hero",
                     "owner": "site-manifest",
                     "semanticTarget": "landing hero",
-                    "resolvedTargetId": null,
-                    "mediaId": null,
-                    "httpsFileUrl": null,
-                    "uploadRequired": true
+                    "resolvedTargetId": "widget_ai_work_school_hero_v2",
+                    "mediaId": "Z3Q6cc-g_1zN5ZFUoVoDUHuGBEUmISJPMlcu6Z1o",
+                    "httpsFileUrl": "https://media.bhekani.com/p/Z3Q6cc-g_1zN5ZFUoVoDUHuGBEUmISJPMlcu6Z1o/main.webp",
+                    "uploadRequired": false
                 },
                 {
                     "key": "course-featured-image",
                     "owner": "course-manifest",
                     "semanticTarget": "course featured image",
-                    "resolvedTargetId": null,
-                    "mediaId": null,
-                    "httpsFileUrl": null,
-                    "uploadRequired": true
+                    "resolvedTargetId": "course_ai_for_actual_work_v1",
+                    "mediaId": "CvBV8mXoM8P2VdfimD-vOuwFCj5E9CwOO91sJ2SX",
+                    "httpsFileUrl": "https://media.bhekani.com/p/CvBV8mXoM8P2VdfimD-vOuwFCj5E9CwOO91sJ2SX/main.webp",
+                    "uploadRequired": false
                 }
             ],
             "objectFit": "cover",
@@ -65,10 +65,10 @@
                     "key": "skill-lesson",
                     "owner": "course-lesson",
                     "semanticTarget": "skill lesson",
-                    "resolvedTargetId": null,
-                    "mediaId": null,
-                    "httpsFileUrl": null,
-                    "uploadRequired": true
+                    "resolvedTargetId": "lesson_ai_for_actual_work_17",
+                    "mediaId": "YqmA5jy23g5GnCu4uDrQEZX61didR3-BtdmPe81a",
+                    "httpsFileUrl": "https://media.bhekani.com/p/YqmA5jy23g5GnCu4uDrQEZX61didR3-BtdmPe81a/main.webp",
+                    "uploadRequired": false
                 }
             ],
             "alt": "A professional packing a field kit with the materials for a job while two colleagues review what belongs in it.",
@@ -85,10 +85,10 @@
                     "key": "mcp-lesson",
                     "owner": "course-lesson",
                     "semanticTarget": "MCP lesson",
-                    "resolvedTargetId": null,
-                    "mediaId": null,
-                    "httpsFileUrl": null,
-                    "uploadRequired": true
+                    "resolvedTargetId": "lesson_ai_for_actual_work_18",
+                    "mediaId": "2qJn1ZyE7P8mMNAwrQsfbgpGYZokBA_ojC5JkZsI",
+                    "httpsFileUrl": "https://media.bhekani.com/p/2qJn1ZyE7P8mMNAwrQsfbgpGYZokBA_ojC5JkZsI/main.webp",
+                    "uploadRequired": false
                 }
             ],
             "alt": "An operator routes records through three separate permission gates, each recording what may pass.",
@@ -105,19 +105,19 @@
                     "key": "landing-checked-work",
                     "owner": "site-manifest",
                     "semanticTarget": "landing What you build section",
-                    "resolvedTargetId": null,
-                    "mediaId": null,
-                    "httpsFileUrl": null,
-                    "uploadRequired": true
+                    "resolvedTargetId": "widget_ai_work_school_outputs_v2",
+                    "mediaId": "lAn5h3ixD80GSST01YTL9H30-KdSMFN3GF9znCXb",
+                    "httpsFileUrl": "https://media.bhekani.com/p/lAn5h3ixD80GSST01YTL9H30-KdSMFN3GF9znCXb/main.webp",
+                    "uploadRequired": false
                 },
                 {
                     "key": "checked-work-lesson",
                     "owner": "course-lesson",
                     "semanticTarget": "checked-work lesson",
-                    "resolvedTargetId": null,
-                    "mediaId": null,
-                    "httpsFileUrl": null,
-                    "uploadRequired": true
+                    "resolvedTargetId": "lesson_ai_for_actual_work_21",
+                    "mediaId": "v_YQWyIXAdGFbl9GQRx3GljM1D5NNfOlnIwudC35",
+                    "httpsFileUrl": "https://media.bhekani.com/p/v_YQWyIXAdGFbl9GQRx3GljM1D5NNfOlnIwudC35/main.webp",
+                    "uploadRequired": false
                 }
             ],
             "alt": "Four colleagues assemble a document, check it against sources, add citations and sign it off.",
@@ -134,10 +134,10 @@
                     "key": "editorial-partnership-lesson",
                     "owner": "course-lesson",
                     "semanticTarget": "editorial partnership lesson",
-                    "resolvedTargetId": null,
-                    "mediaId": null,
-                    "httpsFileUrl": null,
-                    "uploadRequired": true
+                    "resolvedTargetId": "lesson_ai_for_actual_work_20",
+                    "mediaId": "jhuEmKYgPbl-UjrbkG2ehYPEQO1elN6GKsZmNJkR",
+                    "httpsFileUrl": "https://media.bhekani.com/p/jhuEmKYgPbl-UjrbkG2ehYPEQO1elN6GKsZmNJkR/main.webp",
+                    "uploadRequired": false
                 }
             ],
             "alt": "An editor turns an idea map into a sourced draft, revises the argument and sets rejected suggestions aside.",
@@ -159,10 +159,10 @@
                     "key": "landing-tool-selection",
                     "owner": "site-manifest",
                     "semanticTarget": "landing tool-selection section",
-                    "resolvedTargetId": null,
-                    "mediaId": null,
-                    "httpsFileUrl": null,
-                    "uploadRequired": true
+                    "resolvedTargetId": "widget_ai_work_school_tool_selection_v2",
+                    "mediaId": "LVfN0wtYWPs3G57bzULRMnia6PHReN_AI_k6hc32",
+                    "httpsFileUrl": "https://media.bhekani.com/p/LVfN0wtYWPs3G57bzULRMnia6PHReN_AI_k6hc32/main.webp",
+                    "uploadRequired": false
                 }
             ],
             "alt": "A decision guide: use chat for a one-off question, package a repeated job as a skill, put approved files or systems behind a permission gate, and add another reviewer when consequences rise.",
@@ -182,10 +182,10 @@
                     "key": "skill-package-lesson",
                     "owner": "course-lesson",
                     "semanticTarget": "skill lesson",
-                    "resolvedTargetId": null,
-                    "mediaId": null,
-                    "httpsFileUrl": null,
-                    "uploadRequired": true
+                    "resolvedTargetId": "lesson_ai_for_actual_work_17",
+                    "mediaId": "tliuQ36uWfk8kjVvWjlLFDpwHxobdhqKyetmb6Lt",
+                    "httpsFileUrl": "https://media.bhekani.com/p/tliuQ36uWfk8kjVvWjlLFDpwHxobdhqKyetmb6Lt/main.webp",
+                    "uploadRequired": false
                 }
             ],
             "alt": "A reusable skill packages the job, written context, ordered steps, worked examples, checks and source limits so the same task can be run to the same standard later.",
@@ -205,10 +205,10 @@
                     "key": "mcp-connection-lesson",
                     "owner": "course-lesson",
                     "semanticTarget": "MCP lesson",
-                    "resolvedTargetId": null,
-                    "mediaId": null,
-                    "httpsFileUrl": null,
-                    "uploadRequired": true
+                    "resolvedTargetId": "lesson_ai_for_actual_work_18",
+                    "mediaId": "A-MRYg45i0OcgLsVr5beqWXaRnF8lV64MfliWU2S",
+                    "httpsFileUrl": "https://media.bhekani.com/p/A-MRYg45i0OcgLsVr5beqWXaRnF8lV64MfliWU2S/main.webp",
+                    "uploadRequired": false
                 }
             ],
             "alt": "A request names the source it needs, passes separate identity, scope and action gates, reaches an approved source, and returns an answer with its source. A refusal is recorded too.",
@@ -228,10 +228,10 @@
                     "key": "checked-workflow-lesson",
                     "owner": "course-lesson",
                     "semanticTarget": "checked-work lesson",
-                    "resolvedTargetId": null,
-                    "mediaId": null,
-                    "httpsFileUrl": null,
-                    "uploadRequired": true
+                    "resolvedTargetId": "lesson_ai_for_actual_work_21",
+                    "mediaId": "fGbRNurAV15b45FkcTB3e1E5EmWdOk8AMoVGhTXm",
+                    "httpsFileUrl": "https://media.bhekani.com/p/fGbRNurAV15b45FkcTB3e1E5EmWdOk8AMoVGhTXm/main.webp",
+                    "uploadRequired": false
                 }
             ],
             "alt": "Written context becomes a draft, which is checked against sources and cited. A person approves it or sends it back with a reason before the decision is recorded and handed over.",

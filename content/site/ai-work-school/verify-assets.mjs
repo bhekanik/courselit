@@ -9,6 +9,7 @@ const repoRoot = new URL("../../../", root);
 const contract = JSON.parse(
     readFileSync(new URL("asset-contracts.json", root), "utf8"),
 );
+const mediaLock = JSON.parse(readFileSync(new URL("media.json", root), "utf8"));
 
 assert.equal(contract.schemaVersion, 1);
 assert.equal(contract.sourceRasterCount, contract.rasters.length);
@@ -31,6 +32,24 @@ assert.equal(
     new Set(targets.map(({ key }) => key)).size,
     targets.length,
     "promotion target keys must be unique",
+);
+assert.equal(mediaLock.schemaVersion, 1);
+assert.equal(mediaLock.group, "ai-work-school-v2");
+assert.equal(mediaLock.cdnHost, "media.bhekani.com");
+assert.equal(mediaLock.entries.length, targets.length);
+
+const sourcesByTarget = new Map(
+    sources.flatMap((asset) =>
+        asset.promotionTargets.map((target) => [target.key, asset]),
+    ),
+);
+const mediaByTarget = new Map(
+    mediaLock.entries.map((entry) => [entry.key, entry]),
+);
+assert.equal(
+    mediaByTarget.size,
+    mediaLock.entries.length,
+    "media lock keys must be unique",
 );
 
 for (const asset of sources) {
@@ -87,6 +106,34 @@ for (const target of targets) {
             `${target.key} needs a verified HTTPS URL`,
         );
         assert.equal(target.uploadRequired, false);
+        const asset = sourcesByTarget.get(target.key);
+        const entry = mediaByTarget.get(target.key);
+        assert.ok(entry, `${target.key} has no sealed media lock`);
+        assert.equal(entry.sourcePath, asset.file);
+        assert.equal(entry.sha256, asset.sha256);
+        assert.equal(entry.mimeType, "image/webp");
+        assert.equal(
+            entry.bytes,
+            readFileSync(new URL(entry.sourcePath, repoRoot)).byteLength,
+        );
+        assert.equal(entry.media.mediaId, target.mediaId);
+        assert.equal(entry.media.file, target.httpsFileUrl);
+        assert.equal(entry.media.mimeType, "image/webp");
+        assert.equal(entry.media.access, "public");
+        assert.equal(entry.media.size, entry.bytes);
+        assert.equal(
+            entry.media.originalFileName,
+            entry.sourcePath.split("/").at(-1),
+        );
+        assert.equal(
+            entry.media.file,
+            `https://${mediaLock.cdnHost}/p/${entry.media.mediaId}/main.webp`,
+        );
+        assert.equal(
+            entry.media.thumbnail,
+            `https://${mediaLock.cdnHost}/p/${entry.media.mediaId}/thumb.webp`,
+        );
+        assert.ok(entry.media.caption.trim().length >= 40);
     }
 }
 
