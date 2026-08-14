@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 640" role="img" aria-labelledby="title desc">
+  <title id="title">Use the lowest sufficient mechanism</title>
+  <desc id="desc">A known choice belongs in policy, a known sequence belongs in a workflow, and only bounded runtime judgement belongs with an agent. Evidence should move work down the ladder where possible.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 8 4 0 8Z" fill="#0F1D2E"/>
+    </marker>
+    <marker id="teal-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 8 4 0 8Z" fill="#0E5C5E"/>
+    </marker>
+    <marker id="clay-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 8 4 0 8Z" fill="#8A4B12"/>
+    </marker>
+    <style>
+      @font-face { font-family: "Roboto Slab"; src: url("../../../../apps/web/public/fonts/roboto-slab/roboto-slab-latin-variable.woff2") format("woff2"); font-weight: 100 900; }
+      @font-face { font-family: "Mulish"; src: url("../../../../apps/web/public/fonts/mulish/mulish-latin-variable.woff2") format("woff2"); font-weight: 200 1000; }
+      .heading { font-family: "Roboto Slab"; font-size: 16px; font-weight: 500; fill: #0F1D2E; }
+      .label { font-family: "Mulish"; font-size: 15px; font-weight: 600; fill: #0F1D2E; }
+      .body { font-family: "Mulish"; font-size: 15px; font-weight: 400; fill: #435564; }
+      .small { font-family: "Mulish"; font-size: 15px; font-weight: 600; fill: #174A46; }
+      .inverse { fill: #FFFFFF; }
+      .node { fill: #FFFFFF; stroke: #687783; stroke-width: 1.5; }
+      .evidence { fill: #DDEDEA; stroke: #0E5C5E; stroke-width: 1.5; }
+      .review { fill: #F8EBDD; stroke: #8A4B12; stroke-width: 1.5; }
+      .line { fill: none; stroke: #0F1D2E; stroke-width: 1.5; marker-end: url(#arrow); }
+      .teal-line { fill: none; stroke: #0E5C5E; stroke-width: 1.5; marker-end: url(#teal-arrow); }
+      .clay-line { fill: none; stroke: #8A4B12; stroke-width: 1.5; marker-end: url(#clay-arrow); }
+      .rule { stroke: #687783; stroke-width: 1.5; }
+    </style>
+  </defs>
+  <rect width="360" height="640" rx="12" fill="#F7F8F8"/>
+  <text x="28" y="40" class="heading">Use the lowest sufficient mechanism</text>
+  <text x="28" y="63" class="body">More autonomy is not the goal.</text>
+  <rect x="28" y="100" width="304" height="104" rx="8" class="evidence"/>
+  <circle cx="62" cy="132" r="18" fill="#0E5C5E"/>
+  <text x="57" y="138" class="label inverse">1</text>
+  <text x="94" y="132" class="label">Known choice</text>
+  <text x="94" y="155" class="body">Write the rule once.</text>
+  <text x="94" y="181" class="small">Policy</text>
+  <path class="line" d="M180 204V230"/>
+  <rect x="28" y="230" width="304" height="104" rx="8" class="node"/>
+  <circle cx="62" cy="262" r="18" fill="#0F1D2E"/>
+  <text x="57" y="268" class="label inverse">2</text>
+  <text x="94" y="262" class="label">Known sequence</text>
+  <text x="94" y="285" class="body">Run checked steps in order.</text>
+  <text x="94" y="311" class="small">Workflow</text>
+  <path class="line" d="M180 334V360"/>
+  <rect x="28" y="360" width="304" height="104" rx="8" class="review"/>
+  <circle cx="62" cy="392" r="18" fill="#8A4B12"/>
+  <text x="57" y="398" class="label inverse">3</text>
+  <text x="94" y="392" class="label">Bounded judgement</text>
+  <text x="94" y="415" class="body">Choose inside explicit limits.</text>
+  <text x="94" y="441" class="small">Agent</text>
+  <path class="clay-line" d="M332 412H346V516H314"/>
+  <rect x="46" y="516" width="268" height="66" rx="8" class="node"/>
+  <text x="66" y="544" class="label">Can evidence remove judgement?</text>
+  <text x="66" y="565" class="body">Move the work down a rung.</text>
+  <text x="28" y="622" class="small">Argue down before promoting.</text>
+</svg>

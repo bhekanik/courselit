@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 700" role="img" aria-labelledby="title desc">
+  <title id="title">Research before you draft</title>
+  <desc id="desc">Approved sources support named claims with explicit status. Claims, a counterargument and open gaps form an argument that leads to a decision before prose is written.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 8 4 0 8Z" fill="#0F1D2E"/>
+    </marker>
+    <marker id="teal-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 8 4 0 8Z" fill="#0E5C5E"/>
+    </marker>
+    <marker id="clay-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 8 4 0 8Z" fill="#8A4B12"/>
+    </marker>
+    <style>
+      @font-face { font-family: "Roboto Slab"; src: url("../../../../apps/web/public/fonts/roboto-slab/roboto-slab-latin-variable.woff2") format("woff2"); font-weight: 100 900; }
+      @font-face { font-family: "Mulish"; src: url("../../../../apps/web/public/fonts/mulish/mulish-latin-variable.woff2") format("woff2"); font-weight: 200 1000; }
+      .heading { font-family: "Roboto Slab"; font-size: 16px; font-weight: 500; fill: #0F1D2E; }
+      .label { font-family: "Mulish"; font-size: 15px; font-weight: 600; fill: #0F1D2E; }
+      .body { font-family: "Mulish"; font-size: 15px; font-weight: 400; fill: #435564; }
+      .small { font-family: "Mulish"; font-size: 15px; font-weight: 600; fill: #174A46; }
+      .inverse { fill: #FFFFFF; }
+      .node { fill: #FFFFFF; stroke: #687783; stroke-width: 1.5; }
+      .evidence { fill: #DDEDEA; stroke: #0E5C5E; stroke-width: 1.5; }
+      .review { fill: #F8EBDD; stroke: #8A4B12; stroke-width: 1.5; }
+      .line { fill: none; stroke: #0F1D2E; stroke-width: 1.5; marker-end: url(#arrow); }
+      .teal-line { fill: none; stroke: #0E5C5E; stroke-width: 1.5; marker-end: url(#teal-arrow); }
+      .clay-line { fill: none; stroke: #8A4B12; stroke-width: 1.5; marker-end: url(#clay-arrow); }
+      .rule { stroke: #687783; stroke-width: 1.5; }
+    </style>
+  </defs>
+  <rect width="360" height="700" rx="12" fill="#F7F8F8"/>
+  <text x="28" y="40" class="heading">Research before you draft</text>
+  <text x="28" y="63" class="body">Map evidence before prose.</text>
+  <rect x="24" y="98" width="124" height="76" rx="8" class="evidence"/>
+  <text x="44" y="127" class="label">Source</text>
+  <text x="44" y="150" class="body">Exact passage</text>
+  <path class="teal-line" d="M148 136H188"/>
+  <rect x="188" y="98" width="148" height="76" rx="8" class="node"/>
+  <text x="208" y="127" class="label">Claim + status</text>
+  <text x="208" y="150" class="body">Settled · gap</text>
+  <path class="line" d="M262 174V220"/>
+  <rect x="188" y="220" width="148" height="76" rx="8" class="review"/>
+  <text x="208" y="249" class="label">Counterargument</text>
+  <text x="208" y="272" class="body">Strongest objection</text>
+  <path class="clay-line" d="M188 258H148"/>
+  <rect x="24" y="220" width="124" height="76" rx="8" class="review"/>
+  <text x="44" y="249" class="label">Open gap</text>
+  <text x="44" y="272" class="body">Keep the gap</text>
+  <path class="line" d="M86 296V352H180"/>
+  <path class="line" d="M262 296V352H180"/>
+  <rect x="42" y="368" width="276" height="116" rx="8" class="node"/>
+  <text x="62" y="397" class="label">Argument map</text>
+  <text x="62" y="422" class="body">Claim → support → consequence</text>
+  <text x="62" y="440" class="body">Counterargument → response</text>
+  <text x="62" y="458" class="body">Gap → question or boundary</text>
+  <path class="line" d="M180 484V520"/>
+  <rect x="42" y="520" width="276" height="86" rx="8" class="evidence"/>
+  <text x="62" y="550" class="label">Decision</text>
+  <text x="62" y="574" class="body">What the evidence supports now</text>
+  <text x="28" y="676" class="small">Claims need sources and a status.</text>
+</svg>

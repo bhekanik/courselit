@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 700" role="img" aria-labelledby="title desc">
+  <title id="title">Replay the decision</title>
+  <desc id="desc">A source and rule version lead through a rejected alternative to a decision with an owner. The trace explains the decision but still does not prove that the external action happened.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 8 4 0 8Z" fill="#0F1D2E"/>
+    </marker>
+    <marker id="teal-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 8 4 0 8Z" fill="#0E5C5E"/>
+    </marker>
+    <marker id="clay-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 8 4 0 8Z" fill="#8A4B12"/>
+    </marker>
+    <style>
+      @font-face { font-family: "Roboto Slab"; src: url("../../../../apps/web/public/fonts/roboto-slab/roboto-slab-latin-variable.woff2") format("woff2"); font-weight: 100 900; }
+      @font-face { font-family: "Mulish"; src: url("../../../../apps/web/public/fonts/mulish/mulish-latin-variable.woff2") format("woff2"); font-weight: 200 1000; }
+      .heading { font-family: "Roboto Slab"; font-size: 16px; font-weight: 500; fill: #0F1D2E; }
+      .label { font-family: "Mulish"; font-size: 15px; font-weight: 600; fill: #0F1D2E; }
+      .body { font-family: "Mulish"; font-size: 15px; font-weight: 400; fill: #435564; }
+      .small { font-family: "Mulish"; font-size: 15px; font-weight: 600; fill: #174A46; }
+      .inverse { fill: #FFFFFF; }
+      .node { fill: #FFFFFF; stroke: #687783; stroke-width: 1.5; }
+      .evidence { fill: #DDEDEA; stroke: #0E5C5E; stroke-width: 1.5; }
+      .review { fill: #F8EBDD; stroke: #8A4B12; stroke-width: 1.5; }
+      .line { fill: none; stroke: #0F1D2E; stroke-width: 1.5; marker-end: url(#arrow); }
+      .teal-line { fill: none; stroke: #0E5C5E; stroke-width: 1.5; marker-end: url(#teal-arrow); }
+      .clay-line { fill: none; stroke: #8A4B12; stroke-width: 1.5; marker-end: url(#clay-arrow); }
+      .rule { stroke: #687783; stroke-width: 1.5; }
+    </style>
+  </defs>
+  <rect width="360" height="700" rx="12" fill="#F7F8F8"/>
+  <text x="28" y="40" class="heading">Replay the decision</text>
+  <text x="28" y="63" class="body">Another person can replay it.</text>
+  <rect x="34" y="92" width="292" height="58" rx="8" class="evidence"/>
+  <text x="54" y="117" class="label">Source</text>
+  <text x="54" y="137" class="body">Exact record, date and location</text>
+  <path class="line" d="M180 150V172"/>
+  <rect x="34" y="172" width="292" height="58" rx="8" class="node"/>
+  <text x="54" y="197" class="label">Rule version</text>
+  <text x="54" y="217" class="body">The rule that governed this run</text>
+  <path class="line" d="M180 230V252"/>
+  <rect x="34" y="252" width="292" height="58" rx="8" class="review"/>
+  <text x="54" y="277" class="label">Rejected alternative</text>
+  <text x="54" y="297" class="body">What failed, and why</text>
+  <path class="line" d="M180 310V332"/>
+  <rect x="34" y="332" width="292" height="58" rx="8" class="evidence"/>
+  <text x="54" y="357" class="label">Decision + owner</text>
+  <text x="54" y="377" class="body">Choice, confidence and next action</text>
+  <path class="line" d="M180 390V412"/>
+  <rect x="34" y="412" width="292" height="58" rx="8" class="review"/>
+  <text x="54" y="437" class="label">Still unproved</text>
+  <text x="54" y="457" class="body">Whether external action happened</text>
+  <text x="28" y="676" class="small">Trace explains. Destination evidence proves.</text>
+</svg>

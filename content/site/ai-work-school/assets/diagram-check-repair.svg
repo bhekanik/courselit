@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 640" role="img" aria-labelledby="title desc">
+  <title id="title">Make the check capable of failing</title>
+  <desc id="desc">A weak total-only check passes a duplicated and missing row. A repaired row-level check compares every approved identifier and amount, producing a visible failure on the plausible wrong result.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 8 4 0 8Z" fill="#0F1D2E"/>
+    </marker>
+    <marker id="teal-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 8 4 0 8Z" fill="#0E5C5E"/>
+    </marker>
+    <marker id="clay-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 8 4 0 8Z" fill="#8A4B12"/>
+    </marker>
+    <style>
+      @font-face { font-family: "Roboto Slab"; src: url("../../../../apps/web/public/fonts/roboto-slab/roboto-slab-latin-variable.woff2") format("woff2"); font-weight: 100 900; }
+      @font-face { font-family: "Mulish"; src: url("../../../../apps/web/public/fonts/mulish/mulish-latin-variable.woff2") format("woff2"); font-weight: 200 1000; }
+      .heading { font-family: "Roboto Slab"; font-size: 16px; font-weight: 500; fill: #0F1D2E; }
+      .label { font-family: "Mulish"; font-size: 15px; font-weight: 600; fill: #0F1D2E; }
+      .body { font-family: "Mulish"; font-size: 15px; font-weight: 400; fill: #435564; }
+      .small { font-family: "Mulish"; font-size: 15px; font-weight: 600; fill: #174A46; }
+      .inverse { fill: #FFFFFF; }
+      .node { fill: #FFFFFF; stroke: #687783; stroke-width: 1.5; }
+      .evidence { fill: #DDEDEA; stroke: #0E5C5E; stroke-width: 1.5; }
+      .review { fill: #F8EBDD; stroke: #8A4B12; stroke-width: 1.5; }
+      .line { fill: none; stroke: #0F1D2E; stroke-width: 1.5; marker-end: url(#arrow); }
+      .teal-line { fill: none; stroke: #0E5C5E; stroke-width: 1.5; marker-end: url(#teal-arrow); }
+      .clay-line { fill: none; stroke: #8A4B12; stroke-width: 1.5; marker-end: url(#clay-arrow); }
+      .rule { stroke: #687783; stroke-width: 1.5; }
+    </style>
+  </defs>
+  <rect width="360" height="640" rx="12" fill="#F7F8F8"/>
+  <text x="28" y="40" class="heading">Make the check capable of failing</text>
+  <text x="28" y="63" class="body">Name the wrong result before the check.</text>
+  <rect x="28" y="96" width="304" height="94" rx="8" class="review"/>
+  <text x="48" y="125" class="label">Weak check</text>
+  <text x="48" y="149" class="body">‘The totals match.’</text>
+  <text x="48" y="167" class="body">Duplicates and missing rows can pass.</text>
+  <path class="clay-line" d="M180 190V218"/>
+  <rect x="28" y="218" width="304" height="108" rx="8" class="review"/>
+  <text x="48" y="247" class="label">Plausible wrong result</text>
+  <text x="48" y="271" class="body">Invoice 104 is missing.</text>
+  <text x="48" y="289" class="body">Invoice 103 appears twice.</text>
+  <path class="line" d="M180 326V354"/>
+  <rect x="28" y="354" width="304" height="108" rx="8" class="evidence"/>
+  <text x="48" y="383" class="label">Repaired check</text>
+  <text x="48" y="407" class="body">Every approved ID appears exactly once</text>
+  <text x="48" y="425" class="body">with its approved amount.</text>
+  <path class="teal-line" d="M180 462V490"/>
+  <rect x="28" y="490" width="304" height="88" rx="8" class="evidence"/>
+  <text x="48" y="519" class="label">Visible failure</text>
+  <text x="48" y="543" class="body">Missing: 104 · Duplicate: 103</text>
+  <text x="28" y="622" class="small">A check earns its place by rejecting a real miss.</text>
+</svg>

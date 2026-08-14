@@ -10,6 +10,22 @@ The core path is a technical tutorial in the practical sense rather than the sof
 
 Technical practitioners follow the same core. Engineering material sits only in the optional extensions, which are marked optional, are not prerequisites for the next section and carry the audience value `technical practitioners`.
 
+## Teaching method
+
+Every lesson follows the same learning loop: name the outcome, elicit the learner's current model with a written prediction, demonstrate one complete case, work through one partly completed case, improve the learner's real artefact, teach the method back, transfer it to a changed case, check the work, and descend through three hints if needed.
+
+This is the static CourseLit adaptation of BK's teaching notes. The page cannot wait for an answer, reveal content later, assess an artefact or remember learner state. Do not imply that it can. `Before you continue` tells the learner to write before scrolling. The guided checkpoint tells them to stop and compare. The learner-owned file is the durable state.
+
+The course has one load-bearing concept per lesson, recorded in `teaches`. `requires` forms the prerequisite tree and is checked in display order. Supporting terms may appear, but they do not become independent objectives. The work-surface section now precedes checks and delegated-work closure because later lessons require that choice.
+
+Teach-back is not treated as mastery. Each teach-back is followed by a changed case. Hints are graduated: first restate the current decision, then expose a simpler dependency, then give the smallest next move. They must not contain the finished answer.
+
+Teaching diagrams answer a decision question or show a state transition. They are not decorative breaks. The ten added diagrams cover controlled comparison, context routing, mechanism choice, work-surface choice, check repair, replayable traces, closure states, claim mapping, authority, and the capstone improvement loop. Every lesson remains complete if its image fails to load.
+
+Four app screenshots make the dated product map actionable without becoming a vendor catalogue. Lesson 16 shows the current ChatGPT Work, Claude Cowork and Microsoft 365 Copilot Cowork surfaces. Lesson 18 shows one current plugin directory, immediately beside the rule that a listing does not establish trust, permission or suitability. Every screenshot comes from a public official page, carries its capture date and source link, and can be replaced without changing the durable decision model.
+
+All fourteen deterministic diagrams use the same checked render path. The tracked renderer loads pinned static Roboto Slab and Mulish TTFs into `resvg`, renders twice at 720px wide, and requires identical PNG bytes. It then runs `cwebp` twice and requires identical WebP bytes before writing the derivative. An isolated missing-font render must differ. Source text is at least 15px in the 360-unit viewBox, which renders at 12px in a 320px viewport after the lesson's 32px horizontal padding. Do not return to `sips` or headless-Chrome screenshots: the former ignored the WOFF2 declarations, while the latter produced small antialiasing drift between fresh processes.
+
 ## Stable identifiers and slug contract
 
 These are contract, not preference. Changing any of them breaks existing enrolments, progress and links.
@@ -17,7 +33,7 @@ These are contract, not preference. Changing any of them breaks existing enrolme
 - Course key and slug: `ai-for-actual-work`. Course ID: `course_ai_for_actual_work_v1`.
 - Existing section group IDs `group_ai_for_actual_work_01` through `group_ai_for_actual_work_07` and lesson IDs `lesson_ai_for_actual_work_01` through `lesson_ai_for_actual_work_14` remain unchanged.
 - Added section group IDs are `group_ai_for_actual_work_08` through `group_ai_for_actual_work_11`. Added lesson IDs are `lesson_ai_for_actual_work_15` through `lesson_ai_for_actual_work_22`.
-- Display order is groups 01 through 06, groups 08 through 11, then group 07. The new groups use ranks 7000 through 10000 and group 07 moves to rank 11000. This keeps lesson 14 and its embedded capstone last without renumbering existing IDs.
+- Display order is groups 01, 02, 03, 08, 04, 05, 06, 09, 10, 11, then 07. Group 08 moves to rank 4000 so work-surface choice precedes dependent checks and delegated-work lessons. Groups 04 through 06 use ranks 5000 through 7000, groups 09 through 11 use ranks 8000 through 10000, and group 07 remains last at rank 11000. This keeps lesson 14 and its embedded capstone last without renumbering existing IDs.
 - Capstone ID: `capstone_ai_for_actual_work_v1`.
 - Lesson 1 is the preview and is the only lesson with enrolment not required. Every other lesson requires free enrolment.
 
@@ -119,6 +135,8 @@ What was applied, and how honestly.
 - BK essay-edit skill: applicable only as a light voice pass. Its own routing table puts technical and instructional writing at light voice weight, and it directs operational instructional material to the docs skill. So its conventions were followed for sentence-case headings, spaced punctuation instead of dashes, rare bold, claim-scope discipline and no invented anecdote, but the full essay process of idea maps, thesis stress tests, hooks and cold reads was not run. These are lessons, not essays.
 - Writing-docs: applied to lesson shape. Second person, imperative voice, the reader's next action named early, and every major section ending in something usable. Mutating work is documented in the safe order, with simulated or copied targets before anything live.
 - TDD: the expansion contract was written first and failed against the fourteen-lesson manifest with 54 errors. Sections were added as vertical slices and the verifier rerun after each. The manifest became structurally green before source mapping; the final 17 failures were all traceability and image-role requirements, then the source map made the same verifier green.
+- Pedagogy TDD: lesson 1 first failed seven required teaching-structure checks. Each later section failed the same checks before its shell was added. The dependency-order contract then failed when work-surface choice still followed checks and closure. The concept map failed on all forty-four missing `teaches` and `requires` fields. The original seventeen-image contract failed on every absent image, caption and reviewed anchor before the ten new MediaLit records were inserted.
+- Pedagogy mutation gate: deleting a teaching heading or diagram failed, but swapping lesson 1 and 2 predictions and replacing lesson 1's prediction with a generic instruction initially passed. Lesson-owned markers were then added for predictions, guided cases, teach-backs, changed cases, and hints. The verifier now runs its own swap and weakening mutations and fails if any escape.
 - Test-quality rubric: the verifier uses requirement-derived exact values rather than values copied from the manifest, covers missing and invalid input paths, and fails when required structure is deleted. Deleting a required heading, shortening a lesson below the character floor, replacing a capstone artefact with prose or reordering a source list all produce a failure. Verification strings have a length floor, not a semantic-strength check, so reviewer judgement still matters there.
 - TypeScript reviewer: no TypeScript file, type declaration, package manifest or build configuration entered the diff. The standalone verifier consumes untrusted JSON through runtime checks rather than a cast, so the negative scope and boundary check passes.
 - Simplify: applied to the owned diff only, to remove duplication and unclear metadata without changing the course contract. No identifier, count, heading requirement or source list was simplified away.
@@ -162,6 +180,6 @@ What was applied, and how honestly.
 - Several sources are internal, draft or unpublished. Their patterns are used; their details are not, and any future edit must hold that line.
 - The five capstone files can still become paperwork. Each one must contain evidence from the fresh run, and that tie is the thing most likely to erode.
 - Tool-specific claims will date faster than the rest of the course. The review dates above are the only defence and they need somebody to own them.
-- The seven lesson images and course featured image have sealed MediaLit IDs, exact HTTPS URLs, reviewed alt text and visible captions. Production rendering still needs browser review after the follow-up migration applies them; the prose remains complete if an image cannot load.
+- The twenty-one lesson images and course featured image have sealed MediaLit IDs, exact HTTPS URLs, reviewed alt text and visible captions. Production rendering still needs browser review after the follow-up migration applies them; the prose remains complete if an image cannot load.
 - The course can over-teach ambition if the miss filter is ever separated from the raise-your-aspirations framing. They are deliberately taught together.
 - The assessment rubric is unpiloted. Treat any pass or fail decision made with it as provisional until the weak-submission pilot has run.

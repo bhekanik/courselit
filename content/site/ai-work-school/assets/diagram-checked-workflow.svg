@@ -12,8 +12,8 @@
       @font-face { font-family: "Roboto Slab"; src: url("../../../../apps/web/public/fonts/roboto-slab/roboto-slab-latin-variable.woff2") format("woff2"); font-weight: 100 900; }
       @font-face { font-family: "Mulish"; src: url("../../../../apps/web/public/fonts/mulish/mulish-latin-variable.woff2") format("woff2"); font-weight: 200 1000; }
       .heading { font-family: "Roboto Slab"; font-size: 20px; font-weight: 500; fill: #0F1D2E; }
-      .label { font-family: "Mulish"; font-size: 14px; font-weight: 600; fill: #0F1D2E; }
-      .body { font-family: "Mulish"; font-size: 12px; font-weight: 400; fill: #435564; }
+      .label { font-family: "Mulish"; font-size: 15px; font-weight: 600; fill: #0F1D2E; }
+      .body { font-family: "Mulish"; font-size: 15px; font-weight: 400; fill: #435564; }
       .node { fill: #FFFFFF; stroke: #687783; stroke-width: 1.5; }
       .evidence { fill: #DDEDEA; stroke: #0E5C5E; stroke-width: 1.5; }
       .review { fill: #F8EBDD; stroke: #8A4B12; stroke-width: 1.5; }

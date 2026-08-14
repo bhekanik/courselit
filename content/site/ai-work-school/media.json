@@ -1,6 +1,6 @@
 {
     "schemaVersion": 1,
-    "group": "ai-work-school-v2",
+    "group": "ai-work-school-v5",
     "cdnHost": "media.bhekani.com",
     "entries": [
         {
@@ -125,69 +125,307 @@
         {
             "key": "landing-tool-selection",
             "sourcePath": "content/site/ai-work-school/assets/diagram-tool-selection.webp",
-            "sha256": "0b266540b2a21479ea1240fa974fb8905717f96cb5bc8457b31492475e0deea5",
-            "bytes": 57326,
+            "sha256": "df6f8374a297591db4bbae31421a1f345da07bc4bf7b1de779a517916da4a6fe",
+            "bytes": 75104,
             "mimeType": "image/webp",
             "media": {
                 "access": "public",
                 "caption": "A decision guide: use chat for a one-off question, package a repeated job as a skill, put approved files or systems behind a permission gate, and add another reviewer when consequences rise.",
-                "file": "https://media.bhekani.com/p/LVfN0wtYWPs3G57bzULRMnia6PHReN_AI_k6hc32/main.webp",
-                "mediaId": "LVfN0wtYWPs3G57bzULRMnia6PHReN_AI_k6hc32",
+                "file": "https://media.bhekani.com/p/YlQ52LAJHswnjuDLFP49r3UFqcWg9bCZ005kQXuV/main.webp",
+                "mediaId": "YlQ52LAJHswnjuDLFP49r3UFqcWg9bCZ005kQXuV",
                 "mimeType": "image/webp",
                 "originalFileName": "diagram-tool-selection.webp",
-                "size": 57326,
-                "thumbnail": "https://media.bhekani.com/p/LVfN0wtYWPs3G57bzULRMnia6PHReN_AI_k6hc32/thumb.webp"
+                "size": 75104,
+                "thumbnail": "https://media.bhekani.com/p/YlQ52LAJHswnjuDLFP49r3UFqcWg9bCZ005kQXuV/thumb.webp"
             }
         },
         {
             "key": "skill-package-lesson",
             "sourcePath": "content/site/ai-work-school/assets/diagram-skill-package.webp",
-            "sha256": "f7e4eb0be956c9f611014f379c3b4bc584cec6fc588cc472068694e1bbda7ec8",
-            "bytes": 65708,
+            "sha256": "5686c878645b31137c91781e7bc5d29d851ad6f43995a6a43653eadd3060819e",
+            "bytes": 75564,
             "mimeType": "image/webp",
             "media": {
                 "access": "public",
                 "caption": "A reusable skill packages the job, written context, ordered steps, worked examples, checks and source limits so the same task can be run to the same standard later.",
-                "file": "https://media.bhekani.com/p/tliuQ36uWfk8kjVvWjlLFDpwHxobdhqKyetmb6Lt/main.webp",
-                "mediaId": "tliuQ36uWfk8kjVvWjlLFDpwHxobdhqKyetmb6Lt",
+                "file": "https://media.bhekani.com/p/aZoZonTLcZIGwlV4KNLDEVKiqmoIxXiq2waYtjSx/main.webp",
+                "mediaId": "aZoZonTLcZIGwlV4KNLDEVKiqmoIxXiq2waYtjSx",
                 "mimeType": "image/webp",
                 "originalFileName": "diagram-skill-package.webp",
-                "size": 65708,
-                "thumbnail": "https://media.bhekani.com/p/tliuQ36uWfk8kjVvWjlLFDpwHxobdhqKyetmb6Lt/thumb.webp"
+                "size": 75564,
+                "thumbnail": "https://media.bhekani.com/p/aZoZonTLcZIGwlV4KNLDEVKiqmoIxXiq2waYtjSx/thumb.webp"
             }
         },
         {
             "key": "mcp-connection-lesson",
             "sourcePath": "content/site/ai-work-school/assets/diagram-mcp-connection.webp",
-            "sha256": "e98e568dec8c591fc19b26f62074d9ffa84aff15de75e1500b80423ef514ef36",
-            "bytes": 54226,
+            "sha256": "74bcbd41698bbc8d0c43decfe826d70938085172980818d0d49f044ef8c29c4b",
+            "bytes": 68758,
             "mimeType": "image/webp",
             "media": {
                 "access": "public",
                 "caption": "A request names the source it needs, passes separate identity, scope and action gates, reaches an approved source, and returns an answer with its source. A refusal is recorded too.",
-                "file": "https://media.bhekani.com/p/A-MRYg45i0OcgLsVr5beqWXaRnF8lV64MfliWU2S/main.webp",
-                "mediaId": "A-MRYg45i0OcgLsVr5beqWXaRnF8lV64MfliWU2S",
+                "file": "https://media.bhekani.com/p/iLYyEZx2o2hLRmF4SGL6FIYnWtLGsjOuRu4PZCy5/main.webp",
+                "mediaId": "iLYyEZx2o2hLRmF4SGL6FIYnWtLGsjOuRu4PZCy5",
                 "mimeType": "image/webp",
                 "originalFileName": "diagram-mcp-connection.webp",
-                "size": 54226,
-                "thumbnail": "https://media.bhekani.com/p/A-MRYg45i0OcgLsVr5beqWXaRnF8lV64MfliWU2S/thumb.webp"
+                "size": 68758,
+                "thumbnail": "https://media.bhekani.com/p/iLYyEZx2o2hLRmF4SGL6FIYnWtLGsjOuRu4PZCy5/thumb.webp"
             }
         },
         {
             "key": "checked-workflow-lesson",
             "sourcePath": "content/site/ai-work-school/assets/diagram-checked-workflow.webp",
-            "sha256": "74dafdac4d63266f3ffeeb2d07aa3f2ab8852a15d3f33299bf2bc378eb130ee6",
-            "bytes": 43688,
+            "sha256": "822564f00665f2744f362e2852b4b183e97585faa39c7b383317ee0df2e2e202",
+            "bytes": 56270,
             "mimeType": "image/webp",
             "media": {
                 "access": "public",
                 "caption": "Written context becomes a draft, which is checked against sources and cited. A person approves it or sends it back with a reason before the decision is recorded and handed over.",
-                "file": "https://media.bhekani.com/p/fGbRNurAV15b45FkcTB3e1E5EmWdOk8AMoVGhTXm/main.webp",
-                "mediaId": "fGbRNurAV15b45FkcTB3e1E5EmWdOk8AMoVGhTXm",
+                "file": "https://media.bhekani.com/p/Y1CVNTysd20XWcmk-WQK7GO1oSE6IV7WHRV-BkVJ/main.webp",
+                "mediaId": "Y1CVNTysd20XWcmk-WQK7GO1oSE6IV7WHRV-BkVJ",
                 "mimeType": "image/webp",
                 "originalFileName": "diagram-checked-workflow.webp",
-                "size": 43688,
-                "thumbnail": "https://media.bhekani.com/p/fGbRNurAV15b45FkcTB3e1E5EmWdOk8AMoVGhTXm/thumb.webp"
+                "size": 56270,
+                "thumbnail": "https://media.bhekani.com/p/Y1CVNTysd20XWcmk-WQK7GO1oSE6IV7WHRV-BkVJ/thumb.webp"
+            }
+        },
+        {
+            "key": "behaviour-card-comparison-lesson",
+            "sourcePath": "content/site/ai-work-school/assets/diagram-behaviour-card-comparison.webp",
+            "sha256": "3b2d3f8b578745b71c658496ea37c0a4193337e730a69bcbe265eb298bd17b43",
+            "bytes": 61134,
+            "mimeType": "image/webp",
+            "media": {
+                "access": "public",
+                "caption": "Compare the same job with one changed variable, then limit every conclusion to what the two runs actually show.",
+                "file": "https://media.bhekani.com/p/OyoQwlb9jhJT_UGtw4zVGPtCrSqhvRBGNlIueJlq/main.webp",
+                "mediaId": "OyoQwlb9jhJT_UGtw4zVGPtCrSqhvRBGNlIueJlq",
+                "mimeType": "image/webp",
+                "originalFileName": "diagram-behaviour-card-comparison.webp",
+                "size": 61134,
+                "thumbnail": "https://media.bhekani.com/p/OyoQwlb9jhJT_UGtw4zVGPtCrSqhvRBGNlIueJlq/thumb.webp"
+            }
+        },
+        {
+            "key": "context-router-lesson",
+            "sourcePath": "content/site/ai-work-school/assets/diagram-context-router.webp",
+            "sha256": "33819123598bb36124ecd1509854527c2cb4412464a9f5b19fd6f882f3cdec0e",
+            "bytes": 60664,
+            "mimeType": "image/webp",
+            "media": {
+                "access": "public",
+                "caption": "Route context by its job and change rhythm; every durable item needs an owner and an update trigger.",
+                "file": "https://media.bhekani.com/p/B_XeC0UdWLg30QBjTlinflSeTcJCMIG2UOBQ5z-Q/main.webp",
+                "mediaId": "B_XeC0UdWLg30QBjTlinflSeTcJCMIG2UOBQ5z-Q",
+                "mimeType": "image/webp",
+                "originalFileName": "diagram-context-router.webp",
+                "size": 60664,
+                "thumbnail": "https://media.bhekani.com/p/B_XeC0UdWLg30QBjTlinflSeTcJCMIG2UOBQ5z-Q/thumb.webp"
+            }
+        },
+        {
+            "key": "mechanism-ladder-lesson",
+            "sourcePath": "content/site/ai-work-school/assets/diagram-mechanism-ladder.webp",
+            "sha256": "3e63b5077d6c2f1fc7a78924c0de8486349d0488a925967f6b806fd414c4f9da",
+            "bytes": 56426,
+            "mimeType": "image/webp",
+            "media": {
+                "access": "public",
+                "caption": "Use the lowest sufficient mechanism: policy for known choices, workflow for known order, and an agent only for bounded judgement.",
+                "file": "https://media.bhekani.com/p/4xappc5WAehv7fhmaI6gwMiWJL9rk1irNcg07Vul/main.webp",
+                "mediaId": "4xappc5WAehv7fhmaI6gwMiWJL9rk1irNcg07Vul",
+                "mimeType": "image/webp",
+                "originalFileName": "diagram-mechanism-ladder.webp",
+                "size": 56426,
+                "thumbnail": "https://media.bhekani.com/p/4xappc5WAehv7fhmaI6gwMiWJL9rk1irNcg07Vul/thumb.webp"
+            }
+        },
+        {
+            "key": "check-repair-lesson",
+            "sourcePath": "content/site/ai-work-school/assets/diagram-check-repair.webp",
+            "sha256": "d3becbffbdb78d9f2d5ed49be9043491db98f69a9ebe18b588b65a489693ea9f",
+            "bytes": 63010,
+            "mimeType": "image/webp",
+            "media": {
+                "access": "public",
+                "caption": "Name a plausible wrong result first; a check earns its place only when that result visibly fails.",
+                "file": "https://media.bhekani.com/p/7PCPUETILaIq2CPQ_N1CLjJU781swtVnClt1ueUu/main.webp",
+                "mediaId": "7PCPUETILaIq2CPQ_N1CLjJU781swtVnClt1ueUu",
+                "mimeType": "image/webp",
+                "originalFileName": "diagram-check-repair.webp",
+                "size": 63010,
+                "thumbnail": "https://media.bhekani.com/p/7PCPUETILaIq2CPQ_N1CLjJU781swtVnClt1ueUu/thumb.webp"
+            }
+        },
+        {
+            "key": "decision-trace-lesson",
+            "sourcePath": "content/site/ai-work-school/assets/diagram-decision-trace.webp",
+            "sha256": "aa49822b6e27684df71a8ebebe4bc281c86f165dcc75443d3fde03f2d89adc96",
+            "bytes": 54690,
+            "mimeType": "image/webp",
+            "media": {
+                "access": "public",
+                "caption": "A trace lets another person replay the decision; only destination evidence proves what happened afterwards.",
+                "file": "https://media.bhekani.com/p/KIGSO650HCXX2a1K0IYQX4XGv_FkSzplX9VoV-v-/main.webp",
+                "mediaId": "KIGSO650HCXX2a1K0IYQX4XGv_FkSzplX9VoV-v-",
+                "mimeType": "image/webp",
+                "originalFileName": "diagram-decision-trace.webp",
+                "size": 54690,
+                "thumbnail": "https://media.bhekani.com/p/KIGSO650HCXX2a1K0IYQX4XGv_FkSzplX9VoV-v-/thumb.webp"
+            }
+        },
+        {
+            "key": "closure-states-lesson",
+            "sourcePath": "content/site/ai-work-school/assets/diagram-closure-states.webp",
+            "sha256": "96c11a83f1fec068e4ce51b05cc37cb5127a4b185c0e07c33fcef8391c45f7b9",
+            "bytes": 49476,
+            "mimeType": "image/webp",
+            "media": {
+                "access": "public",
+                "caption": "Done is a claim: fresh reviewer and destination evidence moves work through each closure state.",
+                "file": "https://media.bhekani.com/p/YovnjEwdKfLiA-Qs6i2jueLjb-10k9X7xyxD14Ul/main.webp",
+                "mediaId": "YovnjEwdKfLiA-Qs6i2jueLjb-10k9X7xyxD14Ul",
+                "mimeType": "image/webp",
+                "originalFileName": "diagram-closure-states.webp",
+                "size": 49476,
+                "thumbnail": "https://media.bhekani.com/p/YovnjEwdKfLiA-Qs6i2jueLjb-10k9X7xyxD14Ul/thumb.webp"
+            }
+        },
+        {
+            "key": "work-surface-choice-lesson",
+            "sourcePath": "content/site/ai-work-school/assets/diagram-work-surface-choice.webp",
+            "sha256": "00355842850d28e3816e3ad3f801d8887d7c271ce568794ab93bcfe20086ecd5",
+            "bytes": 64556,
+            "mimeType": "image/webp",
+            "media": {
+                "access": "public",
+                "caption": "Choose chat, delegated work or person-only judgement from the shape and authority of the job.",
+                "file": "https://media.bhekani.com/p/7plFDkUb_zdrXVTp8wZ5UggLQk9FO_ZDW1O_bcLY/main.webp",
+                "mediaId": "7plFDkUb_zdrXVTp8wZ5UggLQk9FO_ZDW1O_bcLY",
+                "mimeType": "image/webp",
+                "originalFileName": "diagram-work-surface-choice.webp",
+                "size": 64556,
+                "thumbnail": "https://media.bhekani.com/p/7plFDkUb_zdrXVTp8wZ5UggLQk9FO_ZDW1O_bcLY/thumb.webp"
+            }
+        },
+        {
+            "key": "claim-argument-map-lesson",
+            "sourcePath": "content/site/ai-work-school/assets/diagram-claim-argument-map.webp",
+            "sha256": "cb2a6128f8ae77e0b7dd2e9ba2c5e94bc548bd6ed53fd82a3e194aad07057b75",
+            "bytes": 57520,
+            "mimeType": "image/webp",
+            "media": {
+                "access": "public",
+                "caption": "Map claims, support, counterarguments and open gaps before prose turns them into a smooth story.",
+                "file": "https://media.bhekani.com/p/Rbvtux50mu8VtvN-dw8fjew40UM66-vxbhM8Xogj/main.webp",
+                "mediaId": "Rbvtux50mu8VtvN-dw8fjew40UM66-vxbhM8Xogj",
+                "mimeType": "image/webp",
+                "originalFileName": "diagram-claim-argument-map.webp",
+                "size": 57520,
+                "thumbnail": "https://media.bhekani.com/p/Rbvtux50mu8VtvN-dw8fjew40UM66-vxbhM8Xogj/thumb.webp"
+            }
+        },
+        {
+            "key": "authority-sequence-lesson",
+            "sourcePath": "content/site/ai-work-school/assets/diagram-authority-sequence.webp",
+            "sha256": "f5e6b3aa056f77f15cbb02368165477a32a635b6d307bb9441633bdb45aa7a4d",
+            "bytes": 56858,
+            "mimeType": "image/webp",
+            "media": {
+                "access": "public",
+                "caption": "Authority is a sequence: inspect, propose, approve the exact action, act, then verify external state.",
+                "file": "https://media.bhekani.com/p/wtDdSo9RExjLA22S1VD9b3YKhNvK9OYu1Ux65r6g/main.webp",
+                "mediaId": "wtDdSo9RExjLA22S1VD9b3YKhNvK9OYu1Ux65r6g",
+                "mimeType": "image/webp",
+                "originalFileName": "diagram-authority-sequence.webp",
+                "size": 56858,
+                "thumbnail": "https://media.bhekani.com/p/wtDdSo9RExjLA22S1VD9b3YKhNvK9OYu1Ux65r6g/thumb.webp"
+            }
+        },
+        {
+            "key": "capstone-loop-lesson",
+            "sourcePath": "content/site/ai-work-school/assets/diagram-capstone-loop.webp",
+            "sha256": "331d670a93062454830baa6082f4672b52915e683c689dfc992253758dc58366",
+            "bytes": 59438,
+            "mimeType": "image/webp",
+            "media": {
+                "access": "public",
+                "caption": "Run the whole method once, keep the miss, change one part of the setup, and compare fresh evidence.",
+                "file": "https://media.bhekani.com/p/5eBVQRO1s3srRhTrlGfygKW_xySd8xR4MZ6ybz58/main.webp",
+                "mediaId": "5eBVQRO1s3srRhTrlGfygKW_xySd8xR4MZ6ybz58",
+                "mimeType": "image/webp",
+                "originalFileName": "diagram-capstone-loop.webp",
+                "size": 59438,
+                "thumbnail": "https://media.bhekani.com/p/5eBVQRO1s3srRhTrlGfygKW_xySd8xR4MZ6ybz58/thumb.webp"
+            }
+        },
+        {
+            "key": "chatgpt-work-interface-lesson",
+            "sourcePath": "content/site/ai-work-school/assets/screenshot-chatgpt-work.webp",
+            "sha256": "38173c16ea9d9e9cad8fa30cf2744b0b52c4d327f213aa2cf614f5483f97aa34",
+            "bytes": 67434,
+            "mimeType": "image/webp",
+            "media": {
+                "access": "public",
+                "caption": "Open ChatGPT, then choose Work for a bounded multi-step job or Codex for repository work. Interface captured from OpenAI on 14 August 2026.",
+                "file": "https://media.bhekani.com/p/6ZLWTJ-6808I-0rnctAqx0KqRDWgeIT_-eRfEZve/main.webp",
+                "mediaId": "6ZLWTJ-6808I-0rnctAqx0KqRDWgeIT_-eRfEZve",
+                "mimeType": "image/webp",
+                "originalFileName": "screenshot-chatgpt-work.webp",
+                "size": 67434,
+                "thumbnail": "https://media.bhekani.com/p/6ZLWTJ-6808I-0rnctAqx0KqRDWgeIT_-eRfEZve/thumb.webp"
+            }
+        },
+        {
+            "key": "claude-cowork-interface-lesson",
+            "sourcePath": "content/site/ai-work-school/assets/screenshot-claude-cowork.webp",
+            "sha256": "8ddbacb33682ffce22c56a6b75f6378459d5b26b7412c743e192eef367f95339",
+            "bytes": 50440,
+            "mimeType": "image/webp",
+            "media": {
+                "access": "public",
+                "caption": "Claude Cowork shows the request, connected sources and finished slide deck in one task view. Interface captured from Anthropic on 14 August 2026.",
+                "file": "https://media.bhekani.com/p/8bZNTIFxUfOLiOBCxW2A8SLsAexVhNIJWQS72iPc/main.webp",
+                "mediaId": "8bZNTIFxUfOLiOBCxW2A8SLsAexVhNIJWQS72iPc",
+                "mimeType": "image/webp",
+                "originalFileName": "screenshot-claude-cowork.webp",
+                "size": 50440,
+                "thumbnail": "https://media.bhekani.com/p/8bZNTIFxUfOLiOBCxW2A8SLsAexVhNIJWQS72iPc/thumb.webp"
+            }
+        },
+        {
+            "key": "microsoft-cowork-interface-lesson",
+            "sourcePath": "content/site/ai-work-school/assets/screenshot-microsoft-cowork.webp",
+            "sha256": "5f2ac5c5c9da77416be209d96d39b606aab9ddbcb4b167cceaba29534903da1d",
+            "bytes": 12358,
+            "mimeType": "image/webp",
+            "media": {
+                "access": "public",
+                "caption": "Open Microsoft 365 Copilot and switch from Chat to Cowork before starting a multi-step task. Interface captured from Microsoft Support on 14 August 2026.",
+                "file": "https://media.bhekani.com/p/s1_GaaDD-xUpd3It_ehubb3QR3zS31iqj8WXu68v/main.webp",
+                "mediaId": "s1_GaaDD-xUpd3It_ehubb3QR3zS31iqj8WXu68v",
+                "mimeType": "image/webp",
+                "originalFileName": "screenshot-microsoft-cowork.webp",
+                "size": 12358,
+                "thumbnail": "https://media.bhekani.com/p/s1_GaaDD-xUpd3It_ehubb3QR3zS31iqj8WXu68v/thumb.webp"
+            }
+        },
+        {
+            "key": "chatgpt-plugin-directory-lesson",
+            "sourcePath": "content/site/ai-work-school/assets/screenshot-chatgpt-plugins.webp",
+            "sha256": "f970dd1ec9fb3e94cdc0ea0ee81604abd14f2d7513716786a5a438eff8186c0c",
+            "bytes": 98486,
+            "mimeType": "image/webp",
+            "media": {
+                "access": "public",
+                "caption": "A directory is a discovery surface, not an approval. Inspect the publisher, exact permissions and data boundary before connecting an app. Interface captured from OpenAI on 14 August 2026.",
+                "file": "https://media.bhekani.com/p/m0xhJnv1WtU5OvHk7JGrrt2QiwqLogWcQXOoyJr5/main.webp",
+                "mediaId": "m0xhJnv1WtU5OvHk7JGrrt2QiwqLogWcQXOoyJr5",
+                "mimeType": "image/webp",
+                "originalFileName": "screenshot-chatgpt-plugins.webp",
+                "size": 98486,
+                "thumbnail": "https://media.bhekani.com/p/m0xhJnv1WtU5OvHk7JGrrt2QiwqLogWcQXOoyJr5/thumb.webp"
             }
         }
     ]

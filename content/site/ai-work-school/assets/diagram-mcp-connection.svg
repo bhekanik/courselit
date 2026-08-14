@@ -12,8 +12,10 @@
       @font-face { font-family: "Roboto Slab"; src: url("../../../../apps/web/public/fonts/roboto-slab/roboto-slab-latin-variable.woff2") format("woff2"); font-weight: 100 900; }
       @font-face { font-family: "Mulish"; src: url("../../../../apps/web/public/fonts/mulish/mulish-latin-variable.woff2") format("woff2"); font-weight: 200 1000; }
       .heading { font-family: "Roboto Slab"; font-size: 20px; font-weight: 500; fill: #0F1D2E; }
-      .label { font-family: "Mulish"; font-size: 14px; font-weight: 600; fill: #0F1D2E; }
-      .body { font-family: "Mulish"; font-size: 12px; font-weight: 400; fill: #435564; }
+      .label { font-family: "Mulish"; font-size: 15px; font-weight: 600; fill: #0F1D2E; }
+      .body { font-family: "Mulish"; font-size: 15px; font-weight: 400; fill: #435564; }
+      .gate-number { font-family: "Mulish"; font-size: 15px; font-weight: 600; fill: #FFFFFF; }
+      .refusal-label { font-family: "Mulish"; font-size: 15px; font-weight: 600; fill: #8A4B12; }
       .node { fill: #FFFFFF; stroke: #687783; stroke-width: 1.5; }
       .gate { fill: #F7F8F8; stroke: #0F1D2E; stroke-width: 1.5; }
       .evidence { fill: #DDEDEA; stroke: #0E5C5E; stroke-width: 1.5; }
@@ -38,21 +40,21 @@
 
   <rect x="34" y="226" width="244" height="58" rx="8" class="gate"/>
   <circle cx="59" cy="255" r="13" fill="#0F1D2E"/>
-  <text x="55" y="260" font-family="Mulish" font-size="13" font-weight="600" fill="#FFFFFF">1</text>
+  <text x="54" y="261" class="gate-number">1</text>
   <text x="82" y="252" class="label">Identity</text>
   <text x="82" y="271" class="body">Who is asking?</text>
   <path class="line" d="M156 284V298"/>
 
   <rect x="34" y="298" width="244" height="58" rx="8" class="gate"/>
   <circle cx="59" cy="327" r="13" fill="#0F1D2E"/>
-  <text x="55" y="332" font-family="Mulish" font-size="13" font-weight="600" fill="#FFFFFF">2</text>
+  <text x="54" y="333" class="gate-number">2</text>
   <text x="82" y="324" class="label">Scope</text>
   <text x="82" y="343" class="body">Which records?</text>
   <path class="line" d="M156 356V370"/>
 
   <rect x="34" y="370" width="244" height="58" rx="8" class="gate"/>
   <circle cx="59" cy="399" r="13" fill="#0F1D2E"/>
-  <text x="55" y="404" font-family="Mulish" font-size="13" font-weight="600" fill="#FFFFFF">3</text>
+  <text x="54" y="405" class="gate-number">3</text>
   <text x="82" y="396" class="label">Action</text>
   <text x="82" y="415" class="body">Read, or change?</text>
 
@@ -60,7 +62,7 @@
   <path class="refusal" d="M278 327H310"/>
   <path class="refusal" d="M278 399H310"/>
   <path class="refusal" d="M310 255V430H260V442"/>
-  <text x="286" y="243" font-family="Mulish" font-size="12" font-weight="600" fill="#8A4B12">No</text>
+  <text x="284" y="243" class="refusal-label">No</text>
   <rect x="188" y="442" width="144" height="48" rx="8" class="review"/>
   <text x="204" y="463" class="label">Refused,</text>
   <text x="204" y="481" class="label">and recorded.</text>

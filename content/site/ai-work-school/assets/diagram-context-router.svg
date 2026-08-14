@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 680" role="img" aria-labelledby="title desc">
+  <title id="title">Route context by its job</title>
+  <desc id="desc">Standing rules, procedures, explanations and current evidence live in separate maintained places. A router selects what the current job needs, and every durable item has an owner and update trigger.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 8 4 0 8Z" fill="#0F1D2E"/>
+    </marker>
+    <marker id="teal-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 8 4 0 8Z" fill="#0E5C5E"/>
+    </marker>
+    <marker id="clay-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 8 4 0 8Z" fill="#8A4B12"/>
+    </marker>
+    <style>
+      @font-face { font-family: "Roboto Slab"; src: url("../../../../apps/web/public/fonts/roboto-slab/roboto-slab-latin-variable.woff2") format("woff2"); font-weight: 100 900; }
+      @font-face { font-family: "Mulish"; src: url("../../../../apps/web/public/fonts/mulish/mulish-latin-variable.woff2") format("woff2"); font-weight: 200 1000; }
+      .heading { font-family: "Roboto Slab"; font-size: 16px; font-weight: 500; fill: #0F1D2E; }
+      .label { font-family: "Mulish"; font-size: 15px; font-weight: 600; fill: #0F1D2E; }
+      .body { font-family: "Mulish"; font-size: 15px; font-weight: 400; fill: #435564; }
+      .small { font-family: "Mulish"; font-size: 15px; font-weight: 600; fill: #174A46; }
+      .inverse { fill: #FFFFFF; }
+      .node { fill: #FFFFFF; stroke: #687783; stroke-width: 1.5; }
+      .evidence { fill: #DDEDEA; stroke: #0E5C5E; stroke-width: 1.5; }
+      .review { fill: #F8EBDD; stroke: #8A4B12; stroke-width: 1.5; }
+      .line { fill: none; stroke: #0F1D2E; stroke-width: 1.5; marker-end: url(#arrow); }
+      .teal-line { fill: none; stroke: #0E5C5E; stroke-width: 1.5; marker-end: url(#teal-arrow); }
+      .clay-line { fill: none; stroke: #8A4B12; stroke-width: 1.5; marker-end: url(#clay-arrow); }
+      .rule { stroke: #687783; stroke-width: 1.5; }
+    </style>
+  </defs>
+  <rect width="360" height="680" rx="12" fill="#F7F8F8"/>
+  <text x="28" y="40" class="heading">Route context by its job</text>
+  <text x="28" y="63" class="body">Different context changes at different speeds.</text>
+  <rect x="104" y="94" width="152" height="58" rx="8" class="node"/>
+  <text x="124" y="120" class="label">Current job</text>
+  <text x="124" y="140" class="body">Needed context</text>
+  <path class="line" d="M180 152V180"/>
+  <rect x="90" y="180" width="180" height="58" rx="8" class="evidence"/>
+  <text x="110" y="207" class="label">Context router</text>
+  <text x="110" y="227" class="body">Select · record</text>
+  <path class="line" d="M90 209H42V280"/>
+  <path class="line" d="M270 209H318V280"/>
+  <path class="line" d="M180 238V394"/>
+  <rect x="24" y="280" width="144" height="82" rx="8" class="node"/>
+  <text x="44" y="309" class="label">Standing rule</text>
+  <text x="44" y="331" class="body">Always-on</text>
+  <rect x="192" y="280" width="144" height="82" rx="8" class="node"/>
+  <text x="212" y="309" class="label">Procedure</text>
+  <text x="212" y="331" class="body">Known steps</text>
+  <rect x="24" y="394" width="144" height="82" rx="8" class="node"/>
+  <text x="44" y="423" class="label">Explanation</text>
+  <text x="44" y="445" class="body">Why this differs</text>
+  <rect x="192" y="394" width="144" height="82" rx="8" class="evidence"/>
+  <text x="212" y="423" class="label">Current evidence</text>
+  <text x="212" y="445" class="body">Fresh run sources</text>
+  <path class="line" d="M96 476V516H180"/>
+  <path class="line" d="M264 476V516H180"/>
+  <rect x="44" y="532" width="272" height="78" rx="8" class="review"/>
+  <text x="64" y="560" class="label">Owner + update trigger</text>
+  <text x="64" y="583" class="body">Who changes it</text>
+  <text x="64" y="601" class="body">What triggers the update</text>
+  <text x="28" y="656" class="small">Always-on is a router, not a warehouse.</text>
+</svg>

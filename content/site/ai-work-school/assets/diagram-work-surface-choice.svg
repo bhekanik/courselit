@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 660" role="img" aria-labelledby="title desc">
+  <title id="title">Choose the work surface</title>
+  <desc id="desc">A one-off exchange where the professional stays present belongs in chat. A bounded job with context, finish condition and review may be delegated. Work without authority remains person-only.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 8 4 0 8Z" fill="#0F1D2E"/>
+    </marker>
+    <marker id="teal-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 8 4 0 8Z" fill="#0E5C5E"/>
+    </marker>
+    <marker id="clay-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 8 4 0 8Z" fill="#8A4B12"/>
+    </marker>
+    <style>
+      @font-face { font-family: "Roboto Slab"; src: url("../../../../apps/web/public/fonts/roboto-slab/roboto-slab-latin-variable.woff2") format("woff2"); font-weight: 100 900; }
+      @font-face { font-family: "Mulish"; src: url("../../../../apps/web/public/fonts/mulish/mulish-latin-variable.woff2") format("woff2"); font-weight: 200 1000; }
+      .heading { font-family: "Roboto Slab"; font-size: 16px; font-weight: 500; fill: #0F1D2E; }
+      .label { font-family: "Mulish"; font-size: 15px; font-weight: 600; fill: #0F1D2E; }
+      .body { font-family: "Mulish"; font-size: 15px; font-weight: 400; fill: #435564; }
+      .small { font-family: "Mulish"; font-size: 15px; font-weight: 600; fill: #174A46; }
+      .inverse { fill: #FFFFFF; }
+      .node { fill: #FFFFFF; stroke: #687783; stroke-width: 1.5; }
+      .evidence { fill: #DDEDEA; stroke: #0E5C5E; stroke-width: 1.5; }
+      .review { fill: #F8EBDD; stroke: #8A4B12; stroke-width: 1.5; }
+      .line { fill: none; stroke: #0F1D2E; stroke-width: 1.5; marker-end: url(#arrow); }
+      .teal-line { fill: none; stroke: #0E5C5E; stroke-width: 1.5; marker-end: url(#teal-arrow); }
+      .clay-line { fill: none; stroke: #8A4B12; stroke-width: 1.5; marker-end: url(#clay-arrow); }
+      .rule { stroke: #687783; stroke-width: 1.5; }
+    </style>
+  </defs>
+  <rect width="360" height="660" rx="12" fill="#F7F8F8"/>
+  <text x="28" y="40" class="heading">Choose the work surface</text>
+  <text x="28" y="63" class="body">The job decides, not the button.</text>
+  <rect x="44" y="96" width="272" height="74" rx="8" class="node"/>
+  <text x="64" y="125" class="label">Stay present to steer?</text>
+  <text x="64" y="148" class="body">One bounded exchange</text>
+  <path class="teal-line" d="M112 170V208"/>
+  <text x="74" y="196" class="small">Yes</text>
+  <rect x="28" y="208" width="144" height="72" rx="8" class="evidence"/>
+  <text x="48" y="238" class="label">Chat</text>
+  <text x="48" y="261" class="body">Steer and check.</text>
+  <path class="line" d="M248 170V208"/>
+  <text x="261" y="196" class="small">No</text>
+  <rect x="188" y="208" width="144" height="96" rx="8" class="node"/>
+  <text x="208" y="237" class="label">Bounded job +</text>
+  <text x="208" y="257" class="label">finish condition?</text>
+  <text x="208" y="283" class="body">Context + review</text>
+  <path class="teal-line" d="M260 304V350"/>
+  <text x="276" y="335" class="small">Yes</text>
+  <rect x="188" y="350" width="144" height="80" rx="8" class="evidence"/>
+  <text x="208" y="381" class="label">Delegated work</text>
+  <text x="208" y="405" class="body">Owner accountable</text>
+  <path class="clay-line" d="M188 280H176V390H160"/>
+  <text x="164" y="332" class="small">No</text>
+  <rect x="28" y="350" width="132" height="80" rx="8" class="review"/>
+  <text x="48" y="381" class="label">Person-only</text>
+  <text x="48" y="405" class="body">Person decides</text>
+  <path class="line" d="M100 430V484H180"/>
+  <path class="line" d="M260 430V484H180"/>
+  <rect x="44" y="500" width="272" height="92" rx="8" class="review"/>
+  <text x="64" y="530" class="label">External action or consequence?</text>
+  <text x="64" y="555" class="body">Explicit authority</text>
+  <text x="64" y="573" class="body">Another reviewer</text>
+  <text x="28" y="638" class="small">A longer prompt does not create delegation.</text>
+</svg>

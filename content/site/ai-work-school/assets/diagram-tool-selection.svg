@@ -9,9 +9,9 @@
       @font-face { font-family: "Roboto Slab"; src: url("../../../../apps/web/public/fonts/roboto-slab/roboto-slab-latin-variable.woff2") format("woff2"); font-weight: 100 900; }
       @font-face { font-family: "Mulish"; src: url("../../../../apps/web/public/fonts/mulish/mulish-latin-variable.woff2") format("woff2"); font-weight: 200 1000; }
       .heading { font-family: "Roboto Slab"; font-size: 20px; font-weight: 500; fill: #0F1D2E; }
-      .label { font-family: "Mulish"; font-size: 14px; font-weight: 600; fill: #0F1D2E; }
-      .body { font-family: "Mulish"; font-size: 13px; font-weight: 400; fill: #435564; }
-      .small { font-family: "Mulish"; font-size: 12px; font-weight: 600; fill: #174A46; }
+      .label { font-family: "Mulish"; font-size: 15px; font-weight: 600; fill: #0F1D2E; }
+      .body { font-family: "Mulish"; font-size: 15px; font-weight: 400; fill: #435564; }
+      .small { font-family: "Mulish"; font-size: 15px; font-weight: 600; fill: #174A46; }
       .node { fill: #FFFFFF; stroke: #687783; stroke-width: 1.5; }
       .choice { fill: #F7F8F8; stroke: #687783; stroke-width: 1.5; }
       .evidence { fill: #DDEDEA; stroke: #0E5C5E; stroke-width: 1.5; }
@@ -39,15 +39,15 @@
   <rect x="47" y="213" width="23" height="27" rx="3" fill="#FFFFFF" stroke="#0E5C5E"/>
   <path d="M52 220h13M52 226h13M52 232h9" stroke="#0E5C5E" stroke-width="1.5"/>
   <text x="82" y="227" class="label">Same job, repeated</text>
-  <text x="50" y="253" class="body">Pack context, steps, examples and checks</text>
-  <text x="50" y="272" class="body">as a reusable skill.</text>
+  <text x="50" y="253" class="body">Pack steps, examples and checks</text>
+  <text x="50" y="272" class="body">with the context as a reusable skill.</text>
 
   <rect x="30" y="306" width="292" height="96" rx="8" class="choice"/>
   <path d="M48 336h22M59 325v22" stroke="#0F1D2E" stroke-width="1.5"/>
   <circle cx="59" cy="336" r="14" fill="none" stroke="#0F1D2E" stroke-width="1.5"/>
   <text x="84" y="333" class="label">Needs approved files or systems</text>
-  <text x="50" y="365" class="body">Connect the source behind a permission gate.</text>
-  <text x="50" y="385" class="body">Keep read and change authority separate.</text>
+  <text x="50" y="365" class="body">Connect it behind a permission gate.</text>
+  <text x="50" y="385" class="body">Keep read and change authority apart.</text>
 
   <path class="line" d="M322 134H340"/>
   <path class="line" d="M322 238H340"/>
@@ -59,6 +59,7 @@
   <path d="M47 464h18M47 473h18" stroke="#8A4B12" stroke-width="1.5"/>
   <path d="m49 482 5 5 12-14" fill="none" stroke="#8A4B12" stroke-width="1.8"/>
   <text x="78" y="467" class="label">Higher consequence?</text>
-  <text x="78" y="496" class="body">Another person checks it before it leaves.</text>
+  <text x="78" y="492" class="body">Another person checks it</text>
+  <text x="78" y="514" class="body">before it leaves.</text>
   <text x="28" y="550" class="small">Choose the lowest sufficient mechanism.</text>
 </svg>

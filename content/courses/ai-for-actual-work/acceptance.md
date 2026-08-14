@@ -1,6 +1,6 @@
 # Acceptance checks
 
-Status: expansion contract locked before curriculum changes
+Status: pedagogy and media contract locked before production migration
 
 ## Course contract
 
@@ -26,18 +26,27 @@ Every lesson has:
 - one named learner artefact;
 - four or more concrete checks;
 - exact source-note filenames outside the learner-facing document.
+- one load-bearing `teaches` concept and an ordered `requires` list whose prerequisites appear earlier in the course;
+- the ordered teaching sequence `Outcome`, `Before you continue`, `See it`, `Try it with guidance`, `What you will make`, `Try it on your work`, `Teach it back`, `Try a changed case`, `Check your work`, and `If you get stuck`;
+- a written prediction before explanation, a guided case with ordered steps and a stop-and-record checkpoint, a written teach-back, a changed professional case, and exactly three graduated hints.
+- lesson-owned concept markers in the prediction, guided case, teach-back, changed case, and hints. Swapping prompts between lessons or replacing any of these parts with generic instructions must fail verification.
 
 The first lesson is available as a preview. The remaining lessons require free enrolment.
 
 ## Media contract
 
 - `course.featuredImage` is the complete sealed `course-featured-image` Media object from `content/site/ai-work-school/media.json`.
+- Lessons 2, 4, 5, 7, 10, 11, 14, 15, 19, and 22 contain one new deterministic teaching diagram at the reviewed `See it` anchor.
 - Lesson 17 contains `skill-lesson` followed by `skill-package-lesson` at the reviewed anchor after "Choose the degree of freedom".
+- Lesson 16 contains four dated evidence states, direct links to the current vendor setup pages, and one official interface screenshot each for ChatGPT Work, Claude Cowork and Microsoft 365 Copilot Cowork. Screenshots prove only what the public interface showed on 14 August 2026.
+- Lesson 17 links the open Agent Skills format and current host-specific instructions without treating installation, sharing or policy as portable.
+- Lesson 18 links the MCP introduction, official registry and current product directories, then uses the sealed Plugin Directory screenshot to teach that discovery is not approval.
 - Lesson 18 contains `mcp-lesson` followed by `mcp-connection-lesson` after the dated introductory paragraph.
 - Lesson 20 contains `editorial-partnership-lesson` between "Rebuild the map after revision" and "Repair AI writing without fabricating humanity".
 - Lesson 21 contains `checked-work-lesson` followed by `checked-workflow-lesson` before "Document lane".
 - Every lesson image uses the exact sealed HTTPS `file` URL, the reviewed alt text from `asset-contracts.json`, and a non-empty title. Its next node is a visible paragraph whose text matches the sealed media caption exactly.
-- The course contains exactly these seven lesson images. No image substitutes for lesson prose, an exercise, an artefact, or a check.
+- The course contains exactly twenty-one lesson images: seven existing reviewed visuals, ten deterministic teaching diagrams and four official app screenshots. No image substitutes for lesson prose, an exercise, an artefact, or a check.
+- All fourteen deterministic diagrams are rasterised through the tracked `resvg` and `cwebp` recipe with the checked Roboto Slab and Mulish font files. Two independent PNG renders and two WebP conversions must be byte-identical. Label, body and small text remain at least 12px at the 320px viewport contract.
 - Stable course, group, lesson and capstone identifiers do not change when media is added. The capstone submission remains the same five files.
 
 ## Expansion contract
@@ -60,6 +69,11 @@ The first lesson is available as a preview. The remaining lessons require free e
 - The core path assumes no coding, API access, admin rights, team, automation budget, or permission to mutate external systems.
 - Engineering material sits only in explicit optional technical extensions.
 - The learner brings one recurring, low-risk job and carries it through all twenty-two lessons.
+- The learner writes a prediction before reading each explanation. CourseLit does not hide later content or store the response, so the lesson uses an explicit stop-and-write instruction rather than pretending to offer progressive reveal.
+- The guided case leaves one consequential decision to the learner. It is neither a copied example nor an unscaffolded version of the whole job.
+- Teach-back is followed by a changed case because a fluent summary alone is weak evidence of transfer.
+- Every lesson's three hints descend from the current decision to a simpler prerequisite without supplying the finished artefact.
+- Lesson 21 asks the learner to choose one document, spreadsheet, or meeting lane for the first pass rather than completing all three at once.
 - The course includes worked, clearly illustrative non-coding cases for a research brief, an operational handover, and a stakeholder update.
 - Before using real work data, the learner checks organisational policy and tool approval. If the boundary is unclear, they use redacted or invented material and ask the appropriate owner.
 - Checks come from requirements and must fail on a plausible wrong result.
@@ -88,9 +102,10 @@ Run:
 
 ```sh
 node content/courses/ai-for-actual-work/verify.mjs
+node content/site/ai-work-school/render-diagrams.mjs --check
 ```
 
-The command validates observable manifest behaviour: explicit stable identifiers, counts, ordering, lesson completeness, TipTap shape, sealed media, accessible image attributes and captions, dated product coverage, source traceability, professional exercises, banned claims, privacy coverage, capstone integration, and the non-coding core boundary.
+The command validates observable manifest behaviour: explicit stable identifiers, concept dependencies, counts, ordering, teaching sequence and node shape, lesson completeness, TipTap shape, sealed media, accessible image attributes and captions, dated product coverage, source traceability, professional exercises, banned claims, privacy coverage, capstone integration, and the non-coding core boundary.
 
 ## Reviewer-skill applicability
 

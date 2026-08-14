@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 700" role="img" aria-labelledby="title desc">
+  <title id="title">One fresh run</title>
+  <desc id="desc">A brief and source contract feed checks and evidence, then a decision and handover. A miss produces one bounded setup change and a fresh rerun rather than a wholesale rewrite.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 8 4 0 8Z" fill="#0F1D2E"/>
+    </marker>
+    <marker id="teal-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 8 4 0 8Z" fill="#0E5C5E"/>
+    </marker>
+    <marker id="clay-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 8 4 0 8Z" fill="#8A4B12"/>
+    </marker>
+    <style>
+      @font-face { font-family: "Roboto Slab"; src: url("../../../../apps/web/public/fonts/roboto-slab/roboto-slab-latin-variable.woff2") format("woff2"); font-weight: 100 900; }
+      @font-face { font-family: "Mulish"; src: url("../../../../apps/web/public/fonts/mulish/mulish-latin-variable.woff2") format("woff2"); font-weight: 200 1000; }
+      .heading { font-family: "Roboto Slab"; font-size: 16px; font-weight: 500; fill: #0F1D2E; }
+      .label { font-family: "Mulish"; font-size: 15px; font-weight: 600; fill: #0F1D2E; }
+      .body { font-family: "Mulish"; font-size: 15px; font-weight: 400; fill: #435564; }
+      .small { font-family: "Mulish"; font-size: 15px; font-weight: 600; fill: #174A46; }
+      .inverse { fill: #FFFFFF; }
+      .node { fill: #FFFFFF; stroke: #687783; stroke-width: 1.5; }
+      .evidence { fill: #DDEDEA; stroke: #0E5C5E; stroke-width: 1.5; }
+      .review { fill: #F8EBDD; stroke: #8A4B12; stroke-width: 1.5; }
+      .line { fill: none; stroke: #0F1D2E; stroke-width: 1.5; marker-end: url(#arrow); }
+      .teal-line { fill: none; stroke: #0E5C5E; stroke-width: 1.5; marker-end: url(#teal-arrow); }
+      .clay-line { fill: none; stroke: #8A4B12; stroke-width: 1.5; marker-end: url(#clay-arrow); }
+      .rule { stroke: #687783; stroke-width: 1.5; }
+    </style>
+  </defs>
+  <rect width="360" height="700" rx="12" fill="#F7F8F8"/>
+  <text x="28" y="40" class="heading">One fresh run</text>
+  <text x="28" y="63" class="body">Consolidate the method. Keep the miss.</text>
+  <rect x="38" y="94" width="284" height="88" rx="8" class="node"/>
+  <text x="58" y="123" class="label">Brief + source contract</text>
+  <text x="58" y="148" class="body">Job, authority, inputs and limits</text>
+  <path class="line" d="M180 182V212"/>
+  <rect x="38" y="212" width="284" height="88" rx="8" class="evidence"/>
+  <text x="58" y="241" class="label">Checks + evidence</text>
+  <text x="58" y="266" class="body">Keep what passes and fails.</text>
+  <path class="line" d="M180 300V330"/>
+  <rect x="38" y="330" width="284" height="88" rx="8" class="node"/>
+  <text x="58" y="359" class="label">Decision + handover</text>
+  <text x="58" y="384" class="body">Record owner, destination and why</text>
+  <path class="clay-line" d="M322 374H344V474H314"/>
+  <rect x="46" y="460" width="268" height="72" rx="8" class="review"/>
+  <text x="66" y="489" class="label">Miss</text>
+  <text x="124" y="489" class="body">Classify before fixing.</text>
+  <text x="66" y="513" class="body">Keep the failed evidence.</text>
+  <path class="clay-line" d="M180 532V556"/>
+  <rect x="46" y="556" width="268" height="72" rx="8" class="review"/>
+  <text x="66" y="585" class="label">One setup change</text>
+  <text x="66" y="609" class="body">Owner, trigger, bounded repair</text>
+  <path class="line" d="M46 592H18V256H36"/>
+  <text x="28" y="676" class="small">Run again. Change one thing. Compare.</text>
+</svg>
