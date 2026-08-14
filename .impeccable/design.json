@@ -1,0 +1,221 @@
+{
+    "schemaVersion": 2,
+    "generatedAt": "2026-08-14T19:03:59+01:00",
+    "title": "Design System: AI Work School",
+    "extensions": {
+        "colorMeta": {
+            "ink": {
+                "role": "neutral",
+                "displayName": "Ledger Ink",
+                "canonical": "#0F1D2E",
+                "tonalRamp": [
+                    "#07101A",
+                    "#0F1D2E",
+                    "#23394F",
+                    "#435564",
+                    "#687783",
+                    "#9AA5AD",
+                    "#D3D8DB",
+                    "#F3F5F6"
+                ]
+            },
+            "action": {
+                "role": "primary",
+                "displayName": "Action Oxblood",
+                "canonical": "#7A1B2B",
+                "tonalRamp": [
+                    "#26070D",
+                    "#46101A",
+                    "#5F1421",
+                    "#7A1B2B",
+                    "#A32638",
+                    "#CF6676",
+                    "#EDADB6",
+                    "#FBEAEC"
+                ]
+            },
+            "evidence": {
+                "role": "secondary",
+                "displayName": "Evidence Teal",
+                "canonical": "#0E5C5E",
+                "tonalRamp": [
+                    "#062122",
+                    "#093B3D",
+                    "#0E5C5E",
+                    "#147E7F",
+                    "#3A9E9C",
+                    "#76C4BF",
+                    "#B4E0DC",
+                    "#EDF8F7"
+                ]
+            },
+            "review": {
+                "role": "tertiary",
+                "displayName": "Review Clay",
+                "canonical": "#8A4B12",
+                "tonalRamp": [
+                    "#2A1404",
+                    "#4A2608",
+                    "#67370D",
+                    "#8A4B12",
+                    "#B36A25",
+                    "#D69A5D",
+                    "#EAC49A",
+                    "#F8EBDD"
+                ]
+            },
+            "page": {
+                "role": "neutral",
+                "displayName": "True White",
+                "canonical": "#FFFFFF",
+                "tonalRamp": [
+                    "#181A1B",
+                    "#353839",
+                    "#5A5E60",
+                    "#85898B",
+                    "#B0B3B4",
+                    "#D4D6D7",
+                    "#F0F1F1",
+                    "#FFFFFF"
+                ]
+            },
+            "dark-page": {
+                "role": "neutral",
+                "displayName": "Night Desk",
+                "canonical": "#101820",
+                "tonalRamp": [
+                    "#080C10",
+                    "#101820",
+                    "#17222C",
+                    "#2C3A46",
+                    "#52616D",
+                    "#81909B",
+                    "#B8C3CC",
+                    "#F3F5F7"
+                ]
+            }
+        },
+        "typographyMeta": {
+            "display": {
+                "displayName": "Review-table display",
+                "purpose": "Hero heading only; a document voice rather than a campaign shout."
+            },
+            "headline": {
+                "displayName": "Section heading",
+                "purpose": "Balanced section titles capped near 24ch."
+            },
+            "body": {
+                "displayName": "Working copy",
+                "purpose": "Instructions and explanations capped at 68ch."
+            },
+            "label": {
+                "displayName": "Quiet label",
+                "purpose": "Sentence-case navigation, inventory and captions."
+            }
+        },
+        "shadows": [
+            {
+                "name": "action-lift",
+                "value": "0 1px 2px rgba(15, 29, 46, 0.16)",
+                "purpose": "Buttons only. Bordered cards remain flat."
+            }
+        ],
+        "motion": [
+            {
+                "name": "state-change",
+                "value": "160ms cubic-bezier(0.22, 1, 0.36, 1)",
+                "purpose": "Hover and focus feedback; instant under reduced motion."
+            }
+        ],
+        "breakpoints": [
+            { "name": "sm", "value": "640px" },
+            { "name": "md", "value": "768px" },
+            { "name": "lg", "value": "1024px" }
+        ]
+    },
+    "components": [
+        {
+            "name": "Primary Course Button",
+            "kind": "button",
+            "refersTo": "button-primary",
+            "description": "The one decisive course action.",
+            "html": "<button class=\"ds-btn-primary\">Start the course — free</button>",
+            "css": ".ds-btn-primary { min-height: 44px; padding: 12px 24px; border: 0; border-radius: 6px; background: #7A1B2B; color: #FFFFFF; font: 700 16px/1 Mulish, system-ui, sans-serif; box-shadow: 0 1px 2px rgba(15,29,46,.16); transition: background 160ms cubic-bezier(.22,1,.36,1); } .ds-btn-primary:hover { background: #5F1421; } .ds-btn-primary:focus-visible { outline: 2px solid #23394F; outline-offset: 2px; } @media (prefers-reduced-motion: reduce) { .ds-btn-primary { transition: none; } }"
+        },
+        {
+            "name": "Secondary Button",
+            "kind": "button",
+            "refersTo": "button-secondary",
+            "description": "A quieter route that never competes with enrolment.",
+            "html": "<button class=\"ds-btn-secondary\">Course details</button>",
+            "css": ".ds-btn-secondary { min-height: 44px; padding: 12px 24px; border: 1px solid #687783; border-radius: 6px; background: #FFFFFF; color: #0F1D2E; font: 700 16px/1 Mulish, system-ui, sans-serif; box-shadow: none; } .ds-btn-secondary:hover { background: #F7F8F8; } .ds-btn-secondary:focus-visible { outline: 2px solid #23394F; outline-offset: 2px; }"
+        },
+        {
+            "name": "Work Panel",
+            "kind": "card",
+            "refersTo": "work-panel",
+            "description": "A semantic comparison or grouped work artefact, never default page scaffolding.",
+            "html": "<section class=\"ds-work-panel\"><h3>This is for you if…</h3><p>You have a recurring task and remain accountable for what leaves your hands.</p></section>",
+            "css": ".ds-work-panel { padding: 24px; border: 1px solid #687783; border-radius: 8px; background: #F7F8F8; color: #0F1D2E; box-shadow: none; font: 400 16px/1.65 Mulish, system-ui, sans-serif; } .ds-work-panel h3 { margin: 0 0 8px; font: 500 18px/1.35 'Roboto Slab', Georgia, serif; }"
+        },
+        {
+            "name": "Text Field",
+            "kind": "input",
+            "refersTo": "field",
+            "description": "A legible working input with a visible boundary and focus state.",
+            "html": "<input class=\"ds-field\" value=\"Weekly supplier review\" aria-label=\"Job to bring\">",
+            "css": ".ds-field { width: 100%; min-height: 44px; padding: 12px 16px; border: 1px solid #687783; border-radius: 6px; background: #FFFFFF; color: #0F1D2E; font: 400 16px/1.4 Mulish, system-ui, sans-serif; } .ds-field:focus-visible { outline: 2px solid #23394F; outline-offset: 2px; }"
+        },
+        {
+            "name": "Evidence Badge",
+            "kind": "chip",
+            "refersTo": null,
+            "description": "Metadata or a verified state with text carrying the meaning.",
+            "html": "<span class=\"ds-evidence-badge\">Source checked</span>",
+            "css": ".ds-evidence-badge { display: inline-flex; padding: 4px 8px; border-radius: 6px; background: #DDEDEA; color: #174A46; font: 600 14px/1.4 Mulish, system-ui, sans-serif; }"
+        }
+    ],
+    "narrative": {
+        "northStar": "The Review Table",
+        "overview": "A cross-functional team gathers around a shared worktable in late-afternoon daylight, reading the evidence before deciding what leaves the room. The system is organised but in use, serious without becoming austere, and built around documents, sources, checks and human decisions.",
+        "keyCharacteristics": [
+            "Real professional work before AI vocabulary.",
+            "One decisive split hero; all later imagery teaches or proves something.",
+            "Flat surfaces, modest corners and rules that organise rather than decorate.",
+            "Visible evidence, refusal paths and human decisions.",
+            "A mobile course action before the first viewport ends."
+        ],
+        "rules": [
+            {
+                "name": "The Four Roles Rule",
+                "body": "Navy structures. Oxblood acts. Teal verifies. Clay asks for review. Never exchange their jobs.",
+                "section": "colors"
+            },
+            {
+                "name": "The Light Section Rule",
+                "body": "Landing-page sections remain light. No navy section band is permitted because CourseLit's section background cannot safely swap foreground tokens.",
+                "section": "colors"
+            },
+            {
+                "name": "The Working Size Rule",
+                "body": "Body copy never drops below 1rem and diagram labels never render below 12px.",
+                "section": "typography"
+            },
+            {
+                "name": "The One Shadow Rule",
+                "body": "If an element already has a visible border, it receives no decorative shadow.",
+                "section": "elevation"
+            }
+        ],
+        "dos": [
+            "Do show documents, source material, checklists and human decisions before naming an AI mechanism.",
+            "Do keep oxblood action-only, teal evidence-only and clay review-only.",
+            "Do verify every runtime media URL before adding its image node to a canonical manifest."
+        ],
+        "donts": [
+            "Don't use generic AI gradients, purple glow, robot or chatbot art, or synthetic intelligence motifs.",
+            "Don't use giant empty heroes, endless identical card grids, marquees, glassmorphism or motion without a job.",
+            "Don't put the action colour inside a diagram or use colour as the only carrier of status."
+        ]
+    }
+}

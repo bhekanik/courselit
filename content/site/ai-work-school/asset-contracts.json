@@ -1,0 +1,241 @@
+{
+    "schemaVersion": 1,
+    "status": "source-only-awaiting-upload-and-curriculum-targets",
+    "sourceRasterCount": 5,
+    "diagramSourceCount": 4,
+    "promotionTargetCount": 11,
+    "runtimeRule": "Do not add a media object or TipTap image node until its owning promotion target has a verified MediaLit mediaId and HTTPS file URL.",
+    "mediaOwnershipRule": "Every owning promotion target requires a distinct MediaLit upload and mediaId. Source reuse does not imply media-record reuse because deletion has no global reference count.",
+    "diagramRender": {
+        "brandFontSources": [
+            "apps/web/public/fonts/roboto-slab/roboto-slab-latin-variable.woff2",
+            "apps/web/public/fonts/mulish/mulish-latin-variable.woff2"
+        ],
+        "outputWidth": 720,
+        "commands": [
+            "sips -s format png {sourceSvg} --out {tempPng}",
+            "sips --resampleWidth 720 {tempPng} --out {tempPng2x}",
+            "cwebp -quiet -q 92 -metadata none {tempPng2x} -o {sourceWebp}"
+        ],
+        "toolVersions": {
+            "sips": "316",
+            "cwebp": "1.6.0"
+        }
+    },
+    "rasters": [
+        {
+            "id": "hero-real-work",
+            "source": "content/site/ai-work-school/assets/hero-real-work.webp",
+            "sha256": "78e7b647c989f672ec12e170df648659d7a9c072d62ee34693d87ebdcdad0891",
+            "width": 1586,
+            "height": 992,
+            "promotionTargets": [
+                {
+                    "key": "landing-hero",
+                    "owner": "site-manifest",
+                    "semanticTarget": "landing hero",
+                    "resolvedTargetId": null,
+                    "mediaId": null,
+                    "httpsFileUrl": null,
+                    "uploadRequired": true
+                },
+                {
+                    "key": "course-featured-image",
+                    "owner": "course-manifest",
+                    "semanticTarget": "course featured image",
+                    "resolvedTargetId": null,
+                    "mediaId": null,
+                    "httpsFileUrl": null,
+                    "uploadRequired": true
+                }
+            ],
+            "objectFit": "cover",
+            "aspectRatio": "aspect-video",
+            "alt": "Three colleagues at a shared table, comparing a printed page, a spreadsheet and a workflow shown step by step on screen.",
+            "caption": ""
+        },
+        {
+            "id": "skill-field-kit",
+            "source": "content/site/ai-work-school/assets/illustration-skill-field-kit.webp",
+            "sha256": "c6561ef1ee6628a407ff761334727ed1e4976467d0cc9fc0612496e2d025dbea",
+            "width": 1200,
+            "height": 1200,
+            "promotionTargets": [
+                {
+                    "key": "skill-lesson",
+                    "owner": "course-lesson",
+                    "semanticTarget": "skill lesson",
+                    "resolvedTargetId": null,
+                    "mediaId": null,
+                    "httpsFileUrl": null,
+                    "uploadRequired": true
+                }
+            ],
+            "alt": "A professional packing a field kit with the materials for a job while two colleagues review what belongs in it.",
+            "caption": "A reusable skill is a packed kit: context, steps, examples and checks, ready to open next week."
+        },
+        {
+            "id": "mcp-permission-gates",
+            "source": "content/site/ai-work-school/assets/illustration-mcp-permission-gates.webp",
+            "sha256": "968270210a1dff1adf0ae07a2d0287a1954f002ca22f4e30899f6a48d60f585c",
+            "width": 1200,
+            "height": 1200,
+            "promotionTargets": [
+                {
+                    "key": "mcp-lesson",
+                    "owner": "course-lesson",
+                    "semanticTarget": "MCP lesson",
+                    "resolvedTargetId": null,
+                    "mediaId": null,
+                    "httpsFileUrl": null,
+                    "uploadRequired": true
+                }
+            ],
+            "alt": "An operator routes records through three separate permission gates, each recording what may pass.",
+            "caption": "Identity, scope and action are separate decisions. A governed connection records all three."
+        },
+        {
+            "id": "checked-work",
+            "source": "content/site/ai-work-school/assets/illustration-checked-work.webp",
+            "sha256": "6b48d16ed647d33c8a2f3849513ebd6f3503936945fbf3aa167d0632d1954646",
+            "width": 1600,
+            "height": 901,
+            "promotionTargets": [
+                {
+                    "key": "landing-checked-work",
+                    "owner": "site-manifest",
+                    "semanticTarget": "landing What you build section",
+                    "resolvedTargetId": null,
+                    "mediaId": null,
+                    "httpsFileUrl": null,
+                    "uploadRequired": true
+                },
+                {
+                    "key": "checked-work-lesson",
+                    "owner": "course-lesson",
+                    "semanticTarget": "checked-work lesson",
+                    "resolvedTargetId": null,
+                    "mediaId": null,
+                    "httpsFileUrl": null,
+                    "uploadRequired": true
+                }
+            ],
+            "alt": "Four colleagues assemble a document, check it against sources, add citations and sign it off.",
+            "caption": "Assemble, check, cite, decide. The same moves make the work reviewable."
+        },
+        {
+            "id": "editing-argument",
+            "source": "content/site/ai-work-school/assets/illustration-editing-argument.webp",
+            "sha256": "5b7f4cf8a0af20e9ac2f4ac43bce9ef3e5e0329161100e6393cf679e0e4b3c54",
+            "width": 1200,
+            "height": 1200,
+            "promotionTargets": [
+                {
+                    "key": "editorial-partnership-lesson",
+                    "owner": "course-lesson",
+                    "semanticTarget": "editorial partnership lesson",
+                    "resolvedTargetId": null,
+                    "mediaId": null,
+                    "httpsFileUrl": null,
+                    "uploadRequired": true
+                }
+            ],
+            "alt": "An editor turns an idea map into a sourced draft, revises the argument and sets rejected suggestions aside.",
+            "caption": "Keep the argument, the source check and the edit. Reject suggestions that weaken the work."
+        }
+    ],
+    "diagrams": [
+        {
+            "id": "tool-selection",
+            "sourceSvg": "content/site/ai-work-school/assets/diagram-tool-selection.svg",
+            "sourceWebp": "content/site/ai-work-school/assets/diagram-tool-selection.webp",
+            "svgSha256": "4b401bdda0c24c87df12877220525e332696ac577343ddaf97943f2052cd75ee",
+            "webpSha256": "0b266540b2a21479ea1240fa974fb8905717f96cb5bc8457b31492475e0deea5",
+            "width": 720,
+            "height": 1120,
+            "semanticTargetKey": "landing-tool-selection",
+            "promotionTargets": [
+                {
+                    "key": "landing-tool-selection",
+                    "owner": "site-manifest",
+                    "semanticTarget": "landing tool-selection section",
+                    "resolvedTargetId": null,
+                    "mediaId": null,
+                    "httpsFileUrl": null,
+                    "uploadRequired": true
+                }
+            ],
+            "alt": "A decision guide: use chat for a one-off question, package a repeated job as a skill, put approved files or systems behind a permission gate, and add another reviewer when consequences rise.",
+            "implementation": "deterministic-labelled-svg"
+        },
+        {
+            "id": "skill-package",
+            "sourceSvg": "content/site/ai-work-school/assets/diagram-skill-package.svg",
+            "sourceWebp": "content/site/ai-work-school/assets/diagram-skill-package.webp",
+            "svgSha256": "434690da8987d5e593d6f3cfe50639e16a87e3f97c1261d4cba05ca9427322b3",
+            "webpSha256": "f7e4eb0be956c9f611014f379c3b4bc584cec6fc588cc472068694e1bbda7ec8",
+            "width": 720,
+            "height": 1280,
+            "semanticTargetKey": "skill-lesson",
+            "promotionTargets": [
+                {
+                    "key": "skill-package-lesson",
+                    "owner": "course-lesson",
+                    "semanticTarget": "skill lesson",
+                    "resolvedTargetId": null,
+                    "mediaId": null,
+                    "httpsFileUrl": null,
+                    "uploadRequired": true
+                }
+            ],
+            "alt": "A reusable skill packages the job, written context, ordered steps, worked examples, checks and source limits so the same task can be run to the same standard later.",
+            "implementation": "deterministic-labelled-svg"
+        },
+        {
+            "id": "mcp-connection",
+            "sourceSvg": "content/site/ai-work-school/assets/diagram-mcp-connection.svg",
+            "sourceWebp": "content/site/ai-work-school/assets/diagram-mcp-connection.webp",
+            "svgSha256": "927ce344b3c4b380159cde793a416d8d8a6237ed954fb283893b644629aa5f77",
+            "webpSha256": "e98e568dec8c591fc19b26f62074d9ffa84aff15de75e1500b80423ef514ef36",
+            "width": 720,
+            "height": 1320,
+            "semanticTargetKey": "mcp-lesson",
+            "promotionTargets": [
+                {
+                    "key": "mcp-connection-lesson",
+                    "owner": "course-lesson",
+                    "semanticTarget": "MCP lesson",
+                    "resolvedTargetId": null,
+                    "mediaId": null,
+                    "httpsFileUrl": null,
+                    "uploadRequired": true
+                }
+            ],
+            "alt": "A request names the source it needs, passes separate identity, scope and action gates, reaches an approved source, and returns an answer with its source. A refusal is recorded too.",
+            "implementation": "deterministic-labelled-svg"
+        },
+        {
+            "id": "checked-workflow",
+            "sourceSvg": "content/site/ai-work-school/assets/diagram-checked-workflow.svg",
+            "sourceWebp": "content/site/ai-work-school/assets/diagram-checked-workflow.webp",
+            "svgSha256": "a917ff2f15e25b5f0a59518b6b602bd8e325048495e45ad025ddf762d866c9b4",
+            "webpSha256": "74dafdac4d63266f3ffeeb2d07aa3f2ab8852a15d3f33299bf2bc378eb130ee6",
+            "width": 720,
+            "height": 1240,
+            "semanticTargetKey": "checked-work-lesson",
+            "promotionTargets": [
+                {
+                    "key": "checked-workflow-lesson",
+                    "owner": "course-lesson",
+                    "semanticTarget": "checked-work lesson",
+                    "resolvedTargetId": null,
+                    "mediaId": null,
+                    "httpsFileUrl": null,
+                    "uploadRequired": true
+                }
+            ],
+            "alt": "Written context becomes a draft, which is checked against sources and cited. A person approves it or sends it back with a reason before the decision is recorded and handed over.",
+            "implementation": "deterministic-labelled-svg"
+        }
+    ]
+}

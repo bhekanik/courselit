@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 660" role="img" aria-labelledby="title desc">
+  <title id="title">Three permission gates for a governed MCP connection</title>
+  <desc id="desc">A request names the source it needs, passes separate identity, scope and action gates, reaches an approved source, and returns an answer with its source. A refusal is recorded too.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 8 4 0 8Z" fill="#0F1D2E"/>
+    </marker>
+    <marker id="clay-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 8 4 0 8Z" fill="#8A4B12"/>
+    </marker>
+    <style>
+      @font-face { font-family: "Roboto Slab"; src: url("../../../../apps/web/public/fonts/roboto-slab/roboto-slab-latin-variable.woff2") format("woff2"); font-weight: 100 900; }
+      @font-face { font-family: "Mulish"; src: url("../../../../apps/web/public/fonts/mulish/mulish-latin-variable.woff2") format("woff2"); font-weight: 200 1000; }
+      .heading { font-family: "Roboto Slab"; font-size: 20px; font-weight: 500; fill: #0F1D2E; }
+      .label { font-family: "Mulish"; font-size: 14px; font-weight: 600; fill: #0F1D2E; }
+      .body { font-family: "Mulish"; font-size: 12px; font-weight: 400; fill: #435564; }
+      .node { fill: #FFFFFF; stroke: #687783; stroke-width: 1.5; }
+      .gate { fill: #F7F8F8; stroke: #0F1D2E; stroke-width: 1.5; }
+      .evidence { fill: #DDEDEA; stroke: #0E5C5E; stroke-width: 1.5; }
+      .review { fill: #F8EBDD; stroke: #8A4B12; stroke-width: 1.5; }
+      .line { fill: none; stroke: #0F1D2E; stroke-width: 1.5; marker-end: url(#arrow); }
+      .refusal { fill: none; stroke: #8A4B12; stroke-width: 1.5; marker-end: url(#clay-arrow); }
+    </style>
+  </defs>
+
+  <rect width="360" height="660" rx="12" fill="#F7F8F8"/>
+  <text x="28" y="38" class="heading">Three gates, three decisions</text>
+  <text x="28" y="61" class="body">Permission, not plumbing, is the point.</text>
+
+  <rect x="34" y="82" width="292" height="52" rx="8" class="node"/>
+  <text x="52" y="113" class="label">You ask for something</text>
+  <path class="line" d="M180 134V148"/>
+
+  <rect x="34" y="148" width="292" height="64" rx="8" class="node"/>
+  <text x="52" y="175" class="label">The assistant names the source</text>
+  <text x="52" y="195" class="body">No unnamed source. No implied access.</text>
+  <path class="line" d="M180 212V226"/>
+
+  <rect x="34" y="226" width="244" height="58" rx="8" class="gate"/>
+  <circle cx="59" cy="255" r="13" fill="#0F1D2E"/>
+  <text x="55" y="260" font-family="Mulish" font-size="13" font-weight="600" fill="#FFFFFF">1</text>
+  <text x="82" y="252" class="label">Identity</text>
+  <text x="82" y="271" class="body">Who is asking?</text>
+  <path class="line" d="M156 284V298"/>
+
+  <rect x="34" y="298" width="244" height="58" rx="8" class="gate"/>
+  <circle cx="59" cy="327" r="13" fill="#0F1D2E"/>
+  <text x="55" y="332" font-family="Mulish" font-size="13" font-weight="600" fill="#FFFFFF">2</text>
+  <text x="82" y="324" class="label">Scope</text>
+  <text x="82" y="343" class="body">Which records?</text>
+  <path class="line" d="M156 356V370"/>
+
+  <rect x="34" y="370" width="244" height="58" rx="8" class="gate"/>
+  <circle cx="59" cy="399" r="13" fill="#0F1D2E"/>
+  <text x="55" y="404" font-family="Mulish" font-size="13" font-weight="600" fill="#FFFFFF">3</text>
+  <text x="82" y="396" class="label">Action</text>
+  <text x="82" y="415" class="body">Read, or change?</text>
+
+  <path class="refusal" d="M278 255H310"/>
+  <path class="refusal" d="M278 327H310"/>
+  <path class="refusal" d="M278 399H310"/>
+  <path class="refusal" d="M310 255V430H260V442"/>
+  <text x="286" y="243" font-family="Mulish" font-size="12" font-weight="600" fill="#8A4B12">No</text>
+  <rect x="188" y="442" width="144" height="48" rx="8" class="review"/>
+  <text x="204" y="463" class="label">Refused,</text>
+  <text x="204" y="481" class="label">and recorded.</text>
+
+  <path class="line" d="M156 428V448"/>
+  <rect x="34" y="448" width="132" height="42" rx="8" class="node"/>
+  <text x="49" y="474" class="label">Approved source</text>
+  <path class="line" d="M100 490V510"/>
+
+  <rect x="34" y="510" width="292" height="56" rx="8" class="evidence"/>
+  <text x="52" y="535" class="label">Answer with its source</text>
+  <text x="52" y="554" class="body">The source travels with the answer.</text>
+  <path class="line" d="M180 566V584"/>
+
+  <rect x="34" y="584" width="292" height="50" rx="8" class="node"/>
+  <text x="52" y="614" class="label">Recorded either way</text>
+  <path d="M332 466H344V609H326" fill="none" stroke="#8A4B12" stroke-width="1.5" marker-end="url(#clay-arrow)"/>
+</svg>

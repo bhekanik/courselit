@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 640" role="img" aria-labelledby="title desc">
+  <title id="title">What goes in a reusable skill</title>
+  <desc id="desc">A reusable skill packages the job, written context, ordered steps, worked examples, checks and source limits so the same task can be run to the same standard later.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 8 4 0 8Z" fill="#0F1D2E"/>
+    </marker>
+    <style>
+      @font-face { font-family: "Roboto Slab"; src: url("../../../../apps/web/public/fonts/roboto-slab/roboto-slab-latin-variable.woff2") format("woff2"); font-weight: 100 900; }
+      @font-face { font-family: "Mulish"; src: url("../../../../apps/web/public/fonts/mulish/mulish-latin-variable.woff2") format("woff2"); font-weight: 200 1000; }
+      .heading { font-family: "Roboto Slab"; font-size: 20px; font-weight: 500; fill: #0F1D2E; }
+      .label { font-family: "Mulish"; font-size: 14px; font-weight: 600; fill: #0F1D2E; }
+      .body { font-family: "Mulish"; font-size: 12px; font-weight: 400; fill: #435564; }
+      .node { fill: #FFFFFF; stroke: #687783; stroke-width: 1.5; }
+      .evidence { fill: #DDEDEA; stroke: #0E5C5E; stroke-width: 1.5; }
+      .line { fill: none; stroke: #0F1D2E; stroke-width: 1.5; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <rect width="360" height="640" rx="12" fill="#F7F8F8"/>
+  <text x="28" y="38" class="heading">What goes in the package</text>
+  <text x="28" y="61" class="body">Keep the core small. Load detail only when needed.</text>
+
+  <rect x="20" y="82" width="320" height="478" rx="12" fill="none" stroke="#0E5C5E" stroke-width="2"/>
+  <rect x="36" y="70" width="128" height="25" rx="5" fill="#DDEDEA"/>
+  <text x="48" y="87" class="label" fill="#174A46">One reusable skill</text>
+
+  <rect x="40" y="108" width="280" height="58" rx="8" class="node"/>
+  <circle cx="62" cy="137" r="10" fill="#0F1D2E"/>
+  <path d="M58 137h8" stroke="#FFFFFF" stroke-width="1.5"/>
+  <text x="82" y="134" class="label">The job, in one sentence</text>
+  <text x="82" y="152" class="body">Name the result, audience and finish.</text>
+
+  <path class="line" d="M180 166V180"/>
+  <rect x="40" y="180" width="280" height="70" rx="8" class="node"/>
+  <text x="58" y="207" class="label">Written context</text>
+  <text x="58" y="228" class="body">Audience · constraints · finish condition</text>
+
+  <path class="line" d="M180 250V264"/>
+  <rect x="40" y="264" width="280" height="58" rx="8" class="node"/>
+  <text x="58" y="291" class="label">The steps, in order</text>
+  <text x="58" y="309" class="body">Make hand-offs and stopping points clear.</text>
+
+  <path class="line" d="M180 322V330H106V336"/>
+  <path class="line" d="M180 330H254V336"/>
+  <rect x="40" y="336" width="132" height="76" rx="8" class="node"/>
+  <text x="56" y="364" class="label">Two worked</text>
+  <text x="56" y="382" class="label">examples</text>
+  <text x="56" y="400" class="body">Show the standard.</text>
+  <rect x="188" y="336" width="132" height="76" rx="8" class="evidence"/>
+  <text x="204" y="364" class="label">Checks that</text>
+  <text x="204" y="382" class="label">can fail</text>
+  <text x="204" y="400" class="body">Catch plausible misses.</text>
+
+  <path class="line" d="M106 412V420H170V426"/>
+  <path class="line" d="M254 412V420H190V426"/>
+  <rect x="40" y="426" width="280" height="104" rx="8" class="node"/>
+  <text x="58" y="454" class="label">Source contract</text>
+  <text x="58" y="478" class="body">May use: approved files and named sources.</text>
+  <text x="58" y="500" class="body">Must not invent: facts, authority or approval.</text>
+
+  <path class="line" d="M180 560V580"/>
+  <rect x="28" y="574" width="304" height="50" rx="8" class="evidence"/>
+  <text x="82" y="596" class="label">Open it next week.</text>
+  <text x="82" y="614" class="label">Same job, same standard.</text>
+</svg>
