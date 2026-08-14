@@ -389,7 +389,7 @@ function validateEditorialText(text) {
         [/[\u200B-\u200F\u202A-\u202E\u2060\u2066-\u2069\uFEFF]/u, "invisible Unicode mark"],
         [/\b(?:twelve|12)[ -]month\b/i, "unsupported twelve-month advantage"],
         [/\bjob security\b/i, "unsupported job-security claim"],
-        [/\b\d+(?:\.\d+)?%\b/, "percentage claim"],
+        [/\b\d+(?:\.\d+)?\s*%/, "percentage claim"],
         [/\b\d+\s+(?:minutes?|hours?)\s+(?:saved|faster)\b/i, "fixed time-saving claim"],
         [/\b(?:ChatGPT|Claude|Gemini|OpenAI|Anthropic|Cursor)\b/i, "vendor-specific comparison"],
         [/\b(?:Contentful|Notto|Life Coach OS)\b/i, "private or internal project detail"],
