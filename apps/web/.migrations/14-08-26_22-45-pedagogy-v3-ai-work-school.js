@@ -442,6 +442,16 @@ function requireSingle(documents, message) {
     return documents[0];
 }
 
+function assertExactLessonIds(lessons, expectedIds, message) {
+    const actualIds = lessons.map(({ lessonId }) => lessonId);
+    assert(
+        actualIds.length === expectedIds.length &&
+            new Set(actualIds).size === expectedIds.length &&
+            isDeepStrictEqual([...actualIds].sort(), [...expectedIds].sort()),
+        message,
+    );
+}
+
 function classifyManaged(value, baseline, desired, message) {
     if (isDeepStrictEqual(value, desired)) return "final";
     if (isDeepStrictEqual(value, baseline)) return "baseline";
@@ -526,11 +536,7 @@ async function preflight(db, validated) {
         "Managed lesson identity collides with existing data",
     );
     const lessons = lessonMatches;
-    assert(
-        lessons.length === 22 &&
-            lessons.every(({ lessonId }) => expectedIds.includes(lessonId)),
-        "Managed lesson set is invalid",
-    );
+    assertExactLessonIds(lessons, expectedIds, "Managed lesson set is invalid");
     const lessonPlans = lessons.map((existing) => {
         const baseline = validated.baseline.lessons.find(
             ({ lessonId }) => lessonId === existing.lessonId,
@@ -676,7 +682,11 @@ async function verifyCourseState(db, plan) {
         .collection("lessons")
         .find({ domain: plan.domain._id, courseId: COURSE_ID })
         .toArray();
-    assert(lessons.length === 22, "Lesson verification failed");
+    assertExactLessonIds(
+        lessons,
+        plan.validated.desired.lessons.map(({ lessonId }) => lessonId),
+        "Lesson verification failed",
+    );
     for (const lesson of lessons) {
         const desired = plan.validated.desired.lessons.find(
             ({ lessonId }) => lessonId === lesson.lessonId,

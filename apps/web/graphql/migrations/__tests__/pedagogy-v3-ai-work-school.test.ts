@@ -652,6 +652,40 @@ describe("pedagogy v3 production migration", () => {
         expect(await snapshotCollections(db)).toEqual(before);
     });
 
+    it("rejects a same-domain duplicate that hides a missing lesson", async () => {
+        const { db, domainId } = await seedExpandedBaseline();
+        const duplicateSource = await db.collection("lessons").findOne({
+            domain: domainId,
+            courseId: COURSE_ID,
+            lessonId: "lesson_ai_for_actual_work_01",
+        });
+        if (!duplicateSource) {
+            throw new Error("Expanded lesson fixture is missing");
+        }
+        await db.collection("lessons").deleteOne({
+            domain: domainId,
+            courseId: COURSE_ID,
+            lessonId: "lesson_ai_for_actual_work_22",
+        });
+        await db.collection("lessons").insertOne({
+            ...duplicateSource,
+            _id: new mongoose.Types.ObjectId(),
+        });
+        expect(
+            await db.collection("lessons").countDocuments({
+                domain: domainId,
+                courseId: COURSE_ID,
+            }),
+        ).toBe(22);
+        const before = await snapshotCollections(db);
+
+        const result = runMigration(["--apply"]);
+
+        expect(result.status).toBe(1);
+        expect(result.stderr).toContain("Managed lesson set is invalid");
+        expect(await snapshotCollections(db)).toEqual(before);
+    });
+
     it.each([
         {
             label: "lesson content",
