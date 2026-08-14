@@ -5,6 +5,8 @@ import { readFileSync } from "node:fs";
 
 const root = new URL("./", import.meta.url);
 const manifest = JSON.parse(readFileSync(new URL("site.json", root), "utf8"));
+const mediaManifest = JSON.parse(readFileSync(new URL("media.json", root), "utf8"));
+const courseManifest = JSON.parse(readFileSync(new URL("../../courses/ai-for-actual-work/course.json", root), "utf8"));
 
 const course = {
   courseId: "course_ai_for_actual_work_v1",
@@ -74,7 +76,7 @@ const allowedFonts = new Set([
   "font-source-sans-3",
   "font-system-ui",
 ]);
-const allowedBlockNames = new Set(["header", "footer", "hero", "rich-text", "grid", "faq"]);
+const allowedBlockNames = new Set(["header", "footer", "hero", "rich-text", "media", "grid", "faq"]);
 const allowedPageWidths = new Set(["max-w-2xl", "max-w-3xl", "max-w-4xl", "max-w-5xl", "max-w-6xl"]);
 const allowedVerticalPadding = new Set(["py-4", "py-8", "py-12", "py-16", "py-20", "py-24", "py-32"]);
 const allowedTipTapNodes = new Set([
@@ -95,7 +97,7 @@ assert.equal(manifest.siteKey, "ai-work-school");
 assert.deepEqual(manifest.managedMarker, {
   pageId: "homepage",
   widgetId: "widget_ai_work_school_managed_v1",
-  preflight: "default-or-managed",
+  preflight: "launch-baseline-or-v2",
 });
 assert.deepEqual(manifest.domainScope, {
   selector: "current-domain",
@@ -106,7 +108,9 @@ assert.deepEqual(manifest.domainScope, {
       subtitle: "Bring the task. Build the checks.",
     },
 });
-assert.deepEqual(manifest.course, { ...course, access: "free", sections: 7, lessons: 14 });
+assert.deepEqual(manifest.course, { ...course, access: "free" });
+assert.equal(courseManifest.course.courseId, course.courseId);
+assert.equal(courseManifest.course.slug, course.slug);
 assert.deepEqual(manifest.requiredPages, [
   { pageId: "privacy", href: "/p/privacy" },
   { pageId: "terms", href: "/p/terms" },
@@ -118,6 +122,38 @@ assert.equal(theme.name, "AI Work School");
 assert.equal(theme.parentThemeId, "learning");
 assert.equal(theme.userIdSource, manifest.domainScope.ownerUserIdSource);
 assert.deepEqual(theme.applyStyleTo, ["theme", "draftTheme"]);
+assert.deepEqual(
+  Object.fromEntries(["background", "foreground", "card", "primary", "primaryForeground", "accent", "accentForeground", "destructive", "border", "ring"].map((key) => [key, theme.style.colors.light[key]])),
+  {
+    background: "#ffffff",
+    foreground: "#0f1d2e",
+    card: "#f7f8f8",
+    primary: "#7a1b2b",
+    primaryForeground: "#ffffff",
+    accent: "#ddebea",
+    accentForeground: "#174a46",
+    destructive: "#8a4b12",
+    border: "#687783",
+    ring: "#0e5c5e",
+  },
+  "light palette must keep the Review Table roles",
+);
+assert.deepEqual(
+  Object.fromEntries(["background", "foreground", "card", "primary", "primaryForeground", "accent", "accentForeground", "destructive", "border", "ring"].map((key) => [key, theme.style.colors.dark[key]])),
+  {
+    background: "#101820",
+    foreground: "#f3f5f7",
+    card: "#17222c",
+    primary: "#c8394f",
+    primaryForeground: "#ffffff",
+    accent: "#12312f",
+    accentForeground: "#ddf7f4",
+    destructive: "#d08a45",
+    border: "#7d8b97",
+    ring: "#57b6b2",
+  },
+  "dark palette must keep the Review Table roles",
+);
 
 for (const mode of ["light", "dark"]) {
   const colours = theme.style.colors[mode];
@@ -183,6 +219,7 @@ assert.equal(theme.style.interactives.card.shadow, "shadow-none");
 const { sharedWidgets, page } = manifest;
 assert.deepEqual(manifest.draftSharedWidgetsSource, "sharedWidgets");
 assert.equal(sharedWidgets.length, 2);
+assert.deepEqual(sharedWidgets.map(({ widgetId }) => widgetId), ["widget_ai_work_school_header_v1", "widget_ai_work_school_footer_v1"]);
 assert.deepEqual(sharedWidgets.map(({ name }) => name), ["header", "footer"]);
 assert.ok(sharedWidgets.every(({ shared }) => shared === true));
 assert.ok(
@@ -210,17 +247,49 @@ assert.equal(page.layout.at(-1).widgetId, sharedWidgets[1].widgetId);
 const allWidgets = [...sharedWidgets, ...page.layout.filter(({ shared }) => !shared)];
 assert.equal(new Set(allWidgets.map(({ widgetId }) => widgetId)).size, allWidgets.length, "widget IDs must be unique");
 for (const widget of allWidgets) {
-  assert.match(widget.widgetId, /^widget_ai_work_school_[a-z0-9_]+_v1$/);
+  assert.match(widget.widgetId, /^widget_ai_work_school_[a-z0-9_]+_v[12]$/);
   assert.ok(allowedBlockNames.has(widget.name), `${widget.name} is not an approved site block`);
   assert.equal(widget.settings.type, "site", `${widget.name} must use site metadata`);
   validateSettings(widget.name, widget.settings);
 }
 
 const bodyNames = page.layout.slice(1, -1).map(({ name }) => name);
-assert.deepEqual(bodyNames, ["rich-text", "hero", "grid", "rich-text", "hero", "faq"]);
+assert.deepEqual(bodyNames, [
+  "hero",
+  "rich-text",
+  "rich-text",
+  "media",
+  "rich-text",
+  "media",
+  "rich-text",
+  "rich-text",
+  "grid",
+  "hero",
+  "faq",
+]);
 const managedWidget = page.layout.find(({ widgetId }) => widgetId === manifest.managedMarker.widgetId);
 assert.equal(managedWidget.name, "rich-text");
 assert.equal(managedWidget.shared, false);
+
+const expectedMedia = Object.fromEntries(mediaManifest.entries.map(({ key, media }) => [key, media]));
+const hero = page.layout[1];
+assert.equal(hero.widgetId, "widget_ai_work_school_hero_v2");
+assert.equal(hero.name, "hero");
+assert.equal(hero.settings.mobileMediaPlacement, "after-content");
+assert.equal(hero.settings.alignment, "right");
+assert.equal(hero.settings.contentAlignment, "left");
+assert.deepEqual(hero.settings.media, expectedMedia["landing-hero"]);
+
+for (const [widgetId, mediaKey] of [
+  ["widget_ai_work_school_tool_selection_v2", "landing-tool-selection"],
+  ["widget_ai_work_school_outputs_v2", "landing-checked-work"],
+]) {
+  const widget = page.layout.find((entry) => entry.widgetId === widgetId);
+  assert.equal(widget.name, "media");
+  assert.deepEqual(widget.settings.media, expectedMedia[mediaKey]);
+  assert.equal(widget.settings.hasBorder, false);
+  assert.equal(widget.settings.mediaRadius, 4);
+}
 
 const actions = [...collectValues(manifest, "href"), ...collectValues(manifest, "buttonAction")];
 assert.ok(actions.every((href) => href.startsWith("/") || href.startsWith("#")), "all links must stay on the site");
@@ -234,30 +303,67 @@ const copy = collectText(manifest).join("\n");
 assert.doesNotMatch(copy, /\b(?:revolutionary|cutting-edge|game-changing|seamless|robust|leverage|unlock|supercharge|transform your|empower)\b/i);
 assert.doesNotMatch(copy, /\b\d+(?:\.\d+)?\s*%/);
 assert.doesNotMatch(copy, /\b(?:save|saved|saving)\s+\d+\s+(?:minutes?|hours?|days?)\b/i);
-assert.doesNotMatch(copy, /[\u2013\u2014]/, "copy must not use en/em dashes");
+assert.doesNotMatch(copy.replaceAll("Start the course — free", ""), /[\u2013\u2014]/, "only the required CTA may use an en/em dash");
 assert.doesNotMatch(copy, /[\u200b\u200c\u200d\ufeff]/, "copy must not contain invisible characters");
-assert.match(copy, /real task/i);
+assert.match(copy, /real job/i);
 assert.match(copy, /working brief/i);
 assert.match(copy, /source contract/i);
 assert.match(copy, /decision record/i);
-assert.match(copy, /supplier review.*hiring scorecard.*board summary.*incident write-up/is);
+assert.match(copy, /handover/i);
+assert.match(copy, /Choose the shape of the job, not the brand of the tool\./);
+assert.match(copy, /One-off question: use a chat, then check the answer yourself\./);
+assert.match(copy, /Same job, repeated: pack the context, steps, examples and checks as a reusable skill\./);
+assert.match(copy, /Needs approved files or systems: connect the source behind a permission gate\./);
+assert.match(copy, /Higher consequence: another person checks it before it leaves\./);
+assert.match(copy, /From first brief to finished handover\./);
+assert.match(copy, /Bring one job\. Leave with a method\. Free\./);
+assert.doesNotMatch(copy, /\b(?:7|seven) sections?\b|\b(?:14|fourteen|22|twenty-two) lessons?\b/i);
 
 const headerCourseLinks = sharedWidgets[0].settings.links.filter(({ href }) => href === course.href);
-assert.deepEqual(headerCourseLinks.map(({ label }) => label), ["Start the free course"]);
+assert.deepEqual(headerCourseLinks.map(({ label }) => label), ["Start the course — free"]);
 const courseHeroes = page.layout.filter(({ name, settings }) => name === "hero" && settings.buttonAction === course.href);
 assert.equal(courseHeroes.length, 2);
-assert.ok(courseHeroes.every(({ settings }) => settings.buttonCaption === "Start the free course"));
+assert.ok(courseHeroes.every(({ settings }) => settings.buttonCaption === "Start the course — free"));
 const footerCourseLinks = sharedWidgets[1].settings.sections.flatMap(({ links }) => links).filter(({ href }) => href === course.href);
-assert.deepEqual(footerCourseLinks.map(({ label }) => label), ["Start the free course"]);
+assert.deepEqual(footerCourseLinks.map(({ label }) => label), ["Start the course — free"]);
 const footerHrefs = new Set(sharedWidgets[1].settings.sections.flatMap(({ links }) => links).map(({ href }) => href));
 assert.ok(manifest.requiredPages.every(({ href }) => footerHrefs.has(href)), "every required page must be linked from the footer");
 
-const coursePanel = courseHeroes.at(-1).settings;
-assert.match(collectText(managedWidget).join(" "), new RegExp(`${manifest.course.sections} sections.*${manifest.course.lessons} lessons`, "i"));
-for (const [mode, backgroundKey] of [["light", "backgroundColor"], ["dark", "backgroundColorDark"]]) {
-  assert.ok(contrast(theme.style.colors[mode].foreground, coursePanel.background[backgroundKey]) >= 4.5, `${mode} course panel must keep readable text`);
-  assert.ok(contrast(theme.style.colors[mode].ring, coursePanel.background[backgroundKey]) >= 3, `${mode} course panel must keep a visible focus ring`);
-}
+assert.match(collectText(managedWidget).join(" "), /Free · Bring one job you already do · No coding/);
+const artefacts = page.layout.find(({ widgetId }) => widgetId === "widget_ai_work_school_artefacts_v2");
+const artefactItems = findNodes(artefacts.settings.text, "bulletList").flatMap(({ content }) => content);
+assert.equal(artefactItems.length, 5);
+assert.match(collectText(artefacts).join(" "), /capstone consolidates your lesson records into five reviewable files/i);
+assert.deepEqual(
+  artefactItems.map((item) => collectText(item).join(" ").match(/\(([^)]+\.md)\)/)?.[1]),
+  courseManifest.course.capstone.artifacts,
+);
+const curriculum = page.layout.find(({ widgetId }) => widgetId === "widget_ai_work_school_curriculum_v2");
+assert.equal(findNodes(curriculum.settings.text, "orderedList").length, 1);
+const curriculumItems = findNodes(curriculum.settings.text, "orderedList")[0].content;
+assert.deepEqual(
+  curriculumItems.map((item) => collectText(item)[0].replace(/\.\s*$/, "")),
+  courseManifest.course.sections.map(({ title }) => title),
+  "homepage curriculum must follow the source course",
+);
+const grids = page.layout.filter(({ name }) => name === "grid");
+assert.equal(grids.length, 1, "fit/not-fit must be the only grid");
+assert.deepEqual(grids[0].settings.items.map(({ title }) => title), ["This is for you if", "This is not for you if"]);
+assert.equal(grids[0].settings.items.length, 2);
+const faqs = page.layout.filter(({ name }) => name === "faq");
+assert.equal(faqs.length, 1);
+assert.ok(faqs[0].settings.items.length <= 6, "FAQ must have no more than six items");
+assert.equal(faqs[0].settings.items.length, 6);
+assert.deepEqual(faqs[0].settings.items.map(({ title }) => title), [
+  "How much does the course cost?",
+  "Do I need to write code?",
+  "What kind of work should I bring?",
+  "What if my company has rules about AI?",
+  "What should I do with sensitive material?",
+  "Does this depend on one AI tool?",
+]);
+assert.equal(courseHeroes.at(-1).settings.verticalPadding, "py-12", "closing CTA must stay compact");
+assert.ok(page.layout.every(({ settings }) => !settings?.background), "landing sections must not introduce colour bands");
 
 console.log("AI Work School site manifest checks passed");
 
@@ -266,7 +372,8 @@ function validateSettings(name, settings) {
   const allowedByBlock = {
     header: [...common, "links", "linkAlignment", "showLoginControl", "linkFontWeight", "spacingBetweenLinks", "layout", "backdropBlur"],
     footer: [...common, "sections", "titleFontSize", "sectionHeaderFontSize", "socials", "socialIconsSize"],
-    hero: [...common, "background", "title", "description", "buttonCaption", "buttonAction", "secondaryButtonCaption", "secondaryButtonAction", "alignment", "titleFontSize", "descriptionFontSize", "contentAlignment", "cssId", "layout"],
+    hero: [...common, "title", "description", "buttonCaption", "buttonAction", "secondaryButtonCaption", "secondaryButtonAction", "alignment", "titleFontSize", "descriptionFontSize", "contentAlignment", "cssId", "layout", "media", "mediaRadius", "aspectRatio", "objectFit", "mobileMediaPlacement"],
+    media: [...common, "media", "mediaRadius", "cssId", "aspectRatio", "objectFit", "hasBorder"],
     grid: [...common, "title", "description", "headerAlignment", "itemsAlignment", "items", "cssId", "columns"],
     "rich-text": [...common, "text", "alignment", "cssId", "fontSize"],
     faq: [...common, "title", "description", "headerAlignment", "itemsAlignment", "items", "cssId", "layout"],
@@ -275,7 +382,7 @@ function validateSettings(name, settings) {
   assert.deepEqual(extras, [], `${name} contains fields its Settings type does not define`);
   if (settings.maxWidth) assert.ok(allowedPageWidths.has(settings.maxWidth));
   if (settings.verticalPadding) assert.ok(allowedVerticalPadding.has(settings.verticalPadding));
-  if (settings.background) assert.equal(settings.background.type, "color");
+  if (settings.media) validateMedia(settings.media);
   if (settings.description) validateTipTap(settings.description);
   if (settings.text) validateTipTap(settings.text);
   for (const item of settings.items ?? []) {
@@ -287,8 +394,17 @@ function validateSettings(name, settings) {
     assert.ok(settings.items.every((item) => typeof item.title === "string" && item.description?.type === "doc"));
   }
   if (name === "grid") assert.ok([2, 3].includes(settings.columns));
-  if (name === "hero") assert.ok([3, 4, 5, 6].includes(settings.titleFontSize));
+  if (name === "hero" && settings.titleFontSize !== undefined) assert.ok([3, 4, 5, 6].includes(settings.titleFontSize));
   assert.doesNotMatch(JSON.stringify(settings), /\b(?:w-\[|h-\[|min-w-\[|max-w-\[)/);
+}
+
+function validateMedia(media) {
+  assert.equal(media.access, "public");
+  assert.equal(media.mimeType, "image/webp");
+  assert.match(media.file, /^https:\/\/media\.bhekani\.com\/p\/[A-Za-z0-9_-]+\/main\.webp$/);
+  assert.match(media.thumbnail, /^https:\/\/media\.bhekani\.com\/p\/[A-Za-z0-9_-]+\/thumb\.webp$/);
+  assert.ok(media.caption.length > 20, "media needs useful alternative text");
+  assert.ok(!media.file.includes("?"), "sealed media URL must be stable");
 }
 
 function validateTipTap(node) {
@@ -316,11 +432,21 @@ function collectText(value, results = []) {
     for (const item of value) collectText(item, results);
   } else if (value && typeof value === "object") {
     for (const [key, entry] of Object.entries(value)) {
-      if (["title", "label", "text", "subtitle", "description", "question", "answer", "buttonCaption", "secondaryButtonCaption"].includes(key) && typeof entry === "string") {
+      if (["title", "label", "text", "caption", "subtitle", "description", "question", "answer", "buttonCaption", "secondaryButtonCaption"].includes(key) && typeof entry === "string") {
         results.push(entry);
       }
       collectText(entry, results);
     }
+  }
+  return results;
+}
+
+function findNodes(value, type, results = []) {
+  if (Array.isArray(value)) {
+    for (const item of value) findNodes(item, type, results);
+  } else if (value && typeof value === "object") {
+    if (value.type === type) results.push(value);
+    for (const entry of Object.values(value)) findNodes(entry, type, results);
   }
   return results;
 }

@@ -1,41 +1,39 @@
-# AI Work School design rationale
+# AI Work School homepage rationale
 
 ## Product direction
 
-The fixed product interview gave three words: practical, exacting, generous. The page should feel like a well-made job sheet on a calm workbench. It tells the learner what to bring, what to do next, what to check, and what they will have when they finish. It does not perform intelligence through decoration.
+The page has one job: help a working professional decide whether this free course fits a real piece of work, then take them to it. The design is practical, exacting and generous. It explains what to bring, what the learner will build and how the work will be checked. It does not try to look intelligent through decoration.
 
-The page has one job: help a working professional decide whether the free course fits a real task, then take them to it. It names one course and one direct CourseLit route. There is no catalogue to pad, no borrowed proof, and no promise about speed. The numbered sequence is useful because order matters; it is not a row of interchangeable features.
+The opening promise is deliberately concrete: do one real job and show the working. The page names one course and one CourseLit route. It has no fake catalogue, borrowed proof, speed claim or tool ranking. Course counts were removed because they add little to the decision and drift as the curriculum changes.
 
 ## Visual system
 
-The palette began in OKLCH around a cranberry action colour, then added a teal checking colour and cool navy neutrals. Cranberry marks a decision or next action. Teal marks verification and supporting states. White remains genuinely white in the light theme; the dark theme uses a deep navy surface rather than black. This gives the site a recognisable working character without the purple gradients and synthetic imagery common to AI pages.
+The page follows the `DESIGN.md` Review Table direction. True white and cool neutral surfaces keep the editorial images distinct. Navy carries structure. Oxblood is reserved for actions. Teal marks evidence and checks. Clay marks review. Light sections never become navy bands because the block renderer cannot safely switch all foreground tokens per section.
 
-CourseLit's theme renderer passes colour strings through `color-convert`, which accepts hex but not OKLCH. The manifest therefore stores six-digit hex values. Both modes contain every field in `ThemeStyle`, including sidebar, chart and shadow tokens, so the later migration never has to fill gaps from an unrelated parent theme.
+Roboto Slab gives headings the plain authority of a training manual. Mulish keeps instructions and controls readable at small sizes. Corners stay modest. Images use the existing 16:9 CourseLit renderer with a small radius, no border and no shadow. The design uses no gradients, chatbot imagery, new block or custom CSS.
 
-Roboto Slab gives headings the character of a training manual without making the page ornamental. Mulish keeps instructions, questions and controls open at small sizes. Buttons use sentence case. Corners are modest. Cards have a border and no elevation; buttons get only the smallest shadow. The design avoids the double emphasis of a strong border and a wide shadow.
+## Composition
 
-## Page composition
+The sticky shared header keeps login and theme controls plus one course action. The split hero uses `mobileMediaPlacement: after-content`; with the verified hero implementation, `alignment: right` keeps text on the left at desktop widths while preserving content-first DOM order on mobile. The hero uses its target-specific sealed MediaLit object rather than a shared upload.
 
-The header keeps one primary course action. It also retains CourseLit's login control and theme switcher. In-page anchor links were left out because the registered header is sticky and the block system has no scroll-margin setting for anchor targets. The opening hero asks for a real task, explains the complete learning result, and points to the exact course route. It uses no media because the available design does not have a real image that adds evidence.
+The short inventory earns the managed marker's visible place without freezing curriculum counts. The next section asks learners to choose the job's shape before a tool. A vertical diagram carries the visual explanation; the adjacent ordered list supplies the same decision path in text.
 
-The two-column workflow grid is an ordered diagram expressed through an existing registered block. It collapses to one column on small screens in CourseLit's implementation. The artefact section names the working brief, source contract, decision record and closing note the learner will keep. The course panel gives the only inventory facts supported by the curriculum and repeated in the manifest contract: free access, seven sections and fourteen lessons. The FAQ handles suitability, named work examples, non-coding work, sensitive material and tool independence without making product comparisons.
+The artefact section matches the capstone contract: `working-brief.md`, `source-contract.md`, `checks-and-evidence.md`, `decision-record.md` and `handover.md`. These consolidate the lesson records into five files a colleague can review. The checked-work image shows colleagues assembling and checking that evidence. The curriculum then follows the real course sequence in one ordered list. Order matters here, so numbering is structural rather than decorative.
 
-The core path is written for non-coding professionals. Engineering appears once as an explicit optional extension. Copy uses British spelling and avoids internal notes, testimonials, performance claims and fixed time savings.
+The fit/not-fit comparison is the only grid. This is the one place where equal side-by-side panels make the decision easier. The closing hero is short and has no coloured band. Six FAQs answer the practical objections most likely to block enrolment.
 
-## Accessibility and motion
+## Accessibility and responsive behaviour
 
-Foreground pairs meet WCAG 2.2 AA in both modes, with body foregrounds targeting the stricter 7:1 ratio. Primary, secondary, muted, accent and sidebar pairs are checked separately. Focus rings target at least 3:1 against the page background. Text is never placed on an image.
+Every sealed image carries the reviewed MediaLit caption as alternative text. The tool-selection image is not the sole explanation; its ordered text equivalent precedes it. Course text precedes hero media in the mobile DOM. No text sits on images.
 
-The layout uses CourseLit's responsive `Section`, `Grid`, `Hero`, `FAQ`, header and footer implementations. Content widths and spacing are supported theme tokens. Buttons stack on small screens, the grid collapses, and the horizontal FAQ becomes a single column. The author-controlled rich text starts at heading level two. Registered grid, hero and FAQ blocks render their section titles through CourseLit's `Header1` primitive; changing that document outline belongs to the platform, not this data manifest.
+Light and dark theme pairs are checked for WCAG 2.2 AA contrast. Rules, inputs and focus rings are checked at 3:1 against their surfaces. The manifest uses responsive CourseLit blocks and supported width/spacing tokens, with no fixed horizontal dimensions. It introduces no motion, autoplay or hover-only information.
 
-There is no marquee, custom transition, auto-play media, parallax, or hover-only information. Reduced-motion users receive the same content and interaction because the manifest introduces no motion to remove.
+## Apply contract
 
-## P4 apply contract
+The aggregate migration owns publication, not this manifest. It resolves the current domain and owner, creates or resumes the course stage, and verifies the exact course ID, slug, published state and external free plan before it exposes a CTA. It then upserts `theme_ai_work_school_v1`, applies the complete style to published and draft theme fields, and publishes shared widgets and homepage last.
 
-The manifest is domain-scoped. P4 resolves the current domain and its active owner, patches only the stated site title and subtitle, upserts `theme_ai_work_school_v1` for that owner, and points `Domain.themeId` at it. It copies the complete style to `theme` and `draftTheme`.
+`Domain.sharedWidgets` and `Domain.draftSharedWidgets` are name-keyed objects at persistence. The migration converts the manifest array to an object keyed by `header` and `footer`; each value keeps its stable widget ID. Homepage preflight accepts only the exact launch baseline or the exact v2 desired managed homepage. `widget_ai_work_school_managed_v1` proves ownership but cannot admit a third state on its own. Preflight also requires the existing `privacy` and `terms` pages. Re-running updates the same records and IDs.
 
-The aggregate runs its course stage first. That stage creates or resumes the exact course and external free plan, then publishes the course. Before the site stage starts, P4 verifies the course ID `course_ai_for_actual_work_v1`, slug `ai-for-actual-work`, published state, and attached free plan with `internal: false`. The migration therefore does not require a published course before it starts; it creates, validates, and publishes that dependency before exposing the homepage CTA. Theme, shared-widget, and homepage publication happen last.
+## Bounded Opus pass
 
-`Domain.sharedWidgets` and `Domain.draftSharedWidgets` are name-keyed objects at persistence. P4 converts the manifest's two-element array into an object keyed by `header` and `footer`; each stored value retains its stable `widgetId`. It replaces the existing `homepage` layout only when preflight finds either the untouched CourseLit default or the dedicated rich-text widget named by `managedMarker`. That widget is stored in `Page.layout` and `draftLayout` through CourseLit's real `WidgetSchema`; its visible course inventory also earns its place in the page. Arbitrary owner-edited layouts match neither condition. Preflight must also find the mandatory `privacy` and `terms` pages listed in `requiredPages`, because the footer links to them; it leaves their content alone. P4 copies published page metadata and layout to their draft counterparts. Re-running the migration updates these same records and IDs rather than creating another theme or page.
-
-The manifest does not mutate a database, contain production object IDs, or deploy by itself. It is the reviewed input to the launch migration.
+The requested direct-profile Opus 5 design pass returned no output within the five-minute bound and was stopped. Implementation continued from the already-reviewed `PRODUCT.md`, `DESIGN.md`, `visual-direction.md`, asset contract, media manifest and live CourseLit block schemas. No model suggestion was silently substituted for those frozen inputs.
