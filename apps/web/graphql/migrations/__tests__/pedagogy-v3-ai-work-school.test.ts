@@ -26,6 +26,32 @@ const EXPAND_MIGRATION_PATH = join(
 const frozenPath = (suffix: string) =>
     join(MIGRATION_DIRECTORY, `${MIGRATION_ID}.${suffix}.json`);
 const COURSE_ID = "course_ai_for_actual_work_v1";
+const EXPECTED_V5_DIAGRAM_MEDIA = {
+    "landing-tool-selection": "YlQ52LAJHswnjuDLFP49r3UFqcWg9bCZ005kQXuV",
+    "skill-package-lesson": "aZoZonTLcZIGwlV4KNLDEVKiqmoIxXiq2waYtjSx",
+    "mcp-connection-lesson": "iLYyEZx2o2hLRmF4SGL6FIYnWtLGsjOuRu4PZCy5",
+    "checked-workflow-lesson": "Y1CVNTysd20XWcmk-WQK7GO1oSE6IV7WHRV-BkVJ",
+    "behaviour-card-comparison-lesson":
+        "OyoQwlb9jhJT_UGtw4zVGPtCrSqhvRBGNlIueJlq",
+    "context-router-lesson": "B_XeC0UdWLg30QBjTlinflSeTcJCMIG2UOBQ5z-Q",
+    "mechanism-ladder-lesson": "4xappc5WAehv7fhmaI6gwMiWJL9rk1irNcg07Vul",
+    "check-repair-lesson": "7PCPUETILaIq2CPQ_N1CLjJU781swtVnClt1ueUu",
+    "decision-trace-lesson": "KIGSO650HCXX2a1K0IYQX4XGv_FkSzplX9VoV-v-",
+    "closure-states-lesson": "YovnjEwdKfLiA-Qs6i2jueLjb-10k9X7xyxD14Ul",
+    "work-surface-choice-lesson": "7plFDkUb_zdrXVTp8wZ5UggLQk9FO_ZDW1O_bcLY",
+    "claim-argument-map-lesson": "Rbvtux50mu8VtvN-dw8fjew40UM66-vxbhM8Xogj",
+    "authority-sequence-lesson": "wtDdSo9RExjLA22S1VD9b3YKhNvK9OYu1Ux65r6g",
+    "capstone-loop-lesson": "5eBVQRO1s3srRhTrlGfygKW_xySd8xR4MZ6ybz58",
+};
+const EXPECTED_V5_SCREENSHOT_MEDIA = {
+    "chatgpt-work-interface-lesson": "6ZLWTJ-6808I-0rnctAqx0KqRDWgeIT_-eRfEZve",
+    "claude-cowork-interface-lesson":
+        "8bZNTIFxUfOLiOBCxW2A8SLsAexVhNIJWQS72iPc",
+    "microsoft-cowork-interface-lesson":
+        "s1_GaaDD-xUpd3It_ehubb3QR3zS31iqj8WXu68v",
+    "chatgpt-plugin-directory-lesson":
+        "m0xhJnv1WtU5OvHk7JGrrt2QiwqLogWcQXOoyJr5",
+};
 const DEFAULT_HOMEPAGE_MARKER =
     "This is the default page created for you by CourseLit.";
 type TestDatabase = NonNullable<(typeof mongoose.connection)["db"]>;
@@ -299,17 +325,17 @@ function runMutatedBundle() {
 describe("pedagogy v3 frozen inputs", () => {
     it("freezes the reviewed course, site, and MediaLit manifest", () => {
         expect(sha256(frozenPath("course"))).toBe(
-            "d7ba05db036b170cd9513c5daa3de725701c45b8bea65ceff7ddb89ebc86651f",
+            "ab5845006cab2a558789c5bb93126da168c87792a85f4b1cba325e0cbb57032b",
         );
         expect(sha256(frozenPath("site"))).toBe(
-            "1325b78a4d6d42d9112e30971a6c174cf9d24037683f84528daf7d370c9b7131",
+            "475d47bc8a0d3ae0b6d08885cf4b88069790757baa7b06ac143c878a219efb7a",
         );
         expect(sha256(frozenPath("media"))).toBe(
-            "7d06f50792dfb09ce4b58272398a5c6c82e03c5c62bf57f9c9ac4ab34912b2cb",
+            "60036604448bba19abdf88a07c9ce7f8cb264865cee52b1f06861f9d27433a60",
         );
     });
 
-    it("contains 22 lessons, 17 lesson images, and 10 new MediaLit entries", () => {
+    it("contains 21 lesson images and the exact v5 visual entries", () => {
         const course = JSON.parse(readFileSync(frozenPath("course"), "utf8"));
         const lessons = flattenLessons(course);
         const baseline = JSON.parse(
@@ -335,17 +361,32 @@ describe("pedagogy v3 frozen inputs", () => {
         const newIds = imageIds.filter((id: string) => !oldIds.has(id));
 
         expect(lessons).toHaveLength(22);
-        expect(imageIds).toHaveLength(17);
-        expect(newIds).toHaveLength(10);
-        expect(media.entries).toHaveLength(21);
+        expect(imageIds).toHaveLength(21);
+        expect(newIds).toHaveLength(17);
+        expect(media.group).toBe("ai-work-school-v5");
+        expect(media.entries).toHaveLength(25);
         expect(
-            media.entries
-                .filter(({ media: { mediaId } }: any) =>
-                    newIds.includes(mediaId),
-                )
-                .map(({ media: { mediaId } }: any) => mediaId)
-                .sort(),
-        ).toEqual([...newIds].sort());
+            new Set(media.entries.map(({ sourcePath }: any) => sourcePath))
+                .size,
+        ).toBe(23);
+        expect(
+            Object.fromEntries(
+                media.entries
+                    .filter(({ key }: any) =>
+                        Object.hasOwn(EXPECTED_V5_DIAGRAM_MEDIA, key),
+                    )
+                    .map(({ key, media: { mediaId } }: any) => [key, mediaId]),
+            ),
+        ).toEqual(EXPECTED_V5_DIAGRAM_MEDIA);
+        expect(
+            Object.fromEntries(
+                media.entries
+                    .filter(({ key }: any) =>
+                        Object.hasOwn(EXPECTED_V5_SCREENSHOT_MEDIA, key),
+                    )
+                    .map(({ key, media: { mediaId } }: any) => [key, mediaId]),
+            ),
+        ).toEqual(EXPECTED_V5_SCREENSHOT_MEDIA);
     });
 
     it("rejects changed frozen bytes before database access", () => {

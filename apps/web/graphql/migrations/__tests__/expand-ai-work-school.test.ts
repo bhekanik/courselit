@@ -11,26 +11,12 @@ import { join } from "node:path";
 import mongoose from "mongoose";
 
 const REPO_ROOT = join(__dirname, "..", "..", "..", "..", "..");
-const CANONICAL_COURSE_PATH = join(
-    REPO_ROOT,
-    "content",
-    "courses",
-    "ai-for-actual-work",
-    "course.json",
-);
 const FROZEN_COURSE_PATH = join(
     REPO_ROOT,
     "apps",
     "web",
     ".migrations",
     "14-08-26_20-00-expand-ai-work-school.course.json",
-);
-const CANONICAL_SITE_PATH = join(
-    REPO_ROOT,
-    "content",
-    "site",
-    "ai-work-school",
-    "site.json",
 );
 const FROZEN_SITE_PATH = join(
     REPO_ROOT,
@@ -351,21 +337,23 @@ function runMigrationBundle({
 }
 
 describe("follow-up migration frozen curriculum", () => {
-    it("ships the reviewed 22-lesson course byte-for-byte", () => {
-        expect(readFileSync(FROZEN_COURSE_PATH)).toEqual(
-            readFileSync(CANONICAL_COURSE_PATH),
-        );
-        expect(JSON.parse(readFileSync(FROZEN_COURSE_PATH, "utf8"))).toEqual(
-            JSON.parse(readFileSync(CANONICAL_COURSE_PATH, "utf8")),
+    it("keeps the immutable expanded course snapshot", () => {
+        expect(
+            createHash("sha256")
+                .update(readFileSync(FROZEN_COURSE_PATH))
+                .digest("hex"),
+        ).toBe(
+            "79e4ee924ff05e969cb0a5ed9de541c814343e55ad711786316972b9aabd1caf",
         );
     });
 
-    it("ships the reviewed v2 site byte-for-byte", () => {
-        expect(readFileSync(FROZEN_SITE_PATH)).toEqual(
-            readFileSync(CANONICAL_SITE_PATH),
-        );
-        expect(JSON.parse(readFileSync(FROZEN_SITE_PATH, "utf8"))).toEqual(
-            JSON.parse(readFileSync(CANONICAL_SITE_PATH, "utf8")),
+    it("keeps the immutable expanded site snapshot", () => {
+        expect(
+            createHash("sha256")
+                .update(readFileSync(FROZEN_SITE_PATH))
+                .digest("hex"),
+        ).toBe(
+            "b7b2b8bf40b01ef7d47ffec2da7e30e0f4d85e49442420c56ef7c9ad953fb399",
         );
     });
 

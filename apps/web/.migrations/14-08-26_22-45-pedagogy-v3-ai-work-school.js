@@ -15,15 +15,41 @@ const PLAN_ID = "plan_ai_for_actual_work_free_v1";
 const MIGRATION_ID = "14-08-26_22-45-pedagogy-v3-ai-work-school";
 const BASELINE_ID = "14-08-26_20-00-expand-ai-work-school";
 const EXPECTED_HASHES = {
-    course: "d7ba05db036b170cd9513c5daa3de725701c45b8bea65ceff7ddb89ebc86651f",
-    site: "1325b78a4d6d42d9112e30971a6c174cf9d24037683f84528daf7d370c9b7131",
-    media: "7d06f50792dfb09ce4b58272398a5c6c82e03c5c62bf57f9c9ac4ab34912b2cb",
+    course: "ab5845006cab2a558789c5bb93126da168c87792a85f4b1cba325e0cbb57032b",
+    site: "475d47bc8a0d3ae0b6d08885cf4b88069790757baa7b06ac143c878a219efb7a",
+    media: "60036604448bba19abdf88a07c9ce7f8cb264865cee52b1f06861f9d27433a60",
     baselineCourse:
         "79e4ee924ff05e969cb0a5ed9de541c814343e55ad711786316972b9aabd1caf",
     baselineSite:
         "b7b2b8bf40b01ef7d47ffec2da7e30e0f4d85e49442420c56ef7c9ad953fb399",
     baselineMedia:
         "77546d8802303b32fb30e075ce11cf687043ac0133b25564e13d08c215180e88",
+};
+const EXPECTED_V5_DIAGRAM_MEDIA = {
+    "landing-tool-selection": "YlQ52LAJHswnjuDLFP49r3UFqcWg9bCZ005kQXuV",
+    "skill-package-lesson": "aZoZonTLcZIGwlV4KNLDEVKiqmoIxXiq2waYtjSx",
+    "mcp-connection-lesson": "iLYyEZx2o2hLRmF4SGL6FIYnWtLGsjOuRu4PZCy5",
+    "checked-workflow-lesson": "Y1CVNTysd20XWcmk-WQK7GO1oSE6IV7WHRV-BkVJ",
+    "behaviour-card-comparison-lesson":
+        "OyoQwlb9jhJT_UGtw4zVGPtCrSqhvRBGNlIueJlq",
+    "context-router-lesson": "B_XeC0UdWLg30QBjTlinflSeTcJCMIG2UOBQ5z-Q",
+    "mechanism-ladder-lesson": "4xappc5WAehv7fhmaI6gwMiWJL9rk1irNcg07Vul",
+    "check-repair-lesson": "7PCPUETILaIq2CPQ_N1CLjJU781swtVnClt1ueUu",
+    "decision-trace-lesson": "KIGSO650HCXX2a1K0IYQX4XGv_FkSzplX9VoV-v-",
+    "closure-states-lesson": "YovnjEwdKfLiA-Qs6i2jueLjb-10k9X7xyxD14Ul",
+    "work-surface-choice-lesson": "7plFDkUb_zdrXVTp8wZ5UggLQk9FO_ZDW1O_bcLY",
+    "claim-argument-map-lesson": "Rbvtux50mu8VtvN-dw8fjew40UM66-vxbhM8Xogj",
+    "authority-sequence-lesson": "wtDdSo9RExjLA22S1VD9b3YKhNvK9OYu1Ux65r6g",
+    "capstone-loop-lesson": "5eBVQRO1s3srRhTrlGfygKW_xySd8xR4MZ6ybz58",
+};
+const EXPECTED_V5_SCREENSHOT_MEDIA = {
+    "chatgpt-work-interface-lesson": "6ZLWTJ-6808I-0rnctAqx0KqRDWgeIT_-eRfEZve",
+    "claude-cowork-interface-lesson":
+        "8bZNTIFxUfOLiOBCxW2A8SLsAexVhNIJWQS72iPc",
+    "microsoft-cowork-interface-lesson":
+        "s1_GaaDD-xUpd3It_ehubb3QR3zS31iqj8WXu68v",
+    "chatgpt-plugin-directory-lesson":
+        "m0xhJnv1WtU5OvHk7JGrrt2QiwqLogWcQXOoyJr5",
 };
 const SNAPSHOT_URLS = {
     course: new URL(`./${MIGRATION_ID}.course.json`, import.meta.url),
@@ -283,9 +309,9 @@ function validateFrozenInputs(inputs) {
     const newImageIds = desiredImageIds.filter((id) => !oldImageIds.has(id));
     assert(
         oldImages.length === 7 &&
-            desiredImages.length === 17 &&
-            newImageIds.length === 10 &&
-            new Set(desiredImageIds).size === 17,
+            desiredImages.length === 21 &&
+            newImageIds.length === 17 &&
+            new Set(desiredImageIds).size === 21,
         "Lesson image relationship is invalid",
     );
     for (const { node } of desiredImages) {
@@ -299,25 +325,27 @@ function validateFrozenInputs(inputs) {
     const media = inputs.media;
     assert(
         media?.schemaVersion === 1 &&
-            media.group === "ai-work-school-v3" &&
+            media.group === "ai-work-school-v5" &&
             media.cdnHost === "media.bhekani.com" &&
             Array.isArray(media.entries) &&
-            media.entries.length === 21,
+            media.entries.length === 25,
         "MediaLit manifest identity is invalid",
     );
     const entriesById = new Map();
-    const keys = new Set();
+    const entriesByKey = new Map();
+    const sourcePaths = new Set();
     for (const entry of media.entries) {
         assert(
             nonEmptyString(entry.key) &&
-                !keys.has(entry.key) &&
+                !entriesByKey.has(entry.key) &&
                 nonEmptyString(entry.sourcePath) &&
                 /^[a-f0-9]{64}$/.test(entry.sha256) &&
                 entry.bytes === entry.media?.size &&
                 entry.mimeType === "image/webp",
             "MediaLit entry contract is invalid",
         );
-        keys.add(entry.key);
+        entriesByKey.set(entry.key, entry);
+        sourcePaths.add(entry.sourcePath);
         validateMediaObject(entry.media);
         assert(
             !entriesById.has(entry.media.mediaId),
@@ -325,13 +353,26 @@ function validateFrozenInputs(inputs) {
         );
         entriesById.set(entry.media.mediaId, entry);
     }
+    assert(sourcePaths.size === 23, "MediaLit source set is invalid");
     assert(
         newImageIds.every((id) => entriesById.has(id)) &&
             media.entries.filter(({ media: { mediaId } }) =>
                 newImageIds.includes(mediaId),
-            ).length === 10,
-        "New MediaLit v3 entry set is invalid",
+            ).length === 17,
+        "New MediaLit v5 lesson entry set is invalid",
     );
+    for (const [label, expected] of [
+        ["diagram", EXPECTED_V5_DIAGRAM_MEDIA],
+        ["screenshot", EXPECTED_V5_SCREENSHOT_MEDIA],
+    ]) {
+        assert(
+            Object.entries(expected).every(
+                ([key, mediaId]) =>
+                    entriesByKey.get(key)?.media.mediaId === mediaId,
+            ),
+            `MediaLit v5 ${label} set is invalid`,
+        );
+    }
     for (const { node } of desiredImages) {
         const entry = entriesById.get(mediaIdFromUrl(node.attrs.src));
         assert(
@@ -366,7 +407,7 @@ function validateFrozenInputs(inputs) {
         desired.course.featuredImage?.mediaId,
     ]);
     assert(
-        referencedMediaIds.size === 21 &&
+        referencedMediaIds.size === 25 &&
             media.entries.every(({ media: { mediaId } }) =>
                 referencedMediaIds.has(mediaId),
             ),
