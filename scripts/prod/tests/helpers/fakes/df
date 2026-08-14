@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Real df unless FAKE_DF_AVAIL_KB pins the available blocks.
+set -u
+# shellcheck source=scripts/prod/tests/helpers/fakes/_helpers.bash
+. "${FAKE_HELPERS:?FAKE_HELPERS must be set}"
+fake_log df "$@"
+avail="${FAKE_DF_AVAIL_KB:-}"
+[ "${FAKE_SCOPE:-local}" = remote ] && avail="${FAKE_REMOTE_DF_AVAIL_KB:-$avail}"
+if [ -n "$avail" ]; then
+    printf 'Filesystem 1024-blocks Used Available Capacity Mounted on\n'
+    printf 'fake 1000000000 0 %s 1%% /\n' "$avail"
+    exit 0
+fi
+exec "${REAL_DF:?REAL_DF must be set}" "$@"

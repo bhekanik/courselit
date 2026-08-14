@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Real uname unless the machine type is pinned. The remote-scope override lets a
+# test make the fake host a different architecture from the Mac running Bats.
+set -u
+# shellcheck source=scripts/prod/tests/helpers/fakes/_helpers.bash
+. "${FAKE_HELPERS:?FAKE_HELPERS must be set}"
+m="${FAKE_UNAME_M:-}"
+[ "${FAKE_SCOPE:-local}" = remote ] && m="${FAKE_REMOTE_UNAME_M:-$m}"
+if [ "${1:-}" = "-m" ] && [ -n "$m" ]; then
+    printf '%s\n' "$m"
+    exit 0
+fi
+exec "${REAL_UNAME:?REAL_UNAME must be set}" "$@"

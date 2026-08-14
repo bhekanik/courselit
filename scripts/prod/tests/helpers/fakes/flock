@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# Fake flock: macOS has no flock, and tests need to simulate a held lock.
+set -u
+# shellcheck source=scripts/prod/tests/helpers/fakes/_helpers.bash
+. "${FAKE_HELPERS:?FAKE_HELPERS must be set}"
+fake_log flock "$@"
+while [ $# -gt 0 ]; do
+    case "$1" in
+    -w | --wait | --timeout) shift 2 ;;
+    -*) shift ;;
+    *) break ;;
+    esac
+done
+lockfile="${1:-}"
+shift || true
+: >>"$lockfile"
+[ "${FAKE_FLOCK_BUSY:-0}" = "0" ] || exit 1
+exec "$@"

@@ -1,0 +1,37 @@
+# Trimmed stand-in for the live /home/deploy/services/courselit/compose.yml.
+# Only the shape the harness depends on matters: project name, the three
+# services, and the external Caddy network.
+name: courselit
+
+services:
+  app:
+    image: codelit/courselit-app:latest@sha256:5091e2d219f2e957dc5164f1a7095c8546b0844e6259c24cbf2ec0c5055b8cb7
+    restart: unless-stopped
+    environment:
+      AUTH_SECRET: ${AUTH_SECRET:?AUTH_SECRET is required}
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000')"]
+    networks:
+      - default
+
+  mongo:
+    image: mongo:8.0
+    restart: unless-stopped
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - default
+
+  medialit:
+    image: codelit/medialit:latest@sha256:0254c0ba00fa00650b8b7f63bb8ca0e255d57e6a1e853ff8313c189963ff0445
+    restart: unless-stopped
+    networks:
+      - default
+
+volumes:
+  mongo-data:
+
+networks:
+  default:
+    external: true
+    name: notto-demo_default

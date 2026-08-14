@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# Fake ssh that behaves like a real remote host: it runs the requested command
+# locally with the *remote* fake-docker state and the remote filesystem root, so
+# the payloads deploy.sh pipes over stdin are genuinely executed rather than
+# just recorded.
+set -u
+
+# shellcheck source=scripts/prod/tests/helpers/fakes/_helpers.bash
+. "${FAKE_HELPERS:?FAKE_HELPERS must be set}"
+fake_log ssh "$@"
+
+host=""
+while [ $# -gt 0 ]; do
+    case "$1" in
+    -o | -p | -i | -F) shift 2 ;;
+    -*) shift ;;
+    *)
+        host="$1"
+        shift
+        break
+        ;;
+    esac
+done
+[ -n "$host" ] || {
+    echo "fake-ssh: no host" >&2
+    exit 255
+}
+[ "$host" = "${FAKE_SSH_HOST:-$host}" ] || {
+    echo "fake-ssh: ssh: Could not resolve hostname $host" >&2
+    exit 255
+}
+[ "${FAKE_SSH_EXIT:-0}" = "0" ] || exit "$FAKE_SSH_EXIT"
+
+FAKE_SCOPE=remote \
+    FAKE_DOCKER_STATE="${FAKE_REMOTE_DOCKER_STATE:?FAKE_REMOTE_DOCKER_STATE must be set}" \
+    bash -c "$*"

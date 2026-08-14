@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# Fakes only `git archive` (so tests can prove the build context came from a
+# committed tree without tarring the whole repo). Everything else is real git,
+# which keeps SHA resolution honest.
+set -u
+# shellcheck source=scripts/prod/tests/helpers/fakes/_helpers.bash
+. "${FAKE_HELPERS:?FAKE_HELPERS must be set}"
+fake_log git "$@"
+args=("$@")
+i=0
+while [ "$i" -lt "${#args[@]}" ]; do
+    case "${args[$i]}" in
+    -C | -c) i=$((i + 2)) ;;
+    -*) i=$((i + 1)) ;;
+    *) break ;;
+    esac
+done
+if [ "${args[$i]:-}" = "archive" ]; then
+    shift $((i + 1))
+    rev=""
+    while [ $# -gt 0 ]; do
+        case "$1" in
+        -*) shift ;;
+        *) rev="$1"; shift ;;
+        esac
+    done
+    [ "${FAKE_GIT_ARCHIVE_EXIT:-0}" = "0" ] || exit "$FAKE_GIT_ARCHIVE_EXIT"
+    printf 'GITARCHIVE %s\n' "$rev"
+    exit 0
+fi
+exec "${REAL_GIT:?REAL_GIT must be set}" "$@"
