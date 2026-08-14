@@ -1,0 +1,154 @@
+{
+    "schemaVersion": 1,
+    "siteKey": "ai-work-school",
+    "targetDomain": "main",
+    "courseId": "course_ai_for_actual_work_v1",
+    "sourceHashes": {
+        "expandedCourse": "79e4ee924ff05e969cb0a5ed9de541c814343e55ad711786316972b9aabd1caf",
+        "desiredSite": "b7b2b8bf40b01ef7d47ffec2da7e30e0f4d85e49442420c56ef7c9ad953fb399",
+        "launchCourseSnapshot": "964b2dab53b0a8b29fef5e09e490c2d3a373eb9e174316e3411fb291d8e14fc8",
+        "launchSiteSnapshot": "1b575590a109315cabdc34cad25925531e561fc1d5dff3bf28fd6a77736eed71"
+    },
+    "allowedMediaHosts": ["media.bhekani.com"],
+    "allowedMimeTypes": ["image/webp"],
+    "featuredImage": {
+        "mediaId": "CvBV8mXoM8P2VdfimD-vOuwFCj5E9CwOO91sJ2SX",
+        "originalFileName": "hero-real-work.webp",
+        "mimeType": "image/webp",
+        "size": 391886,
+        "access": "public",
+        "file": "https://media.bhekani.com/p/CvBV8mXoM8P2VdfimD-vOuwFCj5E9CwOO91sJ2SX/main.webp",
+        "thumbnail": "https://media.bhekani.com/p/CvBV8mXoM8P2VdfimD-vOuwFCj5E9CwOO91sJ2SX/thumb.webp",
+        "caption": "Three colleagues at a shared table, comparing a printed page, a spreadsheet and a workflow shown step by step on screen."
+    },
+    "lessonImages": [
+        {
+            "role": "skill-lesson",
+            "lessonId": "lesson_ai_for_actual_work_17",
+            "mediaId": "YqmA5jy23g5GnCu4uDrQEZX61didR3-BtdmPe81a",
+            "imageIndex": 7,
+            "anchorNodeSha256": "87da3d3ce97fe3ffaa62a618d27ae9268b007d75a21d0288be556b9f60909ad4",
+            "node": {
+                "type": "image",
+                "attrs": {
+                    "src": "https://media.bhekani.com/p/YqmA5jy23g5GnCu4uDrQEZX61didR3-BtdmPe81a/main.webp",
+                    "alt": "A professional packing a field kit with the materials for a job while two colleagues review what belongs in it.",
+                    "title": "A reusable skill is a packed kit: context, steps, examples and checks, ready to open next week."
+                }
+            },
+            "caption": "A reusable skill is a packed kit: context, steps, examples and checks, ready to open next week."
+        },
+        {
+            "role": "skill-package-lesson",
+            "lessonId": "lesson_ai_for_actual_work_17",
+            "mediaId": "tliuQ36uWfk8kjVvWjlLFDpwHxobdhqKyetmb6Lt",
+            "imageIndex": 9,
+            "anchorNodeSha256": "c3fb8bddfce1710b845067943bd185899b86172f2cd911aa1e37996f646e27aa",
+            "node": {
+                "type": "image",
+                "attrs": {
+                    "src": "https://media.bhekani.com/p/tliuQ36uWfk8kjVvWjlLFDpwHxobdhqKyetmb6Lt/main.webp",
+                    "alt": "A reusable skill packages the job, written context, ordered steps, worked examples, checks and source limits so the same task can be run to the same standard later.",
+                    "title": "A reusable skill packages the job, written context, ordered steps, worked examples, checks and source limits so the same task can be run to the same standard later."
+                }
+            },
+            "caption": "A reusable skill packages the job, written context, ordered steps, worked examples, checks and source limits so the same task can be run to the same standard later."
+        },
+        {
+            "role": "mcp-lesson",
+            "lessonId": "lesson_ai_for_actual_work_18",
+            "mediaId": "2qJn1ZyE7P8mMNAwrQsfbgpGYZokBA_ojC5JkZsI",
+            "imageIndex": 5,
+            "anchorNodeSha256": "850aa6fa631ab163d82bc887cd3d99fddb8e1b5d0465648b1ea4bf34d3b6e665",
+            "node": {
+                "type": "image",
+                "attrs": {
+                    "src": "https://media.bhekani.com/p/2qJn1ZyE7P8mMNAwrQsfbgpGYZokBA_ojC5JkZsI/main.webp",
+                    "alt": "An operator routes records through three separate permission gates, each recording what may pass.",
+                    "title": "Identity, scope and action are separate decisions. A governed connection records all three."
+                }
+            },
+            "caption": "Identity, scope and action are separate decisions. A governed connection records all three."
+        },
+        {
+            "role": "mcp-connection-lesson",
+            "lessonId": "lesson_ai_for_actual_work_18",
+            "mediaId": "A-MRYg45i0OcgLsVr5beqWXaRnF8lV64MfliWU2S",
+            "imageIndex": 7,
+            "anchorNodeSha256": "a0b90e7fa9efd7789573df120c3705625839fd64299ffcb193852005df6f5050",
+            "node": {
+                "type": "image",
+                "attrs": {
+                    "src": "https://media.bhekani.com/p/A-MRYg45i0OcgLsVr5beqWXaRnF8lV64MfliWU2S/main.webp",
+                    "alt": "A request names the source it needs, passes separate identity, scope and action gates, reaches an approved source, and returns an answer with its source. A refusal is recorded too.",
+                    "title": "A request names the source it needs, passes separate identity, scope and action gates, reaches an approved source, and returns an answer with its source. A refusal is recorded too."
+                }
+            },
+            "caption": "A request names the source it needs, passes separate identity, scope and action gates, reaches an approved source, and returns an answer with its source. A refusal is recorded too."
+        },
+        {
+            "role": "editorial-partnership-lesson",
+            "lessonId": "lesson_ai_for_actual_work_20",
+            "mediaId": "jhuEmKYgPbl-UjrbkG2ehYPEQO1elN6GKsZmNJkR",
+            "imageIndex": 8,
+            "anchorNodeSha256": "17aa70f4a7315d12a06588ab9e5c0b0dc63be6fd5e617019a789216d2801d757",
+            "node": {
+                "type": "image",
+                "attrs": {
+                    "src": "https://media.bhekani.com/p/jhuEmKYgPbl-UjrbkG2ehYPEQO1elN6GKsZmNJkR/main.webp",
+                    "alt": "An editor turns an idea map into a sourced draft, revises the argument and sets rejected suggestions aside.",
+                    "title": "Keep the argument, the source check and the edit. Reject suggestions that weaken the work."
+                }
+            },
+            "caption": "Keep the argument, the source check and the edit. Reject suggestions that weaken the work."
+        },
+        {
+            "role": "checked-work-lesson",
+            "lessonId": "lesson_ai_for_actual_work_21",
+            "mediaId": "v_YQWyIXAdGFbl9GQRx3GljM1D5NNfOlnIwudC35",
+            "imageIndex": 4,
+            "anchorNodeSha256": "74b1dcda1af79a2cbef843e4cc2917ddb0bd7c29eeca9fc23cb31c09a2bd8d0c",
+            "node": {
+                "type": "image",
+                "attrs": {
+                    "src": "https://media.bhekani.com/p/v_YQWyIXAdGFbl9GQRx3GljM1D5NNfOlnIwudC35/main.webp",
+                    "alt": "Four colleagues assemble a document, check it against sources, add citations and sign it off.",
+                    "title": "Assemble, check, cite, decide. The same moves make the work reviewable."
+                }
+            },
+            "caption": "Assemble, check, cite, decide. The same moves make the work reviewable."
+        },
+        {
+            "role": "checked-workflow-lesson",
+            "lessonId": "lesson_ai_for_actual_work_21",
+            "mediaId": "fGbRNurAV15b45FkcTB3e1E5EmWdOk8AMoVGhTXm",
+            "imageIndex": 6,
+            "anchorNodeSha256": "b19ce89507a9337813d5147884b7291aea90440e9d770933de59623f9472761e",
+            "node": {
+                "type": "image",
+                "attrs": {
+                    "src": "https://media.bhekani.com/p/fGbRNurAV15b45FkcTB3e1E5EmWdOk8AMoVGhTXm/main.webp",
+                    "alt": "Written context becomes a draft, which is checked against sources and cited. A person approves it or sends it back with a reason before the decision is recorded and handed over.",
+                    "title": "Written context becomes a draft, which is checked against sources and cited. A person approves it or sends it back with a reason before the decision is recorded and handed over."
+                }
+            },
+            "caption": "Written context becomes a draft, which is checked against sources and cited. A person approves it or sends it back with a reason before the decision is recorded and handed over."
+        }
+    ],
+    "siteProjection": {
+        "baselineSnapshot": "14-08-26_17-30-seed-ai-work-school.site.json",
+        "desiredSnapshot": "14-08-26_20-00-expand-ai-work-school.site.json",
+        "managedMarkerWidgetId": "widget_ai_work_school_managed_v1",
+        "homepageFields": [
+            "title",
+            "description",
+            "robotsAllowed",
+            "draftTitle",
+            "draftDescription",
+            "draftRobotsAllowed",
+            "layout",
+            "draftLayout"
+        ],
+        "sharedWidgetNames": ["header", "footer"]
+    }
+}

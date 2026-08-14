@@ -1,0 +1,1330 @@
+{
+  "schemaVersion": 1,
+  "siteKey": "ai-work-school",
+  "managedMarker": {
+    "pageId": "homepage",
+    "widgetId": "widget_ai_work_school_managed_v1",
+    "preflight": "launch-baseline-or-v2"
+  },
+  "domainScope": {
+    "selector": "current-domain",
+    "ownerUserIdSource": "domain-owner.userId",
+    "themeId": "theme_ai_work_school_v1",
+    "settingsPatch": {
+      "title": "AI Work School",
+      "subtitle": "Bring the task. Build the checks."
+    }
+  },
+  "course": {
+    "courseId": "course_ai_for_actual_work_v1",
+    "slug": "ai-for-actual-work",
+    "href": "/course/ai-for-actual-work/course_ai_for_actual_work_v1",
+    "access": "free"
+  },
+  "requiredPages": [
+    {
+      "pageId": "privacy",
+      "href": "/p/privacy"
+    },
+    {
+      "pageId": "terms",
+      "href": "/p/terms"
+    }
+  ],
+  "theme": {
+    "themeId": "theme_ai_work_school_v1",
+    "name": "AI Work School",
+    "parentThemeId": "learning",
+    "userIdSource": "domain-owner.userId",
+    "applyStyleTo": [
+      "theme",
+      "draftTheme"
+    ],
+    "style": {
+      "colors": {
+        "light": {
+          "background": "#ffffff",
+          "foreground": "#0f1d2e",
+          "card": "#f7f8f8",
+          "cardForeground": "#0f1d2e",
+          "popover": "#ffffff",
+          "popoverForeground": "#0f1d2e",
+          "primary": "#7a1b2b",
+          "primaryForeground": "#ffffff",
+          "secondary": "#ddebea",
+          "secondaryForeground": "#174a46",
+          "muted": "#f7f8f8",
+          "mutedForeground": "#435564",
+          "accent": "#ddebea",
+          "accentForeground": "#174a46",
+          "destructive": "#8a4b12",
+          "border": "#687783",
+          "input": "#687783",
+          "ring": "#0e5c5e",
+          "chart1": "#7a1b2b",
+          "chart2": "#0e5c5e",
+          "chart3": "#8a4b12",
+          "chart4": "#435564",
+          "chart5": "#687783",
+          "sidebar": "#f7f8f8",
+          "sidebarForeground": "#0f1d2e",
+          "sidebarPrimary": "#7a1b2b",
+          "sidebarPrimaryForeground": "#ffffff",
+          "sidebarAccent": "#ddebea",
+          "sidebarAccentForeground": "#174a46",
+          "sidebarBorder": "#687783",
+          "sidebarRing": "#0e5c5e",
+          "shadow2xs": "0 1px 2px 0 hsl(216 35% 12% / 0.04)",
+          "shadowXs": "0 1px 3px 0 hsl(216 35% 12% / 0.05)",
+          "shadowSm": "0 1px 3px 0 hsl(216 35% 12% / 0.08), 0 1px 2px -1px hsl(216 35% 12% / 0.08)",
+          "shadowMd": "0 2px 4px 0 hsl(216 35% 12% / 0.08), 0 4px 6px -1px hsl(216 35% 12% / 0.08)",
+          "shadowLg": "0 4px 6px 0 hsl(216 35% 12% / 0.08), 0 8px 12px -2px hsl(216 35% 12% / 0.08)",
+          "shadowXl": "0 8px 12px 0 hsl(216 35% 12% / 0.10), 0 16px 24px -4px hsl(216 35% 12% / 0.10)",
+          "shadow2xl": "0 16px 24px 0 hsl(216 35% 12% / 0.12), 0 32px 48px -8px hsl(216 35% 12% / 0.12)"
+        },
+        "dark": {
+          "background": "#101820",
+          "foreground": "#f3f5f7",
+          "card": "#17222c",
+          "cardForeground": "#f3f5f7",
+          "popover": "#17222c",
+          "popoverForeground": "#f3f5f7",
+          "primary": "#c8394f",
+          "primaryForeground": "#ffffff",
+          "secondary": "#12312f",
+          "secondaryForeground": "#ddf7f4",
+          "muted": "#17222c",
+          "mutedForeground": "#b8c3cc",
+          "accent": "#12312f",
+          "accentForeground": "#ddf7f4",
+          "destructive": "#d08a45",
+          "border": "#7d8b97",
+          "input": "#7d8b97",
+          "ring": "#57b6b2",
+          "chart1": "#c8394f",
+          "chart2": "#57b6b2",
+          "chart3": "#d08a45",
+          "chart4": "#b8c3cc",
+          "chart5": "#7d8b97",
+          "sidebar": "#17222c",
+          "sidebarForeground": "#f3f5f7",
+          "sidebarPrimary": "#c8394f",
+          "sidebarPrimaryForeground": "#ffffff",
+          "sidebarAccent": "#12312f",
+          "sidebarAccentForeground": "#ddf7f4",
+          "sidebarBorder": "#7d8b97",
+          "sidebarRing": "#57b6b2",
+          "shadow2xs": "0 1px 2px 0 hsl(0 0% 0% / 0.16)",
+          "shadowXs": "0 1px 3px 0 hsl(0 0% 0% / 0.18)",
+          "shadowSm": "0 1px 3px 0 hsl(0 0% 0% / 0.20), 0 1px 2px -1px hsl(0 0% 0% / 0.20)",
+          "shadowMd": "0 2px 4px 0 hsl(0 0% 0% / 0.22), 0 4px 6px -1px hsl(0 0% 0% / 0.22)",
+          "shadowLg": "0 4px 6px 0 hsl(0 0% 0% / 0.24), 0 8px 12px -2px hsl(0 0% 0% / 0.24)",
+          "shadowXl": "0 8px 12px 0 hsl(0 0% 0% / 0.26), 0 16px 24px -4px hsl(0 0% 0% / 0.26)",
+          "shadow2xl": "0 16px 24px 0 hsl(0 0% 0% / 0.30), 0 32px 48px -8px hsl(0 0% 0% / 0.30)"
+        }
+      },
+      "typography": {
+        "preheader": {
+          "fontFamily": "font-mulish",
+          "fontSize": "text-sm",
+          "fontWeight": "font-bold",
+          "lineHeight": "leading-normal",
+          "letterSpacing": "tracking-wide"
+        },
+        "header1": {
+          "fontFamily": "font-roboto-slab",
+          "fontSize": "text-5xl",
+          "fontWeight": "font-bold",
+          "lineHeight": "leading-tight",
+          "letterSpacing": "tracking-tight"
+        },
+        "header2": {
+          "fontFamily": "font-roboto-slab",
+          "fontSize": "text-4xl",
+          "fontWeight": "font-bold",
+          "lineHeight": "leading-tight",
+          "letterSpacing": "tracking-tight"
+        },
+        "header3": {
+          "fontFamily": "font-roboto-slab",
+          "fontSize": "text-3xl",
+          "fontWeight": "font-semibold",
+          "lineHeight": "leading-snug"
+        },
+        "header4": {
+          "fontFamily": "font-roboto-slab",
+          "fontSize": "text-2xl",
+          "fontWeight": "font-semibold",
+          "lineHeight": "leading-snug"
+        },
+        "subheader1": {
+          "fontFamily": "font-mulish",
+          "fontSize": "text-xl",
+          "fontWeight": "font-normal",
+          "lineHeight": "leading-relaxed"
+        },
+        "subheader2": {
+          "fontFamily": "font-mulish",
+          "fontSize": "text-lg",
+          "fontWeight": "font-normal",
+          "lineHeight": "leading-relaxed"
+        },
+        "text1": {
+          "fontFamily": "font-mulish",
+          "fontSize": "text-base",
+          "fontWeight": "font-normal",
+          "lineHeight": "leading-relaxed"
+        },
+        "text2": {
+          "fontFamily": "font-mulish",
+          "fontSize": "text-sm",
+          "fontWeight": "font-normal",
+          "lineHeight": "leading-relaxed"
+        },
+        "link": {
+          "fontFamily": "font-mulish",
+          "fontSize": "text-base",
+          "fontWeight": "font-semibold",
+          "lineHeight": "leading-normal",
+          "textDecoration": "underline"
+        },
+        "button": {
+          "fontFamily": "font-mulish",
+          "fontSize": "text-base",
+          "fontWeight": "font-bold",
+          "lineHeight": "leading-normal",
+          "textTransform": "normal-case"
+        },
+        "input": {
+          "fontFamily": "font-mulish",
+          "fontSize": "text-base",
+          "fontWeight": "font-normal",
+          "lineHeight": "leading-normal"
+        },
+        "caption": {
+          "fontFamily": "font-mulish",
+          "fontSize": "text-sm",
+          "fontWeight": "font-normal",
+          "lineHeight": "leading-normal"
+        }
+      },
+      "interactives": {
+        "button": {
+          "padding": {
+            "x": "px-6",
+            "y": "py-3"
+          },
+          "border": {
+            "width": "border",
+            "radius": "rounded-md",
+            "style": "border-solid"
+          },
+          "shadow": "shadow-xs",
+          "disabled": {
+            "opacity": "opacity-50",
+            "cursor": "cursor-not-allowed"
+          }
+        },
+        "link": {
+          "padding": {
+            "x": "px-0",
+            "y": "py-0"
+          },
+          "disabled": {
+            "opacity": "opacity-50",
+            "cursor": "cursor-not-allowed"
+          }
+        },
+        "card": {
+          "padding": {
+            "x": "px-6",
+            "y": "py-6"
+          },
+          "border": {
+            "width": "border",
+            "radius": "rounded-lg",
+            "style": "border-solid"
+          },
+          "shadow": "shadow-none"
+        },
+        "input": {
+          "borderRadius": "rounded-md",
+          "padding": {
+            "x": "px-4",
+            "y": "py-3"
+          },
+          "border": {
+            "width": "border",
+            "style": "border-solid"
+          },
+          "shadow": "shadow-none",
+          "disabled": {
+            "opacity": "opacity-50",
+            "cursor": "cursor-not-allowed"
+          }
+        }
+      },
+      "structure": {
+        "page": {
+          "width": "max-w-6xl"
+        },
+        "section": {
+          "padding": {
+            "x": "px-4",
+            "y": "py-16"
+          }
+        }
+      }
+    }
+  },
+  "sharedWidgets": [
+    {
+      "widgetId": "widget_ai_work_school_header_v1",
+      "name": "header",
+      "deleteable": false,
+      "shared": true,
+      "settings": {
+        "type": "site",
+        "verticalPadding": "py-4",
+        "maxWidth": "max-w-6xl",
+        "links": [
+          {
+            "id": "link_ai_work_school_start_v1",
+            "label": "Start the course — free",
+            "href": "/course/ai-for-actual-work/course_ai_for_actual_work_v1",
+            "isButton": true,
+            "isPrimary": true
+          }
+        ],
+        "linkAlignment": "center",
+        "showLoginControl": true,
+        "linkFontWeight": "font-bold",
+        "spacingBetweenLinks": 24,
+        "layout": "fixed",
+        "backdropBlur": false
+      }
+    },
+    {
+      "widgetId": "widget_ai_work_school_footer_v1",
+      "name": "footer",
+      "deleteable": false,
+      "shared": true,
+      "settings": {
+        "type": "site",
+        "verticalPadding": "py-12",
+        "maxWidth": "max-w-6xl",
+        "sections": [
+          {
+            "id": "footer_section_ai_work_school_course_v1",
+            "name": "Course",
+            "links": [
+              {
+                "id": "footer_link_ai_work_school_start_v1",
+                "label": "Start the course — free",
+                "href": "/course/ai-for-actual-work/course_ai_for_actual_work_v1"
+              }
+            ]
+          },
+          {
+            "id": "footer_section_ai_work_school_site_v1",
+            "name": "Site",
+            "links": [
+              {
+                "id": "footer_link_ai_work_school_privacy_v1",
+                "label": "Privacy",
+                "href": "/p/privacy"
+              },
+              {
+                "id": "footer_link_ai_work_school_terms_v1",
+                "label": "Terms",
+                "href": "/p/terms"
+              }
+            ]
+          }
+        ],
+        "titleFontSize": 2,
+        "sectionHeaderFontSize": "font-semibold",
+        "socials": {
+          "facebook": "",
+          "twitter": "",
+          "instagram": "",
+          "linkedin": "",
+          "youtube": "",
+          "discord": "",
+          "github": ""
+        },
+        "socialIconsSize": 20
+      }
+    }
+  ],
+  "draftSharedWidgetsSource": "sharedWidgets",
+  "page": {
+    "pageId": "homepage",
+    "name": "Home",
+    "type": "site",
+    "entityIdSource": "domain.name",
+    "creatorIdSource": "domain-owner.userId",
+    "title": "AI for actual work | AI Work School",
+    "description": "A free course for working professionals who want to turn one recurring job into a workflow that colleagues can inspect.",
+    "robotsAllowed": true,
+    "draftTitleSource": "page.title",
+    "draftDescriptionSource": "page.description",
+    "draftRobotsAllowedSource": "page.robotsAllowed",
+    "draftLayoutSource": "page.layout",
+    "layout": [
+      {
+        "widgetId": "widget_ai_work_school_header_v1",
+        "name": "header",
+        "deleteable": false,
+        "shared": true
+      },
+      {
+        "widgetId": "widget_ai_work_school_hero_v2",
+        "name": "hero",
+        "deleteable": true,
+        "shared": false,
+        "settings": {
+          "type": "site",
+          "verticalPadding": "py-20",
+          "maxWidth": "max-w-6xl",
+          "title": "Do one real job with AI, and show your working.",
+          "description": {
+            "type": "doc",
+            "content": [
+              {
+                "type": "paragraph",
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "A free course for working professionals. Bring one recurring, low-risk job you already do. Leave with a workflow that you, and anyone who reviews it, can inspect."
+                  }
+                ]
+              }
+            ]
+          },
+          "buttonCaption": "Start the course — free",
+          "buttonAction": "/course/ai-for-actual-work/course_ai_for_actual_work_v1",
+          "alignment": "right",
+          "contentAlignment": "left",
+          "layout": "normal",
+          "mobileMediaPlacement": "after-content",
+          "mediaRadius": 4,
+          "objectFit": "cover",
+          "media": {
+            "access": "public",
+            "caption": "Three colleagues at a shared table, comparing a printed page, a spreadsheet and a workflow shown step by step on screen.",
+            "file": "https://media.bhekani.com/p/Z3Q6cc-g_1zN5ZFUoVoDUHuGBEUmISJPMlcu6Z1o/main.webp",
+            "mediaId": "Z3Q6cc-g_1zN5ZFUoVoDUHuGBEUmISJPMlcu6Z1o",
+            "mimeType": "image/webp",
+            "originalFileName": "hero-real-work.webp",
+            "size": 391886,
+            "thumbnail": "https://media.bhekani.com/p/Z3Q6cc-g_1zN5ZFUoVoDUHuGBEUmISJPMlcu6Z1o/thumb.webp"
+          }
+        }
+      },
+      {
+        "widgetId": "widget_ai_work_school_managed_v1",
+        "name": "rich-text",
+        "deleteable": true,
+        "shared": false,
+        "settings": {
+          "type": "site",
+          "verticalPadding": "py-4",
+          "maxWidth": "max-w-6xl",
+          "alignment": "left",
+          "fontSize": 3,
+          "text": {
+            "type": "doc",
+            "content": [
+              {
+                "type": "paragraph",
+                "content": [
+                  {
+                    "type": "text",
+                    "marks": [
+                      {
+                        "type": "bold"
+                      }
+                    ],
+                    "text": "Free · Bring one job you already do · No coding"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "widgetId": "widget_ai_work_school_tool_choice_v2",
+        "name": "rich-text",
+        "deleteable": true,
+        "shared": false,
+        "settings": {
+          "type": "site",
+          "verticalPadding": "py-16",
+          "maxWidth": "max-w-4xl",
+          "alignment": "left",
+          "fontSize": 4,
+          "text": {
+            "type": "doc",
+            "content": [
+              {
+                "type": "heading",
+                "attrs": {
+                  "level": 2
+                },
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "Choose the shape of the job, not the brand of the tool."
+                  }
+                ]
+              },
+              {
+                "type": "paragraph",
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "Tools change. The job does not. Decide whether you need a one-off answer, a reusable skill, or a governed connection to approved sources. Then match the mechanism to the risk and repeatability of the work."
+                  }
+                ]
+              },
+              {
+                "type": "orderedList",
+                "content": [
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "One-off question: use a chat, then check the answer yourself."
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "Same job, repeated: pack the context, steps, examples and checks as a reusable skill."
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "Needs approved files or systems: connect the source behind a permission gate."
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "text": "Higher consequence: another person checks it before it leaves."
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "widgetId": "widget_ai_work_school_tool_selection_v2",
+        "name": "media",
+        "deleteable": true,
+        "shared": false,
+        "settings": {
+          "type": "site",
+          "verticalPadding": "py-4",
+          "maxWidth": "max-w-4xl",
+          "media": {
+            "access": "public",
+            "caption": "A decision guide: use chat for a one-off question, package a repeated job as a skill, put approved files or systems behind a permission gate, and add another reviewer when consequences rise.",
+          "file": "https://media.bhekani.com/p/LVfN0wtYWPs3G57bzULRMnia6PHReN_AI_k6hc32/main.webp",
+            "mediaId": "LVfN0wtYWPs3G57bzULRMnia6PHReN_AI_k6hc32",
+            "mimeType": "image/webp",
+            "originalFileName": "diagram-tool-selection.webp",
+            "size": 57326,
+            "thumbnail": "https://media.bhekani.com/p/LVfN0wtYWPs3G57bzULRMnia6PHReN_AI_k6hc32/thumb.webp"
+          },
+          "mediaRadius": 4,
+          "objectFit": "contain",
+          "hasBorder": false
+        }
+      },
+      {
+        "widgetId": "widget_ai_work_school_artefacts_v2",
+        "name": "rich-text",
+        "deleteable": true,
+        "shared": false,
+        "settings": {
+          "type": "site",
+          "verticalPadding": "py-16",
+          "maxWidth": "max-w-4xl",
+          "alignment": "left",
+          "fontSize": 4,
+          "text": {
+            "type": "doc",
+            "content": [
+              {
+                "type": "heading",
+                "attrs": {
+                  "level": 2
+                },
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "Five artefacts, one job."
+                  }
+                ]
+              },
+              {
+                "type": "paragraph",
+                "content": [
+                  {
+                    "type": "text",
+                "text": "The capstone consolidates your lesson records into five reviewable files you can keep, inspect and hand to someone else."
+                  }
+                ]
+              },
+              {
+                "type": "bulletList",
+                "content": [
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "marks": [
+                              {
+                                "type": "bold"
+                              }
+                            ],
+                    "text": "Working brief (working-brief.md). "
+                          },
+                          {
+                            "type": "text",
+                    "text": "The audience, constraints, permission and finish condition for the job."
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "marks": [
+                              {
+                                "type": "bold"
+                              }
+                            ],
+                    "text": "Source contract (source-contract.md). "
+                          },
+                          {
+                            "type": "text",
+                            "text": "What the work may use, what it must not infer and where each claim comes from."
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "marks": [
+                              {
+                                "type": "bold"
+                              }
+                            ],
+                    "text": "Checks and evidence (checks-and-evidence.md). "
+                          },
+                          {
+                            "type": "text",
+                            "text": "Conditions that can expose a missing, unsupported or unsafe result."
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "marks": [
+                              {
+                                "type": "bold"
+                              }
+                            ],
+                    "text": "Decision record (decision-record.md). "
+                          },
+                          {
+                            "type": "text",
+                            "text": "What you accepted, changed or rejected, with the reason."
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "marks": [
+                              {
+                                "type": "bold"
+                              }
+                            ],
+                    "text": "Handover (handover.md). "
+                          },
+                          {
+                            "type": "text",
+                            "text": "The result, evidence, open questions and next action in one place."
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "widgetId": "widget_ai_work_school_outputs_v2",
+        "name": "media",
+        "deleteable": true,
+        "shared": false,
+        "settings": {
+          "type": "site",
+          "verticalPadding": "py-4",
+          "maxWidth": "max-w-4xl",
+          "media": {
+            "access": "public",
+            "caption": "Assemble, check, cite, decide. The same moves make the work reviewable.",
+            "file": "https://media.bhekani.com/p/lAn5h3ixD80GSST01YTL9H30-KdSMFN3GF9znCXb/main.webp",
+            "mediaId": "lAn5h3ixD80GSST01YTL9H30-KdSMFN3GF9znCXb",
+            "mimeType": "image/webp",
+            "originalFileName": "illustration-checked-work.webp",
+            "size": 235772,
+            "thumbnail": "https://media.bhekani.com/p/lAn5h3ixD80GSST01YTL9H30-KdSMFN3GF9znCXb/thumb.webp"
+          },
+          "mediaRadius": 4,
+          "objectFit": "cover",
+          "hasBorder": false
+        }
+      },
+      {
+        "widgetId": "widget_ai_work_school_outputs_caption_v2",
+        "name": "rich-text",
+        "deleteable": true,
+        "shared": false,
+        "settings": {
+          "type": "site",
+          "verticalPadding": "py-4",
+          "maxWidth": "max-w-4xl",
+          "alignment": "left",
+          "fontSize": 2,
+          "text": {
+            "type": "doc",
+            "content": [
+              {
+                "type": "paragraph",
+                "content": [
+                  {
+                    "type": "text",
+                    "marks": [
+                      {
+                        "type": "italic"
+                      }
+                    ],
+                    "text": "Assemble, check, cite, decide. The same moves make the work reviewable."
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "widgetId": "widget_ai_work_school_curriculum_v2",
+        "name": "rich-text",
+        "deleteable": true,
+        "shared": false,
+        "settings": {
+          "type": "site",
+          "verticalPadding": "py-16",
+          "maxWidth": "max-w-4xl",
+          "alignment": "left",
+          "fontSize": 4,
+          "text": {
+            "type": "doc",
+            "content": [
+              {
+                "type": "heading",
+                "attrs": {
+                  "level": 2
+                },
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "From first brief to finished handover."
+                  }
+                ]
+              },
+              {
+                "type": "paragraph",
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "Follow one real job from initial context and permission through checks, decisions and handover."
+                  }
+                ]
+              },
+              {
+                "type": "orderedList",
+                "content": [
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "marks": [
+                              {
+                                "type": "bold"
+                              }
+                            ],
+                            "text": "Start with real work. "
+                          },
+                          {
+                            "type": "text",
+                            "text": "Choose a recurring, low-risk job and describe what a useful result must do."
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "marks": [
+                              {
+                                "type": "bold"
+                              }
+                            ],
+                            "text": "Build context that survives the session. "
+                          },
+                          {
+                            "type": "text",
+                            "text": "Write reusable rules and say when they need an update."
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "marks": [
+                              {
+                                "type": "bold"
+                              }
+                            ],
+                            "text": "Choose the mechanism before the prompt. "
+                          },
+                          {
+                            "type": "text",
+                            "text": "Match policy, workflow or agent to the job, then inspect the process underneath it."
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "marks": [
+                              {
+                                "type": "bold"
+                              }
+                            ],
+                            "text": "Build checks that can prove you wrong. "
+                          },
+                          {
+                            "type": "text",
+                            "text": "Derive acceptance conditions from the brief and fail cheaply before anything changes."
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "marks": [
+                              {
+                                "type": "bold"
+                              }
+                            ],
+                            "text": "Make consequential work inspectable. "
+                          },
+                          {
+                            "type": "text",
+                            "text": "Stop on missing context and leave a replayable decision trace."
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "marks": [
+                              {
+                                "type": "bold"
+                              }
+                            ],
+                            "text": "Close delegated work properly. "
+                          },
+                          {
+                            "type": "text",
+                            "text": "Verify that done is true and plan for automation failure."
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "marks": [
+                              {
+                                "type": "bold"
+                              }
+                            ],
+                            "text": "Choose the work surface. "
+                          },
+                          {
+                            "type": "text",
+                            "text": "Separate quick conversations from work that needs delegation and review."
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "marks": [
+                              {
+                                "type": "bold"
+                              }
+                            ],
+                            "text": "Package repeated work. "
+                          },
+                          {
+                            "type": "text",
+                            "text": "Turn a repeated job into a reusable skill and govern its connections."
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "marks": [
+                              {
+                                "type": "bold"
+                              }
+                            ],
+                            "text": "Research and write with evidence. "
+                          },
+                          {
+                            "type": "text",
+                            "text": "Research before drafting, then edit the argument and the prose."
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "marks": [
+                              {
+                                "type": "bold"
+                              }
+                            ],
+                            "text": "Produce work and act safely. "
+                          },
+                          {
+                            "type": "text",
+                            "text": "Build checked artefacts and act only with explicit authority."
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "listItem",
+                    "content": [
+                      {
+                        "type": "paragraph",
+                        "content": [
+                          {
+                            "type": "text",
+                            "marks": [
+                              {
+                                "type": "bold"
+                              }
+                            ],
+                            "text": "Keep the understanding and improve the setup. "
+                          },
+                          {
+                            "type": "text",
+                            "text": "Turn misses into better rules, checks and handovers."
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "widgetId": "widget_ai_work_school_fit_v2",
+        "name": "grid",
+        "deleteable": true,
+        "shared": false,
+        "settings": {
+          "type": "site",
+          "verticalPadding": "py-16",
+          "maxWidth": "max-w-6xl",
+          "title": "Check the fit",
+          "description": {
+            "type": "doc",
+            "content": [
+              {
+                "type": "paragraph",
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "The course works best when the job is real, bounded and safe to practise with."
+                  }
+                ]
+              }
+            ]
+          },
+          "headerAlignment": "left",
+          "itemsAlignment": "left",
+          "columns": 2,
+          "items": [
+            {
+              "title": "This is for you if",
+              "description": {
+                "type": "doc",
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "You have a recurring, low-risk job with a known audience and source material, and you are willing to inspect the result before anyone uses it."
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            {
+              "title": "This is not for you if",
+              "description": {
+                "type": "doc",
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "You want one magic prompt, cannot use an approved environment, or expect AI to make a final high-consequence decision without human review."
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      {
+        "widgetId": "widget_ai_work_school_closing_v2",
+        "name": "hero",
+        "deleteable": true,
+        "shared": false,
+        "settings": {
+          "type": "site",
+          "verticalPadding": "py-12",
+          "maxWidth": "max-w-4xl",
+          "title": "Bring one job. Leave with a method. Free.",
+          "description": {
+            "type": "doc",
+            "content": [
+              {
+                "type": "paragraph",
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "Start with work you already understand. Finish with a workflow another person can inspect."
+                  }
+                ]
+              }
+            ]
+          },
+          "buttonCaption": "Start the course — free",
+          "buttonAction": "/course/ai-for-actual-work/course_ai_for_actual_work_v1",
+          "alignment": "left",
+          "contentAlignment": "left",
+          "layout": "normal"
+        }
+      },
+      {
+        "widgetId": "widget_ai_work_school_faq_v2",
+        "name": "faq",
+        "deleteable": true,
+        "shared": false,
+        "settings": {
+          "type": "site",
+          "verticalPadding": "py-16",
+          "maxWidth": "max-w-6xl",
+          "title": "Before you start",
+          "description": {
+            "type": "doc",
+            "content": [
+              {
+                "type": "paragraph",
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "Bring the work. The course supplies the method."
+                  }
+                ]
+              }
+            ]
+          },
+          "headerAlignment": "left",
+          "itemsAlignment": "left",
+          "layout": "horizontal",
+          "items": [
+            {
+              "title": "How much does the course cost?",
+              "description": {
+                "type": "doc",
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "Nothing. The course is free."
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            {
+              "title": "Do I need to write code?",
+              "description": {
+                "type": "doc",
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "No. The core course covers research, analysis, planning, writing and decisions. Engineering material is an optional extension."
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            {
+              "title": "What kind of work should I bring?",
+              "description": {
+                "type": "doc",
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "Choose a recurring, low-risk job with a known audience, source material and a result someone will use. Avoid practising on a one-off crisis or an irreversible decision."
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            {
+              "title": "What if my company has rules about AI?",
+              "description": {
+                "type": "doc",
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "Follow them. Use only approved tools, sources and accounts. If the exercise conflicts with policy, use a safe stand-in instead."
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            {
+              "title": "What should I do with sensitive material?",
+              "description": {
+                "type": "doc",
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "Do not paste in personal information, secrets or confidential material without permission. Remove identifying details or use representative sample data."
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            {
+              "title": "Does this depend on one AI tool?",
+              "description": {
+                "type": "doc",
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "No. The course is organised around context, permission, sources, checks, decisions and handover. Apply those practices in the tool your work permits."
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      {
+        "widgetId": "widget_ai_work_school_footer_v1",
+        "name": "footer",
+        "deleteable": false,
+        "shared": true
+      }
+    ]
+  }
+}

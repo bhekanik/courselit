@@ -1,23 +1,10 @@
 import { spawnSync } from "node:child_process";
+import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import mongoose from "mongoose";
 
 const REPO_ROOT = join(__dirname, "..", "..", "..", "..", "..");
-const CANONICAL_COURSE_PATH = join(
-    REPO_ROOT,
-    "content",
-    "courses",
-    "ai-for-actual-work",
-    "course.json",
-);
-const CANONICAL_SITE_PATH = join(
-    REPO_ROOT,
-    "content",
-    "site",
-    "ai-work-school",
-    "site.json",
-);
 const FROZEN_COURSE_PATH = join(
     REPO_ROOT,
     "apps",
@@ -234,34 +221,23 @@ async function seedLaunchPrerequisites() {
 }
 
 describe("launch migration frozen curriculum data", () => {
-    // The runtime image and the migration image both build from apps/web and
-    // packages only: services/app/Dockerfile never copies root content/. The
-    // migration therefore ships its own copy, and this test is what stops that
-    // copy from drifting away from the reviewed P3 curriculum.
-    it("is deep equal to the canonical P3 curriculum manifest", () => {
-        const canonical = JSON.parse(
-            readFileSync(CANONICAL_COURSE_PATH, "utf8"),
-        );
-        const frozen = JSON.parse(readFileSync(FROZEN_COURSE_PATH, "utf8"));
-
-        expect(frozen).toStrictEqual(canonical);
-    });
-
-    it("is a byte-for-byte copy of the canonical P3 curriculum manifest", () => {
-        expect(readFileSync(FROZEN_COURSE_PATH)).toEqual(
-            readFileSync(CANONICAL_COURSE_PATH),
-        );
-    });
-
-    it("keeps the launch site snapshot deep-equal to the P2 manifest", () => {
+    it("keeps the immutable launch course snapshot", () => {
         expect(
-            JSON.parse(readFileSync(FROZEN_SITE_PATH, "utf8")),
-        ).toStrictEqual(JSON.parse(readFileSync(CANONICAL_SITE_PATH, "utf8")));
+            createHash("sha256")
+                .update(readFileSync(FROZEN_COURSE_PATH))
+                .digest("hex"),
+        ).toBe(
+            "964b2dab53b0a8b29fef5e09e490c2d3a373eb9e174316e3411fb291d8e14fc8",
+        );
     });
 
-    it("keeps the launch site snapshot byte-equal to the P2 manifest", () => {
-        expect(readFileSync(FROZEN_SITE_PATH)).toEqual(
-            readFileSync(CANONICAL_SITE_PATH),
+    it("keeps the immutable launch site snapshot", () => {
+        expect(
+            createHash("sha256")
+                .update(readFileSync(FROZEN_SITE_PATH))
+                .digest("hex"),
+        ).toBe(
+            "1b575590a109315cabdc34cad25925531e561fc1d5dff3bf28fd6a77736eed71",
         );
     });
 });
