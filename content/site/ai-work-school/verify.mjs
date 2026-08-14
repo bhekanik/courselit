@@ -185,6 +185,10 @@ assert.deepEqual(manifest.draftSharedWidgetsSource, "sharedWidgets");
 assert.equal(sharedWidgets.length, 2);
 assert.deepEqual(sharedWidgets.map(({ name }) => name), ["header", "footer"]);
 assert.ok(sharedWidgets.every(({ shared }) => shared === true));
+assert.ok(
+  new Set(["font-normal", "font-light", "font-bold"]).has(sharedWidgets[0].settings.linkFontWeight),
+  "header linkFontWeight must match the registered Settings union",
+);
 
 assert.equal(page.pageId, "homepage");
 assert.equal(page.type, "site");

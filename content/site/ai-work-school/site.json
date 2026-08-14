@@ -300,7 +300,7 @@
         ],
         "linkAlignment": "center",
         "showLoginControl": true,
-        "linkFontWeight": "font-semibold",
+        "linkFontWeight": "font-bold",
         "spacingBetweenLinks": 24,
         "layout": "fixed",
         "backdropBlur": false

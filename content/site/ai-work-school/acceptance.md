@@ -8,6 +8,7 @@ This package is the single source-controlled input for applying the AI Work Scho
 - Stable identifiers are explicit. The homepage layout contains the dedicated widget named by `managedMarker`; later migration preflight accepts only the untouched CourseLit default or a page containing that marker. Re-running the migration must update the same theme, widgets, and page rather than create copies.
 - The owner and domain-specific identifiers are symbolic sources for the migration to resolve. No production IDs or private data are stored here.
 - The later migration must fail its preflight if the required `privacy` and `terms` pages do not exist. It does not create or replace their content.
+- The aggregate migration creates or resumes the course first. Before it publishes the homepage CTA, it must verify that `course_ai_for_actual_work_v1` exists at slug `ai-for-actual-work`, is published, and has an attached external free plan with `internal: false`. Only then may it apply the theme, shared widgets, and homepage as its final stage.
 - The theme style is copied to both `theme` and `draftTheme`; shared widgets are copied to both published and draft fields; the page layout and metadata are copied to both published and draft fields.
 - The course CTA is `/course/ai-for-actual-work/course_ai_for_actual_work_v1`, the route used by CourseLit for a real course.
 
