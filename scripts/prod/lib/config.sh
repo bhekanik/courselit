@@ -53,6 +53,12 @@
 : "${AIWS_SMOKE_OTP_EXPECT_STATUS:=200}"
 : "${AIWS_SMOKE_TIMEOUT:=30}"
 
+# Media promotion is deliberately opt-in: the public upload origin has no safe
+# default. The CDN host is the only public host accepted in sealed records.
+: "${AIWS_MEDIALIT_UPLOAD_URL:=}"
+: "${AIWS_MEDIA_CDN_HOST:=}"
+: "${AIWS_MEDIA_TIMEOUT:=60}"
+
 # One tab-separated key=value record per build, appended. Comparable across
 # runs with sort/awk; no framework, no schema to keep in sync.
 : "${AIWS_METRICS_FILE:=${TMPDIR:-/tmp}/aiws-deploy-metrics.tsv}"
