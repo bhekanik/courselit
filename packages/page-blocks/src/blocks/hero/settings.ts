@@ -7,6 +7,8 @@ import {
 import { ImageObjectFit } from "@courselit/components-library";
 import { AspectRatio } from "../../components";
 
+export type MobileMediaPlacement = "before-content" | "after-content";
+
 export default interface Settings extends WidgetDefaultSettings {
     title?: string;
     description?: TextEditorContent;
@@ -26,4 +28,5 @@ export default interface Settings extends WidgetDefaultSettings {
     aspectRatio?: AspectRatio;
     objectFit?: ImageObjectFit;
     layout?: "normal" | "card";
+    mobileMediaPlacement?: MobileMediaPlacement;
 }

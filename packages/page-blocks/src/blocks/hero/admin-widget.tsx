@@ -6,7 +6,7 @@ import type {
     Profile,
 } from "@courselit/common-models";
 import { Theme, ThemeStyle, SectionBackground } from "@courselit/page-models";
-import Settings from "./settings";
+import Settings, { type MobileMediaPlacement } from "./settings";
 import {
     AdminWidgetPanel,
     AdminWidgetPanelContainer,
@@ -73,6 +73,10 @@ export default function AdminWidget({
     );
     const [youtubeLink, setYoutubeLink] = useState(settings.youtubeLink);
     const [alignment, setAlignment] = useState(settings.alignment || "left");
+    const [mobileMediaPlacement, setMobileMediaPlacement] =
+        useState<MobileMediaPlacement>(
+            settings.mobileMediaPlacement || "before-content",
+        );
 
     const [media, setMedia] = useState<Partial<Media>>(settings.media || {});
     const [secondaryButtonAction, setSecondaryButtonAction] = useState(
@@ -123,6 +127,7 @@ export default function AdminWidget({
             youtubeLink,
             media,
             alignment,
+            mobileMediaPlacement,
             mediaRadius: mediaBorderRadius,
             verticalPadding,
             secondaryButtonAction,
@@ -148,6 +153,7 @@ export default function AdminWidget({
         buttonCaption,
         youtubeLink,
         alignment,
+        mobileMediaPlacement,
         media,
         mediaBorderRadius,
         verticalPadding,
@@ -330,6 +336,25 @@ export default function AdminWidget({
                         ]}
                         onChange={(value: Alignment | "right") =>
                             setAlignment(value)
+                        }
+                    />
+                )}
+                {hasHeroGraphic && (
+                    <Select
+                        title="Mobile media placement"
+                        value={mobileMediaPlacement}
+                        options={[
+                            {
+                                label: "Before content",
+                                value: "before-content",
+                            },
+                            {
+                                label: "After content",
+                                value: "after-content",
+                            },
+                        ]}
+                        onChange={(value: MobileMediaPlacement) =>
+                            setMobileMediaPlacement(value)
                         }
                     />
                 )}

@@ -59,6 +59,7 @@ export default function Widget({
         maxWidth,
         background,
         layout = "normal",
+        mobileMediaPlacement = "before-content",
     },
     state: { theme },
     nextTheme,
@@ -70,57 +71,50 @@ export default function Widget({
         verticalPadding || theme.theme.structure.section.padding.y;
 
     const hasHeroGraphic = youtubeLink || (media && media.mediaId);
-    let direction: "md:!flex-row" | "md:!flex-row-reverse";
-    switch (alignment) {
-        case "left":
-            direction = "md:!flex-row";
-            break;
-        case "right":
-            direction = "md:!flex-row-reverse";
-            break;
-        default:
-            direction = "md:!flex-row";
-    }
+    const mediaAfterContent = mobileMediaPlacement === "after-content";
+    const reverseDesktopOrder =
+        (alignment === "right" && !mediaAfterContent) ||
+        (alignment !== "right" && mediaAfterContent);
+    const direction: "md:!flex-row" | "md:!flex-row-reverse" =
+        reverseDesktopOrder ? "md:!flex-row-reverse" : "md:!flex-row";
+
+    const mediaContent = hasHeroGraphic ? (
+        <div
+            className={`w-full sm:mb-2 sm:pr-0 sm:pl-0 md:w-1/2 md:mb-0 flex items-center ${
+                hasHeroGraphic && alignment === "right" ? "md:pl-1" : "md:pl-0"
+            } ${
+                hasHeroGraphic && alignment === "right" ? "md:pl-1" : "md:pl-0"
+            }`}
+        >
+            <div
+                className={`w-full text-center overflow-hidden ${twRoundedMap[mediaRadius]}`}
+                style={{
+                    width: "100%",
+                }}
+            >
+                {isVideo(youtubeLink, media) ? (
+                    <VideoWithPreview
+                        videoUrl={youtubeLink || media?.file || ""}
+                        aspectRatio={aspectRatio}
+                        title={media?.caption || ""}
+                        thumbnailUrl={media?.thumbnail || ""}
+                        modal={playVideoInModal}
+                    />
+                ) : (
+                    <Image
+                        src={media?.file || ""}
+                        alt={media?.caption || ""}
+                        borderRadius={mediaRadius}
+                        objectFit={objectFit}
+                    />
+                )}
+            </div>
+        </div>
+    ) : null;
 
     const mainContent = (
         <div className={clsx("flex flex-col gap-4", direction)}>
-            {hasHeroGraphic && (
-                <div
-                    className={`w-full sm:mb-2 sm:pr-0 sm:pl-0 md:w-1/2 md:mb-0 flex items-center ${
-                        hasHeroGraphic && alignment === "right"
-                            ? "md:pl-1"
-                            : "md:pl-0"
-                    } ${
-                        hasHeroGraphic && alignment === "right"
-                            ? "md:pl-1"
-                            : "md:pl-0"
-                    }`}
-                >
-                    <div
-                        className={`w-full text-center overflow-hidden ${twRoundedMap[mediaRadius]}`}
-                        style={{
-                            width: "100%",
-                        }}
-                    >
-                        {isVideo(youtubeLink, media) ? (
-                            <VideoWithPreview
-                                videoUrl={youtubeLink || media?.file || ""}
-                                aspectRatio={aspectRatio}
-                                title={media?.caption || ""}
-                                thumbnailUrl={media?.thumbnail || ""}
-                                modal={playVideoInModal}
-                            />
-                        ) : (
-                            <Image
-                                src={media?.file || ""}
-                                alt={media?.caption || ""}
-                                borderRadius={mediaRadius}
-                                objectFit={objectFit}
-                            />
-                        )}
-                    </div>
-                </div>
-            )}
+            {!mediaAfterContent && mediaContent}
             <div
                 className={`w-full ${
                     hasHeroGraphic ? "md:w-1/2" : "md:w-full"
@@ -198,6 +192,7 @@ export default function Widget({
                     </div>
                 </div>
             </div>
+            {mediaAfterContent && mediaContent}
         </div>
     );
 
