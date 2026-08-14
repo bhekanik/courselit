@@ -52,12 +52,13 @@ type MigrationResult = ReturnType<typeof spawnSync>;
 
 function migrationEnvironment(
     overrides: Record<string, string | undefined> = {},
-) {
+): NodeJS.ProcessEnv {
     const connection = mongoose.connection;
     const databaseName = connection.name;
     const databaseUri = `mongodb://${connection.host}:${connection.port}/${databaseName}`;
 
     return {
+        NODE_ENV: process.env.NODE_ENV ?? "test",
         PATH: process.env.PATH,
         DB_CONNECTION_STRING: databaseUri,
         TARGET_DOMAIN: "main",
@@ -69,15 +70,15 @@ function runMigration(
     args: string[],
     overrides: Record<string, string | undefined> = {},
 ): MigrationResult {
-    const env = migrationEnvironment(overrides);
+    const env = Object.fromEntries(
+        Object.entries(migrationEnvironment(overrides)).filter(
+            (entry): entry is [string, string] => Boolean(entry[1]),
+        ),
+    ) as NodeJS.ProcessEnv;
 
     return spawnSync(process.execPath, [MIGRATION_PATH, ...args], {
         cwd: REPO_ROOT,
-        env: Object.fromEntries(
-            Object.entries(env).filter((entry): entry is [string, string] =>
-                Boolean(entry[1]),
-            ),
-        ),
+        env,
         encoding: "utf8",
         timeout: 20_000,
     });
@@ -621,7 +622,7 @@ describe("launch migration CLI", () => {
     it("rejects an owner without every launch permission", async () => {
         const { db } = await seedLaunchPrerequisites();
         await db
-            .collection("users")
+            .collection<{ email: string; permissions: string[] }>("users")
             .updateOne(
                 { email: "owner@example.com" },
                 { $pull: { permissions: "course:publish" } },
@@ -702,18 +703,27 @@ describe("launch migration CLI", () => {
     it("rejects a managed homepage changed after launch", async () => {
         const { db } = await seedLaunchPrerequisites();
         expect(runMigration(["--apply"]).status).toBe(0);
-        await db.collection("pages").updateOne(
-            { pageId: "homepage" },
-            {
-                $push: {
-                    layout: {
-                        widgetId: "owner-added-widget",
-                        name: "rich-text",
-                        settings: { text: { type: "doc", content: [] } },
+        await db
+            .collection<{
+                pageId: string;
+                layout: Array<{
+                    widgetId: string;
+                    name: string;
+                    settings: Record<string, unknown>;
+                }>;
+            }>("pages")
+            .updateOne(
+                { pageId: "homepage" },
+                {
+                    $push: {
+                        layout: {
+                            widgetId: "owner-added-widget",
+                            name: "rich-text",
+                            settings: { text: { type: "doc", content: [] } },
+                        },
                     },
                 },
-            },
-        );
+            );
 
         const result = runMigration(["--apply"]);
 

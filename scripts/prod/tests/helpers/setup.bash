@@ -43,6 +43,7 @@ prod_setup() {
     export AIWS_LOCK_TIMEOUT=5
     export AIWS_HEALTH_TIMEOUT=1
     export AIWS_HEALTH_INTERVAL=0
+    unset AIWS_TARGET_DOMAIN
     unset AIWS_SMOKE_MEDIA_URL AIWS_SMOKE_OTP_URL AIWS_SMOKE_OTP_BODY
 
     # A migration that really is committed at HEAD, so the exact-SHA channel is

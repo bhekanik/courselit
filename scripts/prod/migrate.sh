@@ -52,6 +52,10 @@ main() {
         ;;
     esac
 
+    assert_safe_token "AIWS_TARGET_DOMAIN" "$AIWS_TARGET_DOMAIN"
+    [ "$AIWS_TARGET_DOMAIN" = main ] ||
+        die "AIWS_TARGET_DOMAIN must be exactly 'main'"
+
     local sha="${1:-}" migration="${2:-}" mode="${3:-}" confirm="${4:-}"
     is_full_sha "$sha" ||
         die "expected a full 40-character commit SHA, got: '$sha'"

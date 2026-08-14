@@ -21,6 +21,7 @@
 : "${AIWS_MIGRATE_TARGET:=builder}"
 : "${AIWS_MIGRATIONS_DIR:=apps/web/.migrations}"
 : "${AIWS_MIGRATION_RUNNER:=node}"
+: "${AIWS_TARGET_DOMAIN=main}"
 : "${AIWS_LOCAL_TOOLS:=docker git ssh gzip}"
 # Trades CPU on this machine for time on the wire. `cat` disables it.
 : "${AIWS_TRANSFER_COMPRESSOR:=gzip -1}"

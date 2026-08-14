@@ -61,16 +61,41 @@ setup() {
     refute_call "remote docker run --rm --network"
 }
 
-@test "migrate runs one-off on the app network with the live env file and never renders secrets" {
-    run "$PROD_DIR/migrate.sh" "$SHA" "$MIGRATION" --apply --yes
+@test "migrate dry run injects the source-controlled target when the live env omits it" {
+    ! grep -q '^TARGET_DOMAIN=' "$REMOTE_DIR/.env"
+
+    run "$PROD_DIR/migrate.sh" "$SHA" "$MIGRATION" --dry-run
     [ "$status" -eq 0 ]
 
     assert_call "docker run --rm --network notto-demo_default"
     assert_call "--env-file .env"
+    assert_call "--env TARGET_DOMAIN=main"
     assert_call "--entrypoint node"
     assert_call "apps/web/.migrations/$MIGRATION"
     refute_secret_leak "$output"
     refute_rendered_compose_config
+}
+
+@test "migrate rejects an empty target before build or remote work" {
+    export AIWS_TARGET_DOMAIN=
+
+    run "$PROD_DIR/migrate.sh" "$SHA" "$MIGRATION" --dry-run
+    [ "$status" -ne 0 ]
+    [[ "$output" == *"AIWS_TARGET_DOMAIN must not be empty"* ]]
+    refute_call "buildx build"
+    refute_call " ssh "
+    refute_secret_leak "$output"
+}
+
+@test "migrate rejects any target other than main before build or remote work" {
+    export AIWS_TARGET_DOMAIN=another-school
+
+    run "$PROD_DIR/migrate.sh" "$SHA" "$MIGRATION" --dry-run
+    [ "$status" -ne 0 ]
+    [[ "$output" == *"AIWS_TARGET_DOMAIN must be exactly 'main'"* ]]
+    refute_call "buildx build"
+    refute_call " ssh "
+    refute_secret_leak "$output"
 }
 
 @test "migrate takes a pre-mutation mongodump and records the outcome" {

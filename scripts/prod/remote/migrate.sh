@@ -4,6 +4,13 @@
 # file, the override or the live env file.
 # Args: <migration-image> <migration-file> <revision> <mode: dry-run|apply>
 
+case "$TARGET_DOMAIN" in
+main) ;;
+"") r_die "TARGET_DOMAIN must not be empty" ;;
+*[!A-Za-z0-9._:/@-]*) r_die "TARGET_DOMAIN contains unsafe characters" ;;
+*) r_die "TARGET_DOMAIN must be exactly 'main'" ;;
+esac
+
 image="$1"
 migration="$2"
 revision="$3"
@@ -90,6 +97,7 @@ r_log "running $path once in $mode mode from $image on $network"
 # `if ! cmd` would make $? the negation's 0, so the real code is captured here.
 status=0
 docker run --rm --network "$network" --env-file "$ENV_FILE" \
+    --env "TARGET_DOMAIN=$TARGET_DOMAIN" \
     --workdir /app --entrypoint "$MIGRATION_RUNNER" "$image" "$path" "--$mode" || status=$?
 if [ "$status" -ne 0 ]; then
     write_meta failed

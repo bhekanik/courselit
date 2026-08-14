@@ -15,14 +15,14 @@ the test suite asserts that.
 
 On this machine:
 
-| Tool      | Why                                                        |
-| --------- | ---------------------------------------------------------- |
-| `docker`  | `buildx build --platform linux/amd64` and `docker save`      |
-| `git`     | resolving the SHA and producing the build context           |
-| `gzip`    | compressing the image stream before it crosses the network   |
-| `ssh`     | the only channel to the host; needs the `notto-deploy` alias |
-| `curl`    | the public smoke checks                                      |
-| `jq`      | parsing `/api/config` (`brew install jq`)                    |
+| Tool                 | Why                                                          |
+| -------------------- | ------------------------------------------------------------ |
+| `docker`             | `buildx build --platform linux/amd64` and `docker save`      |
+| `git`                | resolving the SHA and producing the build context            |
+| `gzip`               | compressing the image stream before it crosses the network   |
+| `ssh`                | the only channel to the host; needs the `notto-deploy` alias |
+| `curl`               | the public smoke checks                                      |
+| `jq`                 | parsing `/api/config` (`brew install jq`)                    |
 | `bats`, `shellcheck` | running the test suite (`brew install bats-core shellcheck`) |
 
 Building `linux/amd64` on an Apple Silicon Mac needs buildx with QEMU, which
@@ -58,7 +58,7 @@ ssh notto-deploy docker images
 
 # Tests.
 bats scripts/prod/tests
-shellcheck -x -e SC1091 scripts/prod/*.sh scripts/prod/lib/*.sh scripts/prod/remote/*.sh
+shellcheck -s bash -x -e SC1091 scripts/prod/*.sh scripts/prod/lib/*.sh scripts/prod/remote/*.sh
 ```
 
 Abbreviated and uppercase SHAs are rejected — the tag has to be one canonical
@@ -79,14 +79,14 @@ simply cannot reach production; the harness does not need to check for one.
    The active builder must advertise `linux/amd64`; the loaded image is then
    inspected for both platform and exact revision before transfer.
 4. **Immutable tag guard** — if that tag already exists locally or on the host
-   with a *different* revision label, the deploy refuses. Same revision means
+   with a _different_ revision label, the deploy refuses. Same revision means
    the step is skipped, so a re-run is cheap.
 5. **Transfer** — `docker save | gzip -1 | ssh notto-deploy docker load`.
    `docker save` writes uncompressed layer tars and the link to the VPS is the
    slow part, so the stream is compressed; `docker load` sniffs the stream and
    decompresses on the far side.
 6. **Activate** (under the host lock) — back up, layer the override, `docker
-   compose up -d --no-deps app`, verify.
+compose up -d --no-deps app`, verify.
 7. **Smoke** — the public checks below.
 8. **Automatic rollback** — if step 6 or 7 fails, restore the previous app
    image and verify it.
@@ -99,47 +99,48 @@ platform and SHA. Reused images add no row because no build occurred.
 
 Every value is an environment variable with a default in `lib/config.sh`.
 
-| Variable                        | Default                                     |
-| ------------------------------- | ------------------------------------------- |
-| `AIWS_SSH_HOST`                 | `notto-deploy`                              |
-| `AIWS_REMOTE_DIR`               | `/home/deploy/services/courselit`           |
-| `AIWS_COMPOSE_FILE`             | `compose.yml`                               |
-| `AIWS_ENV_FILE`                 | `.env`                                      |
-| `AIWS_OVERRIDE_FILE`            | `compose.aiws.yml`                          |
-| `AIWS_IMAGE_ENV_FILE`           | `aiws-active-image.env`                     |
-| `AIWS_BACKUP_SUBDIR`            | `aiws-backups`                              |
-| `AIWS_LOCK_FILE`                | `.aiws-deploy.lock`                         |
-| `AIWS_COMPOSE_PROJECT`          | `courselit`                                 |
-| `AIWS_CADDY_CONTAINER`          | `notto-demo-caddy-1`                        |
-| `AIWS_IMAGE_REPO`               | `aiws/courselit-app`                        |
-| `AIWS_PLATFORM`                 | `linux/amd64`                               |
-| `AIWS_DOCKERFILE`               | `services/app/Dockerfile`                   |
-| `AIWS_REMOTE_ARCH`              | `x86_64`                                    |
-| `AIWS_MIGRATE_IMAGE_REPO`       | `courselit-migrate`                         |
-| `AIWS_MIGRATE_TARGET`           | `builder`                                   |
-| `AIWS_MIGRATIONS_DIR`           | `apps/web/.migrations`                      |
-| `AIWS_MIGRATION_RUNNER`         | `node`                                      |
-| `AIWS_LOCAL_TOOLS`              | `docker git ssh gzip`                       |
-| `AIWS_TRANSFER_COMPRESSOR`      | `gzip -1` — set to `cat` to disable         |
-| `AIWS_SMOKE_TOOLS`              | `curl jq`                                   |
-| `AIWS_REMOTE_TOOLS`             | `docker flock gzip`                         |
-| `AIWS_REQUIRED_SERVICES`        | `app mongo medialit`                        |
-| **`AIWS_MIN_FREE_DISK_GB`**     | **`20`** — enforced on both ends            |
-| `AIWS_MIN_DUMP_BYTES`           | `1024` — floor for a believable mongodump   |
-| `AIWS_LOCAL_DISK_PATH`          | `$TMPDIR`                                   |
-| `AIWS_SSH_CONNECT_TIMEOUT`      | `15`                                        |
-| `AIWS_LOCK_TIMEOUT`             | `900`                                       |
-| `AIWS_HEALTH_TIMEOUT`           | `300`                                       |
-| `AIWS_HEALTH_INTERVAL`          | `5`                                         |
-| `AIWS_PUBLIC_URL`               | `https://courselit.24.199.66.181.sslip.io`  |
-| `AIWS_SMOKE_MARKER`             | `_next/static`                              |
-| `AIWS_SMOKE_MEDIA_URL`          | unset — optional, reported as SKIP          |
-| `AIWS_SMOKE_OTP_URL`            | unset — optional, reported as SKIP          |
-| `AIWS_SMOKE_OTP_BODY`           | unset — required alongside the OTP URL      |
-| `AIWS_SMOKE_OTP_EXPECT_STATUS`  | `200`                                       |
-| `AIWS_SMOKE_TIMEOUT`            | `30`                                        |
-| `AIWS_METRICS_FILE`             | `$TMPDIR/aiws-deploy-metrics.tsv`           |
-| `AIWS_DEPLOY_TS`                | `date -u +%Y%m%dT%H%M%SZ`                   |
+| Variable                       | Default                                    |
+| ------------------------------ | ------------------------------------------ |
+| `AIWS_SSH_HOST`                | `notto-deploy`                             |
+| `AIWS_REMOTE_DIR`              | `/home/deploy/services/courselit`          |
+| `AIWS_COMPOSE_FILE`            | `compose.yml`                              |
+| `AIWS_ENV_FILE`                | `.env`                                     |
+| `AIWS_OVERRIDE_FILE`           | `compose.aiws.yml`                         |
+| `AIWS_IMAGE_ENV_FILE`          | `aiws-active-image.env`                    |
+| `AIWS_BACKUP_SUBDIR`           | `aiws-backups`                             |
+| `AIWS_LOCK_FILE`               | `.aiws-deploy.lock`                        |
+| `AIWS_COMPOSE_PROJECT`         | `courselit`                                |
+| `AIWS_CADDY_CONTAINER`         | `notto-demo-caddy-1`                       |
+| `AIWS_IMAGE_REPO`              | `aiws/courselit-app`                       |
+| `AIWS_PLATFORM`                | `linux/amd64`                              |
+| `AIWS_DOCKERFILE`              | `services/app/Dockerfile`                  |
+| `AIWS_REMOTE_ARCH`             | `x86_64`                                   |
+| `AIWS_MIGRATE_IMAGE_REPO`      | `courselit-migrate`                        |
+| `AIWS_MIGRATE_TARGET`          | `builder`                                  |
+| `AIWS_MIGRATIONS_DIR`          | `apps/web/.migrations`                     |
+| `AIWS_MIGRATION_RUNNER`        | `node`                                     |
+| `AIWS_TARGET_DOMAIN`           | `main`                                     |
+| `AIWS_LOCAL_TOOLS`             | `docker git ssh gzip`                      |
+| `AIWS_TRANSFER_COMPRESSOR`     | `gzip -1` — set to `cat` to disable        |
+| `AIWS_SMOKE_TOOLS`             | `curl jq`                                  |
+| `AIWS_REMOTE_TOOLS`            | `docker flock gzip`                        |
+| `AIWS_REQUIRED_SERVICES`       | `app mongo medialit`                       |
+| **`AIWS_MIN_FREE_DISK_GB`**    | **`20`** — enforced on both ends           |
+| `AIWS_MIN_DUMP_BYTES`          | `1024` — floor for a believable mongodump  |
+| `AIWS_LOCAL_DISK_PATH`         | `$TMPDIR`                                  |
+| `AIWS_SSH_CONNECT_TIMEOUT`     | `15`                                       |
+| `AIWS_LOCK_TIMEOUT`            | `900`                                      |
+| `AIWS_HEALTH_TIMEOUT`          | `300`                                      |
+| `AIWS_HEALTH_INTERVAL`         | `5`                                        |
+| `AIWS_PUBLIC_URL`              | `https://courselit.24.199.66.181.sslip.io` |
+| `AIWS_SMOKE_MARKER`            | `_next/static`                             |
+| `AIWS_SMOKE_MEDIA_URL`         | unset — optional, reported as SKIP         |
+| `AIWS_SMOKE_OTP_URL`           | unset — optional, reported as SKIP         |
+| `AIWS_SMOKE_OTP_BODY`          | unset — required alongside the OTP URL     |
+| `AIWS_SMOKE_OTP_EXPECT_STATUS` | `200`                                      |
+| `AIWS_SMOKE_TIMEOUT`           | `30`                                       |
+| `AIWS_METRICS_FILE`            | `$TMPDIR/aiws-deploy-metrics.tsv`          |
+| `AIWS_DEPLOY_TS`               | `date -u +%Y%m%dT%H%M%SZ`                  |
 
 Raise `AIWS_MIN_FREE_DISK_GB` for a bigger image; lower it only if you have
 measured how much the transfer and the mongodump actually need.
@@ -248,8 +249,11 @@ verify the loaded platform/revision, and stream it to the host without a
 registry. The host checks the revision again, then runs
 `node apps/web/.migrations/<file> <mode>` in a one-off container on the network
 shared by the live app and Mongo. The live `.env` is passed with Docker's
-`--env-file`; its values are never rendered. Compose files, the runtime image
-and the startup command are untouched.
+`--env-file`; its values are never rendered. The source-controlled
+`AIWS_TARGET_DOMAIN` default is validated as exactly `main`, rendered into the
+trusted remote config, then passed to the one-off container as an explicit
+`TARGET_DOMAIN` override. This does not require `TARGET_DOMAIN` in the live
+`.env`. Compose files, the runtime image and the startup command are untouched.
 
 In `--dry-run` mode the harness never stops the app and never takes a dump. The
 migration receives `--dry-run` and must not mutate production data.
@@ -275,11 +279,11 @@ made after the dump. Stop, inspect `migration.meta` (which records
 `restore-db.sh` is destructive. It requires the full confirmation flag and an
 exact harness backup ID in one of three forms:
 
-| Backup ID                  | Archive read                | Written by         |
-| -------------------------- | --------------------------- | ------------------ |
-| `YYYYMMDDTHHMMSSZ`         | `mongo.archive.gz`          | a deploy           |
-| `migrate-YYYYMMDDTHHMMSSZ` | `mongo.archive.gz`          | `migrate.sh --apply` |
-| `restore-YYYYMMDDTHHMMSSZ` | `pre-restore.archive.gz`    | an earlier restore |
+| Backup ID                  | Archive read             | Written by           |
+| -------------------------- | ------------------------ | -------------------- |
+| `YYYYMMDDTHHMMSSZ`         | `mongo.archive.gz`       | a deploy             |
+| `migrate-YYYYMMDDTHHMMSSZ` | `mongo.archive.gz`       | `migrate.sh --apply` |
+| `restore-YYYYMMDDTHHMMSSZ` | `pre-restore.archive.gz` | an earlier restore   |
 
 The `restore-` form is how you undo a restore: every restore keeps a safety dump
 of the state it replaced, and that dump is selectable as a restore source. The
@@ -315,16 +319,16 @@ needing `mongorestore` is a phase stop: halt and review before continuing.
 
 Required — a failure fails the deploy and triggers a rollback:
 
-| Check          | Passes when                                                    |
-| -------------- | -------------------------------------------------------------- |
-| root `/`       | 200, `text/html`, body contains `AIWS_SMOKE_MARKER`             |
-| `/api/config`  | 200, `application/json`, body parses as JSON                    |
-| `/login`       | 200, `text/html`                                                |
+| Check         | Passes when                                         |
+| ------------- | --------------------------------------------------- |
+| root `/`      | 200, `text/html`, body contains `AIWS_SMOKE_MARKER` |
+| `/api/config` | 200, `application/json`, body parses as JSON        |
+| `/login`      | 200, `text/html`                                    |
 
 Optional — reported as `SKIP`, never as `PASS`, when unconfigured:
 
-| Check       | Configure with                                     |
-| ----------- | -------------------------------------------------- |
+| Check       | Configure with                                       |
+| ----------- | ---------------------------------------------------- |
 | media asset | `AIWS_SMOKE_MEDIA_URL=https://media.bhekani.com/...` |
 | email OTP   | `AIWS_SMOKE_OTP_URL` **and** `AIWS_SMOKE_OTP_BODY`   |
 
@@ -338,7 +342,7 @@ These are real, and deliberately not papered over:
 - **No public media asset is checked by default.** The R2 smoke objects were
   deleted after the last media test, so there is nothing stable to point at.
   Set `AIWS_SMOKE_MEDIA_URL` once P4 uploads a real asset. Until then the
-  media path is only verified *inside* the stack, by the authenticated MediaLit
+  media path is only verified _inside_ the stack, by the authenticated MediaLit
   signature call the deploy makes from the app container.
 - **Email delivery is not verified end to end.** The optional OTP probe only
   proves the endpoint accepted a request. Inbox receipt is a manual check, and

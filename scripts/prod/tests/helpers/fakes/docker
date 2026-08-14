@@ -120,7 +120,7 @@ cmd_run() {
         a="$1"
         case "$a" in
         --rm | -i | -t) shift ;;
-        --network | --env-file | -w | --workdir | --entrypoint | -e) shift 2 ;;
+        --network | --env-file | --env | -w | --workdir | --entrypoint | -e) shift 2 ;;
         -*) die "unsupported run flag: $a" ;;
         *) image="$1"; shift; break ;;
         esac
