@@ -1,6 +1,7 @@
 /**
- * Seeds the reviewed AI-for-work course as an unpublished, resumable aggregate.
- * The launch migration publishes it only after the P2 site snapshot is integrated.
+ * Seeds and publishes the reviewed AI-for-work course and school site.
+ * Course references and the external free plan are verified before publication;
+ * theme and homepage changes run only after the published course is verified.
  *
  * Usage: node 14-08-26_17-30-seed-ai-work-school.js --dry-run|--apply
  */
@@ -12,6 +13,10 @@ const TARGET_DOMAIN = "main";
 const MIGRATION_ID = "14-08-26_17-30-seed-ai-work-school";
 const COURSE_SNAPSHOT_URL = new URL(
     `./${MIGRATION_ID}.course.json`,
+    import.meta.url,
+);
+const SITE_SNAPSHOT_URL = new URL(
+    `./${MIGRATION_ID}.site.json`,
     import.meta.url,
 );
 const PLAN_ID = "plan_ai_for_actual_work_free_v1";
@@ -55,6 +60,74 @@ const PRODUCT_WIDGETS = [
     },
 ];
 const PRODUCT_WIDGET_IDS = PRODUCT_WIDGETS.map(({ widgetId }) => widgetId);
+const DEFAULT_SHARED_WIDGETS = {
+    header: {
+        name: "header",
+        shared: true,
+        deleteable: false,
+        settings: {
+            links: [
+                {
+                    label: "Products",
+                    href: "/products",
+                    isButton: false,
+                    isPrimary: false,
+                },
+                {
+                    label: "Blog",
+                    href: "/blog",
+                    isButton: false,
+                    isPrimary: false,
+                },
+                {
+                    label: "Start learning",
+                    href: "/products",
+                    isButton: true,
+                    isPrimary: true,
+                },
+            ],
+            linkAlignment: "center",
+            showLoginControl: true,
+            linkFontWeight: "font-normal",
+            spacingBetweenLinks: 16,
+        },
+    },
+    footer: {
+        name: "footer",
+        shared: true,
+        deleteable: false,
+        settings: {
+            sections: [
+                {
+                    name: "Legal",
+                    links: [
+                        { label: "Terms of Use", href: "/p/terms" },
+                        { label: "Privacy Policy", href: "/p/privacy" },
+                    ],
+                },
+            ],
+            titleFontSize: 2,
+            socials: {
+                facebook: "",
+                twitter: "https://twitter.com/courselit",
+                instagram: "",
+                youtube: "",
+                linkedin: "",
+                discord: "",
+                github: "https://github.com/codelitdev/courselit",
+            },
+            socialIconsSize: 24,
+        },
+    },
+};
+const SUPPORTED_SITE_WIDGETS = new Set([
+    "header",
+    "rich-text",
+    "hero",
+    "grid",
+    "faq",
+    "footer",
+]);
 
 class SafeMigrationError extends Error {
     constructor(message, exitCode = 1) {
@@ -166,6 +239,142 @@ function validateSnapshot(snapshot) {
     return { course, lessons, groupIds: [...groupIds] };
 }
 
+function validateSiteSnapshot(snapshot, course) {
+    assert(
+        snapshot &&
+            snapshot.schemaVersion === 1 &&
+            snapshot.siteKey === "ai-work-school",
+        "Site snapshot schema is invalid",
+    );
+    assert(
+        snapshot.domainScope?.selector === "current-domain" &&
+            snapshot.domainScope.ownerUserIdSource === "domain-owner.userId" &&
+            snapshot.domainScope.themeId === "theme_ai_work_school_v1" &&
+            nonEmptyString(snapshot.domainScope.settingsPatch?.title) &&
+            nonEmptyString(snapshot.domainScope.settingsPatch?.subtitle),
+        "Site domain scope is invalid",
+    );
+    const lessonCount = course.sections.reduce(
+        (total, section) => total + section.lessons.length,
+        0,
+    );
+    assert(
+        snapshot.course?.courseId === course.courseId &&
+            snapshot.course.slug === course.slug &&
+            snapshot.course.access === "free" &&
+            snapshot.course.sections === course.sections.length &&
+            snapshot.course.lessons === lessonCount &&
+            snapshot.course.href ===
+                `/course/${course.slug}/${course.courseId}`,
+        "Site course contract is invalid",
+    );
+    assert(
+        Array.isArray(snapshot.requiredPages) &&
+            snapshot.requiredPages.length === 2 &&
+            ["privacy", "terms"].every((pageId) =>
+                snapshot.requiredPages.some(
+                    (page) =>
+                        page.pageId === pageId && page.href === `/p/${pageId}`,
+                ),
+            ),
+        "Site legal-page contract is invalid",
+    );
+    assert(
+        snapshot.theme?.themeId === snapshot.domainScope.themeId &&
+            nonEmptyString(snapshot.theme.name) &&
+            nonEmptyString(snapshot.theme.parentThemeId) &&
+            snapshot.theme.userIdSource === "domain-owner.userId" &&
+            valuesEqual(snapshot.theme.applyStyleTo, ["theme", "draftTheme"]) &&
+            snapshot.theme.style?.colors?.light &&
+            snapshot.theme.style?.colors?.dark &&
+            snapshot.theme.style?.typography &&
+            snapshot.theme.style?.interactives &&
+            snapshot.theme.style?.structure,
+        "Site theme contract is invalid",
+    );
+    for (const palette of [
+        snapshot.theme.style.colors.light,
+        snapshot.theme.style.colors.dark,
+    ]) {
+        assert(
+            Object.values(palette).every(
+                (value) =>
+                    nonEmptyString(value) && !value.includes("undefined"),
+            ),
+            "Site theme values are invalid",
+        );
+    }
+
+    assert(
+        Array.isArray(snapshot.sharedWidgets) &&
+            snapshot.sharedWidgets.length === 2 &&
+            snapshot.draftSharedWidgetsSource === "sharedWidgets",
+        "Site shared widgets are invalid",
+    );
+    const sharedWidgetsByName = new Map(
+        snapshot.sharedWidgets.map((widget) => [widget.name, widget]),
+    );
+    assert(
+        sharedWidgetsByName.get("header")?.widgetId ===
+            "widget_ai_work_school_header_v1" &&
+            sharedWidgetsByName.get("footer")?.widgetId ===
+                "widget_ai_work_school_footer_v1",
+        "Site shared widget IDs are invalid",
+    );
+
+    const page = snapshot.page;
+    assert(
+        page?.pageId === "homepage" &&
+            page.type === "site" &&
+            page.entityIdSource === "domain.name" &&
+            page.creatorIdSource === "domain-owner.userId" &&
+            page.draftTitleSource === "page.title" &&
+            page.draftDescriptionSource === "page.description" &&
+            page.draftRobotsAllowedSource === "page.robotsAllowed" &&
+            page.draftLayoutSource === "page.layout" &&
+            nonEmptyString(page.title) &&
+            nonEmptyString(page.description) &&
+            page.robotsAllowed === true &&
+            Array.isArray(page.layout) &&
+            page.layout.length > 0,
+        "Site homepage contract is invalid",
+    );
+    const pageWidgetIds = new Set();
+    for (const widget of page.layout) {
+        assert(
+            nonEmptyString(widget.widgetId) &&
+                SUPPORTED_SITE_WIDGETS.has(widget.name) &&
+                typeof widget.deleteable === "boolean" &&
+                typeof widget.shared === "boolean",
+            "Site homepage widget is invalid",
+        );
+        assert(
+            !pageWidgetIds.has(widget.widgetId),
+            "Site homepage widget IDs are duplicated",
+        );
+        pageWidgetIds.add(widget.widgetId);
+    }
+    assert(
+        snapshot.managedMarker?.pageId === page.pageId &&
+            snapshot.managedMarker.widgetId ===
+                "widget_ai_work_school_managed_v1" &&
+            snapshot.managedMarker.preflight === "default-or-managed" &&
+            pageWidgetIds.has(snapshot.managedMarker.widgetId),
+        "Site managed marker is invalid",
+    );
+    assert(
+        pageWidgetIds.has(sharedWidgetsByName.get("header").widgetId) &&
+            pageWidgetIds.has(sharedWidgetsByName.get("footer").widgetId),
+        "Site shared widget references are invalid",
+    );
+
+    return {
+        site: snapshot,
+        pageWidgetIds: [...pageWidgetIds],
+        sharedWidgetsByName,
+    };
+}
+
 function valuesEqual(left, right) {
     return isDeepStrictEqual(left, right);
 }
@@ -228,7 +437,65 @@ function assertMatchingPlan(existing, domainId, course) {
     );
 }
 
-function buildDesiredState({ domainId, owner, course, lessons }) {
+function assertMatchingTheme(existing, domainId, site) {
+    if (!existing) {
+        return;
+    }
+    assert(
+        sameObjectId(existing.domain, domainId) &&
+            existing.themeId === site.theme.themeId &&
+            existing.name === site.theme.name,
+        "Managed theme identity collides with existing data",
+    );
+}
+
+function withoutWidgetId(widget) {
+    if (!widget) {
+        return undefined;
+    }
+    const { widgetId: _widgetId, ...rest } = widget;
+    return rest;
+}
+
+function isKnownDefaultSharedWidget(widget, name) {
+    return valuesEqual(withoutWidgetId(widget), DEFAULT_SHARED_WIDGETS[name]);
+}
+
+function isManagedSharedWidget(widget, managedWidget) {
+    return managedFieldsMatch(widget, managedWidget);
+}
+
+function assertSharedWidgetsAreSafe(domain, sharedWidgetsByName) {
+    for (const source of [
+        domain.sharedWidgets ?? {},
+        domain.draftSharedWidgets ?? {},
+    ]) {
+        for (const name of ["header", "footer"]) {
+            const widget = source[name];
+            if (!widget) {
+                continue;
+            }
+            assert(
+                isKnownDefaultSharedWidget(widget, name) ||
+                    isManagedSharedWidget(
+                        widget,
+                        sharedWidgetsByName.get(name),
+                    ),
+                "Shared site widgets contain owner edits",
+            );
+        }
+    }
+}
+
+function buildDesiredState({
+    domain,
+    owner,
+    course,
+    lessons,
+    site,
+    sharedWidgetsByName,
+}) {
+    const domainId = domain._id;
     const lessonIds = lessons.map((lesson) => lesson.lessonId);
     const groups = course.sections.map((section) => ({
         _id: section.groupId,
@@ -247,34 +514,61 @@ function buildDesiredState({ domainId, owner, course, lessons }) {
         ],
     });
 
+    const stagedCourse = {
+        domain: domainId,
+        courseId: course.courseId,
+        title: course.title,
+        slug: course.slug,
+        cost: 0,
+        costType: "free",
+        privacy: "unlisted",
+        type: "course",
+        creatorId: owner.userId,
+        published: false,
+        tags: [],
+        lessons: lessonIds,
+        description,
+        groups,
+        sales: 0,
+        customers: [],
+        pageId: course.slug,
+        defaultPaymentPlan: PLAN_ID,
+        leadMagnet: false,
+        discussions: false,
+    };
+    const stagedLessons = lessons.map((lesson) => ({
+        domain: domainId,
+        lessonId: lesson.lessonId,
+        title: lesson.title,
+        type: lesson.type,
+        content: lesson.content,
+        downloadable: false,
+        creatorId: owner.userId,
+        courseId: course.courseId,
+        requiresEnrollment: lesson.requiresEnrollment,
+        published: false,
+        groupId: lesson.groupId,
+    }));
+    const managedSharedWidgets = Object.fromEntries(
+        ["header", "footer"].map((name) => [
+            name,
+            sharedWidgetsByName.get(name),
+        ]),
+    );
+    const homepageLayout = site.page.layout;
+
     return {
+        stagedCourse,
         course: {
-            domain: domainId,
-            courseId: course.courseId,
-            title: course.title,
-            slug: course.slug,
-            cost: 0,
-            costType: "free",
-            privacy: "unlisted",
-            type: "course",
-            creatorId: owner.userId,
-            published: false,
-            tags: [],
-            lessons: lessonIds,
-            description,
-            groups,
-            sales: 0,
-            customers: [],
-            pageId: course.slug,
-            defaultPaymentPlan: PLAN_ID,
-            leadMagnet: false,
-            discussions: false,
+            ...stagedCourse,
+            privacy: "public",
+            published: true,
         },
-        page: {
+        productPage: {
             domain: domainId,
+            creatorId: owner.userId,
             pageId: course.slug,
             type: "product",
-            creatorId: owner.userId,
             name: course.title,
             entityId: course.courseId,
             deleteable: false,
@@ -296,30 +590,70 @@ function buildDesiredState({ domainId, owner, course, lessons }) {
             internal: false,
             includedProducts: [],
         },
-        lessons: lessons.map((lesson) => ({
-            domain: domainId,
-            lessonId: lesson.lessonId,
-            title: lesson.title,
-            type: lesson.type,
-            content: lesson.content,
-            downloadable: false,
-            creatorId: owner.userId,
-            courseId: course.courseId,
-            requiresEnrollment: lesson.requiresEnrollment,
-            published: false,
-            groupId: lesson.groupId,
+        stagedLessons,
+        lessons: stagedLessons.map((lesson) => ({
+            ...lesson,
+            published: true,
         })),
+        theme: {
+            domain: domainId,
+            themeId: site.theme.themeId,
+            name: site.theme.name,
+            parentThemeId: site.theme.parentThemeId,
+            userId: owner.userId,
+            theme: site.theme.style,
+            draftTheme: site.theme.style,
+        },
+        domain: {
+            settings: {
+                ...(domain.settings ?? {}),
+                ...site.domainScope.settingsPatch,
+            },
+            themeId: site.theme.themeId,
+            lastEditedThemeId: site.theme.themeId,
+            sharedWidgets: {
+                ...(domain.sharedWidgets ?? {}),
+                ...managedSharedWidgets,
+            },
+            draftSharedWidgets: {
+                ...(domain.draftSharedWidgets ?? {}),
+                ...managedSharedWidgets,
+            },
+        },
+        homepage: {
+            domain: domainId,
+            pageId: site.page.pageId,
+            name: site.page.name,
+            type: site.page.type,
+            entityId: domain.name,
+            creatorId: owner.userId,
+            title: site.page.title,
+            description: site.page.description,
+            robotsAllowed: site.page.robotsAllowed,
+            draftTitle: site.page.title,
+            draftDescription: site.page.description,
+            draftRobotsAllowed: site.page.robotsAllowed,
+            layout: homepageLayout,
+            draftLayout: homepageLayout,
+            deleteable: false,
+            deleted: false,
+        },
     };
 }
 
-async function preflight(db, snapshot) {
-    const { course, lessons, groupIds } = validateSnapshot(snapshot);
+async function preflight(db, courseSnapshot, siteSnapshot) {
+    const { course, lessons, groupIds } = validateSnapshot(courseSnapshot);
+    const { site, pageWidgetIds, sharedWidgetsByName } = validateSiteSnapshot(
+        siteSnapshot,
+        course,
+    );
     const domains = await db
         .collection("domains")
         .find({ name: TARGET_DOMAIN, deleted: false })
         .limit(2)
         .toArray();
     const domain = requireSingle(domains, "Target domain preflight failed");
+    assertSharedWidgetsAreSafe(domain, sharedWidgetsByName);
 
     const owners = await db
         .collection("users")
@@ -354,10 +688,29 @@ async function preflight(db, snapshot) {
         .limit(2)
         .toArray();
     const homepage = requireSingle(homepages, "Homepage preflight failed");
+    const homepageIsDefault = JSON.stringify(homepage.layout ?? []).includes(
+        DEFAULT_HOMEPAGE_MARKER,
+    );
+    const homepageIsManaged = (homepage.layout ?? []).some(
+        (widget) => widget.widgetId === site.managedMarker.widgetId,
+    );
     assert(
-        JSON.stringify(homepage.layout ?? []).includes(DEFAULT_HOMEPAGE_MARKER),
+        homepageIsDefault || homepageIsManaged,
         "Homepage is not the known default",
     );
+
+    for (const requiredPage of site.requiredPages) {
+        const pages = await db
+            .collection("pages")
+            .find({
+                domain: domain._id,
+                pageId: requiredPage.pageId,
+                deleted: { $ne: true },
+            })
+            .limit(2)
+            .toArray();
+        assert(pages.length === 1, "Required legal pages preflight failed");
+    }
 
     const unrelatedPublishedCourses = await db
         .collection("courses")
@@ -448,6 +801,66 @@ async function preflight(db, snapshot) {
         "Managed widget identity collides with existing data",
     );
 
+    const homepageWidgetCollisionPages = await db
+        .collection("pages")
+        .find({
+            $or: [
+                { "layout.widgetId": { $in: pageWidgetIds } },
+                { "draftLayout.widgetId": { $in: pageWidgetIds } },
+            ],
+        })
+        .project({ _id: 1 })
+        .toArray();
+    assert(
+        homepageWidgetCollisionPages.every((page) =>
+            sameObjectId(page._id, homepage._id),
+        ),
+        "Managed homepage widget identity collides with existing data",
+    );
+    const sharedWidgetIds = [...sharedWidgetsByName.values()].map(
+        (widget) => widget.widgetId,
+    );
+    const sharedWidgetCollisionDomains = await db
+        .collection("domains")
+        .find({
+            $or: [
+                { "sharedWidgets.header.widgetId": { $in: sharedWidgetIds } },
+                { "sharedWidgets.footer.widgetId": { $in: sharedWidgetIds } },
+                {
+                    "draftSharedWidgets.header.widgetId": {
+                        $in: sharedWidgetIds,
+                    },
+                },
+                {
+                    "draftSharedWidgets.footer.widgetId": {
+                        $in: sharedWidgetIds,
+                    },
+                },
+            ],
+        })
+        .project({ _id: 1 })
+        .toArray();
+    assert(
+        sharedWidgetCollisionDomains.every((match) =>
+            sameObjectId(match._id, domain._id),
+        ),
+        "Managed shared widget identity collides with existing data",
+    );
+
+    const themeMatches = await db
+        .collection("userthemes")
+        .find({
+            $or: [
+                { themeId: site.theme.themeId },
+                { domain: domain._id, name: site.theme.name },
+            ],
+        })
+        .limit(2)
+        .toArray();
+    assert(themeMatches.length <= 1, "Managed theme identity is duplicated");
+    const existingTheme = themeMatches[0];
+    assertMatchingTheme(existingTheme, domain._id, site);
+
     const planMatches = await db
         .collection("paymentplans")
         .find({
@@ -510,32 +923,70 @@ async function preflight(db, snapshot) {
     );
 
     const desired = buildDesiredState({
-        domainId: domain._id,
+        domain,
         owner,
         course,
         lessons,
+        site,
+        sharedWidgetsByName,
     });
+    if (homepageIsManaged) {
+        assert(
+            managedFieldsMatch(homepage, desired.homepage),
+            "Managed homepage has owner edits",
+        );
+        assert(
+            managedFieldsMatch(existingTheme, desired.theme),
+            "Managed theme has owner edits",
+        );
+        assert(
+            managedFieldsMatch(domain, desired.domain),
+            "Managed domain settings have owner edits",
+        );
+    }
     const changes = [
         {
+            kind: "course",
             collection: "courses",
             existing: existingCourse,
             desired: desired.course,
         },
         {
+            kind: "product-page",
             collection: "pages",
             existing: existingPage,
-            desired: desired.page,
+            desired: desired.productPage,
         },
         {
+            kind: "plan",
             collection: "paymentplans",
             existing: existingPlan,
             desired: desired.plan,
         },
         ...desired.lessons.map((lesson) => ({
+            kind: "lesson",
             collection: "lessons",
             existing: lessonsById.get(lesson.lessonId),
             desired: lesson,
         })),
+        {
+            kind: "theme",
+            collection: "userthemes",
+            existing: existingTheme,
+            desired: desired.theme,
+        },
+        {
+            kind: "domain",
+            collection: "domains",
+            existing: domain,
+            desired: desired.domain,
+        },
+        {
+            kind: "homepage",
+            collection: "pages",
+            existing: homepage,
+            desired: desired.homepage,
+        },
     ].filter(
         ({ existing, desired: desiredDocument }) =>
             !managedFieldsMatch(existing, desiredDocument),
@@ -544,97 +995,235 @@ async function preflight(db, snapshot) {
     return { changes, desired };
 }
 
-async function applyChanges(db, changes) {
-    let applied = 0;
-    for (const change of changes) {
-        const collection = db.collection(change.collection);
-        if (change.existing) {
-            const result = await collection.updateOne(
-                { _id: change.existing._id },
-                {
-                    $set: {
-                        ...change.desired,
-                        ...(change.collection === "lessons"
-                            ? {}
-                            : { updatedAt: new Date() }),
-                    },
-                },
-            );
-            assert(
-                result.matchedCount === 1,
-                "Managed record changed during apply",
-            );
-        } else {
-            const now = new Date();
-            await collection.insertOne({
-                ...change.desired,
-                ...(change.collection === "lessons"
-                    ? {}
-                    : { createdAt: now, updatedAt: now }),
-            });
-        }
-        applied += 1;
+const TIMESTAMPED_COLLECTIONS = new Set([
+    "courses",
+    "pages",
+    "paymentplans",
+    "userthemes",
+    "domains",
+]);
+
+async function reconcileRecord(db, collectionName, filter, desired) {
+    const collection = db.collection(collectionName);
+    const existing = await collection.findOne(filter);
+    if (managedFieldsMatch(existing, desired)) {
+        return;
     }
 
-    return applied;
+    const timestamps = TIMESTAMPED_COLLECTIONS.has(collectionName);
+    const now = new Date();
+    if (existing) {
+        const result = await collection.updateOne(
+            { _id: existing._id },
+            {
+                $set: {
+                    ...desired,
+                    ...(timestamps ? { updatedAt: now } : {}),
+                },
+            },
+        );
+        assert(
+            result.matchedCount === 1,
+            "Managed record changed during apply",
+        );
+        return;
+    }
+
+    await collection.insertOne({
+        ...desired,
+        ...(timestamps ? { createdAt: now, updatedAt: now } : {}),
+    });
 }
 
-async function verifyAppliedState(db, desired) {
+async function verifyCourseState(db, desired, published) {
+    const expectedCourse = published ? desired.course : desired.stagedCourse;
+    const expectedLessons = published ? desired.lessons : desired.stagedLessons;
     const course = await db
         .collection("courses")
-        .findOne({ courseId: desired.course.courseId });
-    const page = await db.collection("pages").findOne({
-        domain: desired.page.domain,
-        pageId: desired.page.pageId,
+        .findOne({ courseId: expectedCourse.courseId });
+    const productPage = await db.collection("pages").findOne({
+        domain: desired.productPage.domain,
+        pageId: desired.productPage.pageId,
     });
     const plan = await db
         .collection("paymentplans")
         .findOne({ planId: desired.plan.planId });
     assert(
-        managedFieldsMatch(course, desired.course),
+        managedFieldsMatch(course, expectedCourse),
         "Course verification failed",
     );
     assert(
-        managedFieldsMatch(page, desired.page),
+        managedFieldsMatch(productPage, desired.productPage),
         "Product page verification failed",
     );
     assert(
-        managedFieldsMatch(plan, desired.plan),
-        "Payment plan verification failed",
+        managedFieldsMatch(plan, desired.plan) &&
+            plan.type === "free" &&
+            plan.internal === false &&
+            plan.archived === false,
+        "External free plan verification failed",
     );
 
     const lessons = await db
         .collection("lessons")
-        .find({ courseId: desired.course.courseId })
+        .find({ courseId: expectedCourse.courseId })
         .toArray();
     assert(
-        lessons.length === desired.lessons.length,
+        lessons.length === expectedLessons.length,
         "Lesson count verification failed",
     );
     const lessonsById = new Map(
         lessons.map((lesson) => [lesson.lessonId, lesson]),
     );
     assert(
-        desired.lessons.every((lesson) =>
+        expectedLessons.every((lesson) =>
             managedFieldsMatch(lessonsById.get(lesson.lessonId), lesson),
         ),
         "Lesson verification failed",
     );
     assert(
-        course.published === false &&
-            lessons.every((lesson) => lesson.published === false),
-        "Publication occurred before site integration",
+        course.published === published &&
+            lessons.every((lesson) => lesson.published === published),
+        "Course publication verification failed",
     );
+}
+
+async function verifySiteState(db, desired) {
+    const theme = await db
+        .collection("userthemes")
+        .findOne({ themeId: desired.theme.themeId });
+    const domain = await db
+        .collection("domains")
+        .findOne({ _id: desired.homepage.domain });
+    const homepage = await db.collection("pages").findOne({
+        domain: desired.homepage.domain,
+        pageId: desired.homepage.pageId,
+    });
+    assert(
+        managedFieldsMatch(theme, desired.theme),
+        "Theme verification failed",
+    );
+    assert(
+        managedFieldsMatch(domain, desired.domain),
+        "Domain theme verification failed",
+    );
+    assert(
+        managedFieldsMatch(homepage, desired.homepage),
+        "Homepage verification failed",
+    );
+}
+
+async function applyCourseAggregate(db, plan) {
+    const courseKinds = new Set(["course", "product-page", "plan", "lesson"]);
+    const courseNeedsChanges = plan.changes.some(({ kind }) =>
+        courseKinds.has(kind),
+    );
+    if (!courseNeedsChanges) {
+        await verifyCourseState(db, plan.desired, true);
+        return;
+    }
+
+    await reconcileRecord(
+        db,
+        "courses",
+        { courseId: plan.desired.stagedCourse.courseId },
+        plan.desired.stagedCourse,
+    );
+    await reconcileRecord(
+        db,
+        "pages",
+        {
+            domain: plan.desired.productPage.domain,
+            pageId: plan.desired.productPage.pageId,
+        },
+        plan.desired.productPage,
+    );
+    for (const lesson of plan.desired.stagedLessons) {
+        await reconcileRecord(
+            db,
+            "lessons",
+            { lessonId: lesson.lessonId },
+            lesson,
+        );
+    }
+    await reconcileRecord(
+        db,
+        "paymentplans",
+        { planId: plan.desired.plan.planId },
+        plan.desired.plan,
+    );
+
+    await verifyCourseState(db, plan.desired, false);
+    for (const lesson of plan.desired.lessons) {
+        await reconcileRecord(
+            db,
+            "lessons",
+            { lessonId: lesson.lessonId },
+            lesson,
+        );
+    }
+    await reconcileRecord(
+        db,
+        "courses",
+        { courseId: plan.desired.course.courseId },
+        plan.desired.course,
+    );
+    await verifyCourseState(db, plan.desired, true);
+}
+
+async function applySite(db, plan) {
+    await verifyCourseState(db, plan.desired, true);
+    const siteKinds = new Set(["theme", "domain", "homepage"]);
+    if (!plan.changes.some(({ kind }) => siteKinds.has(kind))) {
+        await verifySiteState(db, plan.desired);
+        return;
+    }
+
+    await reconcileRecord(
+        db,
+        "userthemes",
+        { themeId: plan.desired.theme.themeId },
+        plan.desired.theme,
+    );
+    await reconcileRecord(
+        db,
+        "domains",
+        { _id: plan.desired.homepage.domain },
+        plan.desired.domain,
+    );
+    await reconcileRecord(
+        db,
+        "pages",
+        {
+            domain: plan.desired.homepage.domain,
+            pageId: plan.desired.homepage.pageId,
+        },
+        plan.desired.homepage,
+    );
+    await verifySiteState(db, plan.desired);
+}
+
+async function applyPlan(db, plan) {
+    await applyCourseAggregate(db, plan);
+    await applySite(db, plan);
+    await verifyCourseState(db, plan.desired, true);
+    await verifySiteState(db, plan.desired);
+    return plan.changes.length;
 }
 
 async function run() {
     const mode = parseMode(process.argv.slice(2));
     const { connectionString } = readEnvironment();
-    let snapshot;
+    let courseSnapshot;
+    let siteSnapshot;
     try {
-        snapshot = JSON.parse(await readFile(COURSE_SNAPSHOT_URL, "utf8"));
+        [courseSnapshot, siteSnapshot] = await Promise.all(
+            [COURSE_SNAPSHOT_URL, SITE_SNAPSHOT_URL].map(async (url) =>
+                JSON.parse(await readFile(url, "utf8")),
+            ),
+        );
     } catch {
-        throw new SafeMigrationError("Course snapshot could not be read");
+        throw new SafeMigrationError("Launch snapshots could not be read");
     }
 
     try {
@@ -646,12 +1235,8 @@ async function run() {
     try {
         const db = mongoose.connection.db;
         assert(db, "Database connection failed");
-        const plan = await preflight(db, snapshot);
-        const applied =
-            mode === "apply" ? await applyChanges(db, plan.changes) : 0;
-        if (mode === "apply") {
-            await verifyAppliedState(db, plan.desired);
-        }
+        const plan = await preflight(db, courseSnapshot, siteSnapshot);
+        const applied = mode === "apply" ? await applyPlan(db, plan) : 0;
         console.log(
             `launch-migration mode=${mode} planned=${plan.changes.length} applied=${applied}`,
         );

@@ -11,12 +11,26 @@ const CANONICAL_COURSE_PATH = join(
     "ai-for-actual-work",
     "course.json",
 );
+const CANONICAL_SITE_PATH = join(
+    REPO_ROOT,
+    "content",
+    "site",
+    "ai-work-school",
+    "site.json",
+);
 const FROZEN_COURSE_PATH = join(
     REPO_ROOT,
     "apps",
     "web",
     ".migrations",
     "14-08-26_17-30-seed-ai-work-school.course.json",
+);
+const FROZEN_SITE_PATH = join(
+    REPO_ROOT,
+    "apps",
+    "web",
+    ".migrations",
+    "14-08-26_17-30-seed-ai-work-school.site.json",
 );
 const MIGRATION_PATH = join(
     REPO_ROOT,
@@ -81,6 +95,78 @@ async function seedLaunchPrerequisites() {
         name: "main",
         email: "owner@example.com",
         deleted: false,
+        settings: {
+            title: "My school",
+            subtitle: "Learn something new",
+        },
+        themeId: "learning",
+        lastEditedThemeId: "learning",
+        sharedWidgets: {
+            header: {
+                widgetId: "existing-default-header",
+                name: "header",
+                deleteable: false,
+                shared: true,
+                settings: {
+                    links: [
+                        {
+                            label: "Products",
+                            href: "/products",
+                            isButton: false,
+                            isPrimary: false,
+                        },
+                        {
+                            label: "Blog",
+                            href: "/blog",
+                            isButton: false,
+                            isPrimary: false,
+                        },
+                        {
+                            label: "Start learning",
+                            href: "/products",
+                            isButton: true,
+                            isPrimary: true,
+                        },
+                    ],
+                    linkAlignment: "center",
+                    showLoginControl: true,
+                    linkFontWeight: "font-normal",
+                    spacingBetweenLinks: 16,
+                },
+            },
+            footer: {
+                widgetId: "existing-default-footer",
+                name: "footer",
+                deleteable: false,
+                shared: true,
+                settings: {
+                    sections: [
+                        {
+                            name: "Legal",
+                            links: [
+                                { label: "Terms of Use", href: "/p/terms" },
+                                {
+                                    label: "Privacy Policy",
+                                    href: "/p/privacy",
+                                },
+                            ],
+                        },
+                    ],
+                    titleFontSize: 2,
+                    socials: {
+                        facebook: "",
+                        twitter: "https://twitter.com/courselit",
+                        instagram: "",
+                        youtube: "",
+                        linkedin: "",
+                        discord: "",
+                        github: "https://github.com/codelitdev/courselit",
+                    },
+                    socialIconsSize: 24,
+                },
+            },
+        },
+        draftSharedWidgets: {},
     });
     await db.collection("users").insertOne({
         domain: domainId,
@@ -90,34 +176,58 @@ async function seedLaunchPrerequisites() {
         name: "BK",
         permissions: REQUIRED_PERMISSIONS,
     });
-    await db.collection("pages").insertOne({
-        domain: domainId,
-        pageId: "homepage",
-        name: "Home",
-        deleted: false,
-        layout: [
-            {
-                widgetId: "existing-default-copy",
-                name: "rich-text",
-                settings: {
-                    text: {
-                        type: "doc",
-                        content: [
-                            {
-                                type: "paragraph",
-                                content: [
-                                    {
-                                        type: "text",
-                                        text: DEFAULT_HOMEPAGE_MARKER,
-                                    },
-                                ],
-                            },
-                        ],
+    await db.collection("pages").insertMany([
+        {
+            domain: domainId,
+            pageId: "homepage",
+            name: "Home",
+            type: "site",
+            creatorId: "owner_ai_work_school_v1",
+            entityId: "main",
+            deleted: false,
+            layout: [
+                {
+                    widgetId: "existing-default-copy",
+                    name: "rich-text",
+                    settings: {
+                        text: {
+                            type: "doc",
+                            content: [
+                                {
+                                    type: "paragraph",
+                                    content: [
+                                        {
+                                            type: "text",
+                                            text: DEFAULT_HOMEPAGE_MARKER,
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
                     },
                 },
-            },
-        ],
-    });
+            ],
+            draftLayout: [],
+        },
+        {
+            domain: domainId,
+            pageId: "privacy",
+            name: "Privacy policy",
+            type: "site",
+            creatorId: "owner_ai_work_school_v1",
+            entityId: "main",
+            deleted: false,
+        },
+        {
+            domain: domainId,
+            pageId: "terms",
+            name: "Terms of use",
+            type: "site",
+            creatorId: "owner_ai_work_school_v1",
+            entityId: "main",
+            deleted: false,
+        },
+    ]);
 
     return { db, domainId };
 }
@@ -139,6 +249,18 @@ describe("launch migration frozen curriculum data", () => {
     it("is a byte-for-byte copy of the canonical P3 curriculum manifest", () => {
         expect(readFileSync(FROZEN_COURSE_PATH)).toEqual(
             readFileSync(CANONICAL_COURSE_PATH),
+        );
+    });
+
+    it("keeps the launch site snapshot deep-equal to the P2 manifest", () => {
+        expect(
+            JSON.parse(readFileSync(FROZEN_SITE_PATH, "utf8")),
+        ).toStrictEqual(JSON.parse(readFileSync(CANONICAL_SITE_PATH, "utf8")));
+    });
+
+    it("keeps the launch site snapshot byte-equal to the P2 manifest", () => {
+        expect(readFileSync(FROZEN_SITE_PATH)).toEqual(
+            readFileSync(CANONICAL_SITE_PATH),
         );
     });
 });
@@ -205,7 +327,7 @@ describe("launch migration CLI", () => {
 
         expect(result.status).toBe(0);
         expect(result.stdout).toContain("mode=dry-run");
-        expect(result.stdout).toContain("planned=17");
+        expect(result.stdout).toContain("planned=20");
         expect({
             courses: await db.collection("courses").countDocuments(),
             lessons: await db.collection("lessons").countDocuments(),
@@ -215,15 +337,15 @@ describe("launch migration CLI", () => {
         expect(`${result.stdout}${result.stderr}`).not.toContain("mongodb://");
     });
 
-    it("applies the complete course aggregate without publishing it", async () => {
+    it("publishes the complete course before switching the site", async () => {
         const { db, domainId } = await seedLaunchPrerequisites();
 
         const result = runMigration(["--apply"]);
 
         expect(result.status).toBe(0);
         expect(result.stdout).toContain("mode=apply");
-        expect(result.stdout).toContain("planned=17");
-        expect(result.stdout).toContain("applied=17");
+        expect(result.stdout).toContain("planned=20");
+        expect(result.stdout).toContain("applied=20");
 
         const course = await db.collection("courses").findOne({
             courseId: "course_ai_for_actual_work_v1",
@@ -235,6 +357,16 @@ describe("launch migration CLI", () => {
         const plan = await db.collection("paymentplans").findOne({
             planId: "plan_ai_for_actual_work_free_v1",
         });
+        const homepage = await db.collection("pages").findOne({
+            domain: domainId,
+            pageId: "homepage",
+        });
+        const domain = await db.collection("domains").findOne({
+            _id: domainId,
+        });
+        const theme = await db.collection("userthemes").findOne({
+            themeId: "theme_ai_work_school_v1",
+        });
         const lessons = await db
             .collection("lessons")
             .find({ courseId: "course_ai_for_actual_work_v1" })
@@ -245,9 +377,9 @@ describe("launch migration CLI", () => {
             domain: domainId,
             title: "AI for actual work",
             slug: "ai-for-actual-work",
-            privacy: "unlisted",
+            privacy: "public",
             type: "course",
-            published: false,
+            published: true,
             defaultPaymentPlan: "plan_ai_for_actual_work_free_v1",
             pageId: "ai-for-actual-work",
             lessons: Array.from(
@@ -287,10 +419,43 @@ describe("launch migration CLI", () => {
             internal: false,
             archived: false,
         });
-        expect(lessons).toHaveLength(14);
-        expect(lessons.every(({ published }) => published === false)).toBe(
-            true,
+        expect(homepage).toMatchObject({
+            pageId: "homepage",
+            title: "AI for actual work | AI Work School",
+            robotsAllowed: true,
+        });
+        expect(homepage?.layout.map(({ widgetId }) => widgetId)).toContain(
+            "widget_ai_work_school_managed_v1",
         );
+        expect(homepage?.draftLayout).toEqual(homepage?.layout);
+        expect(domain).toMatchObject({
+            themeId: "theme_ai_work_school_v1",
+            lastEditedThemeId: "theme_ai_work_school_v1",
+            settings: {
+                title: "AI Work School",
+                subtitle: "Bring the task. Build the checks.",
+            },
+        });
+        expect(domain?.sharedWidgets.header.widgetId).toBe(
+            "widget_ai_work_school_header_v1",
+        );
+        expect(domain?.sharedWidgets.header.settings.linkFontWeight).toBe(
+            "font-bold",
+        );
+        expect(domain?.sharedWidgets.footer.widgetId).toBe(
+            "widget_ai_work_school_footer_v1",
+        );
+        expect(domain?.draftSharedWidgets).toEqual(domain?.sharedWidgets);
+        expect(theme).toMatchObject({
+            domain: domainId,
+            themeId: "theme_ai_work_school_v1",
+            name: "AI Work School",
+            parentThemeId: "learning",
+            userId: "owner_ai_work_school_v1",
+        });
+        expect(theme?.draftTheme).toEqual(theme?.theme);
+        expect(lessons).toHaveLength(14);
+        expect(lessons.every(({ published }) => published === true)).toBe(true);
         expect(lessons[0]).toMatchObject({
             lessonId: "lesson_ai_for_actual_work_01",
             groupId: "group_ai_for_actual_work_01",
@@ -312,6 +477,11 @@ describe("launch migration CLI", () => {
             productPage: await db.collection("pages").findOne({
                 pageId: "ai-for-actual-work",
             }),
+            homepage: await db.collection("pages").findOne({
+                pageId: "homepage",
+            }),
+            domain: await db.collection("domains").findOne({}),
+            theme: await db.collection("userthemes").findOne({}),
             plan: await db.collection("paymentplans").findOne({}),
             lessons: await db
                 .collection("lessons")
@@ -330,6 +500,11 @@ describe("launch migration CLI", () => {
             productPage: await db.collection("pages").findOne({
                 pageId: "ai-for-actual-work",
             }),
+            homepage: await db.collection("pages").findOne({
+                pageId: "homepage",
+            }),
+            domain: await db.collection("domains").findOne({}),
+            theme: await db.collection("userthemes").findOne({}),
             plan: await db.collection("paymentplans").findOne({}),
             lessons: await db
                 .collection("lessons")
@@ -339,7 +514,7 @@ describe("launch migration CLI", () => {
         }).toEqual(before);
     });
 
-    it("resumes an interrupted unpublished aggregate", async () => {
+    it("resumes an interrupted aggregate and republishes it", async () => {
         const { db } = await seedLaunchPrerequisites();
         expect(runMigration(["--apply"]).status).toBe(0);
         await db.collection("paymentplans").deleteOne({
@@ -363,12 +538,12 @@ describe("launch migration CLI", () => {
         expect(
             await db.collection("lessons").countDocuments({
                 courseId: "course_ai_for_actual_work_v1",
-                published: false,
+                published: true,
             }),
         ).toBe(14);
         expect(
             await db.collection("courses").countDocuments({ published: true }),
-        ).toBe(0);
+        ).toBe(1);
     });
 
     it("rejects a stable lesson ID owned by another aggregate", async () => {
@@ -480,7 +655,7 @@ describe("launch migration CLI", () => {
         const result = runMigration(["--dry-run"]);
 
         expect(result.status).toBe(0);
-        expect(result.stdout).toContain("planned=17");
+        expect(result.stdout).toContain("planned=20");
         expect(await db.collection("courses").countDocuments({})).toBe(0);
     });
 
@@ -521,7 +696,119 @@ describe("launch migration CLI", () => {
         expect(result.status).toBe(1);
         expect(result.stderr).toContain("Homepage is not the known default");
         expect(await db.collection("courses").countDocuments({})).toBe(0);
-        expect(await db.collection("pages").countDocuments({})).toBe(1);
+        expect(await db.collection("pages").countDocuments({})).toBe(3);
+    });
+
+    it("rejects a managed homepage changed after launch", async () => {
+        const { db } = await seedLaunchPrerequisites();
+        expect(runMigration(["--apply"]).status).toBe(0);
+        await db.collection("pages").updateOne(
+            { pageId: "homepage" },
+            {
+                $push: {
+                    layout: {
+                        widgetId: "owner-added-widget",
+                        name: "rich-text",
+                        settings: { text: { type: "doc", content: [] } },
+                    },
+                },
+            },
+        );
+
+        const result = runMigration(["--apply"]);
+
+        expect(result.status).toBe(1);
+        expect(result.stderr).toContain("Managed homepage has owner edits");
+        expect(
+            await db.collection("pages").countDocuments({
+                pageId: "homepage",
+                "layout.widgetId": "owner-added-widget",
+            }),
+        ).toBe(1);
+    });
+
+    it("requires the legal pages referenced by the footer", async () => {
+        const { db } = await seedLaunchPrerequisites();
+        await db.collection("pages").deleteOne({ pageId: "privacy" });
+
+        const result = runMigration(["--apply"]);
+
+        expect(result.status).toBe(1);
+        expect(result.stderr).toContain(
+            "Required legal pages preflight failed",
+        );
+        expect(await db.collection("courses").countDocuments({})).toBe(0);
+        expect(await db.collection("userthemes").countDocuments({})).toBe(0);
+    });
+
+    it("rejects a stable theme ID owned by another domain", async () => {
+        const { db } = await seedLaunchPrerequisites();
+        await db.collection("userthemes").insertOne({
+            domain: new mongoose.Types.ObjectId(),
+            themeId: "theme_ai_work_school_v1",
+            name: "Unrelated theme",
+        });
+
+        const result = runMigration(["--apply"]);
+
+        expect(result.status).toBe(1);
+        expect(result.stderr).toContain(
+            "Managed theme identity collides with existing data",
+        );
+        expect(await db.collection("courses").countDocuments({})).toBe(0);
+        expect(await db.collection("userthemes").countDocuments({})).toBe(1);
+    });
+
+    it("keeps course and site unpublished when lesson staging is interrupted", async () => {
+        const { db, domainId } = await seedLaunchPrerequisites();
+        await db.createCollection("lessons", {
+            validator: {
+                $nor: [{ lessonId: "lesson_ai_for_actual_work_07" }],
+            },
+        });
+
+        const interrupted = runMigration(["--apply"]);
+
+        expect(interrupted.status).toBe(1);
+        expect(
+            await db.collection("courses").countDocuments({
+                courseId: "course_ai_for_actual_work_v1",
+                published: false,
+            }),
+        ).toBe(1);
+        const stagedLessons = await db.collection("lessons").find({}).toArray();
+        expect(stagedLessons.length).toBeGreaterThan(0);
+        expect(
+            stagedLessons.every(({ published }) => published === false),
+        ).toBe(true);
+        expect(await db.collection("userthemes").countDocuments({})).toBe(0);
+        expect(
+            await db.collection("pages").countDocuments({
+                pageId: "homepage",
+                "layout.settings.text.content.content.text":
+                    DEFAULT_HOMEPAGE_MARKER,
+            }),
+        ).toBe(1);
+        expect(
+            await db.collection("domains").countDocuments({
+                _id: domainId,
+                themeId: "learning",
+            }),
+        ).toBe(1);
+
+        await db.command({ collMod: "lessons", validator: {} });
+        const resumed = runMigration(["--apply"]);
+
+        expect(resumed.status).toBe(0);
+        expect(
+            await db.collection("courses").countDocuments({ published: true }),
+        ).toBe(1);
+        expect(
+            await db.collection("pages").countDocuments({
+                pageId: "homepage",
+                "layout.widgetId": "widget_ai_work_school_managed_v1",
+            }),
+        ).toBe(1);
     });
 
     it("rejects an unrelated published course before writing", async () => {
@@ -589,7 +876,7 @@ describe("launch migration CLI", () => {
         expect(result.stderr).toContain(
             "Managed widget identity collides with existing data",
         );
-        expect(await db.collection("pages").countDocuments({})).toBe(2);
+        expect(await db.collection("pages").countDocuments({})).toBe(4);
         expect(await db.collection("courses").countDocuments({})).toBe(0);
     });
 });
