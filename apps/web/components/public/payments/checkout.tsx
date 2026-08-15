@@ -90,7 +90,6 @@ export default function Checkout({
     >();
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const stripePromise = loadStripe(siteinfo.stripeKey as string);
     const router = useRouter();
     const { toast } = useToast();
     const { theme } = useContext(ThemeContext);
@@ -195,8 +194,14 @@ export default function Checkout({
             const response = await fetch.exec();
             if (response.status === "initiated") {
                 if (paymentMethod === UIConstants.PAYMENT_METHOD_STRIPE) {
+                    const stripe = siteinfo.stripeKey
+                        ? await loadStripe(siteinfo.stripeKey)
+                        : null;
+                    if (!stripe) {
+                        throw new Error("Stripe is not configured");
+                    }
                     await redirectToStripeCheckout({
-                        stripe: await stripePromise,
+                        stripe,
                         sessionId: response.paymentTracker,
                     });
                 }
