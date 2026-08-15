@@ -7,11 +7,17 @@ const root = new URL("./", import.meta.url);
 const manifest = JSON.parse(readFileSync(new URL("site.json", root), "utf8"));
 const mediaManifest = JSON.parse(readFileSync(new URL("media.json", root), "utf8"));
 const courseManifest = JSON.parse(readFileSync(new URL("../../courses/ai-for-actual-work/course.json", root), "utf8"));
+const secondaryCourseManifest = JSON.parse(readFileSync(new URL("../../courses/notes-that-do-work/course.json", root), "utf8"));
 
 const course = {
   courseId: "course_ai_for_actual_work_v1",
   slug: "ai-for-actual-work",
   href: "/course/ai-for-actual-work/course_ai_for_actual_work_v1",
+};
+const secondaryCourse = {
+  courseId: "course_notes_that_do_work_v1",
+  slug: "notes-that-do-work",
+  href: "/course/notes-that-do-work/course_notes_that_do_work_v1",
 };
 
 const colourFields = [
@@ -68,7 +74,7 @@ assert.equal(manifest.siteKey, "ai-work-school");
 assert.deepEqual(manifest.managedMarker, {
   pageId: "homepage",
   widgetId: "widget_ai_work_school_managed_v1",
-  preflight: "launch-baseline-or-v2",
+  preflight: "humanized-baseline-or-course-catalogue-v3",
 });
 assert.deepEqual(manifest.domainScope, {
   selector: "current-domain",
@@ -80,8 +86,11 @@ assert.deepEqual(manifest.domainScope, {
   },
 });
 assert.deepEqual(manifest.course, { ...course, access: "free" });
+assert.deepEqual(manifest.secondaryCourse, { ...secondaryCourse, access: "free" });
 assert.equal(courseManifest.course.courseId, course.courseId);
 assert.equal(courseManifest.course.slug, course.slug);
+assert.equal(secondaryCourseManifest.course.courseId, secondaryCourse.courseId);
+assert.equal(secondaryCourseManifest.course.slug, secondaryCourse.slug);
 assert.deepEqual(manifest.requiredPages, [
   { pageId: "privacy", href: "/p/privacy" },
   { pageId: "terms", href: "/p/terms" },
@@ -317,7 +326,7 @@ for (const widget of allWidgets) {
 }
 
 const bodyNames = page.layout.slice(1, -1).map(({ name }) => name);
-assert.deepEqual(bodyNames, ["hero", "rich-text", "rich-text", "media", "rich-text", "media", "rich-text", "rich-text", "grid", "hero", "faq"]);
+assert.deepEqual(bodyNames, ["hero", "rich-text", "grid", "rich-text", "media", "rich-text", "media", "rich-text", "rich-text", "grid", "hero", "faq"]);
 const managedWidget = page.layout.find(({ widgetId }) => widgetId === manifest.managedMarker.widgetId);
 assert.equal(managedWidget.name, "rich-text");
 assert.equal(managedWidget.shared, false);
@@ -362,6 +371,14 @@ const visibleCopy = {
     button: hero.settings.buttonCaption,
   },
   factLine: paragraphTexts(widgetsById.widget_ai_work_school_managed_v1.settings.text),
+  coursePicker: {
+    title: widgetsById.widget_ai_work_school_courses_v1.settings.title,
+    body: paragraphTexts(widgetsById.widget_ai_work_school_courses_v1.settings.description),
+    items: widgetsById.widget_ai_work_school_courses_v1.settings.items.map(({ title, description }) => ({
+      title,
+      body: paragraphTexts(description),
+    })),
+  },
   toolChoice: richTextCopy(widgetsById.widget_ai_work_school_tool_choice_v2.settings.text),
   capstone: richTextCopy(widgetsById.widget_ai_work_school_artefacts_v2.settings.text),
   checkedWorkCaption: paragraphTexts(widgetsById.widget_ai_work_school_outputs_caption_v2.settings.text),
@@ -403,7 +420,21 @@ assert.deepEqual(visibleCopy, {
     body: ["Bring one recurring, low-risk job you already do. You will run it with AI, test the result, and write down enough of the method to do it again without starting from scratch."],
     button: "Start the free course",
   },
-  factLine: ["Free course. No coding required."],
+  factLine: ["Two free courses. No coding required."],
+  coursePicker: {
+    title: "Choose the work you want to improve",
+    body: ["Both courses start with a real, low-risk job. Pick the one that matches the problem in front of you."],
+    items: [
+      {
+        title: "AI for actual work",
+        body: ["Use AI on a recurring job while keeping its sources, checks and decisions visible. Start AI for actual work."],
+      },
+      {
+        title: "Notes that do work",
+        body: ["Turn scattered reading, meeting notes and ideas into a source-backed brief and a handover. Start Notes that do work."],
+      },
+    ],
+  },
   toolChoice: {
     headings: ["Work out what the job needs first."],
     paragraphs: ["A quick question, a job you repeat, and a task that needs company files are different problems. The course shows you when chat is enough, when to save a method as a skill, and when a connection needs tighter permissions and review."],
@@ -512,6 +543,7 @@ assert.doesNotMatch(copy, /\b(?:save|saved|saving)\s+\d+\s+(?:minutes?|hours?|da
 assert.doesNotMatch(copy, /[\u2013\u2014]/, "landing copy must not use en/em dashes");
 assert.doesNotMatch(copy, /[\u200b\u200c\u200d\ufeff]/, "copy must not contain invisible characters");
 assert.match(copy, /real job/i);
+assert.match(copy, /Notes that do work/);
 assert.match(copy, /working brief/i);
 assert.match(copy, /source contract/i);
 assert.match(copy, /decision record/i);
@@ -545,7 +577,14 @@ assert.ok(
   "every required page must be linked from the footer",
 );
 
-assert.equal(collectText(managedWidget).join(" "), "Free course. No coding required.");
+assert.equal(collectText(managedWidget).join(" "), "Two free courses. No coding required.");
+const coursePicker = page.layout.find(({ widgetId }) => widgetId === "widget_ai_work_school_courses_v1");
+assert.equal(coursePicker.name, "grid");
+assert.deepEqual(
+  coursePicker.settings.items.map(({ title }) => title),
+  ["AI for actual work", "Notes that do work"],
+);
+assert.deepEqual(collectValues(coursePicker, "href"), [course.href, secondaryCourse.href]);
 const artefacts = page.layout.find(({ widgetId }) => widgetId === "widget_ai_work_school_artefacts_v2");
 const artefactItems = findNodes(artefacts.settings.text, "bulletList").flatMap(({ content }) => content);
 assert.equal(artefactItems.length, 5);
@@ -568,12 +607,12 @@ assert.deepEqual(
   "homepage curriculum must follow the source course",
 );
 const grids = page.layout.filter(({ name }) => name === "grid");
-assert.equal(grids.length, 1, "fit/not-fit must be the only grid");
+assert.equal(grids.length, 2, "course picker and fit/not-fit must be the only grids");
 assert.deepEqual(
-  grids[0].settings.items.map(({ title }) => title),
+  widgetsById.widget_ai_work_school_fit_v2.settings.items.map(({ title }) => title),
   ["A good job for this course", "Pick another job if"],
 );
-assert.equal(grids[0].settings.items.length, 2);
+assert.equal(widgetsById.widget_ai_work_school_fit_v2.settings.items.length, 2);
 const faqs = page.layout.filter(({ name }) => name === "faq");
 assert.equal(faqs.length, 1);
 assert.ok(faqs[0].settings.items.length <= 6, "FAQ must have no more than six items");
@@ -588,7 +627,7 @@ assert.ok(
   "landing sections must not introduce colour bands",
 );
 
-console.log("AI Work School site manifest checks passed");
+process.stdout.write("AI Work School site manifest checks passed\n");
 
 function validateSettings(name, settings) {
   const common = ["type", "verticalPadding", "maxWidth"];

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 520" role="img" aria-labelledby="title desc">
+  <title id="title">Choose the note's next job</title>
+  <desc id="desc">A decision guide routes a note by its next use: temporary capture, inspectable source evidence, reusable concept, or live project and decision record.</desc>
+  <defs><marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 8 4 0 8Z" fill="#0F1D2E"/></marker><style>.heading{font-family:"Roboto Slab";font-size:22px;font-weight:500;fill:#0F1D2E}.label{font-family:"Mulish";font-size:17px;font-weight:600;fill:#0F1D2E}.body{font-family:"Mulish";font-size:15px;fill:#435564}.small{font-family:"Mulish";font-size:15px;font-weight:600;fill:#174A46}.line{fill:none;stroke:#0F1D2E;stroke-width:1.6;marker-end:url(#arrow)}</style></defs>
+  <rect width="360" height="520" rx="12" fill="#F7F8F8"/>
+  <text x="24" y="38" class="heading">What must this note do next?</text>
+  <text x="24" y="62" class="body">Choose from use, not where it came from.</text>
+  <rect x="66" y="88" width="228" height="62" rx="31" fill="#DDEDEA" stroke="#0E5C5E" stroke-width="1.5"/>
+  <text x="92" y="114" class="label">Name the next action</text><text x="92" y="136" class="body">Real, not hypothetical</text>
+  <path class="line" d="M180 150V178H86V202"/><path class="line" d="M180 178H274V202"/><path class="line" d="M180 178V322H86V346"/><path class="line" d="M180 322H274V346"/>
+  <rect x="24" y="202" width="124" height="96" rx="9" fill="#FFFFFF" stroke="#687783" stroke-width="1.5"/>
+  <text x="40" y="231" class="label">Capture</text><text x="40" y="256" class="body">Remember or</text><text x="40" y="277" class="body">process soon</text>
+  <rect x="212" y="202" width="124" height="96" rx="9" fill="#FFFFFF" stroke="#687783" stroke-width="1.5"/>
+  <text x="228" y="231" class="label">Source</text><text x="228" y="256" class="body">Inspect the</text><text x="228" y="277" class="body">evidence</text>
+  <rect x="24" y="346" width="124" height="96" rx="9" fill="#F8EBDD" stroke="#8A4B12" stroke-width="1.5"/>
+  <text x="40" y="375" class="label">Concept</text><text x="40" y="400" class="body">Reuse one idea</text><text x="40" y="421" class="body">later</text>
+  <rect x="212" y="346" width="124" height="96" rx="9" fill="#FFFFFF" stroke="#687783" stroke-width="1.5"/>
+  <text x="228" y="375" class="label">Project</text><text x="228" y="400" class="body">Run a live</text><text x="228" y="421" class="body">decision</text>
+  <text x="24" y="477" class="small">One note can change jobs over time.</text>
+  <text x="24" y="500" class="body">If the next use is unclear, keep it as capture.</text>
+</svg>

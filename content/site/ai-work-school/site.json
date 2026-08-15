@@ -4,7 +4,7 @@
     "managedMarker": {
         "pageId": "homepage",
         "widgetId": "widget_ai_work_school_managed_v1",
-        "preflight": "launch-baseline-or-v2"
+        "preflight": "humanized-baseline-or-course-catalogue-v3"
     },
     "domainScope": {
         "selector": "current-domain",
@@ -19,6 +19,12 @@
         "courseId": "course_ai_for_actual_work_v1",
         "slug": "ai-for-actual-work",
         "href": "/course/ai-for-actual-work/course_ai_for_actual_work_v1",
+        "access": "free"
+    },
+    "secondaryCourse": {
+        "courseId": "course_notes_that_do_work_v1",
+        "slug": "notes-that-do-work",
+        "href": "/course/notes-that-do-work/course_notes_that_do_work_v1",
         "access": "free"
     },
     "requiredPages": [
@@ -445,12 +451,101 @@
                                                 "type": "bold"
                                             }
                                         ],
-                                        "text": "Free course. No coding required."
+                                        "text": "Two free courses. No coding required."
                                     }
                                 ]
                             }
                         ]
                     }
+                }
+            },
+            {
+                "widgetId": "widget_ai_work_school_courses_v1",
+                "name": "grid",
+                "deleteable": true,
+                "shared": false,
+                "settings": {
+                    "type": "site",
+                    "verticalPadding": "py-16",
+                    "maxWidth": "max-w-6xl",
+                    "title": "Choose the work you want to improve",
+                    "description": {
+                        "type": "doc",
+                        "content": [
+                            {
+                                "type": "paragraph",
+                                "content": [
+                                    {
+                                        "type": "text",
+                                        "text": "Both courses start with a real, low-risk job. Pick the one that matches the problem in front of you."
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "headerAlignment": "left",
+                    "itemsAlignment": "left",
+                    "columns": 2,
+                    "items": [
+                        {
+                            "title": "AI for actual work",
+                            "description": {
+                                "type": "doc",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Use AI on a recurring job while keeping its sources, checks and decisions visible. "
+                                            },
+                                            {
+                                                "type": "text",
+                                                "marks": [
+                                                    {
+                                                        "type": "link",
+                                                        "attrs": {
+                                                            "href": "/course/ai-for-actual-work/course_ai_for_actual_work_v1"
+                                                        }
+                                                    }
+                                                ],
+                                                "text": "Start AI for actual work."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "title": "Notes that do work",
+                            "description": {
+                                "type": "doc",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Turn scattered reading, meeting notes and ideas into a source-backed brief and a handover. "
+                                            },
+                                            {
+                                                "type": "text",
+                                                "marks": [
+                                                    {
+                                                        "type": "link",
+                                                        "attrs": {
+                                                            "href": "/course/notes-that-do-work/course_notes_that_do_work_v1"
+                                                        }
+                                                    }
+                                                ],
+                                                "text": "Start Notes that do work."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    ]
                 }
             },
             {

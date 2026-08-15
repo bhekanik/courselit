@@ -4,9 +4,9 @@ This directory is the source-controlled input for the AI Work School theme and h
 
 ## Data and publication contract
 
-- `site.json` contains one complete domain-scoped manifest: managed marker, course reference, legal-page dependencies, light/dark theme, shared header/footer widgets and published homepage layout.
+- `site.json` contains one complete domain-scoped manifest: managed marker, both course references, legal-page dependencies, light/dark theme, shared header/footer widgets and published homepage layout.
 - Stable IDs are retained for the theme, homepage, managed marker, shared widgets, legal links and course route. Re-applying the later migration must update those records, not create copies.
-- The aggregate migration creates or resumes the course first. Before it publishes the homepage, it verifies that `course_ai_for_actual_work_v1` exists at slug `ai-for-actual-work`, is published and has an attached external free plan with `internal: false`.
+- The original aggregate migration creates the AI course. The second-course migration creates `course_notes_that_do_work_v1` first and verifies both published courses and their external free plans before it publishes the revised homepage.
 - Homepage preflight accepts only the exact launch baseline or the exact v2 desired managed homepage. `widget_ai_work_school_managed_v1` identifies ownership but is not enough to pass preflight; a third or owner-edited state fails closed.
 - The `privacy` and `terms` pages must already exist. The migration links to them but does not replace their content.
 - Theme style is copied to `theme` and `draftTheme`. Shared widgets are copied to published and draft objects keyed by widget name. Page metadata and layout are copied to their draft counterparts.
@@ -15,11 +15,12 @@ This directory is the source-controlled input for the AI Work School theme and h
 
 - The header and both course heroes use the exact CTA `Start the free course` and the real route `/course/ai-for-actual-work/course_ai_for_actual_work_v1`.
 - The split hero comes first. Its copy precedes its sealed `landing-hero` media in mobile reading order.
-- The short fact line is count-free: `Free course. No coding required.`
+- The short fact line states the current offer: `Two free courses. No coding required.`
+- A two-card course picker links the exact routes for `AI for actual work` and `Notes that do work` before the page continues into the first course detail.
 - The tool-choice section includes the sealed vertical diagram and an equivalent ordered text list for people who cannot read the image.
 - The page names the capstone's five final files: working brief, source contract, checks and evidence, decision record and handover. The sealed checked-work image follows them.
 - Curriculum is one ordered sequence using the published course's section names and outcomes. It does not advertise section or lesson counts.
-- The fit/not-fit comparison is the page's only grid. The closing CTA is compact. The FAQ has six questions covering cost, coding, suitable work, company policy, sensitive material and tool independence.
+- The page has two grids: the course picker and the fit/not-fit comparison. The closing CTA is compact. The FAQ has six questions covering cost, coding, suitable work, company policy, sensitive material and tool independence.
 - Header/footer shared-widget IDs and legal links remain unchanged.
 
 ## Design and accessibility

@@ -1,0 +1,168 @@
+{
+    "schemaVersion": 1,
+    "status": "resolved",
+    "diagramRender": {
+        "outputWidth": 720,
+        "minimumMobileViewport": 320,
+        "lessonHorizontalPadding": 32,
+        "minimumRenderedLabelPx": 12,
+        "brandFontSources": [
+            "content/site/ai-work-school/assets/fonts/RobotoSlab-Medium.ttf",
+            "content/site/ai-work-school/assets/fonts/Mulish-Regular.ttf",
+            "content/site/ai-work-school/assets/fonts/Mulish-SemiBold.ttf"
+        ],
+        "commands": [
+            "node content/courses/notes-that-do-work/render-diagrams.mjs --write",
+            "node content/courses/notes-that-do-work/render-diagrams.mjs --check"
+        ],
+        "toolVersions": {
+            "@resvg/resvg-js": "2.6.2",
+            "cwebp": "1.6.0"
+        },
+        "fontProbeDiagramId": "note-job-selector"
+    },
+    "featuredImage": {
+        "id": "featured-notes-that-work",
+        "source": "content/courses/notes-that-do-work/assets/featured-notes-that-work.webp",
+        "sha256": "0055659b4f74a899cf3aef57f7c98c9ca2c9b782ccb889ef2e89a45b81a0657c",
+        "bytes": 424224,
+        "width": 1586,
+        "height": 992,
+        "semanticTarget": "course featured image",
+        "alt": "A professional at a dark desk turns scattered meeting notes and source pages into linked idea cards, a clear brief and a handover folder.",
+        "prompt": "Top-down editorial illustration of a non-technical professional turning scattered meeting notes and source pages into connected idea cards, a decision brief and a handover folder. Mid-century collage and gouache texture in ink navy, parchment, rust, muted teal and ochre. No logos or readable text."
+    },
+    "diagrams": [
+        {
+            "id": "knowledge-leak-map",
+            "sourceSvg": "content/courses/notes-that-do-work/assets/diagram-knowledge-leak-map.svg",
+            "sourceWebp": "content/courses/notes-that-do-work/assets/diagram-knowledge-leak-map.webp",
+            "svgSha256": "aa971a4743dbf24b9a6ac1ef1fad05e5511071a97f5887bca7cb9f56e02f0fa9",
+            "webpSha256": "15be4a768cba00d2567c8d1a59365ac5aa27dda2416627af1bd62916297059c7",
+            "width": 720,
+            "height": 1040,
+            "lessonKey": "find-where-useful-thinking-disappears",
+            "anchorHeading": "Try it with guidance",
+            "placement": "before",
+            "alt": "A live work question passes through sources, thinking and an output. Useful reasons and decisions fall through a leak unless checked notes are left for the next related job.",
+            "caption": "A knowledge leak is the point where useful context becomes hard to find, interpret or reuse. Repair one leak before changing the whole system."
+        },
+        {
+            "id": "source-note-anatomy",
+            "sourceSvg": "content/courses/notes-that-do-work/assets/diagram-source-note-anatomy.svg",
+            "sourceWebp": "content/courses/notes-that-do-work/assets/diagram-source-note-anatomy.webp",
+            "svgSha256": "3767f1c7d3fbf419a719668d417a6fc9af222df06caba8adc1e483d42da23456",
+            "webpSha256": "3936f34b4a95a7cf0653e280dfd3a098335c7437e35861572ad4ceb422178f23",
+            "width": 720,
+            "height": 1140,
+            "lessonKey": "turn-a-capture-into-a-source-note",
+            "anchorHeading": "A source note has five parts",
+            "alt": "Five stacked parts of a source note: source and locator, exact extract, explanation in your own words, live use, and the next check.",
+            "caption": "The source, the exact extract and your interpretation carry different authority. Keep them visibly separate."
+        },
+        {
+            "id": "note-job-selector",
+            "sourceSvg": "content/courses/notes-that-do-work/assets/diagram-note-job-selector.svg",
+            "sourceWebp": "content/courses/notes-that-do-work/assets/diagram-note-job-selector.webp",
+            "svgSha256": "8cc3949a73214941d5a5ea7dbae970baa6c0ba9713d20072ab8156bf10388a73",
+            "webpSha256": "ee173f66f954f44b590d6e323946abc67d39f486ca7a2a087d8a7182dfda1113",
+            "width": 720,
+            "height": 1040,
+            "lessonKey": "give-each-note-one-job",
+            "anchorHeading": "Choose by the next use",
+            "alt": "A decision guide chooses a note's job from its next use: temporary capture, inspectable source evidence, reusable concept, or live project and decision record.",
+            "caption": "Choose a note's job from what it must help someone do next, not from where the note came from."
+        },
+        {
+            "id": "one-idea-split",
+            "sourceSvg": "content/courses/notes-that-do-work/assets/diagram-one-idea-split.svg",
+            "sourceWebp": "content/courses/notes-that-do-work/assets/diagram-one-idea-split.webp",
+            "svgSha256": "2db7036bc579b4db14d3929ee1e41b58b377269c36e04cd141197ae34c91c85f",
+            "webpSha256": "b919c0db810bf9be7b86fcff98286f0883bec102afc54d37c3ee69927ac7db08",
+            "width": 720,
+            "height": 1040,
+            "lessonKey": "write-one-idea-so-it-can-stand-alone",
+            "anchorHeading": "Make the idea portable, not context-free",
+            "alt": "A mixed project note is separated into a source note, one reusable concept and a live decision record, with links preserving how the parts affect each other.",
+            "caption": "Split by job, then link the parts. The reusable concept keeps one claim, its evidence and its boundary."
+        },
+        {
+            "id": "relationship-semantics",
+            "sourceSvg": "content/courses/notes-that-do-work/assets/diagram-relationship-semantics.svg",
+            "sourceWebp": "content/courses/notes-that-do-work/assets/diagram-relationship-semantics.webp",
+            "svgSha256": "bb2cab5b7f7d6901871c60771f3c00bcbfa75c96c9fc4a1e56f9d26ae75f9063",
+            "webpSha256": "56c94bdb0fbfd5987e0e1ca4dc92830e5dd6e0505dda9336a242e6f3d94db8e0",
+            "width": 720,
+            "height": 1080,
+            "lessonKey": "use-tags-properties-and-links-for-different-jobs",
+            "anchorHeading": "Decide from the question the connection must answer",
+            "alt": "Three rows show the different jobs of connections: tags group notes, properties store typed fields, and links narrate how one idea affects another.",
+            "caption": "Tags group. Properties type. Links narrate. Keep a connection only when it changes retrieval, interpretation or action."
+        },
+        {
+            "id": "search-before-create",
+            "sourceSvg": "content/courses/notes-that-do-work/assets/diagram-search-before-create.svg",
+            "sourceWebp": "content/courses/notes-that-do-work/assets/diagram-search-before-create.webp",
+            "svgSha256": "4d4a34f35618d808e9ea6c24f5110bdf8b4104869640f41da3fd9c08515ad067",
+            "webpSha256": "9614fdc8fb8e55bb3ac243cedefd27c374d97018c048bfaa96632c248a2024d0",
+            "width": 720,
+            "height": 1080,
+            "lessonKey": "search-before-creating",
+            "anchorHeading": "Five actions, one decision",
+            "alt": "A search and read step leads to a decision: change an existing note by updating, merging, linking or archiving, or create only when no existing note can carry the idea clearly.",
+            "caption": "Creation is the fallback. Search and read first, then make the smallest change that leaves the system more useful."
+        },
+        {
+            "id": "discovery-presentation",
+            "sourceSvg": "content/courses/notes-that-do-work/assets/diagram-discovery-presentation.svg",
+            "sourceWebp": "content/courses/notes-that-do-work/assets/diagram-discovery-presentation.webp",
+            "svgSha256": "fd3146fbec3f72ab9b39a00e1448a1a3b5648d38e2b8e50062231148efd04c2f",
+            "webpSha256": "02158e1c0d33dded04ae4c750a131b151100e30012dabe91ecfcb9c68d603157",
+            "width": 720,
+            "height": 1040,
+            "lessonKey": "write-to-discover-what-you-think",
+            "anchorHeading": "Use marks that expose the draft",
+            "alt": "A private discovery-writing pass exposes claims, evidence, assumptions, missing information and decisions before a separate presentation pass orders the answer for a reader.",
+            "caption": "Discovery writing finds the thought. Presentation writing arranges the checked reasoning for another person."
+        },
+        {
+            "id": "synthesis-hub",
+            "sourceSvg": "content/courses/notes-that-do-work/assets/diagram-synthesis-hub.svg",
+            "sourceWebp": "content/courses/notes-that-do-work/assets/diagram-synthesis-hub.webp",
+            "svgSha256": "76ed1f930b9666d19f9989f4d64d70f0d9464eebcab2ad473e00e67d1b4c03c9",
+            "webpSha256": "ff7c7cdd602a47ff10d977c30c280b8ad7cfad333a392ba2a8c0df6496bfae14",
+            "width": 720,
+            "height": 1080,
+            "lessonKey": "build-a-synthesis-note-around-a-live-question",
+            "anchorHeading": "A small synthesis has six parts",
+            "alt": "Sources, concepts and visible conflicts feed one live question. The synthesis produces a current answer, an open check and the next decision.",
+            "caption": "A note belongs in the synthesis only when it changes the answer, uncertainty or next action."
+        },
+        {
+            "id": "notes-to-decision",
+            "sourceSvg": "content/courses/notes-that-do-work/assets/diagram-notes-to-decision.svg",
+            "sourceWebp": "content/courses/notes-that-do-work/assets/diagram-notes-to-decision.webp",
+            "svgSha256": "e926d54734505327cd4419530d0c1b228529d56a3d56645d0d5aafe6686fe059",
+            "webpSha256": "b2a9a97df8b68d6a83b2227a22bfeb642646f4d678992ef3e3a4635f0854db2d",
+            "width": 720,
+            "height": 1040,
+            "lessonKey": "move-from-notes-to-an-outline-and-a-decision",
+            "anchorHeading": "A working brief can stay small",
+            "alt": "Source and concept notes feed a question-led synthesis, which becomes a reader-led outline and then a brief with decision, evidence, boundary and next action.",
+            "caption": "Each stage has a different job. The brief follows the reader's decision, not the order in which the notes were created."
+        },
+        {
+            "id": "accretion-loop",
+            "sourceSvg": "content/courses/notes-that-do-work/assets/diagram-accretion-loop.svg",
+            "sourceWebp": "content/courses/notes-that-do-work/assets/diagram-accretion-loop.webp",
+            "svgSha256": "c4c7fb239eda63765fa144cb834e86be5d68f45876f7e1b417b96df82662635c",
+            "webpSha256": "bffa133246931091409c91a858abd270bc6c8ca308cbad647973b0846db8ed78",
+            "width": 720,
+            "height": 1120,
+            "lessonKey": "close-the-loop-so-the-next-job-starts-ahead",
+            "anchorHeading": "Capstone: turn notes into useful work",
+            "alt": "A loop moves from a fresh work question to a checked brief, then updates the owning notes and records uncertainty, owner and review trigger before the next related job.",
+            "caption": "The next job starts ahead only when the real run changes the notes and leaves a reason to check them again."
+        }
+    ]
+}

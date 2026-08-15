@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 540" role="img" aria-labelledby="title desc">
+  <title id="title">Tags, properties and links have different jobs</title>
+  <desc id="desc">Three horizontal rows distinguish grouping notes with tags, storing typed fields as properties, and narrating how two ideas affect each other with links.</desc>
+  <defs><style>.heading{font-family:"Roboto Slab";font-size:21px;font-weight:500;fill:#0F1D2E}.label{font-family:"Mulish";font-size:17px;font-weight:600;fill:#0F1D2E}.body{font-family:"Mulish";font-size:15px;fill:#435564}.small{font-family:"Mulish";font-size:15px;font-weight:600;fill:#174A46}</style></defs>
+  <rect width="360" height="540" rx="12" fill="#F7F8F8"/>
+  <text x="24" y="38" class="heading">Three connections, three jobs</text>
+  <text x="24" y="62" class="body">Choose from the question you need to answer.</text>
+  <rect x="24" y="90" width="312" height="104" rx="10" fill="#DDEDEA" stroke="#0E5C5E" stroke-width="1.5"/>
+  <text x="42" y="120" class="label">Tags group</text>
+  <text x="42" y="147" class="body">Which notes should appear together?</text>
+  <rect x="42" y="160" width="70" height="25" rx="12" fill="#FFFFFF"/><text x="55" y="178" class="body">#close</text>
+  <rect x="120" y="160" width="76" height="25" rx="12" fill="#FFFFFF"/><text x="133" y="178" class="body">#matter</text>
+  <text x="218" y="178" class="small">Retrieve a set</text>
+  <rect x="24" y="208" width="312" height="104" rx="10" fill="#FFFFFF" stroke="#687783" stroke-width="1.5"/>
+  <text x="42" y="238" class="label">Properties type</text>
+  <text x="42" y="265" class="body">What named field must stay consistent?</text>
+  <text x="42" y="294" class="small">owner:</text><text x="101" y="294" class="body">Finance</text>
+  <text x="196" y="294" class="small">review:</text><text x="255" y="294" class="body">Policy change</text>
+  <rect x="24" y="326" width="312" height="128" rx="10" fill="#F8EBDD" stroke="#8A4B12" stroke-width="1.5"/>
+  <text x="42" y="356" class="label">Links narrate</text>
+  <text x="42" y="383" class="body">How does this idea affect that one?</text>
+  <rect x="42" y="400" width="74" height="34" rx="6" fill="#FFFFFF"/><text x="54" y="423" class="body">Source</text>
+  <text x="132" y="423" class="small">limits</text>
+  <path d="M181 417H220" stroke="#8A4B12" stroke-width="1.6"/>
+  <rect x="220" y="400" width="88" height="34" rx="6" fill="#FFFFFF"/><text x="233" y="423" class="body">Concept</text>
+  <text x="24" y="492" class="label">Maintenance test</text>
+  <text x="24" y="516" class="body">Does it change retrieval, meaning or action?</text>
+  <text x="24" y="536" class="small">If not, remove it.</text>
+</svg>

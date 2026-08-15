@@ -2,9 +2,9 @@
 
 ## Product direction
 
-The page has one job: help a working professional decide whether this free course fits a real piece of work, then take them to it. The design is practical, exacting and generous. It explains what to bring, what the learner will build and how the work will be checked. It does not try to look intelligent through decoration.
+The page has one job: help a working professional choose the course that fits the problem in front of them, then take them to it. It explains what to bring, what the learner will build and how the work will be checked. It does not try to look intelligent through decoration.
 
-The opening starts with the course's real tension: AI can finish a task and still get the work wrong. It then asks the learner to bring one recurring, low-risk job and test the result. The page names one course and one CourseLit route. It has no fake catalogue, borrowed proof, speed claim or tool ranking. Course counts were removed because they add little to the decision and drift as the curriculum changes.
+The opening keeps the AI course's real tension: AI can finish a task and still get the work wrong. Immediately after it, a two-card picker offers the AI course and `Notes that do work` with exact CourseLit routes. The rest of the page remains the detailed AI course explanation. Two real courses do not justify catalogue chrome, borrowed proof, speed claims or tool rankings. Course counts stay out because they add little to the decision and drift as curricula change.
 
 ## Visual system
 
@@ -20,7 +20,7 @@ The short fact line earns the managed marker's visible place without freezing cu
 
 The artefact section matches the capstone contract: `working-brief.md`, `source-contract.md`, `checks-and-evidence.md`, `decision-record.md` and `handover.md`. These consolidate the lesson records into five files a colleague can review. The checked-work image shows colleagues assembling and checking that evidence. The curriculum then follows the real course sequence in one ordered list. Order matters here, so numbering is structural rather than decorative.
 
-The fit comparison is the only grid. This is the one place where equal side-by-side panels make the decision easier. It names a month-end variance note, a contract review table and a weekly operations pack as possible practice jobs. The closing hero gives the learner one concrete first step instead of repeating the opening. Six FAQs answer the practical objections most likely to block enrolment.
+The page has two grids. The first compares the two real course choices. The second compares fit and not-fit for the AI course. Both use equal side-by-side panels because the alternatives are genuinely parallel. The fit grid names a month-end variance note, a contract review table and a weekly operations pack as possible practice jobs. The closing hero gives the learner one concrete first step instead of repeating the opening. Six FAQs answer the practical objections most likely to block enrolment.
 
 ## Accessibility and responsive behaviour
 
