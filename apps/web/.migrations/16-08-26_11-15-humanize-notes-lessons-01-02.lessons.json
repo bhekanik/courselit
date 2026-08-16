@@ -1,0 +1,2019 @@
+{
+    "schemaVersion": 1,
+    "migrationId": "16-08-26_11-15-humanize-notes-lessons-01-02",
+    "sourceReviewCommit": "560e256a1df54d0f2037ae5c773a3bf2d2acb503",
+    "sourceCoursePath": "content/courses/notes-that-do-work/course.json",
+    "baselineCourseSnapshot": {
+        "migrationId": "16-08-26_02-15-refine-notes-that-do-work",
+        "sha256": "4becdb8799d9bbae6e8e22ab8848949f3aa74f08aa0d369449c451f83be90179"
+    },
+    "finalCanonicalCourseSha256": "19d5d11042afe3070e80022ad8f0b03095acf5f370ff2233ccdb2eb1c7d69981",
+    "course": {
+        "courseId": "course_notes_that_do_work_v1",
+        "slug": "notes-that-do-work",
+        "expectedLessonIds": [
+            "lesson_notes_that_do_work_01",
+            "lesson_notes_that_do_work_02",
+            "lesson_notes_that_do_work_03",
+            "lesson_notes_that_do_work_04",
+            "lesson_notes_that_do_work_05",
+            "lesson_notes_that_do_work_06",
+            "lesson_notes_that_do_work_07",
+            "lesson_notes_that_do_work_08",
+            "lesson_notes_that_do_work_11",
+            "lesson_notes_that_do_work_12",
+            "lesson_notes_that_do_work_09",
+            "lesson_notes_that_do_work_10"
+        ]
+    },
+    "lessons": [
+        {
+            "lessonId": "lesson_notes_that_do_work_01",
+            "identity": {
+                "title": "Find where useful thinking disappears",
+                "type": "text",
+                "groupId": "group_notes_that_do_work_01",
+                "requiresEnrollment": false,
+                "downloadable": false,
+                "published": true
+            },
+            "baselineContentSha256": "ec89528710dd058f7624b1e5b167042d65b58e27523bdc49cb98cf3976b2e73d",
+            "finalContentSha256": "dde543c98468dcad2200cbe2ff24b4c2cc2cc69903996b77b2725cfa1a6c0f4b",
+            "baselineContent": {
+                "type": "doc",
+                "content": [
+                    {
+                        "type": "heading",
+                        "attrs": {
+                            "level": 2
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Outcome"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Find one place where useful thinking from your work disappears, and choose a question worth carrying through the course."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "heading",
+                        "attrs": {
+                            "level": 2
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Before you continue"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "blockquote",
+                        "content": [
+                            {
+                                "type": "paragraph",
+                                "content": [
+                                    {
+                                        "type": "text",
+                                        "text": "Do not read on yet. Write down one question you need to answer in the next fortnight. Without searching, list every place you think the relevant context lives. Circle the place you would least like a colleague to inherit tomorrow."
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "heading",
+                        "attrs": {
+                            "level": 2
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "See it"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "An accountant preparing a month-end review has three unexplained variances in a spreadsheet, a reason for one variance in an email, a correction discussed in a meeting, and a handwritten reminder about a late invoice. The final review may be accurate, but most of the thinking that made it accurate will vanish when the spreadsheet is filed. Next month begins with the same search."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "The problem is not that the accountant took too few notes. The problem is that the reasons, sources and decisions were separated from the work they explained. A leak is the point where useful context stops being available to the next person or the next version of you. It can happen at capture, when the note has no source; during use, when a decision is not written down; or after delivery, when the useful reasoning stays inside a finished document nobody searches."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Start with a question, not a filing system. A live question gives you a reason to decide what deserves to survive. It also stops the usual detour in which you spend a weekend naming folders and still cannot answer Monday's question."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "heading",
+                        "attrs": {
+                            "level": 3
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Choose a surface you can already use"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "You need somewhere that can hold text, search it and link or reference another note. Use the approved tool already available to you. These official guides show the minimum moves in four common surfaces:"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "bulletList",
+                        "content": [
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "marks": [
+                                                    {
+                                                        "type": "link",
+                                                        "attrs": {
+                                                            "href": "https://obsidian.md/help/"
+                                                        }
+                                                    }
+                                                ],
+                                                "text": "Obsidian Help"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "marks": [
+                                                    {
+                                                        "type": "link",
+                                                        "attrs": {
+                                                            "href": "https://support.microsoft.com/en-US/OneNote/onenote-help-and-learning/basic-tasks-in-onenote-on-windows"
+                                                        }
+                                                    }
+                                                ],
+                                                "text": "OneNote for Windows: basic tasks"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "marks": [
+                                                    {
+                                                        "type": "link",
+                                                        "attrs": {
+                                                            "href": "https://www.notion.com/help/create-links-and-backlinks"
+                                                        }
+                                                    }
+                                                ],
+                                                "text": "Notion: links and backlinks"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "marks": [
+                                                    {
+                                                        "type": "link",
+                                                        "attrs": {
+                                                            "href": "https://support.apple.com/guide/notes/add-links-apde615d29c2/mac"
+                                                        }
+                                                    }
+                                                ],
+                                                "text": "Apple Notes: add links"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "image",
+                        "attrs": {
+                            "src": "https://media.bhekani.com/p/ur6cY_uoVi6MamfWCHfQ3d5I_7o3G_9QcV4_7-ZY/main.webp",
+                            "alt": "Obsidian's desktop app showing a note, folder and note lists, and a graph view, with a mobile note beside it.",
+                            "title": "An official Obsidian example of notes and links in one working surface."
+                        }
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Obsidian is one surface for the method: the note stays readable while links expose connections. Another approved note app can do the same job with different controls."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "The app is not the method. If your organisation limits where records can be stored, those rules choose the surface. Do not copy confidential, personal or client material into a new tool merely to complete an exercise."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "image",
+                        "attrs": {
+                            "src": "https://media.bhekani.com/p/4DYmlakZGQ3dA2kQ-idVmBffMnfNGBtkNjZuduo8/main.webp",
+                            "alt": "A live work question passes through sources, thinking and an output. Useful reasons and decisions fall through a leak unless checked notes are left for the next related job.",
+                            "title": "Find the knowledge leak before changing the whole system."
+                        }
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "A knowledge leak is the point where useful context becomes hard to find, interpret or reuse. Repair one leak before changing the whole system."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "heading",
+                        "attrs": {
+                            "level": 2
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Try it with guidance"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Use the question you wrote. Draw five columns: source, current location, what it contributes, who can read it, and what becomes difficult later. Add the finished output as a source too. A decision memo can hide its own reasoning just as easily as a meeting notebook."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "For each row, ask one concrete question: could I find this again, could I tell where it came from, could I tell why it mattered, and could the next person use it without asking me? Mark only the first failure. You are locating the leak, not scoring your whole system."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Stop and record: write one sentence in work-leak-map.md using this form: When I need to answer [question], the useful context in [place] becomes hard to [find, interpret or reuse] because [observable reason]."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "heading",
+                        "attrs": {
+                            "level": 2
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "What you will make"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Create work-leak-map.md. Include the question, the reader, what they need to do with the answer, the current sources, the leak sentence, and the one leak you will repair. Keep the other problems visible but out of scope."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "heading",
+                        "attrs": {
+                            "level": 2
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Try it on your work"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Open the real locations and correct your map. The point is to compare memory with evidence. Add any source you forgot and delete any source you expected to use but did not. Note whether the omission changes the leak you chose."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "heading",
+                        "attrs": {
+                            "level": 2
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Teach it back"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Close the lesson. Explain to a colleague why collecting more notes is not the same as repairing a knowledge leak. Use your map, but do not use the phrase knowledge management."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "heading",
+                        "attrs": {
+                            "level": 2
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Try a changed case"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "A lawyer inherits a matter with a clean folder structure, complete meeting notes and no record of why the previous lawyer rejected one line of argument. Is the leak capture, use or handover? Write the evidence you would need before deciding. The tidy folders are not enough."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "heading",
+                        "attrs": {
+                            "level": 2
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Check your work"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "bulletList",
+                        "content": [
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "The question is due soon enough to create real pressure, but a poor first attempt is safe to review."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "The source list comes from opened files and systems rather than memory alone."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "The leak sentence describes an observable failure."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "The reader and next use of the output are named."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "One leak is in scope. The rest are parked."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "heading",
+                        "attrs": {
+                            "level": 2
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "If you get stuck"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "orderedList",
+                        "content": [
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Start with the last work item that made you search the same places twice."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Ask what a capable colleague would have to ask you before they could continue."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "If the map is still broad, choose the missing reason behind one recent decision. Repair that leak first."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "finalContent": {
+                "type": "doc",
+                "content": [
+                    {
+                        "type": "heading",
+                        "attrs": {
+                            "level": 2
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Outcome"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Find one place where useful thinking from your work disappears, and pick the question you will keep working on through the course."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "heading",
+                        "attrs": {
+                            "level": 2
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Before you continue"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "blockquote",
+                        "content": [
+                            {
+                                "type": "paragraph",
+                                "content": [
+                                    {
+                                        "type": "text",
+                                        "text": "Do not read on yet. Write down one question you need to answer in the next fortnight. Without searching, list every place you think the relevant context lives. Circle the place you would least like a colleague to inherit tomorrow."
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "heading",
+                        "attrs": {
+                            "level": 2
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "See it"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "An accountant is preparing a month-end review. Three variances in a spreadsheet are still unexplained. The reason for one of them is in an email, a correction came up in a meeting, and a handwritten reminder mentions a late invoice. The review itself may be accurate. When the spreadsheet is filed, though, most of the thinking that made it accurate goes with it, and next month is likely to start with the same search."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "The accountant did take notes. The reasons, sources and decisions just ended up separated from the work they explained. Call that separation a leak: the point where useful context stops being available to the next person, or to the next version of you. It can open at capture, when a note has no source; during use, when nobody records why a decision was made; or at handover, when the useful reasoning stays inside a finished document nobody searches."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Which of those matters depends on the job in front of you, so begin with the question you actually have to answer. Use that question to decide which context you keep and which you leave. Without it you can spend time naming folders and still not answer the question."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "heading",
+                        "attrs": {
+                            "level": 3
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Choose a surface you can already use"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "You need somewhere you can write and search text, then link or refer to another note. Use an approved tool you already have. These official guides show the minimum moves in four common surfaces:"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "bulletList",
+                        "content": [
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "marks": [
+                                                    {
+                                                        "type": "link",
+                                                        "attrs": {
+                                                            "href": "https://obsidian.md/help/"
+                                                        }
+                                                    }
+                                                ],
+                                                "text": "Obsidian Help"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "marks": [
+                                                    {
+                                                        "type": "link",
+                                                        "attrs": {
+                                                            "href": "https://support.microsoft.com/en-US/OneNote/onenote-help-and-learning/basic-tasks-in-onenote-on-windows"
+                                                        }
+                                                    }
+                                                ],
+                                                "text": "OneNote for Windows: basic tasks"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "marks": [
+                                                    {
+                                                        "type": "link",
+                                                        "attrs": {
+                                                            "href": "https://www.notion.com/help/create-links-and-backlinks"
+                                                        }
+                                                    }
+                                                ],
+                                                "text": "Notion: links and backlinks"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "marks": [
+                                                    {
+                                                        "type": "link",
+                                                        "attrs": {
+                                                            "href": "https://support.apple.com/guide/notes/add-links-apde615d29c2/mac"
+                                                        }
+                                                    }
+                                                ],
+                                                "text": "Apple Notes: add links"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "image",
+                        "attrs": {
+                            "src": "https://media.bhekani.com/p/ur6cY_uoVi6MamfWCHfQ3d5I_7o3G_9QcV4_7-ZY/main.webp",
+                            "alt": "Obsidian's desktop app showing a note, folder and note lists, and a graph view, with a mobile note beside it.",
+                            "title": "An official Obsidian example of notes and links in one working surface."
+                        }
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Obsidian is one surface for the method: the note stays readable while links expose connections. Another approved note app can do the same job with different controls."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "The app is not the method. If your organisation limits where records can be stored, those rules choose the surface. Do not copy confidential, personal or client material into a new tool merely to complete an exercise."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "image",
+                        "attrs": {
+                            "src": "https://media.bhekani.com/p/4DYmlakZGQ3dA2kQ-idVmBffMnfNGBtkNjZuduo8/main.webp",
+                            "alt": "A live work question passes through sources, thinking and an output. Useful reasons and decisions fall through a leak unless checked notes are left for the next related job.",
+                            "title": "Find the knowledge leak before changing the whole system."
+                        }
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "A knowledge leak is the point where useful context becomes hard to find, interpret or reuse. Repair one leak before changing the whole system."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "heading",
+                        "attrs": {
+                            "level": 2
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Try it with guidance"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Go back to the question you wrote. Draw five columns: source, current location, what it contributes, who can read it, and what becomes difficult later. Add the finished output as a source as well. A decision memo can hide its own reasoning just as easily as a meeting notebook."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "For each row, ask four plain questions: could I find this again, could I tell where it came from, could I tell why it mattered, and could the next person use it without asking me? Mark only the first failure in each row. You do not need to score the whole system."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Stop and record: write one sentence in work-leak-map.md in this form. When I need to answer [question], the useful context in [place] becomes hard to [find, interpret or reuse] because [observable reason]."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "heading",
+                        "attrs": {
+                            "level": 2
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "What you will make"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Create work-leak-map.md. Include the question, the reader, what they need to do with the answer, the current sources, the leak sentence, and the one leak you will repair. Leave the other problems on the page, marked out of scope."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "heading",
+                        "attrs": {
+                            "level": 2
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Try it on your work"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Your first map came from memory. Open the real locations now and correct it. Add any source you forgot, delete any source you expected to use but did not, and note whether that changes the leak you chose."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "heading",
+                        "attrs": {
+                            "level": 2
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Teach it back"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Explain to a colleague why collecting more notes is not the same as repairing a knowledge leak. Use your map. Do not use the phrase knowledge management."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "heading",
+                        "attrs": {
+                            "level": 2
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Try a changed case"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "A lawyer inherits a matter with a clean folder structure, complete meeting notes and no record of why the previous lawyer rejected one line of argument. Is the leak at capture, during use or at handover? Write down the evidence you would need before you decide."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "heading",
+                        "attrs": {
+                            "level": 2
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Check your work"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "bulletList",
+                        "content": [
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "The question is due soon enough to create real pressure, but a poor first attempt is safe to review."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "The source list comes from opened files and systems rather than memory alone."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "The leak sentence describes an observable failure."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "The map names the reader and what they will do with the output next."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "One leak is in scope and the rest are parked."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "heading",
+                        "attrs": {
+                            "level": 2
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "If you get stuck"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "orderedList",
+                        "content": [
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Start with the last work item that made you search the same places twice."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Write down what a capable colleague would have to ask you before they could carry on."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "If the map still covers too much, pick the missing reason behind one recent decision and repair that leak first."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "lessonId": "lesson_notes_that_do_work_02",
+            "identity": {
+                "title": "Turn a capture into a source note",
+                "type": "text",
+                "groupId": "group_notes_that_do_work_01",
+                "requiresEnrollment": true,
+                "downloadable": false,
+                "published": true
+            },
+            "baselineContentSha256": "089f86c4352676cbee02bac73c8fe7a789f72db1502f69e3036edd9e9c74b348",
+            "finalContentSha256": "9fcbe47b6d3c65d1af683f66854de3b0570834b260d2d738d32013f856b17f4c",
+            "baselineContent": {
+                "type": "doc",
+                "content": [
+                    {
+                        "type": "heading",
+                        "attrs": {
+                            "level": 2
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Outcome"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Turn one capture into a source note you can inspect later without pretending that copying is the same as understanding."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "heading",
+                        "attrs": {
+                            "level": 2
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Before you continue"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "blockquote",
+                        "content": [
+                            {
+                                "type": "paragraph",
+                                "content": [
+                                    {
+                                        "type": "text",
+                                        "text": "Choose one highlight, meeting bullet or document extract from your map. Without reopening the source, write what you think it means, where it came from and why it matters. Put a question mark beside anything you cannot verify from memory."
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "heading",
+                        "attrs": {
+                            "level": 2
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "See it"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "An operations lead writes, Vendor delay caused the incident, in meeting notes. A month later the line looks like a fact. The original incident review says something narrower: a delayed vendor response extended recovery after an internal alert had already been missed. The capture removed the sequence, the internal failure and the difference between cause and duration."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "A source note repairs that loss. It keeps the locator, the relevant source words or data, your explanation, and the question the note can help answer. These parts have different authority. The source can support what it actually says. Your explanation can connect it to the work. The question gives the note a reason to exist. Mixing the three produces a neat paragraph whose claims are hard to audit."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Writing in your own words is a check on understanding, not a ban on quotation. Keep exact wording when it matters, such as a contract clause or a stated decision. Label it and give a locator. Then explain what you think it means. If you cannot explain it without copying the sentence again, you have found work to do rather than a note to polish."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "heading",
+                        "attrs": {
+                            "level": 3
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "A source note has five parts"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "image",
+                        "attrs": {
+                            "src": "https://media.bhekani.com/p/oQb7Df8xEPlAQm5c9QQ7i20ezU2ot1Qq6kZS6Vnw/main.webp",
+                            "alt": "Five stacked parts of a source note: source and locator, exact extract, explanation in your own words, live use, and the next check.",
+                            "title": "Keep the source, exact extract and your interpretation visibly separate."
+                        }
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "The source, the exact extract and your interpretation carry different authority. Keep them visibly separate."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "bulletList",
+                        "content": [
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Source: title, author or owner, date, and a locator precise enough to reopen the evidence."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Extract: the smallest quotation, number, image reference or meeting decision needed for the point."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Your words: what the extract means in this context, including any boundary or uncertainty."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Use: the live question or decision this may inform."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Next check: what you still need to verify, compare or ask."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "heading",
+                        "attrs": {
+                            "level": 2
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Try it with guidance"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Reopen your chosen source. Start with the locator, because every other part depends on being able to inspect the original again. If the source is a meeting, link the agenda or record and name the date and participants. If no record exists, label the note as your recollection and add the person who can confirm it."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Copy only the words or data whose exact form matters. Below that, write two sentences without looking at the source: what this says, and what it does not say. Reopen the source and correct both. Then write one sentence beginning, This matters to my question because. Delete any sentence that merely repeats the extract."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Stop and record: mark each statement in source-note.md as source, interpretation or open question. If one sentence contains more than one kind, split it."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "heading",
+                        "attrs": {
+                            "level": 2
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "What you will make"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Create source-note.md with the five parts above. Give it a title that states the useful point, not the source title. A title such as Delayed vendor response extended recovery is easier to reuse than Incident review notes."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "heading",
+                        "attrs": {
+                            "level": 2
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Try it on your work"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Use a source that matters to the question you chose. Ask whether your first memory matched the original. Record the correction if it did not. That correction is evidence that the source note did useful work before it became part of any system."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "heading",
+                        "attrs": {
+                            "level": 2
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Teach it back"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Close the lesson and explain the difference between a capture, a source extract and a source note. Include one reason a short note can be more trustworthy than a long summary."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "heading",
+                        "attrs": {
+                            "level": 2
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Try a changed case"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "A lawyer has an exact quotation from an authority, but the database link requires a licence the next reader may not have. What belongs in the source note, what belongs in the handover, and what must not be copied? Write the boundary before you decide how much text to retain."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "heading",
+                        "attrs": {
+                            "level": 2
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Check your work"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "bulletList",
+                        "content": [
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "The source can be reopened at the exact place that supports the note."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Quotation, interpretation and open questions cannot be mistaken for each other."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "The title states the point the note may contribute."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "The use sentence connects the note to the live question."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Access and confidentiality limits are recorded."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "heading",
+                        "attrs": {
+                            "level": 2
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "If you get stuck"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "orderedList",
+                        "content": [
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Use one paragraph, one meeting decision or one spreadsheet row rather than a whole document."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Write, The source says, I think this means, and I still need to check as temporary labels."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "If you still cannot explain the point, ask what decision would change if the source were false. Start there."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "finalContent": {
+                "type": "doc",
+                "content": [
+                    {
+                        "type": "heading",
+                        "attrs": {
+                            "level": 2
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Outcome"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Turn one capture into a source note you can inspect later. A reader should be able to see which words came from the source, which are your reading of it, and what you still have to check."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "heading",
+                        "attrs": {
+                            "level": 2
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Before you continue"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "blockquote",
+                        "content": [
+                            {
+                                "type": "paragraph",
+                                "content": [
+                                    {
+                                        "type": "text",
+                                        "text": "Choose one highlight, meeting bullet or document extract from your map. Without reopening the source, write what you think it means, where it came from and why it matters. Put a question mark beside anything you cannot verify from memory."
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "heading",
+                        "attrs": {
+                            "level": 2
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "See it"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "An operations lead writes, Vendor delay caused the incident, in meeting notes. A month later the line reads like a settled fact. The original incident review says something narrower: a delayed vendor response extended recovery after an internal alert had already been missed. The capture dropped the order of events. It also hid the internal failure, and it blurred the difference between causing the incident and extending the recovery."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "A source note puts the missing pieces back where you can see them. It holds the locator, the source words or data you need, your explanation, and the question the note can help answer. The source supports only what it says. Your explanation is what you take it to mean, and that can be wrong. Written out as one tidy paragraph, the whole thing reads as a single claim, and it is hard for a reader to tell which part to check."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Writing the idea in your own words tests whether you understood it. Exact wording still matters sometimes, such as a contract clause or a stated decision. Quote it, label the quotation and give it a locator. Then write what you think it means. If that explanation only repeats the source sentence back, treat that as a signal to rework it until you can say what the sentence means for your question."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "heading",
+                        "attrs": {
+                            "level": 3
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "A source note has five parts"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "image",
+                        "attrs": {
+                            "src": "https://media.bhekani.com/p/oQb7Df8xEPlAQm5c9QQ7i20ezU2ot1Qq6kZS6Vnw/main.webp",
+                            "alt": "Five stacked parts of a source note: source and locator, exact extract, explanation in your own words, live use, and the next check.",
+                            "title": "Keep the source, exact extract and your interpretation visibly separate."
+                        }
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "The source, the exact extract and your interpretation carry different authority. Keep them visibly separate."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "bulletList",
+                        "content": [
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Source: title, author or owner, date, and a locator precise enough to reopen the evidence."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Extract: the smallest quotation, number, image reference or meeting decision needed for the point."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Your words: what the extract means in this context, including any boundary or uncertainty."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Use: the live question or decision this may inform."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Next check: what you still need to verify, compare or ask."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "heading",
+                        "attrs": {
+                            "level": 2
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Try it with guidance"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Reopen your chosen source. Start with the locator, because everything else in the note has to lead back to something you can open. If the source is a meeting, link the agenda or record and name the date and participants. If no record exists, label the note as your recollection and add the person who can confirm it."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Copy only the words or data whose exact form matters. Close the source. Below the extract, write two sentences: what this says, and what it does not say. Reopen the source and correct both. Then write one sentence beginning, This matters to my question because. Delete any sentence that only repeats the extract."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Stop and record: mark each statement in source-note.md as source, interpretation or open question. If one sentence contains more than one kind, split it."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "heading",
+                        "attrs": {
+                            "level": 2
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "What you will make"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Create source-note.md with the five parts above. Give it a title that states the useful point, not the source title. Compared with Incident review notes, a title such as Delayed vendor response extended recovery tells a future reader what the note is about and whether it matters to the job in front of them."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "heading",
+                        "attrs": {
+                            "level": 2
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Try it on your work"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Use a source that matters to the question you chose. Compare what you wrote from memory with the original. Where the two differ, record the correction and keep it in the note. It shows which part of your reading needed checking."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "heading",
+                        "attrs": {
+                            "level": 2
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Teach it back"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Without looking back at the lesson, explain the difference between a capture, a source extract and a source note, then give one reason a short note can be more trustworthy than a long summary."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "heading",
+                        "attrs": {
+                            "level": 2
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Try a changed case"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "A lawyer has an exact quotation from an authority, but the database link requires a licence the next reader may not have. Decide what belongs in the source note, what belongs in the handover, and what must not be copied at all. Write those boundaries down before you decide how much text to retain."
+                            }
+                        ]
+                    },
+                    {
+                        "type": "heading",
+                        "attrs": {
+                            "level": 2
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Check your work"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "bulletList",
+                        "content": [
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Another person can reopen the source at the exact place that supports the note."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "A reader can tell quotation, interpretation and open questions apart."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "The title states the point the note may contribute."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "The use sentence connects the note to the live question."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "The note records any access or confidentiality limit."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "heading",
+                        "attrs": {
+                            "level": 2
+                        },
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "If you get stuck"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "orderedList",
+                        "content": [
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Shrink the source. Work with one paragraph, one meeting decision or one spreadsheet row instead of the whole document."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Use The source says, I think this means, and I still need to check as temporary labels."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "listItem",
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "If the point still will not go into your own words, ask what decision would change if the source turned out to be wrong. Start from that decision."
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    ]
+}

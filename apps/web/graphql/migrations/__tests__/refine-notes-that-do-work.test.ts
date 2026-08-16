@@ -1,6 +1,14 @@
 import { spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
-import { readFileSync } from "node:fs";
+import {
+    copyFileSync,
+    mkdtempSync,
+    readFileSync,
+    rmSync,
+    symlinkSync,
+    writeFileSync,
+} from "node:fs";
+import { tmpdir } from "node:os";
 import { join } from "node:path";
 import mongoose from "mongoose";
 
@@ -596,6 +604,627 @@ describe("Notes that do work refinement migration", () => {
 
         expect(result.status).toBe(1);
         expect(result.stderr).toContain("New media identity is already in use");
+        expect(await snapshotCollections(db)).toEqual(before);
+    });
+});
+
+const HUMANIZATION_ID = "16-08-26_11-15-humanize-notes-lessons-01-02";
+const HUMANIZATION_PATH = join(MIGRATION_DIRECTORY, `${HUMANIZATION_ID}.js`);
+const HUMANIZATION_TRANSITION_PATH = join(
+    MIGRATION_DIRECTORY,
+    `${HUMANIZATION_ID}.lessons.json`,
+);
+const HUMANIZATION_TRANSITION_HASH =
+    "9ed25656644718ca324b6f39c0feeed5542b6f646539ba93af60f83f07b4ae8d";
+const CANONICAL_COURSE_PATH = join(
+    REPO_ROOT,
+    "content",
+    "courses",
+    "notes-that-do-work",
+    "course.json",
+);
+const CANONICAL_COURSE_HASH =
+    "19d5d11042afe3070e80022ad8f0b03095acf5f370ff2233ccdb2eb1c7d69981";
+const SOURCE_REVIEW_COMMIT = "560e256a1df54d0f2037ae5c773a3bf2d2acb503";
+// Canonical section order: pair 11/12 ships before pair 09/10.
+const CANONICAL_LESSON_ORDER = [
+    "lesson_notes_that_do_work_01",
+    "lesson_notes_that_do_work_02",
+    "lesson_notes_that_do_work_03",
+    "lesson_notes_that_do_work_04",
+    "lesson_notes_that_do_work_05",
+    "lesson_notes_that_do_work_06",
+    "lesson_notes_that_do_work_07",
+    "lesson_notes_that_do_work_08",
+    "lesson_notes_that_do_work_11",
+    "lesson_notes_that_do_work_12",
+    "lesson_notes_that_do_work_09",
+    "lesson_notes_that_do_work_10",
+];
+const TARGET_LESSON_IDS = [
+    "lesson_notes_that_do_work_01",
+    "lesson_notes_that_do_work_02",
+];
+const UNREACHABLE_DB = "mongodb://127.0.0.1:1/humanization-should-not-connect";
+
+function sha256File(path: string) {
+    return createHash("sha256")
+        .update(readFileSync(path).toString("latin1"), "latin1")
+        .digest("hex");
+}
+
+function readJson(path: string) {
+    return JSON.parse(readFileSync(path, "utf8"));
+}
+
+function flattenCourseLessons(snapshot: any) {
+    return snapshot.course.sections.flatMap((section: any) =>
+        section.lessons.map((lesson: any) => ({
+            ...lesson,
+            groupId: section.groupId,
+        })),
+    );
+}
+
+function runHumanization(args: string[], env: NodeJS.ProcessEnv = {}) {
+    return runNode(HUMANIZATION_PATH, args, {
+        NODE_ENV: "test",
+        PATH: process.env.PATH,
+        ...env,
+    });
+}
+
+async function seedRefinedBaseline() {
+    const seeded = await seedLaunchedBaseline();
+    const refined = runNode(MIGRATION_PATH, ["--apply"], databaseEnvironment());
+    expect(refined.status).toBe(0);
+    return seeded;
+}
+
+/**
+ * Stages an editable copy of the migration and its two frozen siblings so a
+ * mutated snapshot can be run through the real CLI. `repin` rewrites the
+ * migration's pinned transition hash, which is the only way to reach the
+ * structural checks that sit behind the byte pin.
+ */
+function stageMutatedTransition(
+    mutate: (transition: any) => void,
+    repin = false,
+) {
+    const directory = mkdtempSync(join(tmpdir(), "humanize-notes-"));
+    // The staged copy imports mongoose exactly as the committed migration does.
+    symlinkSync(
+        join(REPO_ROOT, "apps", "web", "node_modules"),
+        join(directory, "node_modules"),
+        "dir",
+    );
+    const transition = readJson(HUMANIZATION_TRANSITION_PATH);
+    mutate(transition);
+    const bytes = `${JSON.stringify(transition, null, 4)}\n`;
+    writeFileSync(join(directory, `${HUMANIZATION_ID}.lessons.json`), bytes);
+    copyFileSync(
+        join(MIGRATION_DIRECTORY, `${MIGRATION_ID}.course.json`),
+        join(directory, `${MIGRATION_ID}.course.json`),
+    );
+    const script = join(directory, `${HUMANIZATION_ID}.js`);
+    const source = readFileSync(HUMANIZATION_PATH, "utf8");
+    writeFileSync(
+        script,
+        repin
+            ? source.replace(
+                  HUMANIZATION_TRANSITION_HASH,
+                  createHash("sha256").update(bytes).digest("hex"),
+              )
+            : source,
+    );
+    return { directory, script };
+}
+
+describe("Notes lessons 01-02 humanisation migration", () => {
+    beforeEach(async () => {
+        await mongoose.connection.db?.dropDatabase();
+    });
+
+    it.each([
+        { args: [] },
+        { args: ["--unknown"] },
+        { args: ["--dry-run", "--apply"] },
+    ])("rejects invalid CLI mode %# before database access", ({ args }) => {
+        const result = runHumanization(args);
+
+        expect(result.status).toBe(64);
+        expect(result.stderr).toContain(
+            "Usage: humanize-notes-lessons-01-02.js --dry-run|--apply",
+        );
+    });
+
+    it("rejects any target domain other than main before database access", () => {
+        const result = runHumanization(["--dry-run"], {
+            DB_CONNECTION_STRING: UNREACHABLE_DB,
+            TARGET_DOMAIN: "another-school",
+        });
+
+        expect(result.status).toBe(1);
+        expect(result.stderr).toContain("Target domain is not allowlisted");
+        expect(result.stderr).not.toContain("Database connection failed");
+    });
+
+    it("pins the transition bytes to the reviewed canonical course", () => {
+        expect(sha256File(HUMANIZATION_TRANSITION_PATH)).toBe(
+            HUMANIZATION_TRANSITION_HASH,
+        );
+        expect(sha256File(CANONICAL_COURSE_PATH)).toBe(CANONICAL_COURSE_HASH);
+
+        const transition = readJson(HUMANIZATION_TRANSITION_PATH);
+        const canonical = flattenCourseLessons(readJson(CANONICAL_COURSE_PATH));
+
+        expect(transition.sourceReviewCommit).toBe(SOURCE_REVIEW_COMMIT);
+        expect(transition.finalCanonicalCourseSha256).toBe(
+            CANONICAL_COURSE_HASH,
+        );
+        expect(transition.baselineCourseSnapshot).toEqual({
+            migrationId: MIGRATION_ID,
+            sha256: FROZEN_HASHES.course,
+        });
+        expect(canonical.map(({ lessonId }: any) => lessonId)).toEqual(
+            CANONICAL_LESSON_ORDER,
+        );
+        expect(transition.course.expectedLessonIds).toEqual(
+            CANONICAL_LESSON_ORDER,
+        );
+        expect(transition.lessons.map(({ lessonId }: any) => lessonId)).toEqual(
+            TARGET_LESSON_IDS,
+        );
+        for (const target of transition.lessons) {
+            const lesson = canonical.find(
+                ({ lessonId }: any) => lessonId === target.lessonId,
+            );
+            expect(target.finalContent).toEqual(lesson.content);
+            expect(target.identity).toEqual({
+                title: lesson.title,
+                type: lesson.type,
+                groupId: lesson.groupId,
+                requiresEnrollment: lesson.requiresEnrollment,
+                downloadable: false,
+                published: lesson.published,
+            });
+        }
+    });
+
+    it("refuses a mutated transition snapshot before opening the database", () => {
+        const { directory, script } = stageMutatedTransition((transition) => {
+            transition.lessons[1].finalContent =
+                transition.lessons[1].baselineContent;
+        });
+        try {
+            const result = runNode(script, ["--apply"], {
+                NODE_ENV: "test",
+                PATH: process.env.PATH,
+                DB_CONNECTION_STRING: UNREACHABLE_DB,
+                TARGET_DOMAIN: "main",
+            });
+
+            expect(result.status).toBe(1);
+            expect(result.stderr).toContain("Frozen source hash is invalid");
+        } finally {
+            rmSync(directory, { recursive: true, force: true });
+        }
+    });
+
+    it("refuses a re-pinned snapshot whose target contents were swapped", () => {
+        const { directory, script } = stageMutatedTransition((transition) => {
+            const [first, second] = transition.lessons;
+            [first.finalContent, second.finalContent] = [
+                second.finalContent,
+                first.finalContent,
+            ];
+        }, true);
+        try {
+            const result = runNode(script, ["--apply"], {
+                NODE_ENV: "test",
+                PATH: process.env.PATH,
+                DB_CONNECTION_STRING: UNREACHABLE_DB,
+                TARGET_DOMAIN: "main",
+            });
+
+            expect(result.status).toBe(1);
+            expect(result.stderr).toContain(
+                "Transition content hashes are invalid",
+            );
+        } finally {
+            rmSync(directory, { recursive: true, force: true });
+        }
+    });
+
+    it("dry-runs the refined baseline twice with two planned changes and zero writes", async () => {
+        const { db } = await seedRefinedBaseline();
+        const before = await snapshotCollections(db);
+
+        const first = runHumanization(["--dry-run"], databaseEnvironment());
+        const second = runHumanization(["--dry-run"], databaseEnvironment());
+
+        expect(first.status).toBe(0);
+        expect(first.stdout).toContain(
+            "notes-humanization-01-02-migration mode=dry-run planned=2 applied=0",
+        );
+        expect(second.status).toBe(0);
+        expect(second.stdout).toBe(first.stdout);
+        expect(await snapshotCollections(db)).toEqual(before);
+    });
+
+    it("applies the reviewed prose to both targets and no other state", async () => {
+        const { db } = await seedRefinedBaseline();
+        const before = await snapshotCollections(db);
+        const { lessons: transition } = readJson(HUMANIZATION_TRANSITION_PATH);
+        const startedAt = Date.now();
+
+        const result = runHumanization(["--apply"], databaseEnvironment());
+
+        expect(result.status).toBe(0);
+        expect(result.stdout).toContain(
+            "notes-humanization-01-02-migration mode=apply planned=2 applied=2",
+        );
+        const after = await snapshotCollections(db);
+        for (const target of transition) {
+            const find = (lessons: any[]) =>
+                lessons.find(
+                    ({ lessonId }: any) => lessonId === target.lessonId,
+                );
+            const beforeLesson = find(before.lessons);
+            const afterLesson = find(after.lessons);
+            expect(beforeLesson.content).toEqual(target.baselineContent);
+            expect(afterLesson.content).toEqual(target.finalContent);
+            expect(afterLesson.updatedAt).toBeInstanceOf(Date);
+            expect(afterLesson.updatedAt.getTime()).toBeGreaterThanOrEqual(
+                startedAt,
+            );
+            expect(omit(afterLesson, ["content", "updatedAt"])).toEqual(
+                omit(beforeLesson, ["content", "updatedAt"]),
+            );
+        }
+        const untouched = (lessons: any[]) =>
+            lessons.filter(
+                ({ lessonId }: any) => !TARGET_LESSON_IDS.includes(lessonId),
+            );
+        expect(untouched(after.lessons)).toEqual(untouched(before.lessons));
+        for (const collection of [
+            "courses",
+            "pages",
+            "domains",
+            "userthemes",
+            "users",
+            "memberships",
+            "invoices",
+            "certificates",
+            "activities",
+            "lessonevaluations",
+            "paymentplans",
+        ]) {
+            expect(after[collection]).toEqual(before[collection]);
+        }
+    });
+
+    it("resumes after Mongo rejects lesson 02 without rewriting lesson 01", async () => {
+        const { db } = await seedRefinedBaseline();
+        const before = await snapshotCollections(db);
+        const { lessons: transition } = readJson(HUMANIZATION_TRANSITION_PATH);
+        await db.command({
+            collMod: "lessons",
+            validator: {
+                lessonId: { $ne: "lesson_notes_that_do_work_02" },
+            },
+            validationLevel: "strict",
+            validationAction: "error",
+        });
+
+        const interrupted = runHumanization(["--apply"], databaseEnvironment());
+
+        expect(interrupted.status).toBe(1);
+        expect(interrupted.stdout).not.toContain(
+            "notes-humanization-01-02-migration",
+        );
+        const partial = await snapshotCollections(db);
+        const lesson = (lessons: any[], lessonId: string) =>
+            lessons.find((candidate: any) => candidate.lessonId === lessonId);
+        const lesson01 = lesson(
+            partial.lessons,
+            "lesson_notes_that_do_work_01",
+        );
+        const lesson02 = lesson(
+            partial.lessons,
+            "lesson_notes_that_do_work_02",
+        );
+        expect(lesson01.content).toEqual(transition[0].finalContent);
+        expect(lesson02.content).toEqual(transition[1].baselineContent);
+        expect(omit(lesson01, ["content", "updatedAt"])).toEqual(
+            omit(lesson(before.lessons, "lesson_notes_that_do_work_01"), [
+                "content",
+                "updatedAt",
+            ]),
+        );
+        expect(omit(lesson02, ["content", "updatedAt"])).toEqual(
+            omit(lesson(before.lessons, "lesson_notes_that_do_work_02"), [
+                "content",
+                "updatedAt",
+            ]),
+        );
+        expect(
+            partial.lessons.filter(
+                ({ lessonId }: any) => !TARGET_LESSON_IDS.includes(lessonId),
+            ),
+        ).toEqual(
+            before.lessons.filter(
+                ({ lessonId }: any) => !TARGET_LESSON_IDS.includes(lessonId),
+            ),
+        );
+        for (const collection of Object.keys(before).filter(
+            (name) => name !== "lessons",
+        )) {
+            expect(partial[collection]).toEqual(before[collection]);
+        }
+        const lesson01AfterInterruption = lesson01;
+        await db.command({
+            collMod: "lessons",
+            validator: {},
+            validationLevel: "off",
+        });
+
+        const resumed = runHumanization(["--apply"], databaseEnvironment());
+
+        expect(resumed.status).toBe(0);
+        expect(resumed.stdout).toContain(
+            "notes-humanization-01-02-migration mode=apply planned=1 applied=1",
+        );
+        const finalLessons = await db
+            .collection("lessons")
+            .find({ courseId: "course_notes_that_do_work_v1" })
+            .sort({ lessonId: 1 })
+            .toArray();
+        expect(lesson(finalLessons, "lesson_notes_that_do_work_01")).toEqual(
+            lesson01AfterInterruption,
+        );
+        expect(
+            lesson(finalLessons, "lesson_notes_that_do_work_02").content,
+        ).toEqual(transition[1].finalContent);
+    });
+
+    it("makes a second apply a byte-stable zero-write no-op", async () => {
+        const { db } = await seedRefinedBaseline();
+        expect(runHumanization(["--apply"], databaseEnvironment()).status).toBe(
+            0,
+        );
+        const before = await snapshotCollections(db);
+
+        const result = runHumanization(["--apply"], databaseEnvironment());
+
+        expect(result.status).toBe(0);
+        expect(result.stdout).toContain(
+            "notes-humanization-01-02-migration mode=apply planned=0 applied=0",
+        );
+        expect(await snapshotCollections(db)).toEqual(before);
+    });
+
+    it.each([
+        {
+            name: "a third content state on a target lesson",
+            error: "Managed lesson has owner edits",
+            mutate: (db: TestDatabase) =>
+                db
+                    .collection("lessons")
+                    .updateOne(
+                        { lessonId: "lesson_notes_that_do_work_01" },
+                        { $set: { content: { type: "doc", content: [] } } },
+                    ),
+        },
+        {
+            name: "an owner-edited target title",
+            error: "Target lesson identity is invalid",
+            mutate: (db: TestDatabase) =>
+                db
+                    .collection("lessons")
+                    .updateOne(
+                        { lessonId: "lesson_notes_that_do_work_01" },
+                        { $set: { title: "Owner title" } },
+                    ),
+        },
+        {
+            name: "a target lesson moved to another group",
+            error: "Managed lesson identity is invalid",
+            mutate: (db: TestDatabase) =>
+                db
+                    .collection("lessons")
+                    .updateOne(
+                        { lessonId: "lesson_notes_that_do_work_02" },
+                        { $set: { groupId: "group_notes_that_do_work_02" } },
+                    ),
+        },
+        {
+            name: "a target lesson with flipped enrollment",
+            error: "Target lesson identity is invalid",
+            mutate: (db: TestDatabase) =>
+                db
+                    .collection("lessons")
+                    .updateOne(
+                        { lessonId: "lesson_notes_that_do_work_01" },
+                        { $set: { requiresEnrollment: true } },
+                    ),
+        },
+        {
+            name: "an unpublished target lesson",
+            error: "Target lesson identity is invalid",
+            mutate: (db: TestDatabase) =>
+                db
+                    .collection("lessons")
+                    .updateOne(
+                        { lessonId: "lesson_notes_that_do_work_02" },
+                        { $set: { published: false } },
+                    ),
+        },
+        {
+            name: "a target lesson reassigned to another creator",
+            error: "Target lesson identity is invalid",
+            mutate: (db: TestDatabase) =>
+                db
+                    .collection("lessons")
+                    .updateOne(
+                        { lessonId: "lesson_notes_that_do_work_01" },
+                        { $set: { creatorId: "someone_else" } },
+                    ),
+        },
+        {
+            name: "a missing target lesson",
+            error: "Managed lesson identity set is invalid",
+            mutate: (db: TestDatabase) =>
+                db
+                    .collection("lessons")
+                    .deleteOne({ lessonId: "lesson_notes_that_do_work_02" }),
+        },
+        {
+            name: "a duplicated target lesson ID",
+            error: "Managed lesson identity is invalid",
+            mutate: (db: TestDatabase, domainId: mongoose.Types.ObjectId) =>
+                db.collection("lessons").insertOne({
+                    domain: domainId,
+                    lessonId: "lesson_notes_that_do_work_01",
+                    courseId: "course_notes_that_do_work_v1",
+                    title: "Duplicate lesson",
+                }),
+        },
+        {
+            name: "a target lesson ID owned by another course",
+            error: "Managed lesson identity is invalid",
+            mutate: (db: TestDatabase, domainId: mongoose.Types.ObjectId) =>
+                db.collection("lessons").insertOne({
+                    domain: domainId,
+                    lessonId: "lesson_notes_that_do_work_02",
+                    courseId: "owner_course",
+                    title: "Owner lesson",
+                }),
+        },
+        {
+            name: "a target lesson ID owned by another domain",
+            error: "Managed lesson identity is invalid",
+            mutate: (db: TestDatabase) =>
+                db.collection("lessons").insertOne({
+                    domain: new mongoose.Types.ObjectId(),
+                    lessonId: "lesson_notes_that_do_work_01",
+                    courseId: "course_notes_that_do_work_v1",
+                    title: "Other school lesson",
+                }),
+        },
+        {
+            name: "a same-domain course slug collision",
+            error: "Managed course preflight failed",
+            mutate: (db: TestDatabase, domainId: mongoose.Types.ObjectId) =>
+                db.collection("courses").insertOne({
+                    domain: domainId,
+                    courseId: "owner_course",
+                    slug: "notes-that-do-work",
+                    title: "Owner course",
+                }),
+        },
+        {
+            name: "a managed course turned private",
+            error: "Managed course identity is invalid",
+            mutate: (db: TestDatabase) =>
+                db
+                    .collection("courses")
+                    .updateOne(
+                        { courseId: "course_notes_that_do_work_v1" },
+                        { $set: { privacy: "unlisted" } },
+                    ),
+        },
+        {
+            name: "a managed course with the wrong slug",
+            error: "Managed course identity is invalid",
+            mutate: (db: TestDatabase) =>
+                db
+                    .collection("courses")
+                    .updateOne(
+                        { courseId: "course_notes_that_do_work_v1" },
+                        { $set: { slug: "owner-slug" } },
+                    ),
+        },
+        {
+            name: "a managed course moved to another domain",
+            error: "Managed course identity is invalid",
+            mutate: (db: TestDatabase) =>
+                db
+                    .collection("courses")
+                    .updateOne(
+                        { courseId: "course_notes_that_do_work_v1" },
+                        { $set: { domain: new mongoose.Types.ObjectId() } },
+                    ),
+        },
+        {
+            name: "an owner-edited course group topology",
+            error: "Managed course identity is invalid",
+            mutate: (db: TestDatabase) =>
+                db.collection("courses").updateOne(
+                    { courseId: "course_notes_that_do_work_v1" },
+                    {
+                        $set: {
+                            "groups.0.lessonsOrder": [
+                                "lesson_notes_that_do_work_02",
+                                "lesson_notes_that_do_work_01",
+                            ],
+                        },
+                    },
+                ),
+        },
+        {
+            name: "a non-target lesson moved to another group",
+            error: "Managed lesson identity is invalid",
+            mutate: (db: TestDatabase) =>
+                db
+                    .collection("lessons")
+                    .updateOne(
+                        { lessonId: "lesson_notes_that_do_work_03" },
+                        { $set: { groupId: "group_notes_that_do_work_01" } },
+                    ),
+        },
+        {
+            name: "an owner without publish permission",
+            error: "Domain owner permissions are incomplete",
+            mutate: (db: TestDatabase) =>
+                db
+                    .collection("users")
+                    .updateOne(
+                        { userId: "owner_ai_work_school_v1" },
+                        { $set: { permissions: ["course:manage_any"] } },
+                    ),
+        },
+        {
+            name: "a domain whose owner email no longer resolves",
+            error: "Domain owner preflight failed",
+            mutate: (db: TestDatabase) =>
+                db
+                    .collection("domains")
+                    .updateOne(
+                        { name: "main" },
+                        { $set: { email: "another-owner@example.com" } },
+                    ),
+        },
+        {
+            name: "an archived free plan",
+            error: "Managed free plan is invalid",
+            mutate: (db: TestDatabase) =>
+                db
+                    .collection("paymentplans")
+                    .updateOne(
+                        { planId: "plan_notes_that_do_work_free_v1" },
+                        { $set: { archived: true } },
+                    ),
+        },
+    ])("refuses $name before writing", async ({ mutate, error }) => {
+        const { db, domainId } = await seedRefinedBaseline();
+        await mutate(db, domainId);
+        const before = await snapshotCollections(db);
+
+        const result = runHumanization(["--apply"], databaseEnvironment());
+
+        expect(result.status).toBe(1);
+        expect(result.stderr).toContain(error);
         expect(await snapshotCollections(db)).toEqual(before);
     });
 });
