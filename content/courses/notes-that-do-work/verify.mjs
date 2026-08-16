@@ -243,6 +243,34 @@ const teachingContracts = [
     },
 ];
 
+const humanizationContracts = new Map([
+    [
+        "lesson_notes_that_do_work_01",
+        {
+            required: [
+                "the question you will keep working on through the course",
+                "Use that question to decide which context you keep and which you leave.",
+                "Explain to a colleague why collecting more notes is not the same as repairing a knowledge leak.",
+            ],
+            forbidden:
+                /Close the lesson|deserves to survive|weekend goes into naming folders|will carry through the rest of the course/i,
+        },
+    ],
+    [
+        "lesson_notes_that_do_work_02",
+        {
+            required: [
+                "treat that as a signal to rework it until you can say what the sentence means for your question",
+                "Without looking back at the lesson, explain the difference between a capture, a source extract and a source note",
+                "it is hard for a reader to tell which part to check",
+                "tells a future reader what the note is about and whether it matters to the job in front of them",
+            ],
+            forbidden:
+                /Close the lesson|not understood yet|whether it bears on the job|Incident review notes names the source and nothing else|without pretending that copying/i,
+        },
+    ],
+]);
+
 function textOf(node) {
     if (!node || typeof node !== "object") return "";
     return [node.text ?? "", ...(node.content ?? []).map(textOf)]
@@ -430,6 +458,20 @@ for (const [index, lesson] of lessons.entries()) {
         `${key} has enough teaching material`,
     );
     assert.match(learnerText, /Teach it back/i);
+    const humanization = humanizationContracts.get(lesson.lessonId);
+    if (humanization) {
+        for (const fragment of humanization.required) {
+            assert.ok(
+                learnerText.includes(fragment),
+                `${key} preserves reviewed humanized prose: ${fragment}`,
+            );
+        }
+        assert.doesNotMatch(
+            learnerText,
+            humanization.forbidden,
+            `${key} excludes superseded generated prose`,
+        );
+    }
 }
 
 assert.deepEqual(course.capstone, {
