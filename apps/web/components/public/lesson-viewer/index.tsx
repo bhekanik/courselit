@@ -18,6 +18,7 @@ import {
     COURSE_PROGRESS_MARK_COMPLETED,
     COURSE_PROGRESS_COMPLETED,
     ENROLL_BUTTON_TEXT,
+    ENROLL_FREE_BUTTON_TEXT,
     TOAST_TITLE_ERROR,
     NOT_ENROLLED_HEADER,
 } from "@/ui-config/strings";
@@ -86,6 +87,7 @@ export const LessonViewer = ({
 }: LessonViewerProps) => {
     const [lesson, setLesson] = useState<Lesson>();
     const [courseTitle, setCourseTitle] = useState<string>("");
+    const [courseCost, setCourseCost] = useState<number>();
     const [isPreview, setIsPreview] = useState(false);
     const [error, setError] = useState();
     const searchParams = useSearchParams();
@@ -111,18 +113,24 @@ export const LessonViewer = ({
     useEffect(() => {
         setError(undefined);
         setLesson(undefined);
+        setCourseCost(undefined);
         if (lessonId) {
             loadLesson(lessonId);
         }
     }, [lessonId, viewerSessionParams.preview]);
 
     const loadLesson = async (id: string) => {
-        const query = `
-            query ($productId: String!, $lessonId: String!, $preview: Boolean) {
+        const courseQuery = `
+            query ($productId: String!, $preview: Boolean) {
                 course: getCourse(id: $productId, preview: $preview) {
                     title
+                    cost
                     isPreview
                 }
+            }
+        `;
+        const lessonQuery = `
+            query ($productId: String!, $lessonId: String!, $preview: Boolean) {
                 lesson: getLessonDetails(id: $lessonId, courseId: $productId, preview: $preview) {
                     lessonId,
                     title,
@@ -142,10 +150,21 @@ export const LessonViewer = ({
             }
         `;
 
-        const fetch = new FetchBuilder()
+        const courseFetch = new FetchBuilder()
             .setUrl(`${address.backend}/api/graph`)
             .setPayload({
-                query,
+                query: courseQuery,
+                variables: {
+                    productId,
+                    preview: viewerSessionParams.preview,
+                },
+            })
+            .setIsGraphQLEndpoint(true)
+            .build();
+        const lessonFetch = new FetchBuilder()
+            .setUrl(`${address.backend}/api/graph`)
+            .setPayload({
+                query: lessonQuery,
                 variables: {
                     productId,
                     lessonId: id,
@@ -157,14 +176,24 @@ export const LessonViewer = ({
 
         try {
             setLoading(true);
-            const response = await fetch.exec();
+            const [courseResult, lessonResult] = await Promise.allSettled([
+                courseFetch.exec(),
+                lessonFetch.exec(),
+            ]);
 
-            if (response.course) {
-                setCourseTitle(response.course.title || "");
-                setIsPreview(Boolean(response.course.isPreview));
+            if (courseResult.status === "rejected") {
+                throw courseResult.reason;
             }
-            if (response.lesson) {
-                setLesson(response.lesson);
+            if (courseResult.value.course) {
+                setCourseTitle(courseResult.value.course.title || "");
+                setCourseCost(courseResult.value.course.cost);
+                setIsPreview(Boolean(courseResult.value.course.isPreview));
+            }
+            if (lessonResult.status === "rejected") {
+                throw lessonResult.reason;
+            }
+            if (lessonResult.value.lesson) {
+                setLesson(lessonResult.value.lesson);
             }
         } catch (err: any) {
             setError(err.message);
@@ -250,7 +279,9 @@ export const LessonViewer = ({
                                 href={`/checkout?type=${Constants.MembershipEntityType.COURSE}&id=${productId}`}
                             >
                                 <Button theme={theme.theme}>
-                                    {ENROLL_BUTTON_TEXT}
+                                    {courseCost === 0
+                                        ? ENROLL_FREE_BUTTON_TEXT
+                                        : ENROLL_BUTTON_TEXT}
                                 </Button>
                             </Link>
                         )}
