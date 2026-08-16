@@ -635,7 +635,7 @@
                                     "content": [
                                         {
                                             "type": "text",
-                                            "text": "A source note puts the missing pieces back where you can see them. It holds the locator, the source words or data you need, your explanation, and the question the note can help answer. The source supports only what it says. Your explanation is what you take it to mean, and that can be wrong. Written out as one tidy paragraph, the whole thing reads as a single claim, and a reader cannot tell which part to check."
+                                            "text": "A source note puts the missing pieces back where you can see them. It holds the locator, the source words or data you need, your explanation, and the question the note can help answer. The source supports only what it says. Your explanation is what you take it to mean, and that can be wrong. Written out as one tidy paragraph, the whole thing reads as a single claim, and it is hard for a reader to tell which part to check."
                                         }
                                     ]
                                 },
@@ -644,7 +644,7 @@
                                     "content": [
                                         {
                                             "type": "text",
-                                            "text": "Writing the idea in your own words tests whether you understood it. Exact wording still matters sometimes, such as a contract clause or a stated decision. Quote it, label the quotation and give it a locator. Then write what you think it means. If that explanation only repeats the source sentence back, that sentence is the part you have not understood yet."
+                                            "text": "Writing the idea in your own words tests whether you understood it. Exact wording still matters sometimes, such as a contract clause or a stated decision. Quote it, label the quotation and give it a locator. Then write what you think it means. If that explanation only repeats the source sentence back, treat that as a signal to rework it until you can say what the sentence means for your question."
                                         }
                                     ]
                                 },
@@ -802,7 +802,7 @@
                                     "content": [
                                         {
                                             "type": "text",
-                                            "text": "Create source-note.md with the five parts above. Give it a title that states the useful point, not the source title. A title such as Delayed vendor response extended recovery states the point. Incident review notes names the source and nothing else."
+                                            "text": "Create source-note.md with the five parts above. Give it a title that states the useful point, not the source title. Compared with Incident review notes, a title such as Delayed vendor response extended recovery tells a future reader what the note is about and whether it matters to the job in front of them."
                                         }
                                     ]
                                 },
@@ -840,7 +840,7 @@
                                     "content": [
                                         {
                                             "type": "text",
-                                            "text": "Close the lesson. Explain the difference between a capture, a source extract and a source note, then give one reason a short note can be more trustworthy than a long summary."
+                                            "text": "Without looking back at the lesson, explain the difference between a capture, a source extract and a source note, then give one reason a short note can be more trustworthy than a long summary."
                                         }
                                     ]
                                 },
