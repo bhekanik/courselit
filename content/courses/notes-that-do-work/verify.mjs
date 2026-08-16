@@ -163,9 +163,8 @@ const requiredHeadings = [
 ];
 
 const teachingContracts = [
-    // Lessons 1-2 use the semantic review contracts below so prose can change without losing the teaching decision.
-    null,
-    null,
+    { review: assertLessonOneReviewContract },
+    { review: assertLessonTwoReviewContract },
     {
         prediction: "write the next action it should make easier",
         guidance: "Write four possible next uses beside it",
@@ -377,7 +376,9 @@ function assertNoUnsafeSensitiveDataInstruction(lesson) {
                 : [textOf(node)],
         ),
     ].flatMap((text) =>
-        text.split(/(?<=[.!?;])\s+|,\s+(?=(?:then|but|however|instead)\b)/u),
+        text.split(
+            /(?<=[.!?;])\s+|,\s+(?=(?:then|but|however|instead)\b)|\s+(?:and|while)\s+(?=(?:never|do not|don't|does not|must not|cannot|can't|without)\b)/u,
+        ),
     );
     const sensitiveMaterial =
         /\b(?:confidential|personal|client|employee|financial|sensitive)\b/i;
@@ -762,13 +763,10 @@ for (const [index, lesson] of lessons.entries()) {
     }
     assert.equal(lesson.content.type, "doc");
     assertTeachingSequence(lesson);
-    if (
-        ![
-            "lesson_notes_that_do_work_01",
-            "lesson_notes_that_do_work_02",
-        ].includes(lesson.lessonId)
-    ) {
-        const contract = teachingContracts[index];
+    const contract = teachingContracts[index];
+    if (contract.review) {
+        contract.review(lesson);
+    } else {
         for (const [field, heading] of [
             ["prediction", "Before you continue"],
             ["guidance", "Try it with guidance"],
@@ -789,12 +787,6 @@ for (const [index, lesson] of lessons.entries()) {
         `${key} has enough teaching material`,
     );
     assert.match(learnerText, /Teach it back/i);
-    if (lesson.lessonId === "lesson_notes_that_do_work_01") {
-        assertLessonOneReviewContract(lesson);
-    }
-    if (lesson.lessonId === "lesson_notes_that_do_work_02") {
-        assertLessonTwoReviewContract(lesson);
-    }
 }
 
 assert.deepEqual(course.capstone, {
