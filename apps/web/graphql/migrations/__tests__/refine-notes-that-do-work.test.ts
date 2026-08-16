@@ -1,4 +1,4 @@
-import { spawnSync } from "node:child_process";
+import { spawn, spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import {
     copyFileSync,
@@ -70,6 +70,35 @@ function runNode(script: string, args: string[], env: NodeJS.ProcessEnv) {
         env,
         encoding: "utf8",
         timeout: 30_000,
+    });
+}
+
+function runNodeAsync(script: string, args: string[], env: NodeJS.ProcessEnv) {
+    const child = spawn(process.execPath, [script, ...args], {
+        cwd: REPO_ROOT,
+        env,
+        timeout: 30_000,
+    });
+    let stdout = "";
+    let stderr = "";
+    child.stdout.setEncoding("utf8");
+    child.stderr.setEncoding("utf8");
+    child.stdout.on("data", (chunk: string) => {
+        stdout += chunk;
+    });
+    child.stderr.on("data", (chunk: string) => {
+        stderr += chunk;
+    });
+    return new Promise<{
+        status: number | null;
+        signal: NodeJS.Signals | null;
+        stdout: string;
+        stderr: string;
+    }>((resolve, reject) => {
+        child.on("error", reject);
+        child.on("close", (status, signal) => {
+            resolve({ status, signal, stdout, stderr });
+        });
     });
 }
 
@@ -681,6 +710,37 @@ async function seedRefinedBaseline() {
     return seeded;
 }
 
+async function waitForBlockedLessonUpdate(db: TestDatabase, appName: string) {
+    const deadline = Date.now() + 5_000;
+    while (Date.now() < deadline) {
+        const { inprog } = await db.admin().command({
+            currentOp: 1,
+            $all: true,
+        });
+        if (
+            inprog.some(
+                (operation: {
+                    appName?: string;
+                    command?: { update?: string; $truncated?: string };
+                }) => {
+                    const command = operation.command;
+                    return (
+                        operation.appName === appName &&
+                        (command?.update === "lessons" ||
+                            command?.$truncated?.startsWith(
+                                '{ update: "lessons"',
+                            ))
+                    );
+                },
+            )
+        ) {
+            return;
+        }
+        await new Promise((resolve) => setTimeout(resolve, 10));
+    }
+    throw new Error("Timed out waiting for the blocked lesson update");
+}
+
 /**
  * Stages an editable copy of the migration and its two frozen siblings so a
  * mutated snapshot can be run through the real CLI. `repin` rewrites the
@@ -937,6 +997,97 @@ describe("Notes lessons 01-02 humanisation migration", () => {
         }
     });
 
+    it("refuses an owner edit that lands after preflight and before the first write", async () => {
+        const { db } = await seedRefinedBaseline();
+        const before = await snapshotCollections(db);
+        const { lessons: transition } = readJson(HUMANIZATION_TRANSITION_PATH);
+        const ownerContent = {
+            type: "doc",
+            content: [
+                {
+                    type: "paragraph",
+                    content: [
+                        {
+                            type: "text",
+                            text: "Owner edit made while the migration was running.",
+                        },
+                    ],
+                },
+            ],
+        };
+        const appName = "pair01-cas-race";
+        const environment = databaseEnvironment();
+        if (!environment.DB_CONNECTION_STRING) {
+            throw new Error("Test database connection is unavailable");
+        }
+        const databaseUrl = new URL(environment.DB_CONNECTION_STRING);
+        databaseUrl.searchParams.set("appName", appName);
+        environment.DB_CONNECTION_STRING = databaseUrl.toString();
+
+        await db.admin().command({
+            configureFailPoint: "failCommand",
+            mode: { times: 1 },
+            data: {
+                failCommands: ["update"],
+                appName,
+                blockConnection: true,
+                blockTimeMS: 2_000,
+            },
+        });
+        try {
+            const migration = runNodeAsync(
+                HUMANIZATION_PATH,
+                ["--apply"],
+                environment,
+            );
+            await waitForBlockedLessonUpdate(db, appName);
+            await db
+                .collection("lessons")
+                .updateOne(
+                    { lessonId: "lesson_notes_that_do_work_01" },
+                    { $set: { content: ownerContent } },
+                );
+
+            const result = await migration;
+
+            expect(result.status).toBe(1);
+            expect(result.signal).toBeNull();
+            expect(result.stderr).toContain(
+                "Managed lesson changed during apply",
+            );
+            expect(result.stdout).not.toContain(
+                "notes-humanization-01-02-migration",
+            );
+            const after = await snapshotCollections(db);
+            const lesson = (lessons: any[], lessonId: string) =>
+                lessons.find(
+                    (candidate: any) => candidate.lessonId === lessonId,
+                );
+            expect(
+                lesson(after.lessons, "lesson_notes_that_do_work_01").content,
+            ).toEqual(ownerContent);
+            expect(
+                lesson(after.lessons, "lesson_notes_that_do_work_02").content,
+            ).toEqual(transition[1].baselineContent);
+            expect(
+                lesson(after.lessons, "lesson_notes_that_do_work_02"),
+            ).toEqual(lesson(before.lessons, "lesson_notes_that_do_work_02"));
+            expect(after).toEqual({
+                ...before,
+                lessons: before.lessons.map((candidate: any) =>
+                    candidate.lessonId === "lesson_notes_that_do_work_01"
+                        ? { ...candidate, content: ownerContent }
+                        : candidate,
+                ),
+            });
+        } finally {
+            await db.admin().command({
+                configureFailPoint: "failCommand",
+                mode: "off",
+            });
+        }
+    });
+
     it("resumes after Mongo rejects lesson 02 without rewriting lesson 01", async () => {
         const { db } = await seedRefinedBaseline();
         const { lessons: transition } = readJson(HUMANIZATION_TRANSITION_PATH);
@@ -966,7 +1117,12 @@ describe("Notes lessons 01-02 humanisation migration", () => {
         if (!validatorEnvironment.DB_CONNECTION_STRING) {
             throw new Error("Test database connection is unavailable");
         }
-        validatorEnvironment.DB_CONNECTION_STRING = `${validatorEnvironment.DB_CONNECTION_STRING}?appName=${databaseSecret}`;
+        const validatorDatabaseUrl = new URL(
+            validatorEnvironment.DB_CONNECTION_STRING,
+        );
+        validatorDatabaseUrl.searchParams.set("appName", databaseSecret);
+        validatorEnvironment.DB_CONNECTION_STRING =
+            validatorDatabaseUrl.toString();
 
         const interrupted = runHumanization(["--apply"], validatorEnvironment);
 

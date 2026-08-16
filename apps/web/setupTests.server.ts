@@ -20,6 +20,7 @@ beforeAll(async () => {
     mongod = await MongoMemoryServer.create({
         instance: {
             ip: "127.0.0.1",
+            args: ["--setParameter", "enableTestCommands=1"],
         },
     });
     const mongoUri = mongod.getUri();
