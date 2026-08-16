@@ -1,0 +1,262 @@
+{
+    "schemaVersion": 1,
+    "group": "notes-that-do-work-v2",
+    "cdnHost": "media.bhekani.com",
+    "entries": [
+        {
+            "key": "featured-notes-that-work",
+            "sourcePath": "content/courses/notes-that-do-work/assets/featured-notes-that-work.webp",
+            "sha256": "0055659b4f74a899cf3aef57f7c98c9ca2c9b782ccb889ef2e89a45b81a0657c",
+            "bytes": 424224,
+            "mimeType": "image/webp",
+            "media": {
+                "access": "public",
+                "caption": "Raw notes become linked ideas, a decision brief and a handover.",
+                "file": "https://media.bhekani.com/p/2QZpP5DXJtsSCa47r8INxjPvp-31f1R9xjhQl1A3/main.webp",
+                "mediaId": "2QZpP5DXJtsSCa47r8INxjPvp-31f1R9xjhQl1A3",
+                "mimeType": "image/webp",
+                "originalFileName": "featured-notes-that-work.webp",
+                "size": 424224,
+                "thumbnail": "https://media.bhekani.com/p/2QZpP5DXJtsSCa47r8INxjPvp-31f1R9xjhQl1A3/thumb.webp"
+            }
+        },
+        {
+            "key": "obsidian-note-surface",
+            "sourcePath": "content/courses/notes-that-do-work/assets/screenshot-obsidian-note-surface.webp",
+            "sha256": "845e2be9b34bbd0371427a1e063acbf434395698d1ee92c2abc8e64138d2730f",
+            "bytes": 45740,
+            "mimeType": "image/webp",
+            "media": {
+                "access": "public",
+                "caption": "Obsidian is one surface for the method: the note stays readable while links expose connections. Another approved note app can do the same job with different controls.",
+                "file": "https://media.bhekani.com/p/ur6cY_uoVi6MamfWCHfQ3d5I_7o3G_9QcV4_7-ZY/main.webp",
+                "mediaId": "ur6cY_uoVi6MamfWCHfQ3d5I_7o3G_9QcV4_7-ZY",
+                "mimeType": "image/webp",
+                "originalFileName": "screenshot-obsidian-note-surface.webp",
+                "size": 45740,
+                "thumbnail": "https://media.bhekani.com/p/ur6cY_uoVi6MamfWCHfQ3d5I_7o3G_9QcV4_7-ZY/thumb.webp"
+            }
+        },
+        {
+            "key": "onenote-link-command",
+            "sourcePath": "content/courses/notes-that-do-work/assets/screenshot-onenote-link-command.webp",
+            "sha256": "46dccce69cd2de16ef460cc96f5ee472ee86a95de042ac9b233d3de18d920512",
+            "bytes": 26696,
+            "mimeType": "image/webp",
+            "media": {
+                "access": "public",
+                "caption": "In OneNote for Windows, select the material you want to connect, then use Insert > Link. The control is different; the job is still to leave a route back to a source or related page.",
+                "file": "https://media.bhekani.com/p/S6uGLmVooml8BzH41vazeIH4JKQeEJYrose7Kldw/main.webp",
+                "mediaId": "S6uGLmVooml8BzH41vazeIH4JKQeEJYrose7Kldw",
+                "mimeType": "image/webp",
+                "originalFileName": "screenshot-onenote-link-command.webp",
+                "size": 26696,
+                "thumbnail": "https://media.bhekani.com/p/S6uGLmVooml8BzH41vazeIH4JKQeEJYrose7Kldw/thumb.webp"
+            }
+        },
+        {
+            "key": "knowledge-leak-map",
+            "sourcePath": "content/courses/notes-that-do-work/assets/diagram-knowledge-leak-map.webp",
+            "sha256": "15be4a768cba00d2567c8d1a59365ac5aa27dda2416627af1bd62916297059c7",
+            "bytes": 69548,
+            "mimeType": "image/webp",
+            "media": {
+                "access": "public",
+                "caption": "A knowledge leak is the point where useful context becomes hard to find, interpret or reuse. Repair one leak before changing the whole system.",
+                "file": "https://media.bhekani.com/p/4DYmlakZGQ3dA2kQ-idVmBffMnfNGBtkNjZuduo8/main.webp",
+                "mediaId": "4DYmlakZGQ3dA2kQ-idVmBffMnfNGBtkNjZuduo8",
+                "mimeType": "image/webp",
+                "originalFileName": "diagram-knowledge-leak-map.webp",
+                "size": 69548,
+                "thumbnail": "https://media.bhekani.com/p/4DYmlakZGQ3dA2kQ-idVmBffMnfNGBtkNjZuduo8/thumb.webp"
+            }
+        },
+        {
+            "key": "source-note-anatomy",
+            "sourcePath": "content/courses/notes-that-do-work/assets/diagram-source-note-anatomy.webp",
+            "sha256": "3936f34b4a95a7cf0653e280dfd3a098335c7437e35861572ad4ceb422178f23",
+            "bytes": 65234,
+            "mimeType": "image/webp",
+            "media": {
+                "access": "public",
+                "caption": "The source, the exact extract and your interpretation carry different authority. Keep them visibly separate.",
+                "file": "https://media.bhekani.com/p/oQb7Df8xEPlAQm5c9QQ7i20ezU2ot1Qq6kZS6Vnw/main.webp",
+                "mediaId": "oQb7Df8xEPlAQm5c9QQ7i20ezU2ot1Qq6kZS6Vnw",
+                "mimeType": "image/webp",
+                "originalFileName": "diagram-source-note-anatomy.webp",
+                "size": 65234,
+                "thumbnail": "https://media.bhekani.com/p/oQb7Df8xEPlAQm5c9QQ7i20ezU2ot1Qq6kZS6Vnw/thumb.webp"
+            }
+        },
+        {
+            "key": "note-job-selector",
+            "sourcePath": "content/courses/notes-that-do-work/assets/diagram-note-job-selector.webp",
+            "sha256": "ee173f66f954f44b590d6e323946abc67d39f486ca7a2a087d8a7182dfda1113",
+            "bytes": 55420,
+            "mimeType": "image/webp",
+            "media": {
+                "access": "public",
+                "caption": "Choose a note's job from what it must help someone do next, not from where the note came from.",
+                "file": "https://media.bhekani.com/p/oSr_RHRYmGoS54rpZJWl7lBNDK_DYw6Dx5fNO1Eu/main.webp",
+                "mediaId": "oSr_RHRYmGoS54rpZJWl7lBNDK_DYw6Dx5fNO1Eu",
+                "mimeType": "image/webp",
+                "originalFileName": "diagram-note-job-selector.webp",
+                "size": 55420,
+                "thumbnail": "https://media.bhekani.com/p/oSr_RHRYmGoS54rpZJWl7lBNDK_DYw6Dx5fNO1Eu/thumb.webp"
+            }
+        },
+        {
+            "key": "one-idea-split",
+            "sourcePath": "content/courses/notes-that-do-work/assets/diagram-one-idea-split.webp",
+            "sha256": "b919c0db810bf9be7b86fcff98286f0883bec102afc54d37c3ee69927ac7db08",
+            "bytes": 52892,
+            "mimeType": "image/webp",
+            "media": {
+                "access": "public",
+                "caption": "Split by job, then link the parts. The reusable concept keeps one claim, its evidence and its boundary.",
+                "file": "https://media.bhekani.com/p/I5nmONuszY4uraTVch0HDE5i4Qvhk_LwNJsqWWp-/main.webp",
+                "mediaId": "I5nmONuszY4uraTVch0HDE5i4Qvhk_LwNJsqWWp-",
+                "mimeType": "image/webp",
+                "originalFileName": "diagram-one-idea-split.webp",
+                "size": 52892,
+                "thumbnail": "https://media.bhekani.com/p/I5nmONuszY4uraTVch0HDE5i4Qvhk_LwNJsqWWp-/thumb.webp"
+            }
+        },
+        {
+            "key": "relationship-semantics",
+            "sourcePath": "content/courses/notes-that-do-work/assets/diagram-relationship-semantics.webp",
+            "sha256": "56c94bdb0fbfd5987e0e1ca4dc92830e5dd6e0505dda9336a242e6f3d94db8e0",
+            "bytes": 65268,
+            "mimeType": "image/webp",
+            "media": {
+                "access": "public",
+                "caption": "Tags group. Properties type. Links narrate. Keep a connection only when it changes retrieval, interpretation or action.",
+                "file": "https://media.bhekani.com/p/45efR9n0lrRbeXUJu9s_ec8fgbq2wFL1G_H9hNvx/main.webp",
+                "mediaId": "45efR9n0lrRbeXUJu9s_ec8fgbq2wFL1G_H9hNvx",
+                "mimeType": "image/webp",
+                "originalFileName": "diagram-relationship-semantics.webp",
+                "size": 65268,
+                "thumbnail": "https://media.bhekani.com/p/45efR9n0lrRbeXUJu9s_ec8fgbq2wFL1G_H9hNvx/thumb.webp"
+            }
+        },
+        {
+            "key": "search-before-create",
+            "sourcePath": "content/courses/notes-that-do-work/assets/diagram-search-before-create.webp",
+            "sha256": "9614fdc8fb8e55bb3ac243cedefd27c374d97018c048bfaa96632c248a2024d0",
+            "bytes": 58048,
+            "mimeType": "image/webp",
+            "media": {
+                "access": "public",
+                "caption": "Creation is the fallback. Search and read first, then make the smallest change that leaves the system more useful.",
+                "file": "https://media.bhekani.com/p/Z1AZ76SmTZnjd-8cTyuzh15KRwFUCJJYMsAS0kme/main.webp",
+                "mediaId": "Z1AZ76SmTZnjd-8cTyuzh15KRwFUCJJYMsAS0kme",
+                "mimeType": "image/webp",
+                "originalFileName": "diagram-search-before-create.webp",
+                "size": 58048,
+                "thumbnail": "https://media.bhekani.com/p/Z1AZ76SmTZnjd-8cTyuzh15KRwFUCJJYMsAS0kme/thumb.webp"
+            }
+        },
+        {
+            "key": "discovery-presentation",
+            "sourcePath": "content/courses/notes-that-do-work/assets/diagram-discovery-presentation.webp",
+            "sha256": "02158e1c0d33dded04ae4c750a131b151100e30012dabe91ecfcb9c68d603157",
+            "bytes": 68818,
+            "mimeType": "image/webp",
+            "media": {
+                "access": "public",
+                "caption": "Discovery writing finds the thought. Presentation writing arranges the checked reasoning for another person.",
+                "file": "https://media.bhekani.com/p/FQDIc2wNttRem5PVXsR-gBi8BiTRi_xqU9BYzDx_/main.webp",
+                "mediaId": "FQDIc2wNttRem5PVXsR-gBi8BiTRi_xqU9BYzDx_",
+                "mimeType": "image/webp",
+                "originalFileName": "diagram-discovery-presentation.webp",
+                "size": 68818,
+                "thumbnail": "https://media.bhekani.com/p/FQDIc2wNttRem5PVXsR-gBi8BiTRi_xqU9BYzDx_/thumb.webp"
+            }
+        },
+        {
+            "key": "synthesis-hub",
+            "sourcePath": "content/courses/notes-that-do-work/assets/diagram-synthesis-hub.webp",
+            "sha256": "ff7c7cdd602a47ff10d977c30c280b8ad7cfad333a392ba2a8c0df6496bfae14",
+            "bytes": 60568,
+            "mimeType": "image/webp",
+            "media": {
+                "access": "public",
+                "caption": "A note belongs in the synthesis only when it changes the answer, uncertainty or next action.",
+                "file": "https://media.bhekani.com/p/sN8xKZCXKNn6UrrcHMxHKsnnj5a7-JKektAykbQ6/main.webp",
+                "mediaId": "sN8xKZCXKNn6UrrcHMxHKsnnj5a7-JKektAykbQ6",
+                "mimeType": "image/webp",
+                "originalFileName": "diagram-synthesis-hub.webp",
+                "size": 60568,
+                "thumbnail": "https://media.bhekani.com/p/sN8xKZCXKNn6UrrcHMxHKsnnj5a7-JKektAykbQ6/thumb.webp"
+            }
+        },
+        {
+            "key": "ai-source-pack",
+            "sourcePath": "content/courses/notes-that-do-work/assets/diagram-ai-source-pack.webp",
+            "sha256": "d40bc394eea972843a883d975ba75f40e2eec5e028a1d1d14d93132cfbf62476",
+            "bytes": 64892,
+            "mimeType": "image/webp",
+            "media": {
+                "access": "public",
+                "caption": "Start with the job. Include only current, relevant and permitted sources, and write down what stays outside. The boundary is evidence, not a guarantee.",
+                "file": "https://media.bhekani.com/p/tWTY3oXFnAPjVrGMn1TwTCukywazlYIVsleoV_eR/main.webp",
+                "mediaId": "tWTY3oXFnAPjVrGMn1TwTCukywazlYIVsleoV_eR",
+                "mimeType": "image/webp",
+                "originalFileName": "diagram-ai-source-pack.webp",
+                "size": 64892,
+                "thumbnail": "https://media.bhekani.com/p/tWTY3oXFnAPjVrGMn1TwTCukywazlYIVsleoV_eR/thumb.webp"
+            }
+        },
+        {
+            "key": "ai-reviewed-reentry",
+            "sourcePath": "content/courses/notes-that-do-work/assets/diagram-ai-reviewed-reentry.webp",
+            "sha256": "88f94d8ba561664e82ba4b8714161cbc97cbfad11f4e6e3f58ea513041183d04",
+            "bytes": 66170,
+            "mimeType": "image/webp",
+            "media": {
+                "access": "public",
+                "caption": "Accept, repair or reject each material claim. Only supported or repaired-and-rechecked wording may return to the notes.",
+                "file": "https://media.bhekani.com/p/rUGceNXTvIDpu4YZNYObDfPsW0p47hNYuekgOP0v/main.webp",
+                "mediaId": "rUGceNXTvIDpu4YZNYObDfPsW0p47hNYuekgOP0v",
+                "mimeType": "image/webp",
+                "originalFileName": "diagram-ai-reviewed-reentry.webp",
+                "size": 66170,
+                "thumbnail": "https://media.bhekani.com/p/rUGceNXTvIDpu4YZNYObDfPsW0p47hNYuekgOP0v/thumb.webp"
+            }
+        },
+        {
+            "key": "notes-to-decision",
+            "sourcePath": "content/courses/notes-that-do-work/assets/diagram-notes-to-decision.webp",
+            "sha256": "b2a9a97df8b68d6a83b2227a22bfeb642646f4d678992ef3e3a4635f0854db2d",
+            "bytes": 51492,
+            "mimeType": "image/webp",
+            "media": {
+                "access": "public",
+                "caption": "Each stage has a different job. The brief follows the reader's decision, not the order in which the notes were created.",
+                "file": "https://media.bhekani.com/p/YzWW4gUdw1KYjjx_5bDqdR8fRlV6VQnSLqSseyek/main.webp",
+                "mediaId": "YzWW4gUdw1KYjjx_5bDqdR8fRlV6VQnSLqSseyek",
+                "mimeType": "image/webp",
+                "originalFileName": "diagram-notes-to-decision.webp",
+                "size": 51492,
+                "thumbnail": "https://media.bhekani.com/p/YzWW4gUdw1KYjjx_5bDqdR8fRlV6VQnSLqSseyek/thumb.webp"
+            }
+        },
+        {
+            "key": "accretion-loop",
+            "sourcePath": "content/courses/notes-that-do-work/assets/diagram-accretion-loop.webp",
+            "sha256": "bffa133246931091409c91a858abd270bc6c8ca308cbad647973b0846db8ed78",
+            "bytes": 67702,
+            "mimeType": "image/webp",
+            "media": {
+                "access": "public",
+                "caption": "The next job starts ahead only when the real run changes the notes and leaves a reason to check them again.",
+                "file": "https://media.bhekani.com/p/-KN99a8cpe4ScO69WLk1Z5eCmir6fw9yIVUST4l0/main.webp",
+                "mediaId": "-KN99a8cpe4ScO69WLk1Z5eCmir6fw9yIVUST4l0",
+                "mimeType": "image/webp",
+                "originalFileName": "diagram-accretion-loop.webp",
+                "size": 67702,
+                "thumbnail": "https://media.bhekani.com/p/-KN99a8cpe4ScO69WLk1Z5eCmir6fw9yIVUST4l0/thumb.webp"
+            }
+        }
+    ]
+}
