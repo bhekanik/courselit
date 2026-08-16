@@ -70,7 +70,7 @@
                                     "content": [
                                         {
                                             "type": "text",
-                                            "text": "Find one place where useful thinking from your work disappears, and choose a question worth carrying through the course."
+                                            "text": "Find one place where useful thinking from your work disappears, and pick the question you will carry through the rest of the course."
                                         }
                                     ]
                                 },
@@ -110,7 +110,7 @@
                                     "content": [
                                         {
                                             "type": "text",
-                                            "text": "An accountant preparing a month-end review has three unexplained variances in a spreadsheet, a reason for one variance in an email, a correction discussed in a meeting, and a handwritten reminder about a late invoice. The final review may be accurate, but most of the thinking that made it accurate will vanish when the spreadsheet is filed. Next month begins with the same search."
+                                            "text": "An accountant is preparing a month-end review. Three variances in a spreadsheet are still unexplained. The reason for one of them is in an email, a correction came up in a meeting, and a handwritten reminder mentions a late invoice. The review itself may be accurate. When the spreadsheet is filed, though, most of the thinking that made it accurate goes with it, and next month begins with the same search."
                                         }
                                     ]
                                 },
@@ -119,7 +119,7 @@
                                     "content": [
                                         {
                                             "type": "text",
-                                            "text": "The problem is not that the accountant took too few notes. The problem is that the reasons, sources and decisions were separated from the work they explained. A leak is the point where useful context stops being available to the next person or the next version of you. It can happen at capture, when the note has no source; during use, when a decision is not written down; or after delivery, when the useful reasoning stays inside a finished document nobody searches."
+                                            "text": "The accountant did take notes. The reasons, sources and decisions just ended up separated from the work they explained. Call that separation a leak: the point where useful context stops being available to the next person, or to the next version of you. It can open at capture, when a note has no source; during use, when nobody records why a decision was made; or at handover, when the useful reasoning stays inside a finished document nobody searches."
                                         }
                                     ]
                                 },
@@ -128,7 +128,7 @@
                                     "content": [
                                         {
                                             "type": "text",
-                                            "text": "Start with a question, not a filing system. A live question gives you a reason to decide what deserves to survive. It also stops the usual detour in which you spend a weekend naming folders and still cannot answer Monday's question."
+                                            "text": "Which of those matters depends on the job in front of you, so begin with the question you actually have to answer. That question tells you which context deserves to survive. It also keeps you off the detour where a weekend goes into naming folders and Monday's question is still unanswered."
                                         }
                                     ]
                                 },
@@ -147,7 +147,7 @@
                                     "content": [
                                         {
                                             "type": "text",
-                                            "text": "You need somewhere that can hold text, search it and link or reference another note. Use the approved tool already available to you. These official guides show the minimum moves in four common surfaces:"
+                                            "text": "You need somewhere you can write and search text, then link or refer to another note. Use an approved tool you already have. These official guides show the minimum moves in four common surfaces:"
                                         }
                                     ]
                                 },
@@ -266,7 +266,7 @@
                                     "content": [
                                         {
                                             "type": "text",
-                                            "text": "The app is not the method. If your organisation limits where records can be stored, those rules choose the surface. Do not copy confidential, personal or client material into a new tool merely to complete an exercise."
+                                            "text": "If your organisation limits where records can be stored, those rules choose the surface. Do not copy confidential, personal or client material into a new tool merely to complete an exercise."
                                         }
                                     ]
                                 },
@@ -302,7 +302,7 @@
                                     "content": [
                                         {
                                             "type": "text",
-                                            "text": "Use the question you wrote. Draw five columns: source, current location, what it contributes, who can read it, and what becomes difficult later. Add the finished output as a source too. A decision memo can hide its own reasoning just as easily as a meeting notebook."
+                                            "text": "Go back to the question you wrote. Draw five columns: source, current location, what it contributes, who can read it, and what becomes difficult later. Add the finished output as a source as well. A decision memo can hide its own reasoning just as easily as a meeting notebook."
                                         }
                                     ]
                                 },
@@ -311,7 +311,7 @@
                                     "content": [
                                         {
                                             "type": "text",
-                                            "text": "For each row, ask one concrete question: could I find this again, could I tell where it came from, could I tell why it mattered, and could the next person use it without asking me? Mark only the first failure. You are locating the leak, not scoring your whole system."
+                                            "text": "For each row, ask four plain questions: could I find this again, could I tell where it came from, could I tell why it mattered, and could the next person use it without asking me? Mark only the first failure in each row. You do not need to score the whole system."
                                         }
                                     ]
                                 },
@@ -320,7 +320,7 @@
                                     "content": [
                                         {
                                             "type": "text",
-                                            "text": "Stop and record: write one sentence in work-leak-map.md using this form: When I need to answer [question], the useful context in [place] becomes hard to [find, interpret or reuse] because [observable reason]."
+                                            "text": "Stop and record: write one sentence in work-leak-map.md in this form. When I need to answer [question], the useful context in [place] becomes hard to [find, interpret or reuse] because [observable reason]."
                                         }
                                     ]
                                 },
@@ -339,7 +339,7 @@
                                     "content": [
                                         {
                                             "type": "text",
-                                            "text": "Create work-leak-map.md. Include the question, the reader, what they need to do with the answer, the current sources, the leak sentence, and the one leak you will repair. Keep the other problems visible but out of scope."
+                                            "text": "Create work-leak-map.md. Include the question, the reader, what they need to do with the answer, the current sources, the leak sentence, and the one leak you will repair. Leave the other problems on the page, marked out of scope."
                                         }
                                     ]
                                 },
@@ -358,7 +358,7 @@
                                     "content": [
                                         {
                                             "type": "text",
-                                            "text": "Open the real locations and correct your map. The point is to compare memory with evidence. Add any source you forgot and delete any source you expected to use but did not. Note whether the omission changes the leak you chose."
+                                            "text": "Your first map came from memory. Open the real locations now and correct it. Add any source you forgot, delete any source you expected to use but did not, and note whether that changes the leak you chose."
                                         }
                                     ]
                                 },
@@ -377,7 +377,7 @@
                                     "content": [
                                         {
                                             "type": "text",
-                                            "text": "Close the lesson. Explain to a colleague why collecting more notes is not the same as repairing a knowledge leak. Use your map, but do not use the phrase knowledge management."
+                                            "text": "Close the lesson and explain to a colleague why collecting more notes is not the same as repairing a knowledge leak. Use your map. Do not use the phrase knowledge management."
                                         }
                                     ]
                                 },
@@ -396,7 +396,7 @@
                                     "content": [
                                         {
                                             "type": "text",
-                                            "text": "A lawyer inherits a matter with a clean folder structure, complete meeting notes and no record of why the previous lawyer rejected one line of argument. Is the leak capture, use or handover? Write the evidence you would need before deciding. The tidy folders are not enough."
+                                            "text": "A lawyer inherits a matter with a clean folder structure, complete meeting notes and no record of why the previous lawyer rejected one line of argument. Is the leak at capture, during use or at handover? Write down the evidence you would need before you decide."
                                         }
                                     ]
                                 },
@@ -463,7 +463,7 @@
                                                     "content": [
                                                         {
                                                             "type": "text",
-                                                            "text": "The reader and next use of the output are named."
+                                                            "text": "The map names the reader and what they will do with the output next."
                                                         }
                                                     ]
                                                 }
@@ -477,7 +477,7 @@
                                                     "content": [
                                                         {
                                                             "type": "text",
-                                                            "text": "One leak is in scope. The rest are parked."
+                                                            "text": "One leak is in scope and the rest are parked."
                                                         }
                                                     ]
                                                 }
@@ -520,7 +520,7 @@
                                                     "content": [
                                                         {
                                                             "type": "text",
-                                                            "text": "Ask what a capable colleague would have to ask you before they could continue."
+                                                            "text": "Write down what a capable colleague would have to ask you before they could carry on."
                                                         }
                                                     ]
                                                 }
@@ -534,7 +534,7 @@
                                                     "content": [
                                                         {
                                                             "type": "text",
-                                                            "text": "If the map is still broad, choose the missing reason behind one recent decision. Repair that leak first."
+                                                            "text": "If the map still covers too much, pick the missing reason behind one recent decision and repair that leak first."
                                                         }
                                                     ]
                                                 }
