@@ -52,6 +52,7 @@ const MobileNav = (props: MobileNavSettings) => {
                     {props.logo && (
                         <div className="mr-2">
                             <Image
+                                alt=""
                                 src={props.logo.file}
                                 borderRadius={2}
                                 width="w-[32px]"
@@ -70,43 +71,50 @@ const MobileNav = (props: MobileNavSettings) => {
             >
                 {props.links &&
                     (props.links as Link[]).map((link: Link, index) => (
-                        <PageLink
-                            key={index}
-                            href={link.href}
-                            theme={theme}
-                            linkFontWeight={props.linkFontWeight}
-                            onClick={() => {
-                                setOpen(false);
-                            }}
-                            isButton={link.isButton}
-                            label={link.label}
-                        />
+                        <li key={index}>
+                            <PageLink
+                                href={link.href}
+                                theme={theme}
+                                linkFontWeight={props.linkFontWeight}
+                                onClick={() => {
+                                    setOpen(false);
+                                }}
+                                isButton={link.isButton}
+                                label={link.label}
+                            />
+                        </li>
                     ))}
                 {showLoginControl && (
                     <>
-                        <hr />
+                        <li aria-hidden="true">
+                            <hr />
+                        </li>
                         {!isGuest && (
+                            <li>
+                                <PageLink
+                                    theme={theme}
+                                    href="/dashboard"
+                                    linkFontWeight={props.linkFontWeight}
+                                    onClick={() => {
+                                        setOpen(false);
+                                    }}
+                                    isButton={false}
+                                    label="Dashboard"
+                                />
+                            </li>
+                        )}
+                        <li>
                             <PageLink
                                 theme={theme}
-                                href="/dashboard"
+                                href={isGuest ? "/login" : "/logout"}
+                                label={isGuest ? "Login" : "Logout"}
                                 linkFontWeight={props.linkFontWeight}
                                 onClick={() => {
                                     setOpen(false);
                                 }}
                                 isButton={false}
-                                label="Dashboard"
                             />
-                        )}
-                        <PageLink
-                            theme={theme}
-                            href={isGuest ? "/login" : "/logout"}
-                            label={isGuest ? "Login" : "Logout"}
-                            linkFontWeight={props.linkFontWeight}
-                            onClick={() => {
-                                setOpen(false);
-                            }}
-                            isButton={false}
-                        />
+                        </li>
                     </>
                 )}
             </ul>

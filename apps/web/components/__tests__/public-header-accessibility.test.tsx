@@ -72,7 +72,10 @@ function renderHeader() {
         pageData: { pageType: Constants.PageType.SITE },
         state: {
             auth: { guest: true, checked: true },
-            siteinfo: { title: "AI Work School" },
+            siteinfo: {
+                title: "AI Work School",
+                logo: { file: "/logo.png", caption: "" },
+            },
             networkAction: false,
             profile,
             address: {
@@ -121,5 +124,11 @@ describe("public header accessibility", () => {
         expect(dialog).toHaveAccessibleDescription(
             "Navigate the site and account pages.",
         );
+        expect(dialog.querySelector("img")).toHaveAttribute("alt", "");
+        expect(
+            Array.from(dialog.querySelector("ul")?.children || []).every(
+                (child) => child.tagName === "LI",
+            ),
+        ).toBe(true);
     });
 });
