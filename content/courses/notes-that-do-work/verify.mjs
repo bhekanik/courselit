@@ -163,20 +163,9 @@ const requiredHeadings = [
 ];
 
 const teachingContracts = [
-    {
-        prediction: "one question you need to answer in the next fortnight",
-        guidance: "Draw five columns: source, current location",
-        teachBack: "collecting more notes is not the same as repairing",
-        changedCase: "inherits a matter with a clean folder structure",
-    },
-    {
-        prediction:
-            "Without reopening the source, write what you think it means",
-        guidance: "Start with the locator",
-        teachBack:
-            "difference between a capture, a source extract and a source note",
-        changedCase: "database link requires a licence",
-    },
+    // Lessons 1-2 use the semantic review contracts below so prose can change without losing the teaching decision.
+    null,
+    null,
     {
         prediction: "write the next action it should make easier",
         guidance: "Write four possible next uses beside it",
@@ -242,34 +231,6 @@ const teachingContracts = [
         changedCase: "after a policy, contract or reporting rule has changed",
     },
 ];
-
-const humanizationContracts = new Map([
-    [
-        "lesson_notes_that_do_work_01",
-        {
-            required: [
-                "the question you will keep working on through the course",
-                "Use that question to decide which context you keep and which you leave.",
-                "Explain to a colleague why collecting more notes is not the same as repairing a knowledge leak.",
-            ],
-            forbidden:
-                /Close the lesson|deserves to survive|weekend goes into naming folders|will carry through the rest of the course/i,
-        },
-    ],
-    [
-        "lesson_notes_that_do_work_02",
-        {
-            required: [
-                "treat that as a signal to rework it until you can say what the sentence means for your question",
-                "Without looking back at the lesson, explain the difference between a capture, a source extract and a source note",
-                "it is hard for a reader to tell which part to check",
-                "tells a future reader what the note is about and whether it matters to the job in front of them",
-            ],
-            forbidden:
-                /Close the lesson|not understood yet|whether it bears on the job|Incident review notes names the source and nothing else|without pretending that copying/i,
-        },
-    ],
-]);
 
 function textOf(node) {
     if (!node || typeof node !== "object") return "";
@@ -385,6 +346,367 @@ function assertTeachingSequence(lesson) {
     );
 }
 
+function hintTextsOf(lesson) {
+    const hintIndex = lesson.content.content.findIndex(
+        (node) =>
+            node.type === "heading" && textOf(node) === "If you get stuck",
+    );
+    assert.notEqual(
+        hintIndex,
+        -1,
+        `${lesson.key} keeps the If you get stuck heading`,
+    );
+    const hintList = lesson.content.content[hintIndex + 1];
+    assert.equal(
+        hintList?.type,
+        "orderedList",
+        `${lesson.key} follows the hint heading with an ordered list`,
+    );
+    return hintList.content.map(textOf);
+}
+
+function assertNoUnsafeSensitiveDataInstruction(lesson) {
+    const lessonSegments = [
+        lesson.outcome,
+        lesson.exercise,
+        lesson.artifact.description,
+        ...lesson.verification,
+        ...lesson.content.content.flatMap((node) =>
+            ["bulletList", "orderedList"].includes(node.type)
+                ? node.content.map(textOf)
+                : [textOf(node)],
+        ),
+    ].flatMap((text) =>
+        text.split(/(?<=[.!?;])\s+|,\s+(?=(?:then|but|however|instead)\b)/u),
+    );
+    const sensitiveMaterial =
+        /\b(?:confidential|personal|client|employee|financial|sensitive)\b/i;
+    const unapprovedDestination =
+        /\b(?:new|unapproved|public|personal|external|third-party|cloud|shared|AI)\b.{0,24}\b(?:tool|service|surface|app|location|system|drive|workspace|chatbot)\b/i;
+    const riskyAction =
+        /\b(?:copy(?:ing)?|upload(?:ing)?|mov(?:e|ing)|past(?:e|ing)|send(?:ing)?|stor(?:e|ing)|sync(?:ing)?|export(?:ing)?|shar(?:e|ing)|email(?:ing)?|publish(?:ing)?|attach(?:ing)?|dump(?:ing)?)\b/i;
+    const safetyBeforeAction =
+        /\b(?:do not|don't|does not|must not|never|cannot|can't|without)\b[^.!?;:]{0,18}$/i;
+
+    for (const sentence of lessonSegments) {
+        if (
+            !sensitiveMaterial.test(sentence) ||
+            !unapprovedDestination.test(sentence) ||
+            !riskyAction.test(sentence)
+        ) {
+            continue;
+        }
+
+        for (const match of sentence.matchAll(
+            new RegExp(riskyAction.source, "gi"),
+        )) {
+            assert.match(
+                sentence.slice(0, match.index),
+                safetyBeforeAction,
+                `${lesson.key} rejects unsafe instructions for sensitive material: ${sentence}`,
+            );
+        }
+    }
+}
+
+function assertNoTeachingDecisionNegation(lesson) {
+    const lessonText = [
+        lesson.outcome,
+        lesson.exercise,
+        lesson.artifact.description,
+        ...lesson.verification,
+        textOf(lesson.content),
+    ]
+        .join(" ")
+        .replaceAll(/\s+/g, " ");
+    assert.doesNotMatch(
+        lessonText,
+        /\b(?:ignore|disregard|invent|discard)\b.{0,60}\b(?:work|question|source|context|evidence)\b/i,
+        `${lesson.key} does not negate its learner decision`,
+    );
+    assert.doesNotMatch(
+        lessonText,
+        /\b(?:work|questions?|details|sources?|evidence|context)\b.{0,24}\b(?:do(?:es)? not|don't|doesn't|need not|needn't)\b.{0,16}\bmatter\b/i,
+        `${lesson.key} keeps evidence and context material to the decision`,
+    );
+    assert.doesNotMatch(
+        lessonText,
+        /\b(?:question|source note|prediction|check|context|evidence)\b.{0,40}\b(?:optional|irrelevant|unnecessary|(?:may|can|should) be (?:skipped|ignored|invented|discarded))\b|\byou (?:may|can|should) (?:skip|ignore|invent|discard)\b.{0,40}\b(?:question|source|check|context|evidence)\b|\beither (?:way|approach) works\b/i,
+        `${lesson.key} does not weaken its learner decision`,
+    );
+}
+
+function assertLessonOneReviewContract(lesson) {
+    assert.match(
+        lesson.outcome,
+        /\bquestion\b/i,
+        "lesson 01 keeps a work question",
+    );
+    assert.match(
+        lesson.outcome,
+        /\b(?:context|thinking|reasoning)\b/i,
+        "lesson 01 traces useful context",
+    );
+    assert.match(
+        lesson.outcome,
+        /\b(?:disappear|lost|leak|hard to (?:find|interpret|reuse))\b/i,
+        "lesson 01 locates where context becomes unavailable",
+    );
+
+    const prediction = textAfterHeading(lesson.content, "Before you continue");
+    assert.match(
+        prediction,
+        /\b(?:write|record|note)\b/i,
+        "lesson 01 prediction is written",
+    );
+    assert.match(
+        prediction,
+        /\bquestion\b/i,
+        "lesson 01 prediction starts from a question",
+    );
+    assert.match(
+        prediction,
+        /\b(?:without searching|before (?:searching|looking|opening)|from memory)\b/i,
+        "lesson 01 surfaces the learner's prior model before inspection",
+    );
+    assert.match(
+        prediction,
+        /\b(?:place|location|source)s?\b/i,
+        "lesson 01 prediction maps where context lives",
+    );
+
+    const guidance = textAfterHeading(
+        lesson.content,
+        "Try it with guidance",
+    );
+    assert.match(guidance, /\bsource\b/i, "lesson 01 guidance starts from sources");
+    assert.match(
+        guidance,
+        /\blocation\b/i,
+        "lesson 01 guidance records where context lives",
+    );
+    assert.match(
+        guidance,
+        /\bcontribut\w*\b/i,
+        "lesson 01 guidance records what each source contributes",
+    );
+
+    const teachBack = textAfterHeading(lesson.content, "Teach it back");
+    assert.match(teachBack, /\bnotes\b/i, "lesson 01 teach-back starts from notes");
+    assert.match(
+        teachBack,
+        /\brepair\w*\b/i,
+        "lesson 01 teach-back explains repair rather than collection",
+    );
+    assert.match(
+        teachBack,
+        /\bleak\b/i,
+        "lesson 01 teach-back explains the knowledge leak",
+    );
+
+    const changedCase = textAfterHeading(
+        lesson.content,
+        "Try a changed case",
+    );
+    assert.match(changedCase, /\blawyer\b/i, "lesson 01 transfer changes profession");
+    assert.match(
+        changedCase,
+        /\binherit\w*\b/i,
+        "lesson 01 transfer tests inherited work",
+    );
+    assert.match(
+        changedCase,
+        /\b(?:why|reason)\b/i,
+        "lesson 01 transfer keeps missing reasoning as the leak",
+    );
+
+    const hints = hintTextsOf(lesson);
+    assert.match(
+        hints[0],
+        /\b(?:last|recent|previous|earlier)\b/i,
+        "lesson 01 hint 1 starts from recent work",
+    );
+    assert.match(
+        hints[0],
+        /\b(?:search|look|hunt|find)\w*\b/i,
+        "lesson 01 hint 1 nudges recall of repeated search",
+    );
+    assert.match(
+        hints[1],
+        /\b(?:colleague|person|inheritor|teammate|successor|whoever)\b/i,
+        "lesson 01 hint 2 supplies an inheritance frame",
+    );
+    assert.match(
+        hints[1],
+        /\b(?:ask|need|request|require)\w*\b/i,
+        "lesson 01 hint 2 identifies missing context",
+    );
+    assert.match(
+        hints[2],
+        /\b(?:pick|choose|narrow|focus|settle|limit)\b/i,
+        "lesson 01 hint 3 narrows the task",
+    );
+    assert.match(
+        hints[2],
+        /\b(?:reason|decision|leak|problem)\b/i,
+        "lesson 01 hint 3 names a repair target",
+    );
+
+    const lessonText = textOf(lesson.content);
+    assert.doesNotMatch(
+        lessonText,
+        /Close the lesson|deserves to survive|weekend goes into naming folders|will carry through the rest of the course/i,
+        "lesson 01 excludes known generated residue",
+    );
+    assertNoTeachingDecisionNegation(lesson);
+    assertNoUnsafeSensitiveDataInstruction(lesson);
+}
+
+function assertLessonTwoReviewContract(lesson) {
+    assert.match(
+        lesson.outcome,
+        /\b(?:capture|highlight|extract|meeting note)\b/i,
+        "lesson 02 starts from captured source material",
+    );
+    assert.match(
+        lesson.outcome,
+        /\bsource note\b/i,
+        "lesson 02 produces a source note",
+    );
+    assert.match(
+        lesson.outcome,
+        /\b(?:interpretation|your words|your reading)\b/i,
+        "lesson 02 separates the learner's interpretation",
+    );
+    assert.match(
+        lesson.outcome,
+        /\b(?:question|check|uncertainty)\b/i,
+        "lesson 02 keeps the live use or remaining check visible",
+    );
+
+    const prediction = textAfterHeading(lesson.content, "Before you continue");
+    assert.match(
+        prediction,
+        /\b(?:capture|highlight|extract|meeting bullet)\b/i,
+        "lesson 02 prediction uses one real capture",
+    );
+    assert.match(
+        prediction,
+        /\b(?:without reopening|before (?:reopening|opening)|from memory)\b/i,
+        "lesson 02 predicts before source inspection",
+    );
+    assert.match(
+        prediction,
+        /\b(?:write|record|note)\b/i,
+        "lesson 02 prediction is written",
+    );
+    assert.match(
+        prediction,
+        /\b(?:question mark|cannot verify|uncertain|unsure)\b/i,
+        "lesson 02 records uncertainty",
+    );
+
+    const guidance = textAfterHeading(
+        lesson.content,
+        "Try it with guidance",
+    );
+    assert.match(
+        guidance,
+        /\blocator\b/i,
+        "lesson 02 guidance starts from a precise locator",
+    );
+    assert.match(
+        guidance,
+        /\b(?:reopen|open)\w*\b/i,
+        "lesson 02 guidance leads back to inspectable evidence",
+    );
+    assert.match(guidance, /\bsource\b/i, "lesson 02 guidance keeps the source visible");
+
+    const teachBack = textAfterHeading(lesson.content, "Teach it back");
+    assert.match(teachBack, /\bcapture\b/i, "lesson 02 teach-back explains a capture");
+    assert.match(
+        teachBack,
+        /\bsource extract\b/i,
+        "lesson 02 teach-back explains a source extract",
+    );
+    assert.match(
+        teachBack,
+        /\bsource note\b/i,
+        "lesson 02 teach-back explains a source note",
+    );
+    assert.match(
+        teachBack,
+        /\btrust\w*\b/i,
+        "lesson 02 teach-back tests trust rather than length",
+    );
+
+    const changedCase = textAfterHeading(
+        lesson.content,
+        "Try a changed case",
+    );
+    assert.match(
+        changedCase,
+        /\blicen[cs]e\b/i,
+        "lesson 02 transfer introduces an access limit",
+    );
+    assert.match(
+        changedCase,
+        /\b(?:copy|retain)\w*\b/i,
+        "lesson 02 transfer requires a retention decision",
+    );
+    assert.match(
+        changedCase,
+        /\b(?:boundar|must not)\w*\b/i,
+        "lesson 02 transfer records the safety boundary",
+    );
+
+    const hints = hintTextsOf(lesson);
+    assert.match(
+        hints[0],
+        /\b(?:shrink|narrow|smaller|one|single|cut|reduce)\b/i,
+        "lesson 02 hint 1 reduces the source",
+    );
+    assert.match(
+        hints[0],
+        /\b(?:source|paragraph|decision|row|document)\b/i,
+        "lesson 02 hint 1 gives a small source unit",
+    );
+    assert.match(
+        hints[1],
+        /\bsource\b/i,
+        "lesson 02 hint 2 identifies source material",
+    );
+    assert.match(
+        hints[1],
+        /\b(?:think|interpret|your words|reading|meaning)\b/i,
+        "lesson 02 hint 2 separates interpretation",
+    );
+    assert.match(
+        hints[1],
+        /\b(?:check|verify|question|uncertain)\b/i,
+        "lesson 02 hint 2 exposes the open check",
+    );
+    assert.match(
+        hints[2],
+        /\b(?:wrong|incorrect|unsupported|false|mistaken)\b/i,
+        "lesson 02 hint 3 tests the source",
+    );
+    assert.match(
+        hints[2],
+        /\b(?:decision|action|answer)\b/i,
+        "lesson 02 hint 3 connects the source to work",
+    );
+
+    const lessonText = textOf(lesson.content);
+    assert.doesNotMatch(
+        lessonText,
+        /Close the lesson|not understood yet|whether it bears on the job|Incident review notes names the source and nothing else|without pretending that copying/i,
+        "lesson 02 excludes known generated residue",
+    );
+    assertNoTeachingDecisionNegation(lesson);
+    assertNoUnsafeSensitiveDataInstruction(lesson);
+}
+
 assert.deepEqual(Object.keys(manifest), ["schemaVersion", "course"]);
 assert.equal(manifest.schemaVersion, 1);
 const { course } = manifest;
@@ -440,17 +762,26 @@ for (const [index, lesson] of lessons.entries()) {
     }
     assert.equal(lesson.content.type, "doc");
     assertTeachingSequence(lesson);
-    const contract = teachingContracts[index];
-    for (const [field, heading] of [
-        ["prediction", "Before you continue"],
-        ["guidance", "Try it with guidance"],
-        ["teachBack", "Teach it back"],
-        ["changedCase", "Try a changed case"],
-    ]) {
-        assert.ok(
-            textAfterHeading(lesson.content, heading).includes(contract[field]),
-            `${key} preserves its ${field} teaching contract`,
-        );
+    if (
+        ![
+            "lesson_notes_that_do_work_01",
+            "lesson_notes_that_do_work_02",
+        ].includes(lesson.lessonId)
+    ) {
+        const contract = teachingContracts[index];
+        for (const [field, heading] of [
+            ["prediction", "Before you continue"],
+            ["guidance", "Try it with guidance"],
+            ["teachBack", "Teach it back"],
+            ["changedCase", "Try a changed case"],
+        ]) {
+            assert.ok(
+                textAfterHeading(lesson.content, heading).includes(
+                    contract[field],
+                ),
+                `${key} preserves its ${field} teaching contract`,
+            );
+        }
     }
     const learnerText = textOf(lesson.content);
     assert.ok(
@@ -458,19 +789,11 @@ for (const [index, lesson] of lessons.entries()) {
         `${key} has enough teaching material`,
     );
     assert.match(learnerText, /Teach it back/i);
-    const humanization = humanizationContracts.get(lesson.lessonId);
-    if (humanization) {
-        for (const fragment of humanization.required) {
-            assert.ok(
-                learnerText.includes(fragment),
-                `${key} preserves reviewed humanized prose: ${fragment}`,
-            );
-        }
-        assert.doesNotMatch(
-            learnerText,
-            humanization.forbidden,
-            `${key} excludes superseded generated prose`,
-        );
+    if (lesson.lessonId === "lesson_notes_that_do_work_01") {
+        assertLessonOneReviewContract(lesson);
+    }
+    if (lesson.lessonId === "lesson_notes_that_do_work_02") {
+        assertLessonTwoReviewContract(lesson);
     }
 }
 
