@@ -370,7 +370,7 @@ function assertNoUnsafeSensitiveDataInstruction(lesson) {
     const unapprovedDestination =
         /\b(?:new|unapproved|public|personal|external|third-party|cloud|shared|AI)\b.{0,24}\b(?:tool|service|surface|app|location|system|drive|workspace|chatbot)\b/i;
     const referentialDestination =
-        /\b(?:to|into|in|onto)\s+(?:it|that tool|(?:the )?same tool)\b|\bthere\b(?=\s*(?:before|after|instead|too|as well|first|now|immediately|[.!?]|$))/i;
+        /\b(?:to|into|in|onto)\s+(?:it|that tool|(?:the )?same tool)\b|\bthere\b(?!\s+(?:is|are|was|were)\b)/i;
     const riskyAction =
         /\b(?:copy(?:ing)?|upload(?:ing)?|mov(?:e|ing)|past(?:e|ing)|send(?:ing)?|stor(?:e|ing)|sync(?:ing)?|export(?:ing)?|shar(?:e|ing)|email(?:ing)?|publish(?:ing)?|attach(?:ing)?|dump(?:ing)?)\b/i;
     const safetyBeforeAction =
