@@ -533,12 +533,40 @@ async function run() {
     }
 }
 
+function safeDiagnosticToken(value) {
+    if (typeof value === "number" && Number.isSafeInteger(value)) {
+        return String(value);
+    }
+    if (typeof value === "string" && /^[A-Za-z0-9_.:-]{1,64}$/.test(value)) {
+        return value;
+    }
+}
+
+function summarizeUnexpectedError(error) {
+    const summary = "Notes humanisation migration failed unexpectedly";
+    if (!(error instanceof Error)) return summary;
+
+    // Mongo messages and errInfo may contain connection or document data.
+    // Only allow short scalar identifiers into operator output.
+    const details = [`name=${safeDiagnosticToken(error.name) ?? "Error"}`];
+    for (const key of ["code", "codeName"]) {
+        let value;
+        try {
+            value = safeDiagnosticToken(error[key]);
+        } catch {
+            continue;
+        }
+        if (value) details.push(`${key}=${value}`);
+    }
+    return `${summary} ${details.join(" ")}`;
+}
+
 run().catch((error) => {
     if (error instanceof SafeMigrationError) {
         console.error(error.message);
         process.exitCode = error.exitCode;
         return;
     }
-    console.error("Notes humanisation migration failed unexpectedly");
+    console.error(summarizeUnexpectedError(error));
     process.exitCode = 1;
 });

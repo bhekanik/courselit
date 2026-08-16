@@ -836,6 +836,39 @@ describe("Notes lessons 01-02 humanisation migration", () => {
         }
     });
 
+    it("keeps a non-Error failure generic and secret-safe", () => {
+        const thrownSecret = "pair01-non-error-secret";
+        const { directory, script } = stageMutatedTransition(() => {});
+        const source = readFileSync(script, "utf8");
+        const runStart =
+            "async function run() {\n    const mode = parseMode(process.argv.slice(2));";
+        expect(source).toContain(runStart);
+        writeFileSync(
+            script,
+            source.replace(
+                runStart,
+                `async function run() {\n    throw "${thrownSecret}";\n    const mode = parseMode(process.argv.slice(2));`,
+            ),
+        );
+        try {
+            const result = runNode(script, ["--dry-run"], {
+                DB_CONNECTION_STRING: UNREACHABLE_DB,
+                TARGET_DOMAIN: "main",
+            });
+
+            expect(result.status).toBe(1);
+            expect(result.stderr).toContain(
+                "Notes humanisation migration failed unexpectedly",
+            );
+            expect(result.stderr).not.toContain(thrownSecret);
+            expect(result.stderr).not.toContain("name=");
+            expect(result.stderr).not.toContain("code=");
+            expect(result.stderr).not.toContain("codeName=");
+        } finally {
+            rmSync(directory, { recursive: true, force: true });
+        }
+    });
+
     it("dry-runs the refined baseline twice with two planned changes and zero writes", async () => {
         const { db } = await seedRefinedBaseline();
         const before = await snapshotCollections(db);
@@ -906,8 +939,21 @@ describe("Notes lessons 01-02 humanisation migration", () => {
 
     it("resumes after Mongo rejects lesson 02 without rewriting lesson 01", async () => {
         const { db } = await seedRefinedBaseline();
-        const before = await snapshotCollections(db);
         const { lessons: transition } = readJson(HUMANIZATION_TRANSITION_PATH);
+        const databaseSecret = "pair01-validator-database-secret";
+        const documentSecret = "pair01-client-document-secret";
+        const contentSecret =
+            "The source, the exact extract and your interpretation carry different authority.";
+        expect(JSON.stringify(transition[1].baselineContent)).toContain(
+            contentSecret,
+        );
+        await db
+            .collection("lessons")
+            .updateOne(
+                { lessonId: "lesson_notes_that_do_work_02" },
+                { $set: { privateMarker: documentSecret } },
+            );
+        const before = await snapshotCollections(db);
         await db.command({
             collMod: "lessons",
             validator: {
@@ -916,13 +962,25 @@ describe("Notes lessons 01-02 humanisation migration", () => {
             validationLevel: "strict",
             validationAction: "error",
         });
+        const validatorEnvironment = databaseEnvironment();
+        if (!validatorEnvironment.DB_CONNECTION_STRING) {
+            throw new Error("Test database connection is unavailable");
+        }
+        validatorEnvironment.DB_CONNECTION_STRING = `${validatorEnvironment.DB_CONNECTION_STRING}?appName=${databaseSecret}`;
 
-        const interrupted = runHumanization(["--apply"], databaseEnvironment());
+        const interrupted = runHumanization(["--apply"], validatorEnvironment);
 
         expect(interrupted.status).toBe(1);
         expect(interrupted.stdout).not.toContain(
             "notes-humanization-01-02-migration",
         );
+        expect(interrupted.stderr).toContain("name=MongoServerError");
+        expect(interrupted.stderr).toMatch(
+            /code=121\b|codeName=DocumentValidationFailure\b/,
+        );
+        expect(interrupted.stderr).not.toContain(databaseSecret);
+        expect(interrupted.stderr).not.toContain(documentSecret);
+        expect(interrupted.stderr).not.toContain(contentSecret);
         const partial = await snapshotCollections(db);
         const lesson = (lessons: any[], lessonId: string) =>
             lessons.find((candidate: any) => candidate.lessonId === lessonId);
