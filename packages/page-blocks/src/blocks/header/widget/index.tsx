@@ -138,6 +138,11 @@ export default function Widget({
                     </div>
                 )}
                 <Button
+                    aria-label={
+                        nextTheme
+                            ? `Switch to ${nextTheme} theme`
+                            : "Toggle colour theme"
+                    }
                     variant="ghost"
                     className="relative h-8 w-8 rounded-full"
                     size="icon"
@@ -173,6 +178,7 @@ export default function Widget({
                             key={userMenuKey}
                             trigger={
                                 <Button2
+                                    aria-label="Open account menu"
                                     variant="ghost"
                                     className="relative h-8 w-8 rounded-full"
                                 >

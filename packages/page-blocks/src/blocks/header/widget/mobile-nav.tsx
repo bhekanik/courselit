@@ -26,6 +26,8 @@ const MobileNav = (props: MobileNavSettings) => {
         <Drawer
             open={open}
             setOpen={setOpen}
+            title={`${props.title} navigation`}
+            description="Navigate the site and account pages."
             trigger={
                 <Button
                     variant="ghost"

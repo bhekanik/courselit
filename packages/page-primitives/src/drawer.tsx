@@ -1,5 +1,11 @@
 import { ReactNode } from "react";
-import { Sheet, SheetContent, SheetTrigger } from "./components/ui/sheet";
+import {
+    Sheet,
+    SheetContent,
+    SheetDescription,
+    SheetTitle,
+    SheetTrigger,
+} from "./components/ui/sheet";
 import { cn } from "./lib/utils";
 import type { ThemeStyle } from "@courselit/page-models";
 
@@ -9,6 +15,8 @@ interface DrawerProps {
     side?: "left" | "right" | "top" | "bottom";
     open: boolean;
     setOpen: (open: boolean) => void;
+    title: string;
+    description: string;
     style?: React.CSSProperties;
     className?: string;
     theme?: ThemeStyle;
@@ -20,6 +28,8 @@ export function Drawer({
     side = "left",
     open,
     setOpen,
+    title,
+    description,
     style,
     className = "",
     theme,
@@ -32,10 +42,12 @@ export function Drawer({
 
     return (
         <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger asChild>
-                <span>{trigger}</span>
-            </SheetTrigger>
+            <SheetTrigger asChild>{trigger}</SheetTrigger>
             <SheetContent side={side} style={style} className={classes}>
+                <SheetTitle className="sr-only">{title}</SheetTitle>
+                <SheetDescription className="sr-only">
+                    {description}
+                </SheetDescription>
                 {children}
             </SheetContent>
         </Sheet>
