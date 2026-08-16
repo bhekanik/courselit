@@ -491,6 +491,27 @@ assert.match(lesson10Text, /The twelve lesson artefacts are your working records
 assert.match(lesson10Text, /ai-source-brief\.md/);
 assert.match(lesson10Text, /change-review\.md/);
 
+const lesson11Text = textOf(
+    lessons.find(({ lessonId }) => lessonId === "lesson_notes_that_do_work_11")
+        ?.content,
+);
+assert.match(
+    lesson11Text,
+    /Use only a tool and storage location your organisation permits/,
+);
+assert.match(
+    lesson11Text,
+    /A source pack is not permission to move client, employee, financial or confidential material into a new service/,
+);
+assert.match(
+    lesson11Text,
+    /If the approved tool cannot receive the needed sources, do the exercise with public or synthetic material and record the boundary/,
+);
+assert.doesNotMatch(
+    lesson11Text,
+    /ignore (your )?organi[sz]ation(?:al|'s) approval|upload (?:all )?(?:client|employee|financial|confidential)/i,
+);
+
 const lesson12Text = textOf(
     lessons.find(({ lessonId }) => lessonId === "lesson_notes_that_do_work_12")
         ?.content,

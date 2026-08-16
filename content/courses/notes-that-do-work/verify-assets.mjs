@@ -37,6 +37,29 @@ assert.equal(contract.schemaVersion, 1);
 assert.equal(contract.status, "resolved");
 assert.equal(contract.diagrams.length, 12);
 assert.equal(contract.screenshots.length, 2);
+assert.deepEqual(
+    contract.screenshots.map(
+        ({ id, officialPageUrl, directAssetUrl = null }) => ({
+            id,
+            officialPageUrl,
+            directAssetUrl,
+        }),
+    ),
+    [
+        {
+            id: "obsidian-note-surface",
+            officialPageUrl: "https://obsidian.md/",
+            directAssetUrl: null,
+        },
+        {
+            id: "onenote-link-command",
+            officialPageUrl:
+                "https://support.microsoft.com/en-US/OneNote/onenote-help-and-learning/basic-tasks-in-onenote-on-windows",
+            directAssetUrl:
+                "https://support.microsoft.com/en-US/OneNote/media/basic-tasks-screenshot-twelve-png.png",
+        },
+    ],
+);
 assert.equal(mediaLock.schemaVersion, 1);
 assert.equal(mediaLock.group, "notes-that-do-work-v2");
 assert.equal(mediaLock.cdnHost, "media.bhekani.com");
