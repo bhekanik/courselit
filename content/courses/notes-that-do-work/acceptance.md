@@ -2,7 +2,7 @@
 
 ## Product promise
 
-This is a free, public course for non-technical professionals. A learner takes one real, low-risk work question and turns scattered notes, reading, meeting records and prior work into a source-backed output another person can use.
+This is a free, public course for non-technical professionals. A learner takes one real, low-risk work question and turns scattered notes, reading, meeting records and prior work into a source-backed output another person can use. The learner also practises giving AI a small, checked source pack and reviewing its answer as a proposed change.
 
 The course is tool-agnostic. Obsidian is a worked example because the source material lives there. Plain Markdown files, Apple Notes, OneNote and Notion are valid surfaces. The course teaches a way of working, not a software setup.
 
@@ -10,9 +10,9 @@ The course is tool-agnostic. Obsidian is a worked example because the source mat
 
 - Course ID: `course_notes_that_do_work_v1`
 - Slug: `notes-that-do-work`
-- Five sections, ten text lessons and one capstone embedded in lesson 10
-- Lesson IDs: `lesson_notes_that_do_work_01` through `lesson_notes_that_do_work_10`
-- The first lesson is a public preview. Lessons 2 to 10 require free enrolment.
+- Six sections, twelve text lessons and one capstone embedded in lesson 10
+- Lesson IDs: `lesson_notes_that_do_work_01` through `lesson_notes_that_do_work_12`
+- The first lesson is a public preview. All other lessons require free enrolment.
 - Existing course, group and lesson IDs are not reused.
 - Every lesson is published when the course is published.
 
@@ -30,7 +30,10 @@ The exact section and lesson order is:
 4. Think on the page
    1. Write to discover what you think
    2. Build a synthesis note around a live question
-5. Ship from the system
+5. Work with AI from checked notes
+   1. Give AI a source pack, not your whole archive
+   2. Review the answer before it joins your notes
+6. Ship from the system
    1. Move from notes to an outline and a decision
    2. Close the loop so the next job starts ahead
 
@@ -73,6 +76,8 @@ The worked cases cover at least:
 - a lawyer turning matter notes and sources into a handover or advice outline;
 - an operations lead turning incident and meeting records into a decision note;
 - an analyst turning reading and observations into a recommendation.
+- an operations lead selecting checked incident notes for an AI-assisted brief;
+- a lawyer accepting, repairing or rejecting claims in an AI draft before updating matter notes.
 
 No case implies that a note system replaces professional judgement, source checking, records policy, confidentiality rules or review.
 
@@ -90,7 +95,8 @@ Lesson artefacts are working records. The four capstone files consolidate or ref
 ## Visual contract
 
 - One bespoke featured image shows raw notes becoming useful work.
-- At least eight labelled teaching diagrams are placed beside the decision they teach.
+- Twelve labelled teaching diagrams are placed beside the decision they teach.
+- Authentic product screenshots may show where a learner can perform a move, but they do not count as teaching diagrams.
 - Diagrams use the existing AI Work School brand palette and deterministic render pipeline.
 - Diagram labels remain at least 12 CSS pixels at a 320-pixel viewport with lesson padding.
 - Every lesson image has exact alt text, a visible caption immediately after it and a distinct MediaLit owner ID.
@@ -107,14 +113,16 @@ Lesson artefacts are working records. The four capstone files consolidate or ref
 - Product links point to current official documentation and bind the visible label to the exact URL.
 - Tool observations that can change are dated in the source map.
 - The copy does not use a `second brain` promise or tell learners to organise everything before doing real work.
+- The course never tells a learner to upload a whole archive, confidential record or unapproved source to an AI tool.
+- An AI answer is treated as a proposed change until the learner checks every material claim against the selected sources.
 
 ## Production contract
 
-- A new timestamped, idempotent migration creates the course, lessons and an external `internal:false` free plan.
+- A new timestamped, idempotent follow-up migration adds the two lessons and reviewed media to the existing course.
 - Existing course migrations and frozen snapshots remain byte-immutable.
 - The migration accepts exactly `--dry-run` or `--apply` and requires `TARGET_DOMAIN=main`.
 - Dry-run performs zero writes.
-- Apply stages the course unpublished, verifies all lessons and the plan, publishes lessons, then publishes the course.
+- Apply stages the new lessons unpublished, verifies them, publishes them, then updates the existing course topology.
 - Any landing-page change is last.
 - Owner, legal-page, stable-ID and owner-edit conflicts fail before writes.
 - Existing courses, learner progress, purchases, plans, users and unowned site fields are preserved.

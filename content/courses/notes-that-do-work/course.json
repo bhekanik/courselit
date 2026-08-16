@@ -18,9 +18,9 @@
             "size": 424224,
             "thumbnail": "https://media.bhekani.com/p/2QZpP5DXJtsSCa47r8INxjPvp-31f1R9xjhQl1A3/thumb.webp"
         },
-        "description": "Turn scattered reading, meeting notes and half-formed ideas into decisions, drafts and handovers that you can use again. You will build the system around one real question from your work. Obsidian is one example, not a requirement.",
-        "audience": "Professionals whose useful thinking is spread across notebooks, documents, email, meeting records and note apps. You need one real, low-risk question to work on and somewhere you can write and search. You do not need Obsidian, a database, a special folder structure, coding skills or a large archive of existing notes.",
-        "outcome": "You finish with a small working knowledge system built around a real question, a source-backed brief another person can use, and a handover that records what should be checked or reused next time.",
+        "description": "Turn scattered reading, meeting notes and half-formed ideas into decisions, drafts and handovers you can use again. You will build the system around one real question, give AI only the checked context it needs, and review its answer before it joins your notes. Obsidian is one example, not a requirement.",
+        "audience": "Professionals whose useful thinking is spread across notebooks, documents, email, meeting records and note apps. You need one real, low-risk question to work on and somewhere you can write and search. You may use an approved AI tool, but the course also works with a synthetic example. You do not need Obsidian, a database, a special folder structure, coding skills or a large archive of existing notes.",
+        "outcome": "You finish with a small working knowledge system built around a real question, a checked source pack for AI-assisted work, a source-backed brief another person can use, and a handover that records what should be checked or reused next time.",
         "sections": [
             {
                 "key": "capture-with-a-purpose",
@@ -188,11 +188,11 @@
                                                                 {
                                                                     "type": "link",
                                                                     "attrs": {
-                                                                        "href": "https://support.microsoft.com/en-US/OneNote/take-and-format-notes"
+                                                                        "href": "https://support.microsoft.com/en-US/OneNote/onenote-help-and-learning/basic-tasks-in-onenote-on-windows"
                                                                     }
                                                                 }
                                                             ],
-                                                            "text": "OneNote: take and format notes"
+                                                            "text": "OneNote for Windows: basic tasks"
                                                         }
                                                     ]
                                                 }
@@ -241,6 +241,23 @@
                                                     ]
                                                 }
                                             ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "image",
+                                    "attrs": {
+                                        "src": "https://media.bhekani.com/p/ur6cY_uoVi6MamfWCHfQ3d5I_7o3G_9QcV4_7-ZY/main.webp",
+                                        "alt": "Obsidian's desktop app showing a note, folder and note lists, and a graph view, with a mobile note beside it.",
+                                        "title": "An official Obsidian example of notes and links in one working surface."
+                                    }
+                                },
+                                {
+                                    "type": "paragraph",
+                                    "content": [
+                                        {
+                                            "type": "text",
+                                            "text": "Obsidian is one surface for the method: the note stays readable while links expose connections. Another approved note app can do the same job with different controls."
                                         }
                                     ]
                                 },
@@ -2027,6 +2044,23 @@
                                         {
                                             "type": "text",
                                             "text": "A cleaner system gives each mechanism a role. Tags group notes into useful working sets. Properties store named facts such as matter, owner, status or review date. Links narrate relationships between ideas, evidence and decisions. The body sentence does the important work: Authority A limits the definition used in Concept B tells the reader more than a naked link under Related."
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "image",
+                                    "attrs": {
+                                        "src": "https://media.bhekani.com/p/S6uGLmVooml8BzH41vazeIH4JKQeEJYrose7Kldw/main.webp",
+                                        "alt": "The OneNote for Windows Insert ribbon with the Link command outlined at the far right.",
+                                        "title": "Find the Link command in OneNote for Windows."
+                                    }
+                                },
+                                {
+                                    "type": "paragraph",
+                                    "content": [
+                                        {
+                                            "type": "text",
+                                            "text": "In OneNote for Windows, select the material you want to connect, then use Insert > Link. The control is different; the job is still to leave a route back to a source or related page."
                                         }
                                     ]
                                 },
@@ -3823,10 +3857,176 @@
                 ]
             },
             {
+                "key": "work-with-ai-from-checked-notes",
+                "groupId": "group_notes_that_do_work_06",
+                "title": "Work with AI from checked notes",
+                "rank": 5000,
+                "outcome": "Choose the notes an AI tool is allowed to use, then check every proposed change before it becomes part of the knowledge system.",
+                "lessons": [
+                    {
+                        "key": "give-ai-a-source-pack-not-your-whole-archive",
+                        "lessonId": "lesson_notes_that_do_work_11",
+                        "title": "Give AI a source pack, not your whole archive",
+                        "outcome": "Turn a live question and a small set of checked notes into a bounded AI work brief with explicit exclusions, source locators and a stop condition.",
+                        "type": "text",
+                        "published": true,
+                        "requiresEnrollment": true,
+                        "exercise": "Choose one low-risk question from your synthesis, select only the notes needed to answer it, record why each note belongs, state what the AI may do, and keep confidential or irrelevant material outside the source pack.",
+                        "artifact": {
+                            "filename": "ai-source-brief.md",
+                            "description": "A bounded brief containing the job, selected sources, exact locators, allowed use, exclusions, output shape and the condition that should stop the AI rather than let it guess."
+                        },
+                        "verification": [
+                            "The brief names one job and one reader rather than asking the AI to understand the whole archive.",
+                            "Every included note changes the answer, supplies evidence or states a necessary constraint.",
+                            "Each source has a locator that a reviewer can open without searching the entire system.",
+                            "Excluded material and organisational storage rules are written down before any upload or connection.",
+                            "The stop condition tells the AI what missing evidence must cause a question or refusal."
+                        ],
+                        "sourceNotes": [
+                            "Golden Context as Context Substrate.md",
+                            "Knowledge Bank as Agent Working Memory.md",
+                            "Substrate Audits Before AI Features.md"
+                        ],
+                        "teaches": "bounded-ai-source-pack",
+                        "requires": ["question-led-synthesis"],
+                        "content": {
+                            "type": "doc",
+                            "content": [
+                                {"type":"heading","attrs":{"level":2},"content":[{"type":"text","text":"Outcome"}]},
+                                {"type":"paragraph","content":[{"type":"text","text":"Give an AI tool enough checked context to do one job without handing it a whole archive and hoping it finds the right boundaries."}]},
+                                {"type":"heading","attrs":{"level":2},"content":[{"type":"text","text":"Before you continue"}]},
+                                {"type":"blockquote","content":[{"type":"paragraph","content":[{"type":"text","text":"Choose the live question from your synthesis. Before reading on, write which notes you would give the AI and which you would keep out. Beside each choice, write the reason. Do not open the tool yet."}]}]},
+                                {"type":"heading","attrs":{"level":2},"content":[{"type":"text","text":"See it"}]},
+                                {"type":"paragraph","content":[{"type":"text","text":"An operations lead wants help drafting a decision note after a supplier incident. Her knowledge system contains the incident timeline, two meeting notes, the current escalation rule, last year's supplier review, an unrelated complaint, personal contact details and an old rule that has since changed. Asking an AI tool to read everything feels thorough. It also hides the most important decisions: which rule is current, which evidence belongs to this incident and which material the tool should never receive."}]},
+                                {"type":"paragraph","content":[{"type":"text","text":"She makes a source pack instead. It contains the incident timeline, the exact section of the current escalation rule and the meeting decisions that changed the next action. Each item has a locator and a one-line reason for inclusion. The old rule stays outside the pack, but the brief warns that an older version exists. Personal details are removed because the draft does not need them."}]},
+                                {"type":"paragraph","content":[{"type":"text","text":"The pack does not make the AI correct. It makes the job inspectable. A colleague can see what the tool was allowed to use, notice a missing source and reproduce the draft with the same boundary. A whole archive makes those decisions implicit. The model then has to guess which document is current, which note is evidence and which text is only background."}]},
+                                {"type":"heading","attrs":{"level":3},"content":[{"type":"text","text":"Treat context as a working boundary"}]},
+                                {"type":"image","attrs":{"src":"https://media.bhekani.com/p/tWTY3oXFnAPjVrGMn1TwTCukywazlYIVsleoV_eR/main.webp","alt":"A job contract filters a larger archive into a small AI source pack. Current, relevant and permitted notes enter; stale, unrelated and restricted notes stay outside.","title":"Choose a checked source pack for one AI job."}},
+                                {"type":"paragraph","content":[{"type":"text","text":"Start with the job. Include only current, relevant and permitted sources, and write down what stays outside. The boundary is evidence, not a guarantee."}]},
+                                {"type":"paragraph","content":[{"type":"text","text":"Good working context answers six questions: What is the job? Who will use the result? Which sources may support it? What is explicitly out? What shape should the answer take? When should the AI stop and ask? These are job decisions, not prompt decoration."}]},
+                                {"type":"paragraph","content":[{"type":"text","text":"Use only a tool and storage location your organisation permits. A source pack is not permission to move client, employee, financial or confidential material into a new service. If the approved tool cannot receive the needed sources, do the exercise with public or synthetic material and record the boundary."}]},
+                                {"type":"heading","attrs":{"level":2},"content":[{"type":"text","text":"Try it with guidance"}]},
+                                {"type":"paragraph","content":[{"type":"text","text":"Write the job before you choose the notes. Use one sentence with a verb, an object and a reader: Draft a two-page exception brief for the finance reviewer. Then work through the source list."}]},
+                                {"type":"orderedList","attrs":{"start":1},"content":[
+                                    {"type":"listItem","content":[{"type":"paragraph","content":[{"type":"text","text":"Copy the live question and name the person who will use the answer."}]}]},
+                                    {"type":"listItem","content":[{"type":"paragraph","content":[{"type":"text","text":"For each candidate note, finish: This belongs because it changes the answer, supplies evidence or sets a constraint."}]}]},
+                                    {"type":"listItem","content":[{"type":"paragraph","content":[{"type":"text","text":"Add the exact page, heading, paragraph, row or date that lets another person find the source."}]}]},
+                                    {"type":"listItem","content":[{"type":"paragraph","content":[{"type":"text","text":"Write the allowed use and output shape. Drafting, comparison and question-finding are different jobs."}]}]},
+                                    {"type":"listItem","content":[{"type":"paragraph","content":[{"type":"text","text":"List exclusions and write the missing-source condition that must stop the work."}]}]}
+                                ]},
+                                {"type":"paragraph","content":[{"type":"text","text":"Stop and record: remove one note from the pack. If the expected answer does not change, the note was background rather than working context. Record the removal and why it was safe."}]},
+                                {"type":"heading","attrs":{"level":2},"content":[{"type":"text","text":"What you will make"}]},
+                                {"type":"paragraph","content":[{"type":"text","text":"Create ai-source-brief.md. Include the job, reader, selected source list with locators, reason for each source, allowed use, output shape, exclusions and stop condition. Keep the file beside the synthesis it came from."}]},
+                                {"type":"heading","attrs":{"level":2},"content":[{"type":"text","text":"Try it on your work"}]},
+                                {"type":"paragraph","content":[{"type":"text","text":"Run the brief on the lowest-risk version of your question. Ask the AI to name which supplied source supports each material claim and to mark any gap instead of filling it. Save the response as a draft outside your trusted notes. Do not let the tool write back to the source notes yet."}]},
+                                {"type":"paragraph","content":[{"type":"text","text":"If your organisation does not permit this use, run the same brief against public documents or a small synthetic case. The learning target is the boundary and the evidence path, not access to a particular product."}]},
+                                {"type":"heading","attrs":{"level":2},"content":[{"type":"text","text":"Teach it back"}]},
+                                {"type":"paragraph","content":[{"type":"text","text":"Close the lesson and explain why a smaller checked source pack is better than a whole archive for one bounded job. Include the privacy boundary, the reviewer and the condition that should make the AI stop."}]},
+                                {"type":"heading","attrs":{"level":2},"content":[{"type":"text","text":"Try a changed case"}]},
+                                {"type":"paragraph","content":[{"type":"text","text":"Your approved AI tool cannot open internal links. A colleague offers to paste the full contents of every linked page into one document. Decide what should be copied, summarised, excluded or replaced with a locator. Preserve enough source identity that the resulting claims can still be checked."}]},
+                                {"type":"heading","attrs":{"level":2},"content":[{"type":"text","text":"Check your work"}]},
+                                {"type":"bulletList","content":[
+                                    {"type":"listItem","content":[{"type":"paragraph","content":[{"type":"text","text":"The job, reader and output shape are specific enough to tell when the work is done."}]}]},
+                                    {"type":"listItem","content":[{"type":"paragraph","content":[{"type":"text","text":"Every selected source has a reason and a locator."}]}]},
+                                    {"type":"listItem","content":[{"type":"paragraph","content":[{"type":"text","text":"No confidential or irrelevant material entered the pack merely because it was nearby."}]}]},
+                                    {"type":"listItem","content":[{"type":"paragraph","content":[{"type":"text","text":"The brief distinguishes source facts, your judgement and the AI's proposed wording."}]}]},
+                                    {"type":"listItem","content":[{"type":"paragraph","content":[{"type":"text","text":"The stop condition exposes missing evidence instead of rewarding a plausible guess."}]}]}
+                                ]},
+                                {"type":"heading","attrs":{"level":2},"content":[{"type":"text","text":"If you get stuck"}]},
+                                {"type":"orderedList","attrs":{"start":1},"content":[
+                                    {"type":"listItem","content":[{"type":"paragraph","content":[{"type":"text","text":"Start with the reader. What must they decide after reading the answer?"}]}]},
+                                    {"type":"listItem","content":[{"type":"paragraph","content":[{"type":"text","text":"Keep a source only if removing it changes a claim, constraint or uncertainty."}]}]},
+                                    {"type":"listItem","content":[{"type":"paragraph","content":[{"type":"text","text":"Use this stop condition: If the supplied sources do not support a material claim, name the missing evidence and do not complete that part."}]}]}
+                                ]}
+                            ]
+                        }
+                    },
+                    {
+                        "key": "review-the-answer-before-it-joins-your-notes",
+                        "lessonId": "lesson_notes_that_do_work_12",
+                        "title": "Review the answer before it joins your notes",
+                        "outcome": "Compare an AI draft with its source pack, decide what to accept, repair or reject, and update trusted notes only after the evidence and decision are visible.",
+                        "type": "text",
+                        "published": true,
+                        "requiresEnrollment": true,
+                        "exercise": "Take one low-risk AI draft made from your source brief, check each material claim against the supplied sources, label every proposed note change accept, repair or reject, and record the reason before updating anything trusted.",
+                        "artifact": {
+                            "filename": "change-review.md",
+                            "description": "A claim-by-claim review showing the proposed change, supporting source, decision, repair or rejection reason, and the exact trusted note that may be updated after review."
+                        },
+                        "verification": [
+                            "Every material claim is compared with a source from the approved pack.",
+                            "Accepted wording is separated from the source text and from the reviewer's judgement.",
+                            "Repairs and rejections record a concrete reason rather than a confidence score.",
+                            "No trusted note is updated before the review decision is recorded.",
+                            "The final note keeps uncertainty or exceptions that could change later use."
+                        ],
+                        "sourceNotes": [
+                            "Knowledge Bank as Agent Working Memory.md",
+                            "Golden Context as Context Substrate.md",
+                            "Writing is thinking.md"
+                        ],
+                        "teaches": "reviewed-ai-reentry",
+                        "requires": ["bounded-ai-source-pack"],
+                        "content": {
+                            "type": "doc",
+                            "content": [
+                                {"type":"heading","attrs":{"level":2},"content":[{"type":"text","text":"Outcome"}]},
+                                {"type":"paragraph","content":[{"type":"text","text":"Treat an AI answer as a proposed change. Check it against the source pack before any sentence becomes part of a trusted note, synthesis or brief."}]},
+                                {"type":"heading","attrs":{"level":2},"content":[{"type":"text","text":"Before you continue"}]},
+                                {"type":"blockquote","content":[{"type":"paragraph","content":[{"type":"text","text":"Read the AI draft once without opening the sources. Mark the sentences that feel most convincing. Predict which sentences you would allow back into your notes and which one deserves the slowest check. Record the prediction before continuing."}]}]},
+                                {"type":"heading","attrs":{"level":2},"content":[{"type":"text","text":"See it"}]},
+                                {"type":"paragraph","content":[{"type":"text","text":"A lawyer uses a checked source pack to draft a matter handover. The answer is clear and mostly faithful. One sentence says the client approved the proposed timetable. The meeting note says the client was comfortable with the direction but wanted to see dates first. Another paragraph combines the current authority with an older internal note and quietly drops the jurisdiction named in the source."}]},
+                                {"type":"paragraph","content":[{"type":"text","text":"Nothing in the draft looks absurd. That is why fluency is a weak review signal. The useful question is not whether the answer sounds professional. It is whether each material sentence keeps the authority, boundary and uncertainty of the source it relies on."}]},
+                                {"type":"paragraph","content":[{"type":"text","text":"The lawyer creates a change review. The timetable sentence is rejected because it turns a conditional response into approval. The authority paragraph is repaired to restore the jurisdiction. A concise description of the next meeting is accepted because the date and purpose match the meeting record. Only then are the handover notes updated."}]},
+                                {"type":"heading","attrs":{"level":3},"content":[{"type":"text","text":"Use decisions, not confidence scores"}]},
+                                {"type":"image","attrs":{"src":"https://media.bhekani.com/p/rUGceNXTvIDpu4YZNYObDfPsW0p47hNYuekgOP0v/main.webp","alt":"Each material claim in an AI draft is compared with the checked source pack, then accepted, repaired and checked again, or rejected. Only reviewed changes return to the notes.","title":"Review an AI draft before it rejoins the notes."}},
+                                {"type":"paragraph","content":[{"type":"text","text":"Accept, repair or reject each material claim. Only supported or repaired-and-rechecked wording may return to the notes."}]},
+                                {"type":"paragraph","content":[{"type":"text","text":"Accept means the source supports the claim and the wording preserves its boundary. Repair means the underlying point is useful but the wording, scope or source link must change. Reject means the source pack does not support the claim or the claim does not belong in the trusted note. These decisions leave a review trail another person can inspect."}]},
+                                {"type":"paragraph","content":[{"type":"text","text":"The review should improve the source system as well as the draft. If checking the draft against a current source shows that a concept note is stale, update or supersede that note. If the source pack omitted a current rule, fix the pack. If the brief allowed guessing, repair the stop condition. The checked discrepancy shows where the setup needs repair."}]},
+                                {"type":"heading","attrs":{"level":2},"content":[{"type":"text","text":"Try it with guidance"}]},
+                                {"type":"paragraph","content":[{"type":"text","text":"Compare each material claim with the source pack. Work in a table with five columns: proposed claim, source locator, decision, reason, trusted note affected."}]},
+                                {"type":"orderedList","attrs":{"start":1},"content":[
+                                    {"type":"listItem","content":[{"type":"paragraph","content":[{"type":"text","text":"Copy one claim at a time. Do not review a whole paragraph as one unit."}]}]},
+                                    {"type":"listItem","content":[{"type":"paragraph","content":[{"type":"text","text":"Open the cited source and find the exact passage, row or meeting decision."}]}]},
+                                    {"type":"listItem","content":[{"type":"paragraph","content":[{"type":"text","text":"Choose accept, repair or reject. Write the source-based reason before editing the sentence."}]}]},
+                                    {"type":"listItem","content":[{"type":"paragraph","content":[{"type":"text","text":"Record whether the draft exposed a stale note, missing source or weak instruction."}]}]}
+                                ]},
+                                {"type":"paragraph","content":[{"type":"text","text":"Stop and record: find the sentence you originally marked as most convincing. Compare your first impression with the source-based decision. Write what the difference reveals about your review habit."}]},
+                                {"type":"heading","attrs":{"level":2},"content":[{"type":"text","text":"What you will make"}]},
+                                {"type":"paragraph","content":[{"type":"text","text":"Create change-review.md. Include the draft version or date, one row for every material claim, the exact source locator, accept, repair or reject, the reason, and any source note or instruction that must change."}]},
+                                {"type":"heading","attrs":{"level":2},"content":[{"type":"text","text":"Try it on your work"}]},
+                                {"type":"paragraph","content":[{"type":"text","text":"Review the draft from the previous lesson. Make the accepted and repaired changes in a working copy first. When the review table and final wording agree, update the relevant concept or synthesis notes. Preserve source extracts, locators and unresolved questions. Do not replace the source note with the AI summary."}]},
+                                {"type":"paragraph","content":[{"type":"text","text":"Finish by changing one part of the setup. Add a missing locator, narrow the source pack, strengthen the stop condition or mark a stale note as superseded. The next run should inherit the correction."}]},
+                                {"type":"heading","attrs":{"level":2},"content":[{"type":"text","text":"Teach it back"}]},
+                                {"type":"paragraph","content":[{"type":"text","text":"Close the lesson and explain why a fluent answer is still only a proposed change. Describe the difference between checking the draft, editing the prose and repairing the knowledge system."}]},
+                                {"type":"heading","attrs":{"level":2},"content":[{"type":"text","text":"Try a changed case"}]},
+                                {"type":"paragraph","content":[{"type":"text","text":"An AI draft correctly combines two sources but drops an exception that appears in only one of them. The headline recommendation remains true for most cases. Decide whether to accept, repair or reject it, then show where the exception belongs so a later search cannot miss it."}]},
+                                {"type":"heading","attrs":{"level":2},"content":[{"type":"text","text":"Check your work"}]},
+                                {"type":"bulletList","content":[
+                                    {"type":"listItem","content":[{"type":"paragraph","content":[{"type":"text","text":"Every material claim has a source locator and an explicit decision."}]}]},
+                                    {"type":"listItem","content":[{"type":"paragraph","content":[{"type":"text","text":"Repairs preserve scope, exceptions and uncertainty from the source."}]}]},
+                                    {"type":"listItem","content":[{"type":"paragraph","content":[{"type":"text","text":"Rejected claims remain in the review record with the reason they failed."}]}]},
+                                    {"type":"listItem","content":[{"type":"paragraph","content":[{"type":"text","text":"Trusted notes changed only after the review table was complete."}]}]},
+                                    {"type":"listItem","content":[{"type":"paragraph","content":[{"type":"text","text":"The source pack or instruction now carries at least one useful correction from the run."}]}]}
+                                ]},
+                                {"type":"heading","attrs":{"level":2},"content":[{"type":"text","text":"If you get stuck"}]},
+                                {"type":"orderedList","attrs":{"start":1},"content":[
+                                    {"type":"listItem","content":[{"type":"paragraph","content":[{"type":"text","text":"Start with the sentence that could most change a decision or action."}]}]},
+                                    {"type":"listItem","content":[{"type":"paragraph","content":[{"type":"text","text":"Underline the exact words in the source that support the claim, then compare scope and certainty."}]}]},
+                                    {"type":"listItem","content":[{"type":"paragraph","content":[{"type":"text","text":"If you cannot choose, reject the sentence from the trusted note and record the source or professional review still needed."}]}]}
+                                ]}
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
                 "key": "ship-from-the-system",
                 "groupId": "group_notes_that_do_work_05",
                 "title": "Ship from the system",
-                "rank": 5000,
+                "rank": 6000,
                 "outcome": "Turn the synthesis into a brief for a real reader, then update the notes and handover so the next related job starts with checked context.",
                 "lessons": [
                     {
@@ -3854,7 +4054,7 @@
                             "Evergreen Notes Permit Smooth Incremental Progress in Writing.md"
                         ],
                         "teaches": "notes-to-output",
-                        "requires": ["question-led-synthesis"],
+                        "requires": ["reviewed-ai-reentry"],
                         "content": {
                             "type": "doc",
                             "content": [
@@ -4437,7 +4637,7 @@
                                     "content": [
                                         {
                                             "type": "text",
-                                            "text": "Use one fresh, low-risk question you would have had to answer anyway. The ten lesson artefacts are your working records. Consolidate or reference them in exactly four final files from this run:"
+                                            "text": "Use one fresh, low-risk question you would have had to answer anyway. The twelve lesson artefacts are your working records. Consolidate or reference them in exactly four final files from this run:"
                                         }
                                     ]
                                 },
@@ -4499,6 +4699,15 @@
                                                     ]
                                                 }
                                             ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "paragraph",
+                                    "content": [
+                                        {
+                                            "type": "text",
+                                            "text": "If you use an approved AI tool on this run, keep ai-source-brief.md and change-review.md as working records, link them from the four final files, and carry their exclusions, claim decisions and unresolved checks into the source pack or handover."
                                         }
                                     ]
                                 },
@@ -4601,7 +4810,7 @@
                                     "content": [
                                         {
                                             "type": "text",
-                                            "text": "Close every course file. Explain the full loop from live question to source note, concept, relationship, search, discovery draft, synthesis, brief and handover. Then name the point where the system could still mislead the next person."
+                                            "text": "Close every course file. Explain the full loop from live question to source note, concept, relationship, search, discovery draft and synthesis. Then explain how a checked AI source pack and claim review feed the brief and handover when AI use is approved. Name the point where the system could still mislead the next person."
                                         }
                                     ]
                                 },

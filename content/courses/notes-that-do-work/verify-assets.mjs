@@ -35,19 +35,20 @@ const textOf = (node) =>
 
 assert.equal(contract.schemaVersion, 1);
 assert.equal(contract.status, "resolved");
-assert.equal(contract.diagrams.length, 10);
+assert.equal(contract.diagrams.length, 12);
+assert.equal(contract.screenshots.length, 2);
 assert.equal(mediaLock.schemaVersion, 1);
-assert.equal(mediaLock.group, "notes-that-do-work-v1");
+assert.equal(mediaLock.group, "notes-that-do-work-v2");
 assert.equal(mediaLock.cdnHost, "media.bhekani.com");
-assert.equal(mediaLock.entries.length, 11);
+assert.equal(mediaLock.entries.length, 15);
 
 const mediaByKey = new Map(
     mediaLock.entries.map((entry) => [entry.key, entry]),
 );
-assert.equal(mediaByKey.size, 11);
+assert.equal(mediaByKey.size, 15);
 assert.equal(
     new Set(mediaLock.entries.map((entry) => entry.media.mediaId)).size,
-    11,
+    15,
     "each owning target needs a distinct MediaLit ID",
 );
 
@@ -141,12 +142,14 @@ for (const diagram of contract.diagrams) {
     assert.ok(lesson, `${diagram.id} target lesson exists`);
     const nodes = lesson.content.content;
     const imageIndexes = nodes.flatMap((node, index) =>
-        node.type === "image" ? [index] : [],
+        node.type === "image" && node.attrs?.src === lock.media.file
+            ? [index]
+            : [],
     );
     assert.equal(
         imageIndexes.length,
         1,
-        `${diagram.lessonKey} has one teaching image`,
+        `${diagram.lessonKey} has the expected teaching image once`,
     );
     const imageIndex = imageIndexes[0];
     const image = nodes[imageIndex];
@@ -166,9 +169,64 @@ for (const diagram of contract.diagrams) {
     );
 }
 
+for (const screenshot of contract.screenshots) {
+    assert.equal(hash(screenshot.sourceWebp), screenshot.webpSha256);
+    assert.equal(
+        statSync(resolve(repoRoot, screenshot.sourceWebp)).size,
+        screenshot.bytes,
+    );
+    assert.equal(
+        dimensions(screenshot.sourceWebp),
+        `${screenshot.width}x${screenshot.height}`,
+    );
+    assert.match(screenshot.officialPageUrl, /^https:\/\//);
+    if (screenshot.directAssetUrl) {
+        assert.match(screenshot.directAssetUrl, /^https:\/\//);
+    }
+    assert.match(screenshot.captureDate, /^2026-08-16$/);
+    assert.ok(screenshot.capture.length >= 40);
+
+    const lock = mediaByKey.get(screenshot.id);
+    assert.ok(lock, `${screenshot.id} media lock is missing`);
+    assert.equal(lock.sourcePath, screenshot.sourceWebp);
+    assert.equal(lock.sha256, screenshot.webpSha256);
+    assert.equal(lock.bytes, screenshot.bytes);
+    assert.equal(lock.media.caption, screenshot.caption);
+    assert.equal(lock.media.access, "public");
+    assert.equal(lock.media.mimeType, "image/webp");
+    assert.equal(
+        lock.media.file,
+        `https://media.bhekani.com/p/${lock.media.mediaId}/main.webp`,
+    );
+
+    const lesson = lessonByKey.get(screenshot.lessonKey);
+    assert.ok(lesson, `${screenshot.id} target lesson exists`);
+    const nodes = lesson.content.content;
+    const imageIndex = nodes.findIndex(
+        (node) =>
+            node.type === "image" && node.attrs?.src === lock.media.file,
+    );
+    assert.ok(imageIndex >= 0, `${screenshot.id} appears in its lesson`);
+    assert.equal(nodes[imageIndex].attrs.alt, screenshot.alt);
+    assert.equal(textOf(nodes[imageIndex + 1]), screenshot.caption);
+    const anchorIndex = nodes.findIndex((node) =>
+        textOf(node).startsWith(screenshot.anchorText),
+    );
+    assert.ok(anchorIndex >= 0, `${screenshot.id} anchor exists`);
+    assert.equal(
+        imageIndex,
+        screenshot.placement === "before" ? anchorIndex - 2 : anchorIndex + 1,
+        `${screenshot.id} is beside its practical anchor`,
+    );
+}
+
 assert.deepEqual(
     [...mediaByKey.keys()].sort(),
-    [featured.id, ...contract.diagrams.map(({ id }) => id)].sort(),
+    [
+        featured.id,
+        ...contract.screenshots.map(({ id }) => id),
+        ...contract.diagrams.map(({ id }) => id),
+    ].sort(),
 );
 
 process.stdout.write(

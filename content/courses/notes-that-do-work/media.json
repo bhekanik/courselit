@@ -1,6 +1,6 @@
 {
     "schemaVersion": 1,
-    "group": "notes-that-do-work-v1",
+    "group": "notes-that-do-work-v2",
     "cdnHost": "media.bhekani.com",
     "entries": [
         {
@@ -18,6 +18,40 @@
                 "originalFileName": "featured-notes-that-work.webp",
                 "size": 424224,
                 "thumbnail": "https://media.bhekani.com/p/2QZpP5DXJtsSCa47r8INxjPvp-31f1R9xjhQl1A3/thumb.webp"
+            }
+        },
+        {
+            "key": "obsidian-note-surface",
+            "sourcePath": "content/courses/notes-that-do-work/assets/screenshot-obsidian-note-surface.webp",
+            "sha256": "845e2be9b34bbd0371427a1e063acbf434395698d1ee92c2abc8e64138d2730f",
+            "bytes": 45740,
+            "mimeType": "image/webp",
+            "media": {
+                "access": "public",
+                "caption": "Obsidian is one surface for the method: the note stays readable while links expose connections. Another approved note app can do the same job with different controls.",
+                "file": "https://media.bhekani.com/p/ur6cY_uoVi6MamfWCHfQ3d5I_7o3G_9QcV4_7-ZY/main.webp",
+                "mediaId": "ur6cY_uoVi6MamfWCHfQ3d5I_7o3G_9QcV4_7-ZY",
+                "mimeType": "image/webp",
+                "originalFileName": "screenshot-obsidian-note-surface.webp",
+                "size": 45740,
+                "thumbnail": "https://media.bhekani.com/p/ur6cY_uoVi6MamfWCHfQ3d5I_7o3G_9QcV4_7-ZY/thumb.webp"
+            }
+        },
+        {
+            "key": "onenote-link-command",
+            "sourcePath": "content/courses/notes-that-do-work/assets/screenshot-onenote-link-command.webp",
+            "sha256": "46dccce69cd2de16ef460cc96f5ee472ee86a95de042ac9b233d3de18d920512",
+            "bytes": 26696,
+            "mimeType": "image/webp",
+            "media": {
+                "access": "public",
+                "caption": "In OneNote for Windows, select the material you want to connect, then use Insert > Link. The control is different; the job is still to leave a route back to a source or related page.",
+                "file": "https://media.bhekani.com/p/S6uGLmVooml8BzH41vazeIH4JKQeEJYrose7Kldw/main.webp",
+                "mediaId": "S6uGLmVooml8BzH41vazeIH4JKQeEJYrose7Kldw",
+                "mimeType": "image/webp",
+                "originalFileName": "screenshot-onenote-link-command.webp",
+                "size": 26696,
+                "thumbnail": "https://media.bhekani.com/p/S6uGLmVooml8BzH41vazeIH4JKQeEJYrose7Kldw/thumb.webp"
             }
         },
         {
@@ -154,6 +188,40 @@
                 "originalFileName": "diagram-synthesis-hub.webp",
                 "size": 60568,
                 "thumbnail": "https://media.bhekani.com/p/sN8xKZCXKNn6UrrcHMxHKsnnj5a7-JKektAykbQ6/thumb.webp"
+            }
+        },
+        {
+            "key": "ai-source-pack",
+            "sourcePath": "content/courses/notes-that-do-work/assets/diagram-ai-source-pack.webp",
+            "sha256": "d40bc394eea972843a883d975ba75f40e2eec5e028a1d1d14d93132cfbf62476",
+            "bytes": 64892,
+            "mimeType": "image/webp",
+            "media": {
+                "access": "public",
+                "caption": "Start with the job. Include only current, relevant and permitted sources, and write down what stays outside. The boundary is evidence, not a guarantee.",
+                "file": "https://media.bhekani.com/p/tWTY3oXFnAPjVrGMn1TwTCukywazlYIVsleoV_eR/main.webp",
+                "mediaId": "tWTY3oXFnAPjVrGMn1TwTCukywazlYIVsleoV_eR",
+                "mimeType": "image/webp",
+                "originalFileName": "diagram-ai-source-pack.webp",
+                "size": 64892,
+                "thumbnail": "https://media.bhekani.com/p/tWTY3oXFnAPjVrGMn1TwTCukywazlYIVsleoV_eR/thumb.webp"
+            }
+        },
+        {
+            "key": "ai-reviewed-reentry",
+            "sourcePath": "content/courses/notes-that-do-work/assets/diagram-ai-reviewed-reentry.webp",
+            "sha256": "88f94d8ba561664e82ba4b8714161cbc97cbfad11f4e6e3f58ea513041183d04",
+            "bytes": 66170,
+            "mimeType": "image/webp",
+            "media": {
+                "access": "public",
+                "caption": "Accept, repair or reject each material claim. Only supported or repaired-and-rechecked wording may return to the notes.",
+                "file": "https://media.bhekani.com/p/rUGceNXTvIDpu4YZNYObDfPsW0p47hNYuekgOP0v/main.webp",
+                "mediaId": "rUGceNXTvIDpu4YZNYObDfPsW0p47hNYuekgOP0v",
+                "mimeType": "image/webp",
+                "originalFileName": "diagram-ai-reviewed-reentry.webp",
+                "size": 66170,
+                "thumbnail": "https://media.bhekani.com/p/rUGceNXTvIDpu4YZNYObDfPsW0p47hNYuekgOP0v/thumb.webp"
             }
         },
         {

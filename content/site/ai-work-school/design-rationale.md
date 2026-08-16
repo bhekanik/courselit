@@ -4,7 +4,7 @@
 
 The page has one job: help a working professional choose the course that fits the problem in front of them, then take them to it. It explains what to bring, what the learner will build and how the work will be checked. It does not try to look intelligent through decoration.
 
-The opening keeps the AI course's real tension: AI can finish a task and still get the work wrong. Immediately after it, a two-card picker offers the AI course and `Notes that do work` with exact CourseLit routes. The rest of the page remains the detailed AI course explanation. Two real courses do not justify catalogue chrome, borrowed proof, speed claims or tool rankings. Course counts stay out because they add little to the decision and drift as curricula change.
+The opening keeps the AI course's real tension: AI can finish a task and still get the work wrong. Immediately after it, a two-card picker offers the AI course and `Notes that do work` with exact CourseLit routes. The second card names the course's practical AI boundary: choose the notes a tool may read and check the answer before it returns to trusted work. The rest of the page remains the detailed AI course explanation. Two real courses do not justify catalogue chrome, borrowed proof, speed claims or tool rankings. Course counts stay out because they add little to the decision and drift as curricula change.
 
 ## Visual system
 

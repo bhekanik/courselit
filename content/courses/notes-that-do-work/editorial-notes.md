@@ -35,12 +35,14 @@ Use four professional cases across the course rather than inventing a different 
 - Lawyer: matter notes and authorities become a handover or advice outline. The lawyer checks sources and professional duties.
 - Operations lead: incident and meeting records become a decision note with owners.
 - Analyst: reading and observations become a recommendation with uncertainty visible.
+- AI source-pack thread: the operations lead chooses only the current incident timeline, rule and meeting record needed for one brief, while excluding old policy, unrelated complaints and personal details.
+- AI review thread: the lawyer compares every material statement in an AI-assisted handover with the selected matter sources, then accepts, repairs or rejects it.
 
 The examples illustrate the method. They are not legal, accounting or records-management advice.
 
 ## Capstone distinction
 
-The ten lesson artefacts are working records. The capstone's four final files are the evidence bundle from one fresh run. Do not claim that every setup note was created during the capstone run.
+The twelve lesson artefacts are working records. The capstone's four final files are the evidence bundle from one fresh run. Do not claim that every setup note was created during the capstone run.
 
 ## Visual roles
 
@@ -53,10 +55,14 @@ The ten lesson artefacts are working records. The capstone's four final files ar
 7. Lesson 06: search-before-create decision path.
 8. Lesson 07: discovery writing versus audience writing.
 9. Lesson 08: source cluster to synthesis hub.
-10. Lesson 09: notes to outline to decision.
-11. Lesson 10: use, update, verify and reuse loop.
+10. Lesson 11: a checked source pack inside a clear AI boundary.
+11. Lesson 12: source claim to accept, repair or reject, then reviewed re-entry.
+12. Lesson 09: notes to outline to decision.
+13. Lesson 10: use, update, verify and reuse loop.
 
 Every diagram must answer a question the learner is deciding at that point. A decorative screenshot of a graph view is not a teaching diagram.
+
+Product screenshots are field guides, not proof of availability, safety or organisational approval. Use official public pages, record the capture date and source URL, and explain the move the learner should notice. Never generate a fake product interface.
 
 ## Copy guard
 

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 570" role="img" aria-labelledby="title desc">
+  <title id="title">Choose a checked source pack for one AI job</title>
+  <desc id="desc">A job contract filters a larger note archive into a small checked source pack. Current, relevant and permitted notes enter the pack. Stale, unrelated and restricted notes stay outside.</desc>
+  <defs><marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 8 4 0 8Z" fill="#0F1D2E"/></marker><style>.heading{font-family:"Roboto Slab";font-size:20px;font-weight:500;fill:#0F1D2E}.label{font-family:"Mulish";font-size:17px;font-weight:600;fill:#0F1D2E}.body{font-family:"Mulish";font-size:15px;fill:#435564}.small{font-family:"Mulish";font-size:15px;font-weight:600;fill:#174A46}.line{fill:none;stroke:#0F1D2E;stroke-width:1.7;marker-end:url(#arrow)}</style></defs>
+  <rect width="360" height="570" rx="12" fill="#F7F8F8"/>
+  <text x="24" y="38" class="heading">Start with the job, not the archive</text>
+  <text x="24" y="62" class="body">Choose what the AI may see for this task.</text>
+  <rect x="48" y="88" width="264" height="82" rx="9" fill="#0F1D2E"/>
+  <text x="72" y="119" font-family="Mulish" font-size="17" font-weight="600" fill="#FFFFFF">Job contract</text>
+  <text x="72" y="145" font-family="Mulish" font-size="15" fill="#DDEDEA">Reader, output, sources, stop rule</text>
+  <path class="line" d="M180 170V204"/>
+  <rect x="30" y="204" width="300" height="82" rx="41" fill="#DDEDEA" stroke="#0E5C5E" stroke-width="1.5"/>
+  <text x="57" y="236" class="label">Selection test</text>
+  <text x="57" y="261" class="body">Current? Relevant? Permitted?</text>
+  <path class="line" d="M115 286V324"/>
+  <path class="line" d="M245 286V324"/>
+  <rect x="20" y="324" width="154" height="136" rx="10" fill="#FFFFFF" stroke="#0E5C5E" stroke-width="1.5"/>
+  <text x="42" y="354" class="label">Inside the pack</text>
+  <text x="42" y="382" class="body">Current rule</text>
+  <text x="42" y="406" class="body">Incident timeline</text>
+  <text x="42" y="430" class="body">Relevant decision</text>
+  <rect x="186" y="324" width="154" height="136" rx="10" fill="#F8EBDD" stroke="#A94D3F" stroke-width="1.5"/>
+  <text x="208" y="354" class="label">Kept outside</text>
+  <text x="208" y="382" class="body">Old rule</text>
+  <text x="208" y="406" class="body">Personal details</text>
+  <text x="208" y="430" class="body">Unrelated case</text>
+  <path class="line" d="M97 460V482"/>
+  <rect x="48" y="482" width="264" height="46" rx="9" fill="#0F1D2E"/>
+  <text x="77" y="512" font-family="Mulish" font-size="17" font-weight="600" fill="#FFFFFF">Send only the checked pack</text>
+  <text x="24" y="546" class="small">The boundary is visible.</text>
+  <text x="24" y="563" class="body">The answer still needs checking.</text>
+</svg>

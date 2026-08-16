@@ -102,6 +102,29 @@ const expectedSections = [
         ],
     },
     {
+        key: "work-with-ai-from-checked-notes",
+        groupId: "group_notes_that_do_work_06",
+        title: "Work with AI from checked notes",
+        lessons: [
+            [
+                "give-ai-a-source-pack-not-your-whole-archive",
+                "lesson_notes_that_do_work_11",
+                "Give AI a source pack, not your whole archive",
+                "bounded-ai-source-pack",
+                ["question-led-synthesis"],
+                "ai-source-brief.md",
+            ],
+            [
+                "review-the-answer-before-it-joins-your-notes",
+                "lesson_notes_that_do_work_12",
+                "Review the answer before it joins your notes",
+                "reviewed-ai-reentry",
+                ["bounded-ai-source-pack"],
+                "change-review.md",
+            ],
+        ],
+    },
+    {
         key: "ship-from-the-system",
         groupId: "group_notes_that_do_work_05",
         title: "Ship from the system",
@@ -111,7 +134,7 @@ const expectedSections = [
                 "lesson_notes_that_do_work_09",
                 "Move from notes to an outline and a decision",
                 "notes-to-output",
-                ["question-led-synthesis"],
+                ["reviewed-ai-reentry"],
                 "working-brief.md",
             ],
             [
@@ -193,6 +216,18 @@ const teachingContracts = [
         changedCase: "whether a variance needs escalation",
     },
     {
+        prediction: "which notes you would give the AI and which you would keep out",
+        guidance: "Write the job before you choose the notes",
+        teachBack: "why a smaller checked source pack is better than a whole archive",
+        changedCase: "approved AI tool cannot open internal links",
+    },
+    {
+        prediction: "which sentences you would allow back into your notes",
+        guidance: "Compare each material claim with the source pack",
+        teachBack: "why a fluent answer is still only a proposed change",
+        changedCase: "draft correctly combines two sources but drops an exception",
+    },
+    {
         prediction:
             "which of those serves your memory rather than their decision",
         guidance: "Turn each reasoning group in your synthesis into a question",
@@ -202,7 +237,8 @@ const teachingContracts = [
     {
         prediction: "which existing note will save you the most work",
         guidance: "Start with search-before-create",
-        teachBack: "Explain the full loop from live question",
+        teachBack:
+            "a checked AI source pack and claim review feed the brief and handover when AI use is approved",
         changedCase: "after a policy, contract or reporting rule has changed",
     },
 ];
@@ -331,7 +367,7 @@ assert.equal(course.title, "Notes that do work");
 assert.equal(course.access, "free");
 assert.equal(course.privacy, "public");
 assert.equal(course.published, true);
-assert.equal(course.sections.length, 5);
+assert.equal(course.sections.length, 6);
 
 assert.deepEqual(
     course.sections.map(({ key, groupId, title }) => ({ key, groupId, title })),
@@ -344,9 +380,9 @@ assert.deepEqual(
 
 const lessons = course.sections.flatMap((section) => section.lessons);
 const expectedLessons = expectedSections.flatMap((section) => section.lessons);
-assert.equal(lessons.length, 10);
-assert.equal(new Set(lessons.map(({ key }) => key)).size, 10);
-assert.equal(new Set(lessons.map(({ lessonId }) => lessonId)).size, 10);
+assert.equal(lessons.length, 12);
+assert.equal(new Set(lessons.map(({ key }) => key)).size, 12);
+assert.equal(new Set(lessons.map(({ lessonId }) => lessonId)).size, 12);
 
 for (const [index, lesson] of lessons.entries()) {
     const [key, lessonId, title, teaches, requires, filename] =
@@ -424,8 +460,8 @@ assert.deepEqual(course.capstone, {
 const expectedLinks = [
     { text: "Obsidian Help", href: "https://obsidian.md/help/" },
     {
-        text: "OneNote: take and format notes",
-        href: "https://support.microsoft.com/en-US/OneNote/take-and-format-notes",
+        text: "OneNote for Windows: basic tasks",
+        href: "https://support.microsoft.com/en-US/OneNote/onenote-help-and-learning/basic-tasks-in-onenote-on-windows",
     },
     {
         text: "Notion: links and backlinks",
@@ -447,10 +483,52 @@ assert.doesNotMatch(
     /second brain|game[- ]changer|unlock your|revolutioni[sz]e|seamless|robust|leverage/iu,
 );
 
+const lesson10Text = textOf(
+    lessons.find(({ lessonId }) => lessonId === "lesson_notes_that_do_work_10")
+        ?.content,
+);
+assert.match(lesson10Text, /The twelve lesson artefacts are your working records/);
+assert.match(lesson10Text, /ai-source-brief\.md/);
+assert.match(lesson10Text, /change-review\.md/);
+
+const lesson12Text = textOf(
+    lessons.find(({ lessonId }) => lessonId === "lesson_notes_that_do_work_12")
+        ?.content,
+);
+assert.match(
+    lesson12Text,
+    /If checking the draft against a current source shows that a concept note is stale/,
+);
+assert.match(
+    lesson12Text,
+    /The checked discrepancy shows where the setup needs repair/,
+);
+assert.doesNotMatch(lesson12Text, /the (AI )?answer is evidence/i);
+assert.doesNotMatch(lesson12Text, /if the AI exposed a stale/i);
+
 const images = lessons.flatMap((lesson) =>
     imagesOf(lesson.content).map((image) => ({ lesson, image })),
 );
-assert.equal(images.length, 10, "course includes ten teaching diagrams");
+assert.equal(
+    images.length,
+    14,
+    "course includes twelve teaching diagrams and two official screenshots",
+);
+assert.deepEqual(
+    images
+        .map(({ image }) => image.attrs?.src)
+        .filter((src) =>
+            [
+                "https://media.bhekani.com/p/ur6cY_uoVi6MamfWCHfQ3d5I_7o3G_9QcV4_7-ZY/main.webp",
+                "https://media.bhekani.com/p/S6uGLmVooml8BzH41vazeIH4JKQeEJYrose7Kldw/main.webp",
+            ].includes(src),
+        )
+        .sort(),
+    [
+        "https://media.bhekani.com/p/S6uGLmVooml8BzH41vazeIH4JKQeEJYrose7Kldw/main.webp",
+        "https://media.bhekani.com/p/ur6cY_uoVi6MamfWCHfQ3d5I_7o3G_9QcV4_7-ZY/main.webp",
+    ],
+);
 for (const { lesson, image } of images) {
     const attrs = image.attrs ?? {};
     assert.match(

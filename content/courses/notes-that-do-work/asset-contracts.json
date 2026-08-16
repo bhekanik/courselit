@@ -32,6 +32,41 @@
         "alt": "A professional at a dark desk turns scattered meeting notes and source pages into linked idea cards, a clear brief and a handover folder.",
         "prompt": "Top-down editorial illustration of a non-technical professional turning scattered meeting notes and source pages into connected idea cards, a decision brief and a handover folder. Mid-century collage and gouache texture in ink navy, parchment, rust, muted teal and ochre. No logos or readable text."
     },
+    "screenshots": [
+        {
+            "id": "obsidian-note-surface",
+            "sourceWebp": "content/courses/notes-that-do-work/assets/screenshot-obsidian-note-surface.webp",
+            "webpSha256": "845e2be9b34bbd0371427a1e063acbf434395698d1ee92c2abc8e64138d2730f",
+            "bytes": 45740,
+            "width": 1120,
+            "height": 430,
+            "officialPageUrl": "https://obsidian.md/",
+            "captureDate": "2026-08-16",
+            "capture": "agent-browser 0.34.0 at 1440x1000; crop 1120x430+160+538; cwebp 1.6.0 q92 metadata none",
+            "lessonKey": "find-where-useful-thinking-disappears",
+            "anchorText": "The app is not the method.",
+            "placement": "before",
+            "alt": "Obsidian's desktop app showing a note, folder and note lists, and a graph view, with a mobile note beside it.",
+            "caption": "Obsidian is one surface for the method: the note stays readable while links expose connections. Another approved note app can do the same job with different controls."
+        },
+        {
+            "id": "onenote-link-command",
+            "sourceWebp": "content/courses/notes-that-do-work/assets/screenshot-onenote-link-command.webp",
+            "webpSha256": "46dccce69cd2de16ef460cc96f5ee472ee86a95de042ac9b233d3de18d920512",
+            "bytes": 26696,
+            "width": 1252,
+            "height": 276,
+            "officialPageUrl": "https://support.microsoft.com/en-US/OneNote/onenote-help-and-learning/basic-tasks-in-onenote-on-windows",
+            "directAssetUrl": "https://support.microsoft.com/en-US/OneNote/media/basic-tasks-screenshot-twelve-png.png",
+            "captureDate": "2026-08-16",
+            "capture": "agent-browser 0.34.0 img element capture; cwebp 1.6.0 q92 metadata none",
+            "lessonKey": "use-tags-properties-and-links-for-different-jobs",
+            "anchorText": "A cleaner system gives each mechanism a role.",
+            "placement": "after",
+            "alt": "The OneNote for Windows Insert ribbon with the Link command outlined at the far right.",
+            "caption": "In OneNote for Windows, select the material you want to connect, then use Insert > Link. The control is different; the job is still to leave a route back to a source or related page."
+        }
+    ],
     "diagrams": [
         {
             "id": "knowledge-leak-map",
@@ -137,6 +172,32 @@
             "anchorHeading": "A small synthesis has six parts",
             "alt": "Sources, concepts and visible conflicts feed one live question. The synthesis produces a current answer, an open check and the next decision.",
             "caption": "A note belongs in the synthesis only when it changes the answer, uncertainty or next action."
+        },
+        {
+            "id": "ai-source-pack",
+            "sourceSvg": "content/courses/notes-that-do-work/assets/diagram-ai-source-pack.svg",
+            "sourceWebp": "content/courses/notes-that-do-work/assets/diagram-ai-source-pack.webp",
+            "svgSha256": "8753b67bf3fc8c33efba8f358d3cfb6c14895674312ef87a35a57ccd7eda082c",
+            "webpSha256": "d40bc394eea972843a883d975ba75f40e2eec5e028a1d1d14d93132cfbf62476",
+            "width": 720,
+            "height": 1140,
+            "lessonKey": "give-ai-a-source-pack-not-your-whole-archive",
+            "anchorHeading": "Treat context as a working boundary",
+            "alt": "A job contract filters a larger archive into a small AI source pack. Current, relevant and permitted notes enter; stale, unrelated and restricted notes stay outside.",
+            "caption": "Start with the job. Include only current, relevant and permitted sources, and write down what stays outside. The boundary is evidence, not a guarantee."
+        },
+        {
+            "id": "ai-reviewed-reentry",
+            "sourceSvg": "content/courses/notes-that-do-work/assets/diagram-ai-reviewed-reentry.svg",
+            "sourceWebp": "content/courses/notes-that-do-work/assets/diagram-ai-reviewed-reentry.webp",
+            "svgSha256": "e8754bc742de10a3e09bcbeba29b7363caaecf69c25f45bd7bd7267f61837962",
+            "webpSha256": "88f94d8ba561664e82ba4b8714161cbc97cbfad11f4e6e3f58ea513041183d04",
+            "width": 720,
+            "height": 1140,
+            "lessonKey": "review-the-answer-before-it-joins-your-notes",
+            "anchorHeading": "Use decisions, not confidence scores",
+            "alt": "Each material claim in an AI draft is compared with the checked source pack, then accepted, repaired and checked again, or rejected. Only reviewed changes return to the notes.",
+            "caption": "Accept, repair or reject each material claim. Only supported or repaired-and-rechecked wording may return to the notes."
         },
         {
             "id": "notes-to-decision",

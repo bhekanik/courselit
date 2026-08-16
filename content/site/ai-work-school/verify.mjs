@@ -431,7 +431,7 @@ assert.deepEqual(visibleCopy, {
       },
       {
         title: "Notes that do work",
-        body: ["Turn scattered reading, meeting notes and ideas into a source-backed brief and a handover. Start Notes that do work."],
+        body: ["Turn scattered reading and meeting notes into a brief you can stand behind. Choose what AI may read, check what it writes, and leave a handover for the next person. Start Notes that do work."],
       },
     ],
   },
