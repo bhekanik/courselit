@@ -273,6 +273,7 @@ export const ENROLL_IN_THE_COURSE =
 export const NOT_ENROLLED_HEADER = "Content Locked";
 export const USER_ERROR_HEADER = "Yikes!";
 export const ENROLL_BUTTON_TEXT = "Buy now";
+export const ENROLL_FREE_BUTTON_TEXT = "Start the free course";
 export const CHECKOUT_BUTTON_TEXT = "Complete Purchase";
 export const BUTTON_DELETE_MEDIA = "Delete";
 export const DELETE_MEDIA_POPUP_HEADER = "Delete this file?";

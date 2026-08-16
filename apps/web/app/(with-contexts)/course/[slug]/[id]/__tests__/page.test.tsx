@@ -170,9 +170,34 @@ describe("Course introduction page", () => {
 
         expect(document.body).toHaveTextContent("$0");
         expect(screen.getByText("free")).toBeInTheDocument();
+        expect(
+            screen.getByRole("link", { name: "Start the free course" }),
+        ).toHaveAttribute("href", "/checkout?type=course&id=course-1");
+    });
+
+    it("keeps the purchase CTA for paid courses", async () => {
+        (getProduct as jest.Mock).mockResolvedValue({
+            title: "Paid course",
+            description: JSON.stringify({ type: "doc", content: [] }),
+            courseId: "paid-course",
+            slug: "paid-course",
+            cost: 49,
+            costType: "one-time",
+            isPreview: false,
+            firstLesson: "paid-lesson",
+        });
+
+        renderPage();
+
+        await waitFor(() => {
+            expect(
+                screen.getByRole("heading", { name: "Paid course" }),
+            ).toBeInTheDocument();
+        });
+
         expect(screen.getByRole("link", { name: "Buy now" })).toHaveAttribute(
             "href",
-            "/checkout?type=course&id=course-1",
+            "/checkout?type=course&id=paid-course",
         );
     });
 
@@ -190,7 +215,7 @@ describe("Course introduction page", () => {
         });
 
         expect(
-            screen.queryByRole("link", { name: "Buy now" }),
+            screen.queryByRole("link", { name: "Start the free course" }),
         ).not.toBeInTheDocument();
     });
 });

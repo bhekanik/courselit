@@ -6,6 +6,7 @@ import { ArrowRight } from "@courselit/icons";
 import {
     COURSE_PROGRESS_START,
     ENROLL_BUTTON_TEXT,
+    ENROLL_FREE_BUTTON_TEXT,
     BTN_VIEW_CERTIFICATE,
 } from "@ui-config/strings";
 import {
@@ -118,7 +119,9 @@ export default function ProductPage(props: {
                             href={`/checkout?type=course&id=${product.courseId}`}
                         >
                             <Button theme={theme.theme}>
-                                {ENROLL_BUTTON_TEXT}
+                                {product.cost === 0
+                                    ? ENROLL_FREE_BUTTON_TEXT
+                                    : ENROLL_BUTTON_TEXT}
                             </Button>
                         </Link>
                     </div>
