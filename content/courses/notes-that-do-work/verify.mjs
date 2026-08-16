@@ -365,7 +365,17 @@ function hintTextsOf(lesson) {
 }
 
 function assertNoUnsafeSensitiveDataInstruction(lesson) {
-    const lessonSegments = [
+    const sensitiveMaterial =
+        /\b(?:confidential|personal|client|employee|financial|sensitive)\b/i;
+    const unapprovedDestination =
+        /\b(?:new|unapproved|public|personal|external|third-party|cloud|shared|AI)\b.{0,24}\b(?:tool|service|surface|app|location|system|drive|workspace|chatbot)\b/i;
+    const referentialDestination =
+        /\b(?:to|into|in|onto)\s+(?:it|that tool|(?:the )?same tool)\b|\bthere\b(?=\s*(?:before|after|instead|too|as well|first|now|immediately|[.!?]|$))/i;
+    const riskyAction =
+        /\b(?:copy(?:ing)?|upload(?:ing)?|mov(?:e|ing)|past(?:e|ing)|send(?:ing)?|stor(?:e|ing)|sync(?:ing)?|export(?:ing)?|shar(?:e|ing)|email(?:ing)?|publish(?:ing)?|attach(?:ing)?|dump(?:ing)?)\b/i;
+    const safetyBeforeAction =
+        /\b(?:do not|don't|does not|must not|never|cannot|can't|without)\b[^.!?;:]{0,18}$/i;
+    const lessonTexts = [
         lesson.outcome,
         lesson.exercise,
         lesson.artifact.description,
@@ -375,24 +385,31 @@ function assertNoUnsafeSensitiveDataInstruction(lesson) {
                 ? node.content.map(textOf)
                 : [textOf(node)],
         ),
-    ].flatMap((text) =>
-        text.split(
-            /(?<=[.!?;])\s+|,\s+(?=(?:then|but|however|instead)\b)|\s+(?:and|while)\s+(?=(?:never|do not|don't|does not|must not|cannot|can't|without)\b)/u,
-        ),
+    ];
+    const lessonSegments = lessonTexts.flatMap((text) =>
+        text.split(/(?<=[.!?;])\s+/u).flatMap((sentence) => {
+            let hasPriorDestination = false;
+            return sentence
+                .split(
+                    /,\s+(?=(?:then|but|however|instead)\b)|\s+(?:and|while)\s+(?=(?:never|do not|don't|does not|must not|cannot|can't|without)\b)/u,
+                )
+                .map((segment) => {
+                    const hasExplicitDestination =
+                        unapprovedDestination.test(segment);
+                    const hasDestination =
+                        hasExplicitDestination ||
+                        (hasPriorDestination &&
+                            referentialDestination.test(segment));
+                    hasPriorDestination ||= hasExplicitDestination;
+                    return { text: segment, hasDestination };
+                });
+        }),
     );
-    const sensitiveMaterial =
-        /\b(?:confidential|personal|client|employee|financial|sensitive)\b/i;
-    const unapprovedDestination =
-        /\b(?:new|unapproved|public|personal|external|third-party|cloud|shared|AI)\b.{0,24}\b(?:tool|service|surface|app|location|system|drive|workspace|chatbot)\b/i;
-    const riskyAction =
-        /\b(?:copy(?:ing)?|upload(?:ing)?|mov(?:e|ing)|past(?:e|ing)|send(?:ing)?|stor(?:e|ing)|sync(?:ing)?|export(?:ing)?|shar(?:e|ing)|email(?:ing)?|publish(?:ing)?|attach(?:ing)?|dump(?:ing)?)\b/i;
-    const safetyBeforeAction =
-        /\b(?:do not|don't|does not|must not|never|cannot|can't|without)\b[^.!?;:]{0,18}$/i;
 
-    for (const sentence of lessonSegments) {
+    for (const { text: sentence, hasDestination } of lessonSegments) {
         if (
             !sensitiveMaterial.test(sentence) ||
-            !unapprovedDestination.test(sentence) ||
+            !hasDestination ||
             !riskyAction.test(sentence)
         ) {
             continue;
@@ -474,6 +491,29 @@ function assertLessonOneReviewContract(lesson) {
         prediction,
         /\b(?:place|location|source)s?\b/i,
         "lesson 01 prediction maps where context lives",
+    );
+    const selectionAction =
+        /\b(?:circle|mark|rank|choose|pick|star|flag|identify|select)\w*\b/i;
+    const decisionCriterion =
+        /\b(?:inherit|disappear|leak)\w*\b|\bhardest\b[^.!?;]{0,20}\b(?:find|reuse|interpret)\w*\b/i;
+    const decisionSpecificity =
+        /\b(?:one|the (?:place|location|source)|least|most likely|likeliest|hardest|worst)\b/i;
+    const negatedSelection =
+        /\b(?:do not|don't|never|skip)\b[^.!?;]{0,24}\b(?:circle|mark|rank|choose|pick|star|flag|identify|select)\w*\b[^.!?;]{0,48}\b(?:inherit|disappear|leak)\w*\b/i;
+    assert.doesNotMatch(
+        prediction,
+        negatedSelection,
+        "lesson 01 prediction does not cancel the leak choice",
+    );
+    assert.ok(
+        prediction.split(/(?<=[.!?;])\s+/u).some(
+            (sentence) =>
+                selectionAction.test(sentence) &&
+                decisionCriterion.test(sentence) &&
+                decisionSpecificity.test(sentence) &&
+                !negatedSelection.test(sentence),
+        ),
+        "lesson 01 prediction chooses one likely leak or inheritance target",
     );
 
     const guidance = textAfterHeading(
