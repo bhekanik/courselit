@@ -328,6 +328,50 @@ describe("Notes that do work refinement migration", () => {
         ).toBe(12);
     });
 
+    it("refuses to publish a staged lesson that changed after insertion", async () => {
+        const { db } = await seedLaunchedBaseline();
+        const homepageBefore = await db.collection("pages").findOne({
+            pageId: "homepage",
+        });
+
+        const result = runMigration(["--apply"], {
+            ...databaseEnvironment(),
+            NOTES_REFINEMENT_MIGRATION_TEST_FAIL_AT: "corrupt-staged-title",
+        });
+
+        expect(result.status).toBe(1);
+        expect(result.stderr).toContain(
+            "Managed new lesson verification failed",
+        );
+        expect(
+            await db
+                .collection("lessons")
+                .find({
+                    lessonId: {
+                        $in: [
+                            "lesson_notes_that_do_work_11",
+                            "lesson_notes_that_do_work_12",
+                        ],
+                    },
+                })
+                .project({ _id: 0, lessonId: 1, published: 1 })
+                .sort({ lessonId: 1 })
+                .toArray(),
+        ).toEqual([
+            {
+                lessonId: "lesson_notes_that_do_work_11",
+                published: false,
+            },
+            {
+                lessonId: "lesson_notes_that_do_work_12",
+                published: false,
+            },
+        ]);
+        expect(
+            await db.collection("pages").findOne({ pageId: "homepage" }),
+        ).toEqual(homepageBefore);
+    });
+
     it("applies only the reviewed course, lesson, and homepage fields", async () => {
         const { db, domainId } = await seedLaunchedBaseline();
         await db.collection("courses").updateOne(

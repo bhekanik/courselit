@@ -705,7 +705,7 @@ async function preflight(db, frozen) {
     };
 }
 
-async function verifyLessons(db, plan, frozen, expectPublished) {
+async function verifyLessons(db, plan, frozen, expectedPublication) {
     const lessons = await db
         .collection("lessons")
         .find({ domain: plan.domain._id, courseId: COURSE_ID })
@@ -725,11 +725,16 @@ async function verifyLessons(db, plan, frozen, expectPublished) {
         const existing = byId.get(final.lessonId);
         assert(existing, "Managed lesson is missing");
         if (NEW_LESSON_IDS.includes(final.lessonId)) {
+            const published =
+                expectedPublication === "planned"
+                    ? plan.newLessonStates.get(final.lessonId)?.state ===
+                      "final"
+                    : expectedPublication;
             const expected = desiredNewLesson(
                 final,
                 plan.domain,
                 plan.owner,
-                expectPublished,
+                published,
             );
             assert(
                 managedFieldsMatch(existing, expected),
@@ -794,6 +799,20 @@ async function stageNewLessons(db, plan) {
             throw new SafeMigrationError("Injected failure after lesson stage");
         }
     }
+    if (
+        process.env.NODE_ENV === "test" &&
+        process.env.NOTES_REFINEMENT_MIGRATION_TEST_FAIL_AT ===
+            "corrupt-staged-title"
+    ) {
+        const result = await db.collection("lessons").updateOne(
+            {
+                lessonId: NEW_LESSON_IDS[0],
+                published: false,
+            },
+            { $set: { title: "Injected corrupt staged title" } },
+        );
+        assert(result.matchedCount === 1, "Test lesson corruption failed");
+    }
 }
 
 async function publishNewLessons(db, plan) {
@@ -801,10 +820,7 @@ async function publishNewLessons(db, plan) {
         if (state === "final") continue;
         const result = await db.collection("lessons").updateOne(
             {
-                domain: plan.domain._id,
-                lessonId: published.lessonId,
-                courseId: COURSE_ID,
-                content: published.content,
+                ...published,
                 published: false,
             },
             { $set: { published: true, updatedAt: new Date() } },
@@ -900,6 +916,7 @@ async function updateHomepage(db, plan, finalSite) {
 async function apply(db, plan, frozen) {
     await applyLessonContent(db, plan);
     await stageNewLessons(db, plan);
+    await verifyLessons(db, plan, frozen, "planned");
     await publishNewLessons(db, plan);
     await verifyLessons(db, plan, frozen, true);
     await updateCourse(db, plan);
