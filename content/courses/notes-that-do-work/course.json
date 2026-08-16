@@ -549,11 +549,11 @@
                         "key": "turn-a-capture-into-a-source-note",
                         "lessonId": "lesson_notes_that_do_work_02",
                         "title": "Turn a capture into a source note",
-                        "outcome": "Convert one real meeting note, highlight or document extract into a source note that preserves the source, your interpretation and the question it can help answer.",
+                        "outcome": "Turn one real meeting note, highlight or document extract into a source note that keeps the source, your interpretation and the live question it may help answer beside each other.",
                         "type": "text",
                         "published": true,
                         "requiresEnrollment": true,
-                        "exercise": "Take one capture from the work-leak map. Reopen the original source, verify the capture, rewrite the relevant idea in your own words, separate quotation from interpretation, and record the live question the note may help answer.",
+                        "exercise": "Take one capture from the work-leak map. Reopen the original source, check what the capture kept and what it lost, rewrite the relevant idea in your own words, separate quotation from interpretation, and record the live question the note may help answer.",
                         "artifact": {
                             "filename": "source-note.md",
                             "description": "A checked source note with a precise locator, a short source extract where needed, an explanation in your own words, the question it serves, and any uncertainty or follow-up."
@@ -561,7 +561,7 @@
                         "verification": [
                             "The locator lets another person open the exact source passage, meeting record or data row.",
                             "Quoted words and your interpretation are visibly separate.",
-                            "The note explains why the source matters to the live question instead of merely summarising it.",
+                            "The note explains what the source contributes to answering the live question.",
                             "Uncertainty, missing context and access limits remain visible.",
                             "The note does not copy confidential material into an unapproved surface."
                         ],
@@ -586,7 +586,7 @@
                                     "content": [
                                         {
                                             "type": "text",
-                                            "text": "Turn one capture into a source note you can inspect later without pretending that copying is the same as understanding."
+                                            "text": "Turn one capture into a source note you can inspect later. A reader should be able to see which words came from the source, which are your reading of it, and what you still have to check."
                                         }
                                     ]
                                 },
@@ -626,7 +626,7 @@
                                     "content": [
                                         {
                                             "type": "text",
-                                            "text": "An operations lead writes, Vendor delay caused the incident, in meeting notes. A month later the line looks like a fact. The original incident review says something narrower: a delayed vendor response extended recovery after an internal alert had already been missed. The capture removed the sequence, the internal failure and the difference between cause and duration."
+                                            "text": "An operations lead writes, Vendor delay caused the incident, in meeting notes. A month later the line reads like a settled fact. The original incident review says something narrower: a delayed vendor response extended recovery after an internal alert had already been missed. The capture dropped the order of events. It also hid the internal failure, and it blurred the difference between causing the incident and extending the recovery."
                                         }
                                     ]
                                 },
@@ -635,7 +635,7 @@
                                     "content": [
                                         {
                                             "type": "text",
-                                            "text": "A source note repairs that loss. It keeps the locator, the relevant source words or data, your explanation, and the question the note can help answer. These parts have different authority. The source can support what it actually says. Your explanation can connect it to the work. The question gives the note a reason to exist. Mixing the three produces a neat paragraph whose claims are hard to audit."
+                                            "text": "A source note puts the missing pieces back where you can see them. It holds the locator, the source words or data you need, your explanation, and the question the note can help answer. The source supports only what it says. Your explanation is what you take it to mean, and that can be wrong. Written out as one tidy paragraph, the whole thing reads as a single claim, and a reader cannot tell which part to check."
                                         }
                                     ]
                                 },
@@ -644,7 +644,7 @@
                                     "content": [
                                         {
                                             "type": "text",
-                                            "text": "Writing in your own words is a check on understanding, not a ban on quotation. Keep exact wording when it matters, such as a contract clause or a stated decision. Label it and give a locator. Then explain what you think it means. If you cannot explain it without copying the sentence again, you have found work to do rather than a note to polish."
+                                            "text": "Writing the idea in your own words tests whether you understood it. Exact wording still matters sometimes, such as a contract clause or a stated decision. Quote it, label the quotation and give it a locator. Then write what you think it means. If that explanation only repeats the source sentence back, that sentence is the part you have not understood yet."
                                         }
                                     ]
                                 },
@@ -765,7 +765,7 @@
                                     "content": [
                                         {
                                             "type": "text",
-                                            "text": "Reopen your chosen source. Start with the locator, because every other part depends on being able to inspect the original again. If the source is a meeting, link the agenda or record and name the date and participants. If no record exists, label the note as your recollection and add the person who can confirm it."
+                                            "text": "Reopen your chosen source. Start with the locator, because everything else in the note has to lead back to something you can open. If the source is a meeting, link the agenda or record and name the date and participants. If no record exists, label the note as your recollection and add the person who can confirm it."
                                         }
                                     ]
                                 },
@@ -774,7 +774,7 @@
                                     "content": [
                                         {
                                             "type": "text",
-                                            "text": "Copy only the words or data whose exact form matters. Below that, write two sentences without looking at the source: what this says, and what it does not say. Reopen the source and correct both. Then write one sentence beginning, This matters to my question because. Delete any sentence that merely repeats the extract."
+                                            "text": "Copy only the words or data whose exact form matters. Close the source. Below the extract, write two sentences: what this says, and what it does not say. Reopen the source and correct both. Then write one sentence beginning, This matters to my question because. Delete any sentence that only repeats the extract."
                                         }
                                     ]
                                 },
@@ -802,7 +802,7 @@
                                     "content": [
                                         {
                                             "type": "text",
-                                            "text": "Create source-note.md with the five parts above. Give it a title that states the useful point, not the source title. A title such as Delayed vendor response extended recovery is easier to reuse than Incident review notes."
+                                            "text": "Create source-note.md with the five parts above. Give it a title that states the useful point, not the source title. A title such as Delayed vendor response extended recovery states the point. Incident review notes names the source and nothing else."
                                         }
                                     ]
                                 },
@@ -821,7 +821,7 @@
                                     "content": [
                                         {
                                             "type": "text",
-                                            "text": "Use a source that matters to the question you chose. Ask whether your first memory matched the original. Record the correction if it did not. That correction is evidence that the source note did useful work before it became part of any system."
+                                            "text": "Use a source that matters to the question you chose. Compare what you wrote from memory with the original. Where the two differ, record the correction and keep it in the note. It shows which part of your reading needed checking."
                                         }
                                     ]
                                 },
@@ -840,7 +840,7 @@
                                     "content": [
                                         {
                                             "type": "text",
-                                            "text": "Close the lesson and explain the difference between a capture, a source extract and a source note. Include one reason a short note can be more trustworthy than a long summary."
+                                            "text": "Close the lesson. Explain the difference between a capture, a source extract and a source note, then give one reason a short note can be more trustworthy than a long summary."
                                         }
                                     ]
                                 },
@@ -859,7 +859,7 @@
                                     "content": [
                                         {
                                             "type": "text",
-                                            "text": "A lawyer has an exact quotation from an authority, but the database link requires a licence the next reader may not have. What belongs in the source note, what belongs in the handover, and what must not be copied? Write the boundary before you decide how much text to retain."
+                                            "text": "A lawyer has an exact quotation from an authority, but the database link requires a licence the next reader may not have. Decide what belongs in the source note, what belongs in the handover, and what must not be copied at all. Write those boundaries down before you decide how much text to retain."
                                         }
                                     ]
                                 },
@@ -884,7 +884,7 @@
                                                     "content": [
                                                         {
                                                             "type": "text",
-                                                            "text": "The source can be reopened at the exact place that supports the note."
+                                                            "text": "Another person can reopen the source at the exact place that supports the note."
                                                         }
                                                     ]
                                                 }
@@ -898,7 +898,7 @@
                                                     "content": [
                                                         {
                                                             "type": "text",
-                                                            "text": "Quotation, interpretation and open questions cannot be mistaken for each other."
+                                                            "text": "A reader can tell quotation, interpretation and open questions apart."
                                                         }
                                                     ]
                                                 }
@@ -940,7 +940,7 @@
                                                     "content": [
                                                         {
                                                             "type": "text",
-                                                            "text": "Access and confidentiality limits are recorded."
+                                                            "text": "The note records any access or confidentiality limit."
                                                         }
                                                     ]
                                                 }
@@ -969,7 +969,7 @@
                                                     "content": [
                                                         {
                                                             "type": "text",
-                                                            "text": "Use one paragraph, one meeting decision or one spreadsheet row rather than a whole document."
+                                                            "text": "Shrink the source. Work with one paragraph, one meeting decision or one spreadsheet row instead of the whole document."
                                                         }
                                                     ]
                                                 }
@@ -983,7 +983,7 @@
                                                     "content": [
                                                         {
                                                             "type": "text",
-                                                            "text": "Write, The source says, I think this means, and I still need to check as temporary labels."
+                                                            "text": "Use The source says, I think this means, and I still need to check as temporary labels."
                                                         }
                                                     ]
                                                 }
@@ -997,7 +997,7 @@
                                                     "content": [
                                                         {
                                                             "type": "text",
-                                                            "text": "If you still cannot explain the point, ask what decision would change if the source were false. Start there."
+                                                            "text": "If the point still will not go into your own words, ask what decision would change if the source turned out to be wrong. Start from that decision."
                                                         }
                                                     ]
                                                 }
