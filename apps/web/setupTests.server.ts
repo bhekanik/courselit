@@ -20,6 +20,7 @@ beforeAll(async () => {
     mongod = await MongoMemoryServer.create({
         instance: {
             ip: "127.0.0.1",
+            // The real CAS race test needs failCommand; this server is test-only.
             args: ["--setParameter", "enableTestCommands=1"],
         },
     });

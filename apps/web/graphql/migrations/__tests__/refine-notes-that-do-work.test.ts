@@ -81,6 +81,7 @@ function runNodeAsync(script: string, args: string[], env: NodeJS.ProcessEnv) {
     });
     let stdout = "";
     let stderr = "";
+    let error: Error | undefined;
     child.stdout.setEncoding("utf8");
     child.stderr.setEncoding("utf8");
     child.stdout.on("data", (chunk: string) => {
@@ -89,17 +90,21 @@ function runNodeAsync(script: string, args: string[], env: NodeJS.ProcessEnv) {
     child.stderr.on("data", (chunk: string) => {
         stderr += chunk;
     });
-    return new Promise<{
+    const done = new Promise<{
         status: number | null;
         signal: NodeJS.Signals | null;
         stdout: string;
         stderr: string;
-    }>((resolve, reject) => {
-        child.on("error", reject);
+        error?: Error;
+    }>((resolve) => {
+        child.on("error", (spawnError) => {
+            error = spawnError;
+        });
         child.on("close", (status, signal) => {
-            resolve({ status, signal, stdout, stderr });
+            resolve({ status, signal, stdout, stderr, error });
         });
     });
+    return { child, done };
 }
 
 async function seedLaunchedBaseline() {
@@ -1034,8 +1039,10 @@ describe("Notes lessons 01-02 humanisation migration", () => {
                 blockTimeMS: 2_000,
             },
         });
+        let migration: ReturnType<typeof runNodeAsync> | undefined;
+        let migrationReaped = false;
         try {
-            const migration = runNodeAsync(
+            migration = runNodeAsync(
                 HUMANIZATION_PATH,
                 ["--apply"],
                 environment,
@@ -1048,8 +1055,10 @@ describe("Notes lessons 01-02 humanisation migration", () => {
                     { $set: { content: ownerContent } },
                 );
 
-            const result = await migration;
+            const result = await migration.done;
+            migrationReaped = true;
 
+            expect(result.error).toBeUndefined();
             expect(result.status).toBe(1);
             expect(result.signal).toBeNull();
             expect(result.stderr).toContain(
@@ -1081,6 +1090,15 @@ describe("Notes lessons 01-02 humanisation migration", () => {
                 ),
             });
         } finally {
+            if (migration && !migrationReaped) {
+                if (
+                    migration.child.exitCode === null &&
+                    migration.child.signalCode === null
+                ) {
+                    migration.child.kill();
+                }
+                await migration.done;
+            }
             await db.admin().command({
                 configureFailPoint: "failCommand",
                 mode: "off",
